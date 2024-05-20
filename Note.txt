@@ -1,0 +1,6 @@
+PHP Version 8.1.10
+Laravel Framework 9.40.1
+
+AWS
+Login: noteawws@gmail.com
+pw: noteAwws12-9=3
