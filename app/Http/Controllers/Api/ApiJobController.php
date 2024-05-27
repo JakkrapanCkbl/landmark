@@ -59,6 +59,9 @@ class ApiJobController extends Controller
             'inspectiondate' => $request->inspectiondate,
             'lcduedate' => $request->lcduedate,
             'clientduedate' => $request->clientduedate,
+            'headvaluer' => $request->headvaluer,
+            'valuer' => $request->valuer,
+
         ]);
         
         if($job){
