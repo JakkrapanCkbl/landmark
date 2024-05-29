@@ -107,5 +107,8 @@ Route::get('/invoice-old',function(){
     return view('invoice.invoice');
 });
 
+//Invoice by Note
 Route::get('/invoice-edit/{id}',[InvoiceEdit::class, 'render'])->name('invoice.edit');
 Route::get('/invoice-details/{id}',[InvoiceDetails::class, 'render'])->name('invoice.details');
+Route::get('/invoice-details-og',[InvoiceDetails::class, 'render_original'])->name('invoice.details');
+Route::get('/invoicelist',[InvoiceDetails::class, 'render_original'])->name('invoice.details');

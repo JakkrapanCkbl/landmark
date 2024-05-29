@@ -21,4 +21,8 @@ class InvoiceDetails extends Component
         $this->mount($id);
         return view('livewire.invoice-details', ['invoice' => $this->invoice]);
     }
+    public function render_original()
+    {
+        return view('livewire.invoice-details-og', ['invoice' => $this->invoice]);
+    }
 }
