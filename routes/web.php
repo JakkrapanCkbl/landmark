@@ -7,7 +7,6 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ConfirmationController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,7 +65,8 @@ use App\Http\Livewire\JobInsertFiles;
 use App\Http\Livewire\GetProject;
 use App\Http\Livewire\Students;
 // use App\Http\Livewire\Counter;
-
+use App\Http\Livewire\InvoiceDetails;
+use App\Http\Livewire\InvoiceEdit;
 
 Route::view('/welcome', 'welcome');
 //Route::view('/test', 'joborder.joborder-add');
@@ -102,3 +102,10 @@ Route::get('/students', Students::class);
 // Route::get('/counter', Counter::class);
 Route::get('export-data', [AuthController::class, 'ExportData'])->middleware('auth')->name('joborder.export-data');
 
+
+Route::get('/invoice-old',function(){
+    return view('invoice.invoice');
+});
+
+Route::get('/invoice-edit/{id}',[InvoiceEdit::class, 'render'])->name('invoice.edit');
+Route::get('/invoice-details/{id}',[InvoiceDetails::class, 'render'])->name('invoice.details');

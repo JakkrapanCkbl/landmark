@@ -3,11 +3,22 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\Invoice;
 
 class InvoiceDetails extends Component
 {
-    public function render()
+    public $invoiceId;
+    public $invoice;
+
+    public function mount($id)
     {
-        return view('livewire.invoice-details');
+        $this->invoiceId = $id;
+        $this->invoice = Invoice::findOrFail($id);
+    }
+
+    public function render($id)
+    {
+        $this->mount($id);
+        return view('livewire.invoice-details', ['invoice' => $this->invoice]);
     }
 }
