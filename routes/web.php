@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\ForgetPasswordManager;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ConfirmationController;
+use App\Http\Controllers\InvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,7 +109,12 @@ Route::get('/invoice-old',function(){
 });
 
 //Invoice by Note
-Route::get('/invoice-edit/{id}',[InvoiceEdit::class, 'render'])->name('invoice.edit');
 Route::get('/invoice-details/{id}',[InvoiceDetails::class, 'render'])->name('invoice.details');
-Route::get('/invoice-details-og',[InvoiceDetails::class, 'render_original'])->name('invoice.details');
-Route::get('/invoicelist',[InvoiceDetails::class, 'render_original'])->name('invoice.details');
+Route::get('/invoice-details-og',[InvoiceDetails::class, 'render_original'])->name('invoice.detailsog');
+Route::get('/invoicelist',[InvoiceController::class, 'invoiceList'])->name('invoice.invoiceList');
+
+Route::get('/invoice-edit/{id}',[InvoiceController::class, 'edit'])->name('invoice.edit');
+Route::post('/invoice-edit/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
+
+// Route::get('/invoice-create/{id}',[InvoiceCreate::class, 'render'])->name('invoice.invoice-create');
+// Route::post('/invoice-create/{id}', [InvoiceController::class, 'update'])->name('invoice.store');

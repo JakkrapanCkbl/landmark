@@ -19,6 +19,6 @@ class InvoiceEdit extends Component
     public function render($id)
     {
         $this->mount($id);
-        return view('livewire.invoice-edit', ['invoice' => $this->invoice]);
+        return view('livewire.invoice-edit', ['invoice' => $this->invoice, 'id' => $id]);
     }
 }

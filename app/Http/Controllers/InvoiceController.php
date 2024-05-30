@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use App\Http\Livewire\InvoiceEdit;
 
 class InvoiceController extends Controller
 {
@@ -23,13 +24,26 @@ class InvoiceController extends Controller
             'receiptdate' => 'required|date',
         ]);
 
-        Invoice::create($request->all());
-        return redirect()->route('livewire.InvoiceList')->with('success', 'Invoice created successfully.');
+        // $invoice = Invoice::create([
+        //     'invoiceno' => $request->invoiceno,
+        //     'invoicedate' => $request->invoicedate,
+        //     'customer' => $request->customer,
+        //     'address' => $request->address,
+        //     'description' => $request->description,
+        //     'qty' => $request->qty,
+        //     'amountjob' => $request->amountjob,
+        //     'remark' => $request->remark,
+        //     'receiptno' => $request->receiptno,
+        //     'receiptdate' => $request->receiptdate,
+        // ]);
+        $invoice = Invoice::create($request->all());
+        // return redirect()->route('livewire.invoice-details', ['id' => $invoice->id])->with('success', 'Invoice created successfully.');
     }
 
-    public function update(Request $request, Invoice $invoice)
+    public function update(Request $request, $id) //Invoice $invoice)
     {
         $request->validate([
+            // 'id' => 'required|integer|unique:id',
             'invoiceno' => 'required|string|max:255|unique:invoices,invoiceno',
             'invoicedate' => 'required|date',
             'customer' => 'required|string|max:255',
@@ -42,18 +56,32 @@ class InvoiceController extends Controller
             'receiptdate' => 'required|date',
         ]);
 
+        $invoice = Invoice::findOrFail($id);
         $invoice->update($request->all());
-        return redirect()->route('livewire.InvoiceList')->with('success', 'Invoice updated successfully.');
+
+        // return redirect('/invoicelist')->with('message', 'Post created successfully');
+        // return redirect()->route('livewire.invoice-details', ['id' => $invoice->id])->with('success', 'Invoice created successfully.');
     }
 
     public function destroy(Invoice $invoice)
     {
         $invoice->delete();
-        return redirect()->route('livewire.InvoiceList')->with('success', 'Invoice deleted successfully.');
+        return redirect()->route('livewire.invoice-list')->with('success', 'Invoice deleted successfully.');
     }
 
-    public function showList()
+    public function list()
     {
-        return view('invoice.InvoiceList');
+        return view('livewire.invoice-list');
+    }
+
+    // public function render($id)
+    // {
+    //     $this->mount($id);
+    //     return view('livewire.invoice-edit', ['invoice' => $this->invoice, 'id' => $id]);
+    // }
+    public function edit($id)
+    {
+        $invoice = Invoice::findOrFail($id);
+        return view('livewire.invoice-edit', ['invoice' => $invoice]);
     }
 }
