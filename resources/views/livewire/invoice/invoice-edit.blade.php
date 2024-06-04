@@ -44,13 +44,29 @@
                             </div>
                             <div class="col-sm-12 col-md-12 col-xl">
                                 <div class="form-group">
-                                    <label for="invoice-date" class="form-label text-muted">Invoice Date:</label>
+                                    <label for="invoicedate" class="form-label text-muted">Invoice Date:</label>
                                     <div id="inv-datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
                                         <span class="input-group-addon input-group-text bg-primary-transparent"><i
                                                 class="fe fe-calendar text-primary-dark"></i></span>
-                                        <input id="invoice-date" class="form-control" type="text"
-                                            placeholder="Select Invoice Date" />
+                                        <input id="invoicedate" name="invoicedate" class="form-control" type="text"
+                                            placeholder="Select Invoice Date"
+                                            value="{{ Carbon\Carbon::parse($invoice->invoicedate)->thaidate('D j M y') }}" />
+
+                                        {{ Carbon\Carbon::parse($invoice->invoicedate)->thaidate('D j M y') }}
+
+                                        <?php
+                                        echo "12323123" . "\n";
+                                        ?>
+
+                                        <td class="text-muted fs-13"><a href="#"
+                                                wire:click="bindingPopup('{{ $invoice->id }}','{{ $invoice->invoicecode }}','{{ $invoice->reportcode }}','{{ $invoice->projectname }}','{{ $invoice->proplocation }}','{{ Carbon\Carbon::parse($invoice->invoicedate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($invoice->clientduedate)->thaidate('D j M y') }}','{{ $invoice->invoice_status }}')"
+                                                class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal"><span
+                                                    style="color:green;font-weight: bold;text-decoration: underline;">
+                                                    </p></a></td>
+
+
                                     </div>
+                                    {{ old('invoiceno', $invoice->invoicedate) }}
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12 col-xl">
@@ -101,7 +117,8 @@
                                     <label for="add-tax" class="form-label text-muted">Add Tax:</label>
                                     <select
                                         class="form-control select2-show-search form-select select2-hidden-accessible text-dark"
-                                        id="add-tax" data-placeholder="Choose Type..." tabindex="-1" aria-hidden="true">
+                                        id="add-tax" data-placeholder="Choose Type..." tabindex="-1"
+                                        aria-hidden="true">
                                         <option label="Choose one"></option>
                                         <option value="empty">---</option>
                                         <option value="before discount">Before Discount</option>
@@ -188,7 +205,7 @@
                                                             <span
                                                                 class="input-group-text bg-primary-transparent text-primary-dark">฿</span>
                                                             <input type="number" class="form-control"
-                                                                placeholder="Price" value="{{ $invoice->amountjob }}"
+                                                                placeholder="Price" value="{{ $invoice->amountinvoice }}"
                                                                 min="0">
                                                         </div>
 
@@ -210,7 +227,7 @@
                                                         </div>
                                                     </td>
                                                     <td rowspan="2" class="bg-primary-transparent w-15 amount-cell">
-                                                        {{ $invoice->amountjob }}
+                                                        {{ $invoice->amountinvoice }}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -242,7 +259,7 @@
                                         <tbody>
                                             <tr>
                                                 <td colspan="3" class="border-top-0">Sub Total</td>
-                                                <td class="border-top-0">{{ $invoice->amountjob * $invoice->qty }}
+                                                <td class="border-top-0">{{ $invoice->amountinvoice * $invoice->qty }}
                                                 </td>
                                             </tr>
                                             <tr>

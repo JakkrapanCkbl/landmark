@@ -104,11 +104,11 @@ Route::get('/students', Students::class);
 Route::get('export-data', [AuthController::class, 'ExportData'])->middleware('auth')->name('joborder.export-data');
 
 
+
+//Invoice by Note
 Route::get('/invoice-old',function(){
     return view('invoice.invoice');
 });
-
-//Invoice by Note
 Route::get('/invoice-details/{id}',[InvoiceDetails::class, 'render'])->name('invoice.details');
 Route::get('/invoice-details-og',[InvoiceDetails::class, 'render_original'])->name('invoice.detailsog');
 Route::get('/invoicelist',[InvoiceController::class, 'invoiceList'])->name('invoice.invoiceList');

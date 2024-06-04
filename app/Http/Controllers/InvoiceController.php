@@ -42,25 +42,23 @@ class InvoiceController extends Controller
 
     public function update(Request $request, $id) //Invoice $invoice)
     {
+        $invoice = Invoice::findOrFail($id);
         $request->validate([
-            // 'id' => 'required|integer|unique:id',
-            'invoiceno' => 'required|string|max:255|unique:invoices,invoiceno',
-            'invoicedate' => 'required|date',
-            'customer' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'qty' => 'required|integer|min:0',
-            'amountjob' => 'required|integer|min:0',
-            'remark' => 'nullable|string|max:255',
-            'receiptno' => 'required|string|max:255',
-            'receiptdate' => 'required|date',
+            //     'invoiceno' => 'required|string|max:255|unique:invoices,invoiceno',
+            // 'invoicedate' => 'required|date',
+            //     'customer' => 'required|string|max:255',
+            //     'address' => 'required|string|max:255',
+            //     'description' => 'required|string|max:255',
+            // 'qty' => 'required|integer|min:0',
+            // 'amountjob' => 'required|integer|min:0',
+            // 'remark' => 'nullable|string|max:255',
+            // 'receiptno' => 'required|string|max:255',
+            // 'receiptdate' => 'required|date',
         ]);
 
-        $invoice = Invoice::findOrFail($id);
         $invoice->update($request->all());
-
-        // return redirect('/invoicelist')->with('message', 'Post created successfully');
-        // return redirect()->route('livewire.invoice-details', ['id' => $invoice->id])->with('success', 'Invoice created successfully.');
+        // dd("this is ", $invoice);
+        return redirect()->route('invoice.details', ['id' => $invoice->id])->with('success', 'Invoice updated successfully.');
     }
 
     public function destroy(Invoice $invoice)
@@ -71,7 +69,7 @@ class InvoiceController extends Controller
 
     public function list()
     {
-        return view('livewire.invoice-list');
+        return view('livewire.invoice.invoice-list');
     }
 
     // public function render($id)
