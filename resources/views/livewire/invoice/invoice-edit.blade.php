@@ -54,8 +54,9 @@
 
                                         {{ Carbon\Carbon::parse($invoice->invoicedate)->thaidate('D j M y') }}
 
+
                                         <?php
-                                        echo "12323123" . "\n";
+                                        echo '12323123' . "\n";
                                         ?>
 
                                         <td class="text-muted fs-13"><a href="#"

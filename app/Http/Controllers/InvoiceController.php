@@ -80,6 +80,6 @@ class InvoiceController extends Controller
     public function edit($id)
     {
         $invoice = Invoice::findOrFail($id);
-        return view('livewire.invoice-edit', ['invoice' => $invoice]);
+        return view('livewire.invoice.invoice-edit', ['invoice' => $invoice]);
     }
 }

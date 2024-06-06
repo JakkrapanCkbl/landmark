@@ -1,6 +1,63 @@
 @extends('layouts.app')
 
 @section('styles')
+    <style>
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 100px;
+        }
+
+        .signature-block {
+            text-align: center;
+        }
+
+        .signature-block-left {
+            text-align: left;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid #000;
+            width: 300px;
+            margin-bottom: 5px;
+        }
+
+        .signature-line.short {
+            width: 200px;
+        }
+
+        .signature-name {
+            font-size: 16px;
+        }
+
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            /* margin-top: 10px; */
+        }
+
+        .info-block {
+            display: flex;
+            align-items: baseline;
+        }
+
+        .info-topic {
+            margin-right: 4px;
+            font-size: 16px;
+        }
+
+        .info-line {
+            border-bottom: 1px solid #000;
+            width: 140px;
+            /* width: 20%; */
+            margin-bottom: 5px;
+        }
+
+        .info-line.long {
+            width: 175px;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -10,7 +67,7 @@
             <img src="../assets2/images/logo.png">
         </div>
         <div>
-            <h1 class="page-title center fw-bold">สำเนาใบแจ้งหนี้/ใบวางบิล</h1>
+            <h1 class="page-title center fw-bold" style="margin-left: 20px; margin-top: 16px;">สำเนาใบแจ้งหนี้/ใบวางบิล</h1>
         </div>
         <div class="ms-auto pageheader-btn">
             <ol class="breadcrumb">
@@ -94,26 +151,71 @@
                                     <td class="text-end">1,600 ฿</td>
                                     {{-- <td class="text-end">฿6,400</td> --}}
                                 </tr>
+                                @php
+                                    // php code in app/thaicounts.php to change number to thai counts
+                                    $amount = $invoice->amountjob * 1.07;
+                                    $thaiWords = bahtText($amount);
+                                @endphp
                                 <tr>
-                                    <td colspan="1" class=""></td>
-                                    <td colspan="4" rowspan="3" class="fw-bold text-uppercase text-end">Total</td>
+                                    <td class=""></td>
+                                    <td colspan="4" width=76% rowspan="3"
+                                        class="fw-bold text-uppercase text-center h5">
+                                        ( {{ $thaiWords }} )</td>
                                     <td colspan="1" class="fw-bold text-uppercase text-end">Total</td>
-                                    <td class="fw-bold text-end h4">{{ $invoice->amountjob }} ฿</td>
+                                    <td class="fw-bold text-end h5">{{ $invoice->amountjob }} ฿</td>
                                 </tr>
                                 <tr>
                                     <td colspan="1" class=""></td>
                                     <td colspan="1" class="fw-bold text-uppercase text-end">Vat 7%</td>
-                                    <td class="fw-bold text-end h4">{{ $invoice->amountjob * 0.07 }} ฿</td>
+                                    <td class="fw-bold text-end h5">{{ $invoice->amountjob * 0.07 }} ฿</td>
                                 </tr>
                                 <tr>
                                     <td colspan="1" class=""></td>
                                     <td colspan="1" class="fw-bold text-uppercase text-end">Total + Vat</td>
-                                    <td class="fw-bold text-end h4">{{ $invoice->amountjob * 1.07 }} ฿</td>
+                                    <td class="fw-bold text-end h5">{{ $amount }} ฿</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+
+                    <hr>
+                    <div class="signature-section">
+                        <div class="signature-block" style="margin-left:3%">
+                            <div class="signature-line"></div>
+                            <div class="signature-name">ผู้รับวางบิล</div>
+                        </div>
+                        <div class="signature-block" style="margin-left:-10%">
+                            <div class="signature-line short"></div>
+                            <div class="signature-name">วันที่</div>
+                        </div>
+                        <div class="signature-block text-center" style="margin-right:3%">
+                            <div class="signature-line"></div>
+                            <div class="signature-name">แผนกบัญชี</div>
+                        </div>
+                    </div>
+                    <hr>
+                    <h4>Payment</h4>
+                    <div class="info-section">
+                        <div class="info-block">
+                            <div class="info-topic">Cheque No.:</div>
+                            <div class="info-line long"></div>
+                        </div>
+                        <div class="info-block">
+                            <div class="info-topic">Bank:</div>
+                            <div class="info-line"></div>
+                        </div>
+                        <div class="info-block">
+                            <div class="info-topic">Date:</div>
+                            <div class="info-line"></div>
+                        </div>
+                        <div class="info-block">
+                            <div class="info-topic">Amount:</div>
+                            <div class="info-line"></div>
+                        </div>
+                    </div>
+
                 </div>
+
                 <div class="card-footer text-end">
                     <button type="button" class="btn btn-primary mb-1" onclick="javascript:window.print();"><i
                             class="si si-wallet"></i> Pay Invoice</button>
