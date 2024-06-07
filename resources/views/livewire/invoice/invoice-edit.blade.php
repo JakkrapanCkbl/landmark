@@ -51,23 +51,14 @@
                                         <input id="invoicedate" name="invoicedate" class="form-control" type="text"
                                             placeholder="Select Invoice Date"
                                             value="{{ Carbon\Carbon::parse($invoice->invoicedate)->thaidate('D j M y') }}" />
-
-                                        {{ Carbon\Carbon::parse($invoice->invoicedate)->thaidate('D j M y') }}
-
-
-                                        <?php
-                                        echo '12323123' . "\n";
-                                        ?>
-
-                                        <td class="text-muted fs-13"><a href="#"
+                                        {{-- <td class="text-muted fs-13"><a href="#"
                                                 wire:click="bindingPopup('{{ $invoice->id }}','{{ $invoice->invoicecode }}','{{ $invoice->reportcode }}','{{ $invoice->projectname }}','{{ $invoice->proplocation }}','{{ Carbon\Carbon::parse($invoice->invoicedate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($invoice->clientduedate)->thaidate('D j M y') }}','{{ $invoice->invoice_status }}')"
                                                 class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal"><span
                                                     style="color:green;font-weight: bold;text-decoration: underline;">
-                                                    </p></a></td>
+                                                    </p></a></td> --}}
 
 
                                     </div>
-                                    {{ old('invoiceno', $invoice->invoicedate) }}
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12 col-xl">
@@ -113,7 +104,7 @@
                                         placeholder="Enter Project Name" value="Project Spruko">
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md col-xl">
+                            {{-- <div class="col-sm-12 col-md col-xl">
                                 <div class="form-group">
                                     <label for="add-tax" class="form-label text-muted">Add Tax:</label>
                                     <select
@@ -126,7 +117,7 @@
                                         <option value="after discount" selected>After Discount</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-xl-12">
                                 <div class="row">
                                     <div class="col-xl-5 col-md-5 col-sm-12">
@@ -206,7 +197,7 @@
                                                             <span
                                                                 class="input-group-text bg-primary-transparent text-primary-dark">฿</span>
                                                             <input type="number" class="form-control"
-                                                                placeholder="Price" value="{{ $invoice->amountinvoice }}"
+                                                                placeholder="Price" value="{{ $invoice->amountjob }}"
                                                                 min="0">
                                                         </div>
 
@@ -218,17 +209,13 @@
                                                                 data-placeholder="Choose Type..." tabindex="-1"
                                                                 aria-hidden="true">
                                                                 <option label="Choose one"></option>
-                                                                <option value="empty" selected>---</option>
-                                                                <option value="day">GST: 10%</option>
-                                                                <option value="day">CGST: 18%</option>
-                                                                <option value="day">VAT: 10%</option>
-                                                                <option value="day">IGST: 10%</option>
-                                                                <option value="day">UGST: 10%</option>
+                                                                <option value="day" selected>VAT: 7%</option>
+                                                                <option value="empty">---</option>
                                                             </select>
                                                         </div>
                                                     </td>
                                                     <td rowspan="2" class="bg-primary-transparent w-15 amount-cell">
-                                                        {{ $invoice->amountinvoice }}
+                                                        {{ $invoice->amountjob }}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -260,7 +247,7 @@
                                         <tbody>
                                             <tr>
                                                 <td colspan="3" class="border-top-0">Sub Total</td>
-                                                <td class="border-top-0">{{ $invoice->amountinvoice * $invoice->qty }}
+                                                <td class="border-top-0">{{ $invoice->amountjob * $invoice->qty }}
                                                 </td>
                                             </tr>
                                             <tr>

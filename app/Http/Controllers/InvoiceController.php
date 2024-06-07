@@ -11,6 +11,28 @@ class InvoiceController extends Controller
     // Store a newly created resource in storage.
     public function store(Request $request)
     {
+        // $invoice = Invoice::create([
+        //     'invoice_number' => $request->invoice_number,
+        //     'invoice_date' => $request->invoice_date,
+        //     'from_name' => $request->from_name,
+        //     'from_address' => $request->from_address,
+        //     'from_email' => $request->from_email,
+        //     'to_name' => $request->to_name,
+        //     'to_address' => $request->to_address,
+        //     'to_email' => $request->to_email,
+        //     'total' => collect($request->items)->sum(function ($item) {
+        //         return $item['quantity'] * $item['unit_price'];
+        //     }),
+        // ]);
+
+        // foreach ($request->items as $item) {
+        //     $invoice->items()->create([
+        //         'description' => $item['description'],
+        //         'quantity' => $item['quantity'],
+        //         'unit_price' => $item['unit_price'],
+        //         'subtotal' => $item['quantity'] * $item['unit_price'],
+        //     ]);
+        // }
         $request->validate([
             'invoiceno' => 'required|string|max:255|unique:invoices,invoiceno',
             'invoicedate' => 'required|date',
@@ -37,7 +59,7 @@ class InvoiceController extends Controller
         //     'receiptdate' => $request->receiptdate,
         // ]);
         $invoice = Invoice::create($request->all());
-        // return redirect()->route('livewire.invoice-details', ['id' => $invoice->id])->with('success', 'Invoice created successfully.');
+        return redirect()->route('invoice.details', ['id' => $invoice->id])->with('success', 'Invoice created successfully.');
     }
 
     public function update(Request $request, $id) //Invoice $invoice)
@@ -81,5 +103,9 @@ class InvoiceController extends Controller
     {
         $invoice = Invoice::findOrFail($id);
         return view('livewire.invoice.invoice-edit', ['invoice' => $invoice]);
+    }
+    public function create()
+    {
+        return view('livewire.invoice.invoice-create');
     }
 }

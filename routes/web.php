@@ -116,5 +116,5 @@ Route::get('/invoicelist',[InvoiceController::class, 'invoiceList'])->name('invo
 Route::get('/invoice-edit/{id}',[InvoiceController::class, 'edit'])->name('invoice.edit');
 Route::post('/invoice-edit/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
 
-// Route::get('/invoice-create/{id}',[InvoiceCreate::class, 'render'])->name('invoice.invoice-create');
-// Route::post('/invoice-create/{id}', [InvoiceController::class, 'update'])->name('invoice.store');
+Route::get('/invoice-create',[InvoiceController::class, 'create'])->name('invoice.invoice-create');
+Route::post('/invoice-create', [InvoiceController::class, 'store'])->name('invoice.store');
