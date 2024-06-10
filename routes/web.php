@@ -118,3 +118,6 @@ Route::post('/invoice-edit/{id}', [InvoiceController::class, 'update'])->name('i
 
 Route::get('/invoice-create',[InvoiceController::class, 'create'])->name('invoice.invoice-create');
 Route::post('/invoice-create', [InvoiceController::class, 'store'])->name('invoice.store');
+
+Route::get('/invoice-printInvoice/{id}',[InvoiceController::class, 'printInvoice'])->name('invoice.printInvoice');
+Route::get('/invoice-printReceipt/{id}',[InvoiceController::class, 'printReceipt'])->name('invoice.printReceipt');

@@ -175,10 +175,10 @@
                                         <table class="invoice-product-table">
                                             <thead>
                                                 <tr>
-                                                    <th>Description</th>
-                                                    <th>Quantity</th>
+                                                    <th width=60%>Description</th>
+                                                    <th width=10%>Quantity</th>
                                                     <th>Unit Price</th>
-                                                    <th>Tax</th>
+                                                    {{-- <th>Tax</th> --}}
                                                     <th>Amount</th>
                                                 </tr>
                                             </thead>
@@ -202,7 +202,7 @@
                                                         </div>
 
                                                     </td>
-                                                    <td class="w-10">
+                                                    {{-- <td class="w-10">
                                                         <div class="form-group mb-0">
                                                             <select
                                                                 class="form-control select2-show-search form-select select2-hidden-accessible"
@@ -213,9 +213,9 @@
                                                                 <option value="empty">---</option>
                                                             </select>
                                                         </div>
-                                                    </td>
+                                                    </td> --}}
                                                     <td rowspan="2" class="bg-primary-transparent w-15 amount-cell">
-                                                        {{ $invoice->amountjob }}
+                                                        {{ $invoice->amountjob * 1.07}}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -250,7 +250,7 @@
                                                 <td class="border-top-0">{{ $invoice->amountjob * $invoice->qty }}
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            {{-- <tr>
                                                 <td>Discount</td>
                                                 <td class="w-30">
                                                     <input type="number" class="form-control text-end" value="0"
@@ -267,20 +267,20 @@
                                                     </div>
                                                 </td>
                                                 <td>1773.00</td>
-                                            </tr>
+                                            </tr> --}}
                                             <tr>
                                                 <td>Tax</td>
-                                                <td colspan="3">0.00</td>
+                                                <td colspan="3">{{ $invoice->amountjob * $invoice->qty }}</td>
                                             </tr>
                                             <tr class="bg-primary-transparent text-primary-dark fw-bold fs-15">
                                                 <td colspan="3">Total</td>
-                                                <td>1773.00</td>
+                                                <td>{{ $invoice->amountjob * $invoice->qty *1.07}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div class="col-xl-12 mt-4">
+                            {{-- <div class="col-xl-12 mt-4">
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <label for="recipientNote" class="form-label text-muted mb-2">Note:</label>
@@ -292,7 +292,7 @@
                                         <p class="text-dark">Thank you for your business.</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="row p-5">
                             <div class="btn-list text-end">

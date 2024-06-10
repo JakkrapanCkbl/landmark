@@ -108,4 +108,16 @@ class InvoiceController extends Controller
     {
         return view('livewire.invoice.invoice-create');
     }
+
+    public function printInvoice($id)
+    {
+        $invoice = Invoice::findOrFail($id);
+        return view('invoice.pdf_invoice', ['item' => $invoice]);
+    }
+    
+    public function printReceipt($id)
+    {
+        $invoice = Invoice::findOrFail($id);
+        return view('invoice.pdf_receipt', ['item' => $invoice]);
+    }
 }
