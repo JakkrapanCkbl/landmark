@@ -73,8 +73,6 @@
             .content {
                 page-break-before: always;
                 position: relative;
-                padding-bottom: 100px;
-                /* Space for the footer */
             }
 
             .header-space {
@@ -85,15 +83,15 @@
             }
 
             .card-body {
-                height: 900px;
+                height: 1000px;
             }
 
-            div {
+            /* div {
                 border: 1px solid black;
-            }
+            } */
 
             body {
-                zoom: 155%;
+                /* zoom: 155%; */
             }
 
             html,
@@ -128,6 +126,51 @@
             hr.thickhr {
                 border-top: 1.6px solid #333;
             }
+
+            /*  */
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            .page {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                /* Ensure content does not overflow */
+            }
+
+            /* Resetting margins and paddings for all elements */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            /* Header specific adjustments */
+            .page-header,
+            .page-footer {
+                /* position: fixed; */
+                left: 0;
+                width: 100%;
+            }
+
+            .page-header {
+                top: 0;
+            }
+
+            .page-footer {
+                bottom: 0;
+            }
+
+            /* Avoid page breaks within the content */
+            .content {
+                page-break-inside: avoid !important;
+            }
+
         }
 
         @media screen {
@@ -169,17 +212,6 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="clearfix">
-                        {{-- <div class="float-start">
-                            <h3 class="card-title mb-0">#INV-{{ $invoice->invoiceno }}</h3>
-                        </div> --}}
-                        {{-- <div class="float-end">
-                            <h3 class="card-title text-end mb-2">#INV-{{ $invoice->invoiceno }}</h3>
-                            <h3 class="card-title text-end mb-2">Date:
-                                {{ Carbon\Carbon::parse($invoice->invoicedate)->thaidate('j M Y') }}
-                            </h3>
-                        </div> --}}
-                    </div>
                     <hr>
                     <div class="row mb-6">
                         <div class="col-sm-8">
