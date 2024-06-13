@@ -188,10 +188,9 @@
         @media screen {
 
             .no-screen,
-            .no-screen *,
-            {
-            display: none !important;
-        }
+            .no-screen * {
+                display: none !important;
+            }
         }
     </style>
 @endsection

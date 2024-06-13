@@ -31,28 +31,29 @@ Route::get('/projectmaster', function () {
     return view('projectmaster.listing-single');
 });
 
-Route::get('check-helper',[MainController::class, 'checkHelper']);
-Route::get('testcode',[JobController::class, 'testcode']);
+Route::get('check-helper', [MainController::class, 'checkHelper']);
+Route::get('testcode', [JobController::class, 'testcode']);
 
 Route::get('login', [AuthController::class, 'index'])->name('login');
 
-Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
+Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post');
 Route::get('registration', [AuthController::class, 'registration'])->name('register');
-Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post'); 
+Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post');
 
-Route::get('dashboard', [AuthController::class, 'dashboard']); 
+Route::get('dashboard', [AuthController::class, 'dashboard']);
 
 
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/forget-password',[ForgetPasswordManager::class, 'forgetPassword'])->name('forget.password');
-Route::post('/forget-password',[ForgetPasswordManager::class, 'forgetPasswordPost'])->name('forget.password.post');
-Route::get('/reset-password/{token}',[ForgetPasswordManager::class, "resetPassword"])->name("reset.password");
-Route::post('/reset-password',[ForgetPasswordManager::class, 'resetPasswordPost'])->name('reset.password.post');
+Route::get('/forget-password', [ForgetPasswordManager::class, 'forgetPassword'])->name('forget.password');
+Route::post('/forget-password', [ForgetPasswordManager::class, 'forgetPasswordPost'])->name('forget.password.post');
+Route::get('/reset-password/{token}', [ForgetPasswordManager::class, "resetPassword"])->name("reset.password");
+Route::post('/reset-password', [ForgetPasswordManager::class, 'resetPasswordPost'])->name('reset.password.post');
 
 
 
 
 use App\Http\Livewire\Login2;
+
 Route::get('login2', Login2::class);
 
 use App\Http\Livewire\Landing;
@@ -68,6 +69,7 @@ use App\Http\Livewire\Students;
 // use App\Http\Livewire\Counter;
 use App\Http\Livewire\InvoiceDetails;
 use App\Http\Livewire\InvoiceEdit;
+use App\Http\Livewire\NhLoanDetails;
 
 Route::view('/welcome', 'welcome');
 //Route::view('/test', 'joborder.joborder-add');
@@ -106,18 +108,26 @@ Route::get('export-data', [AuthController::class, 'ExportData'])->middleware('au
 
 
 //Invoice by Note
-Route::get('/invoice-old',function(){
+Route::get('/invoice-old', function () {
     return view('invoice.invoice');
 });
-Route::get('/invoice-details/{id}',[InvoiceDetails::class, 'render'])->name('invoice.details');
-Route::get('/invoice-details-og',[InvoiceDetails::class, 'render_original'])->name('invoice.detailsog');
-Route::get('/invoicelist',[InvoiceController::class, 'invoiceList'])->name('invoice.invoiceList');
+Route::get('/receipt-old', function () {
+    return view('invoice.pdf_receipt', compact('receipt',));
+});
+Route::get('/invoice-details/{id}', [InvoiceDetails::class, 'render'])->name('invoice.details');
+Route::get('/invoice-details-og', [InvoiceDetails::class, 'render_original'])->name('invoice.detailsog');
+Route::get('/invoicelist', [InvoiceController::class, 'invoiceList'])->name('invoice.invoiceList');
 
-Route::get('/invoice-edit/{id}',[InvoiceController::class, 'edit'])->name('invoice.edit');
+Route::get('/invoice-edit/{id}', [InvoiceController::class, 'edit'])->name('invoice.edit');
 Route::post('/invoice-edit/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
 
-Route::get('/invoice-create',[InvoiceController::class, 'create'])->name('invoice.invoice-create');
+Route::get('/invoice-create', [InvoiceController::class, 'create'])->name('invoice.invoice-create');
 Route::post('/invoice-create', [InvoiceController::class, 'store'])->name('invoice.store');
 
-Route::get('/invoice-printInvoice/{id}',[InvoiceController::class, 'printInvoice'])->name('invoice.printInvoice');
-Route::get('/invoice-printReceipt/{id}',[InvoiceController::class, 'printReceipt'])->name('invoice.printReceipt');
+// Route::get('/receipt-details-og', [ReceiptDetails::class, 'render_original'])->name('receipt.detailsog');
+
+Route::get('/nhloan-details/{id}', [NhLoanDetails::class, 'render'])->name('nhloan.details');
+
+Route::get('/nhloan-details', function () {
+    return view('livewire.invoice.nhloan-details');
+});
