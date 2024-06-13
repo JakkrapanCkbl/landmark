@@ -27,11 +27,11 @@
         }
 
         .signature-line.long {
-            width: 372px;
+            width: 430px;
         }
 
         .signature-name {
-            font-size: 16px;
+            font-size: 17px;
         }
 
         .info-section {
@@ -48,7 +48,7 @@
 
         .info-topic {
             margin-right: 4px;
-            font-size: 16px;
+            font-size: 17px;
         }
 
         .info-line {
@@ -82,33 +82,40 @@
                 padding: 0;
             }
 
+            .page-header {
+                margin: 0;
+                padding: 0;
+            }
+
             .card-body {
-                height: 1000px;
-            }
-
-            /* div {
-                border: 1px solid black;
-            } */
-
-            body {
-                /* zoom: 155%; */
-            }
-
-            html,
-            body {
-                height: auto;
+                height: 1040px;
             }
 
             address {
-                font-size: 16px;
-            }
-
-            tr td p {
-                font-size: 14px;
-            }
-
-            tr td .text-end {
                 font-size: 17px;
+            }
+
+            tr td p,
+            tr td div .text-muted {
+                font-size: 17px;
+                overflow-wrap: break-word;
+                /* line break if length exceeds width */
+                white-space: normal;
+                word-break: break-word;
+            }
+
+            tr td {
+                font-size: 17px;
+            }
+
+            tr td .text-end,
+            tr td.thai-totalAmount {
+                font-size: 21px;
+            }
+
+            tr th.text-center,
+            tr th.text-end {
+                font-size: 18px;
             }
 
             .table-bordered,
@@ -130,6 +137,7 @@
             /*  */
             body,
             html {
+                height: auto;
                 margin: 0;
                 padding: 0;
                 width: 100%;
@@ -173,12 +181,17 @@
 
         }
 
+        @page {
+            margin-top: -30px;
+        }
+
         @media screen {
 
             .no-screen,
-            .no-screen * {
-                display: none !important;
-            }
+            .no-screen *,
+            {
+            display: none !important;
+        }
         }
     </style>
 @endsection
@@ -190,11 +203,11 @@
             <img src="../assets2/images/logo.png">
         </div>
         <div class="text-center">
-            <h1 class="page-title center fw-bold" style="margin-left: 20px; margin-top: 16px;">สำเนาใบแจ้งหนี้/ใบวางบิล</h1>
-            <h1 class="page-title center fw-bold no-screen" style="margin-left: 20px; margin-top: 16px;">RECEIPT/TAX INVOICE
-            </h1>
-            <h2 class="page-title center fw-bold no-screen" style="margin-left: 20px; margin-top: 16px;">ต้นฉบับ
-                (เอกสารออกเป็นชุด)</h2>
+            <p class="h3 page-title center fw-bold" style="margin-left: 20px; margin-top: 16px;">สำเนาใบแจ้งหนี้/ใบวางบิล</p>
+            <p class="h3 page-title center fw-bold no-screen" style="margin-left: 20px; margin-top: 16px;">RECEIPT/TAX INVOICE
+            </p>
+            <p class="h3 page-title center fw-bold no-screen" style="margin-left: 20px; margin-top: 16px;">ต้นฉบับ
+                (เอกสารออกเป็นชุด)</p>
         </div>
         <div class="ms-auto pageheader-btn no-print">
             <ol class="breadcrumb">
@@ -223,17 +236,19 @@
                                 โทร : 0-2331-4580-2<br>
                                 www.landmarkcon.net
                             </address>
+                        </div>
+                        <div class="col-sm-4 text-end">
+                            <p class="h4 card-title text-end mb-2">#INV-{{ $invoice->invoiceno }}</p>
+                            <p class="h4 card-title text-end mb-4">Date:
+                                {{ Carbon\Carbon::parse($invoice->invoicedate)->thaidate('j M Y') }}
+                            </p>
+                        </div>
+                        <div class="col-sm-10">
                             <p class="h4">ลูกค้า:</p>
                             <address>
                                 {{ $invoice->customer }}<br>
                                 {{ $invoice->address }}<br>
                             </address>
-                        </div>
-                        <div class="col-sm-4 text-end">
-                            <h3 class="card-title text-end mb-2">#INV-{{ $invoice->invoiceno }}</h3>
-                            <h3 class="card-title text-end mb-4">Date:
-                                {{ Carbon\Carbon::parse($invoice->invoicedate)->thaidate('j M Y') }}
-                            </h3>
                         </div>
                     </div>
                     <div class="table-responsive push">
@@ -241,9 +256,7 @@
                             <tbody>
                                 <tr class=" ">
                                     <th class="text-center">#</th>
-                                    {{-- <th>Item</th> --}}
                                     <th colspan="5" class="text-center">Item</th>
-                                    {{-- <th class="text-end">Unit Price</th> --}}
                                     <th class="text-end">Amount (Baht)</th>
                                 </tr>
                                 @php
@@ -260,11 +273,9 @@
                                             <div class="text-muted">{{ Str::substr($invoice->description, 31) }}</div>
                                         </div>
                                     </td>
-                                    {{-- <td class="text-center"> {{ $invoice->qty }}</td> --}}
                                     <td class="text-end"> {{ number_format($invoice->amountjob, 2, '.', ',') }} </td>
-                                    {{-- <td class="text-end"> {{ $invoice->amountjob * $invoice->qty }} ฿</td> --}}
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <td class="text-center">2.</td>
                                     <td colspan="5">
                                         <p class="font-w800 mb-1">ค่าบริการประเมินมูลค่าทรัพย์สิน</p>
@@ -272,14 +283,12 @@
                                             <div class="text-muted">LC/63BF-1101 HLHO 630800328</div>
                                         </div>
                                     </td>
-                                    {{-- <td class="text-center">15</td> --}}
                                     <td class="text-end">1,600</td>
-                                    {{-- <td class="text-end">฿6,400</td> --}}
-                                </tr>
+                                </tr> --}}
                                 <tr>
                                     <td rowspan ="3"></td>
                                     <td colspan="4" width=76% rowspan="3"
-                                        class="fw-bold text-uppercase text-center h5">
+                                        class="fw-bold text-uppercase text-center h4 thai-totalAmount">
                                         ( {{ $thaiWords }} )</td>
                                     <td colspan="1" class="fw-bold text-uppercase text-end">Sub Total</td>
                                     <td class="fw-bold text-end h5">
@@ -303,15 +312,15 @@
                 <div class="card-footer text-end">
                     <hr class="thickhr">
                     <div class="print-bottom">
-                        <div class="text-end mr-6">
-                            <h4>บริษัท แลนด์มาร์ค คอนซัลแทนส์ จำกัด</h4>
+                        <div class="text-end mr-6" style="margin-right:62px;">
+                            <p class="h3" style="font-size:20px;">บริษัท แลนด์มาร์ค คอนซัลแทนส์ จำกัด</p>
                         </div>
-                        <div class="signature-section">
+                        <div class="signature-section no-screen">
                             <div class="signature-block" style="margin-left:0%">
                                 <div class="signature-line"></div>
                                 <div class="signature-name">ผู้รับวางบิล</div>
                             </div>
-                            <div class="signature-block" style="margin-left:-5%">
+                            <div class="signature-block" style="margin-left:0%">
                                 <div class="signature-line short"></div>
                                 <div class="signature-name">วันที่</div>
                             </div>
@@ -322,7 +331,7 @@
                         </div>
                         <hr class="thickhr">
                         <h4 class="mb-2 text-start">Payment</h4>
-                        <div class="info-section">
+                        <div class="info-section no-screen">
                             <div class="info-block">
                                 <div class="info-topic">Cheque No.:</div>
                                 <div class="info-line long"></div>
