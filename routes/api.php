@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiJobController;
 use App\Http\Controllers\Api\ApiComputerController;
+use App\Models\User;
 
 
 /*
@@ -17,13 +18,31 @@ use App\Http\Controllers\Api\ApiComputerController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('login', function(){
+    abort(401);
+})->name('login');
+
+Route::post('login', function(){
+    $credentials = request()->only(['email', 'password']);
+    if (!auth()->validate($credentials)) {
+        abort(402);
+    }else{
+        $user = User::where('email', $credentials['email'])->first();
+        $user->tokens()->delete();
+        $token = $user->createToken('postman',['admin']);
+        return response()->json(['token' => $token->plainTextToken],200);
+    }
 });
 
 
-Route::post('addjobapi', [ApiJobController::class, 'store']);
-Route::get('addjobapi', [ApiJobController::class, 'index']);
+Route::group(['middleware' => 'auth:sanctum'], function(){
+    Route::post('addjobapi', [ApiJobController::class, 'store']);
+    Route::get('addjobapi', [ApiJobController::class, 'index']);
+    Route::put('/editjobapi/{id}', [ApiJobController::class, 'update']);
+
+});
+
+
 
 // Route::get('/addjobapi', function(){
 //     return 'this is api';
@@ -33,4 +52,11 @@ Route::get('addjobapi', [ApiJobController::class, 'index']);
 Route::post('/computers', [ApiComputerController::class, 'store']);
 Route::get('/computers', [ApiComputerController::class, 'index']);
 Route::get('/computers/{cpu_id}', [ApiComputerController::class, 'show']);
+
+Route::post('myuser', function() {
+    return 'POST';
+});
+
+// Route::post('login',[ApiJobController::class, 'login']);
+
 

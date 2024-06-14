@@ -598,7 +598,7 @@
                                     {{-- <th>test</th> --}}
                                     <th class="bg-transparent border-bottom-0">ลูกค้า</th>
                                     <th class="bg-transparent border-bottom-0">รายงานเลขที่</th>
-                                    <th class="bg-transparent border-bottom-0">ID (KK/UOB)</th>
+                                    <th class="bg-transparent border-bottom-0">Bank's ID</th>
                                     <th class="bg-transparent border-bottom-0">โครงการ / ที่ตั้ง</th>
                                     <th class="bg-transparent border-bottom-0">ปรเภท</th>
                                     <th class="bg-transparent border-bottom-0">เนื้อที่</th>
@@ -714,8 +714,10 @@
 
                                    
                                     <td class="text-muted fs-13"><p class="mb-0 text-dark">{{ $job->reportcode }}</p></td>
+                                    {{-- <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></td> --}}
+                                    {{-- <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="_blank"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td> --}}
+                                    <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="popup" onclick="window.open('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}','name','width=850,height=750')"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td>
                                     {{-- <td class="text-muted fs-13 fw-semibold" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }}<br>{{ $job->proplocation }}"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" >{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,30) }}</a></td> --}}
-                                    <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td>
                                     {{-- <td class="text-muted fs-13"><a href="{{url('project-details')}}" class="text-dark">Noa Dashboard UI</a></td> --}}
                                     <td class="fs-13"><p class="mb-0">{{ $job->prop_type }}</p></td>
                                     <td class="text-muted fs-13"><p class="mb-0 text-muted">{{ $job->prop_size }}</p></td>
@@ -730,13 +732,24 @@
                                             <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/srp.jpg')}})"></span> 
                                         @elseif ($job->valuer == 'นิรันดร')
                                             <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/nda.jpg')}})"></span> 
+                                        @elseif ($job->valuer == 'วรงค์')
+                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/wrg.jpg')}})"></span> 
+                                        @elseif ($job->valuer == 'อานิพงศ์')
+                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/anp.jpg')}})"></span> 
+                                        @elseif ($job->valuer == 'ปริวรรต')
+                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/prw.jpg')}})"></span> 
+                                        @elseif ($job->valuer == 'อธิวัฒน์')
+                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ath.jpg')}})"></span> 
                                         @elseif ($job->valuer == 'มนต์ชัย')
                                             <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mcm.jpg')}})"></span>
                                         @elseif ($job->valuer == 'ภัทรกร')
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/pks.jpg')}})"></span>                                                                    
+                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ptk.jpg')}})"></span>                                                                    
+                                        @elseif ($job->valuer == 'ณัฐวุฒิ')
+                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ntw.jpg')}})"></span>
                                         @else
                                             <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/avatar.jpg')}})"></span> 
                                         @endif
+                                        
                                     </td>
                                     <td class="text-center">
                                         @if ($job->headvaluer == 'มงคล')
@@ -745,10 +758,20 @@
                                             <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/srp.jpg')}})"></span> 
                                         @elseif ($job->headvaluer == 'นิรันดร')
                                             <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/nda.jpg')}})"></span> 
+                                        @elseif ($job->headvaluer == 'วรงค์')
+                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/wrg.jpg')}})"></span> 
+                                        @elseif ($job->headvaluer == 'อานิพงศ์')
+                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/anp.jpg')}})"></span> 
+                                        @elseif ($job->headvaluer == 'ปริวรรต')
+                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/prw.jpg')}})"></span> 
+                                        @elseif ($job->headvaluer == 'อธิวัฒน์')
+                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ath.jpg')}})"></span> 
                                         @elseif ($job->headvaluer == 'มนต์ชัย')
                                             <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mcm.jpg')}})"></span>
                                         @elseif ($job->headvaluer == 'ภัทรกร')
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/pks.jpg')}})"></span>                                                                    
+                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ptk.jpg')}})"></span>                                                                    
+                                        @elseif ($job->headvaluer == 'ณัฐวุฒิ')
+                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ntw.jpg')}})"></span>
                                         @else
                                             <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/avatar.jpg')}})"></span> 
                                         @endif

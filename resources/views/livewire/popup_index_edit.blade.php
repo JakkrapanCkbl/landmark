@@ -76,6 +76,16 @@
                             <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-upload">
                                 Upload
                             </a>
+                            <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-print">
+                                Print เล่มรายงาน
+                            </a>
+                             <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-link_folder">
+                                Link Folder
+                            </a>
+                             <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-file_collect">
+                                File Collect
+                            </a>
+
                             <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-subtask">
                                 To do
                             </a>
@@ -155,7 +165,24 @@
 									<input type="hidden" id="subfolder" name="subfolder" value={{$subfolder}}>
 								</form>
                             </div>
+                        </div>
 
+                        <div class="tab-pane" id="task-print">
+                            <div class="row">
+                                Print เล่มรายงาน
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="task-link_folder">
+                            <div class="row">
+                               Link Folder
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="task-file_collect">
+                            <div class="row">
+                               File Collect
+                            </div>
                         </div>
 
                         <div class="tab-pane" id="task-subtask">

@@ -35,11 +35,12 @@
         <div class="col-lg-12">
             <div class="card custom-card">
                 <div class="card-header border-bottom">
-                    @if(session()->has('message'))
+                    <h3 class="card-title">แก้ไข / ตรวจสอบความถูกต้อง</h3>
+                    {{-- @if(session()->has('message'))
                         <div class="alert alert-success">{{session('message')}}</div>
                     @else
-                        <h3 class="card-title">แก้ไข</h3>
-                    @endif
+                        <h3 class="card-title">แก้ไข / ตรวจสอบความถูกต้อง</h3>
+                    @endif --}}
                 </div>
                 <div class="card-body">
                      <div class="table-responsive">
@@ -58,7 +59,7 @@
                                             </div>
                                             <div class="col-3">
                                                 <div class="form-group">
-                                                    <label for="reportcode" class="form-label">ID (KK/UOB)</label>
+                                                    <label for="reportcode" class="form-label">Bank's ID</label>
                                                     <input type="text" class="form-control" name="reportcode" id="reportcode" wire:model="reportcode">
                                                     @error('reportcode') <span class="error" style="color: red;">{{ $message }}</span> @enderror
                                                     
@@ -81,14 +82,26 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            
+                                            
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ประเภททรัพย์สิน / กลุ่มย่อย</p></td>
+                                    <td class="wp-70">
+                                        <div class="row">
+                                            <div class="col-3">
                                                 <div class="form-group">
                                                     <label for="prop_type" class="form-label">ประเภททรัพย์สิน</label>
-                                                    <select name="prop_type" class="form-control form-select" id="prop_type" wire:model="prop_type">				
+                                                    {{-- <select name="prop_type" class="form-control form-select" id="prop_type" wire:model="prop_type">				
                                                         <option value="ห้องชุด">ห้องชุด</option>
                                                         <option value="บ้านเดี่ยว">บ้านเดี่ยว</option>
                                                         <option value="บ้านแฝด">บ้านแฝด</option>
                                                         <option value="ทาวน์เฮาส์/ทาวน์โฮม">ทาวน์เฮาส์/ทาวน์โฮม</option>
+                                                        <option value="ทาวน์เฮาส์">ทาวน์เฮาส์</option>
+                                                        <option value="ทาวน์โฮม">ทาวน์โฮม</option>
                                                         <option value="ตึกแถว">ตึกแถว</option>
                                                         <option value="ที่ดินว่างเปล่า">ที่ดินว่างเปล่า</option>
                                                         <option value="โรงงาน/โกดัง">โรงงาน/โกดัง</option>
@@ -100,9 +113,61 @@
                                                         <option value="สิทธิการเช่า">สิทธิการเช่า</option>
                                                         <option value="เครื่องจักร">เครื่องจักร</option>
                                                         <option value="อื่น ๆ">อื่น ๆ</option>
+                                                    </select> --}}
+                                                    <select class="form-control form-select" id="proptype" name="proptype"  wire:model="selectedProptype" >
+                                                        <option value=""></option>
+                                                        @foreach($proptypes as $item)
+                                                            <option value="{{ $item->show_prop_type }}" @if ($proptype == $item->show_prop_type) selected @endif>{{ $item->show_prop_type }}</option>
+                                                        @endforeach
                                                     </select>
+                                                    {{-- <p>You have selected: {{ $selectedProptype }}</p> --}}
                                                 </div>
                                             </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label for="prop_type2" class="form-label">กลุ่มย่อย</label>
+                                                    {{-- <select name="prop_type2" id="prop_type2" class="form-control form-select" wire:model="prop_type2">
+                                                        @if ($prop_type === 'ที่ดินว่างเปล่า')
+                                                            <option value=""></option>
+                                                            <option value="Master Form (1 แปลง)">Master Form (1 แปลง)</option>
+                                                            <option value="ที่ดิน 2 แปลง">ที่ดิน 2 แปลง</option>
+                                                            <option value="ที่ดิน 3 แปลง">ที่ดิน 3 แปลง</option>
+                                                            <option value="ตั้งอยู่เขตป่า">ตั้งอยู่เขตป่า</option>
+                                                            <option value="มีผู้บุกรุก ครอบครองปรปักษ์">มีผู้บุกรุก ครอบครองปรปักษ์</option>
+                                                            <option value="ถูกเวนคืน">ถูกเวนคืน</option>
+                                                            <option value="เนื้อที่ดินบางส่วนเป็นถนนภาระจำยอม">เนื้อที่ดินบางส่วนเป็นถนนภาระจำยอม</option>
+                                                            <option value="อื่นๆ">อื่นๆ</option>
+                                                        @elseif ($prop_type === 'ทาวน์เฮาส์')
+                                                            <option value=""></option>
+                                                            <option value="Master Form (1 หลัง)">Master Form (1 หลัง)</option>
+                                                            <option value="ทาวน์เฮาส์ 2 หลัง">ทาวน์เฮาส์ 2 หลัง</option>
+                                                            <option value="ทาวน์เฮาส์ 3 หลัง">ทาวน์เฮาส์ 3 หลัง</option>
+                                                            <option value="อาคารคร่อมที่ดินแปลงข้างเคียง">อาคารคร่อมที่ดินแปลงข้างเคียง</option>
+                                                            <option value="มีผู้บุกรุก ครอบครองปรปักษ์">มีผู้บุกรุก ครอบครองปรปักษ์</option>
+                                                            <option value="ถูกเวนคืน">ถูกเวนคืน</option>
+                                                            <option value="ระยะถ่อยร่นจากคลอง/ถนน ไม่ถูกต้อง">ระยะถ่อยร่นจากคลอง/ถนน ไม่ถูกต้อง</option>
+                                                            <option value="ตั้งอยู่เขตป่า">อื่นๆ</option>
+                                                        @else
+                                                            <option value=""></option>
+                                                        @endif
+                                                    </select> --}}
+                                                     <select class="form-control form-select" id="proptype2" name="proptype2" wire:model="selectedProptype2">
+                                                        @foreach ($proptype2s as $item)
+                                                            <option value="{{ $item->show_prop_type2 }}" @if ($proptype2 == $item->show_prop_type2) selected @endif>{{ $item->show_prop_type2 }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label for="prop_type2_note" class="form-label">อื่นๆ ระบุ</label>
+                                                    <input type="text" class="form-control" name="prop_type2_note" id="prop_type2_note" wire:model="prop_type2_note">
+                                                    @error('prop_type2_note') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                    
+                                                </div>
+                                            </div>
+
                                             <div class="col-2">
                                                 <div class="form-group">
                                                     <label for="prop_size" class="form-label">เนื้อที่</label>
@@ -111,9 +176,11 @@
                                                     
                                                 </div>
                                             </div>
+                                            
                                         </div>
                                     </td>
                                 </tr>
+
                                 <tr>
                                     <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ชื่อโครงการ</p></td>
                                     <td class="wp-70">
@@ -154,7 +221,7 @@
                                             </div>
                                             <div class="col-2">
                                                 <div class="form-group">
-                                                    <label for="amphure_code" class="form-label">อำเภอ</label>
+                                                    <label for="amphure_code" class="form-label">อำเภอ / เขต</label>
                                                     <select class="form-control form-select" id="amphure_code" name="amphure_code" wire:model="amphure_code">
                                                         @foreach ($amphures as $amphure)
                                                             <option value="{{ $amphure->code }}" @if ($amphure_code == $amphure->code) selected @endif>{{ $amphure->name_th }}</option>
@@ -164,7 +231,7 @@
                                             </div>
                                             <div class="col-2">
                                                 <div class="form-group">
-                                                    <label for="district" class="form-label">ตำบล</label>
+                                                    <label for="district" class="form-label">ตำบล / แขวง</label>
                                                     <input type="text" class="form-control" name="district" id="district" wire:model="district">
                                                     @error('district') <span class="error" style="color: red;">{{ $message }}</span> @enderror
                                                 </div>
@@ -361,6 +428,38 @@
                                     </td>
                                 </tr>
 
+                                 <tr>
+                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">วิธีการประเมิน / ราคาประเมิน</p></td>
+                                    <td class="wp-70">
+                                        <div class="row">
+                                           <div class="col-5">
+                                                <div class="form-group">
+                                                    <label for="obj_method" class="form-label">วิธีการประเมิน</label>
+                                                    <select name="obj_method" class="form-control form-select" wire:model="obj_method">
+                                                        <option value=""></option>
+                                                        <option value="วิธีเปรียบเทียบตลาด">วิธีเปรียบเทียบตลาด</option>
+                                                        <option value="วิธีวิเคราะห์มูลค่าจากต้นทุน">วิธีวิเคราะห์มูลค่าจากต้นทุน</option>
+                                                        <option value="วิธีแปลงรายได้เป็นมูลค่า">วิธีแปลงรายได้เป็นมูลค่า</option>
+                                                        <option value="วิธีการตั้งสมมติฐานในการพัฒนา">วิธีการตั้งสมมติฐานในการพัฒนา</option>
+                                                        <option value="วิธีวิเคราะห์กระแสเงินสด">วิธีวิเคราะห์กระแสเงินสด</option>
+                                                        <option value="วิธีประเมินโดยแบบจำลอง">วิธีประเมินโดยแบบจำลอง</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-2">
+                                               <div class="form-group">
+                                                    <label for="marketvalue" class="form-label">ราคาประเมิน</label>
+                                                    {{-- {{ number_format($Expense->price, 2) }} --}}
+                                                    <input type="text" class="form-control" name="marketvalue" id="marketvalue" wire:model="marketvalue">
+                                                    @error('marketvalue') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                </tr>
+
                                 <tr>
                                     <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">สถานะงาน</p></td>
                                     <td class="wp-70">
@@ -376,11 +475,44 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            
+                                        </div>            
+                                    </td>
+                                </tr>
 
-                                             <div class="col-3">
+                                 <tr>
+                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">บันทึก / ผ่านการตรวจสอบ</p></td>
+                                    <td class="wp-70">
+                                        <div class="row">
+                                            <div class="col-5">
+                                                 {{-- <div class="form-group">
+                                                    <input type="checkbox" id="job_checked" name="job_checked" wire:model="job_checked"> ผ่านการตรวจสอบเช็คข้อมูลแล้ว
+                                                </div> --}}
+                                                {{-- <div class="form-check form-switch">
+                                                    &nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="job_checked" wire:model="job_checked">
+                                                    <label class="form-check-label" for="flexSwitchCheckDefault">ผ่านการตรวจสอบเช็คข้อมูลแล้ว</label>
+                                                </div> --}}
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">ผ่านการตรวจสอบเช็คข้อมูลแล้ว</label>
+                                                <br>
+                                                <label>
+                                                    <input type="radio" name="options" value="0" wire:model="job_checked"> No
+                                                </label>
+                                                &nbsp;&nbsp;
+                                                <label>
+                                                    <input type="radio" name="options" value="1" wire:model="job_checked"> Yes
+                                                </label>
+                                            </div>
+
+                                             <div class="col-2">
                                                 <div class="form-group">
                                                     <button class="btn btn-primary" onclick="confirmEdit()">บันทึกข้อมูล</button>
                                                 </div>
+                                            </div>
+
+                                            <div class="col-3">
+                                                @if(session()->has('message'))
+                                                    <div class="alert alert-success">{{session('message')}}</div>
+                                                @endif
                                             </div>
                                         </div>            
                                     </td>
