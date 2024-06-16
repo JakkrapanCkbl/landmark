@@ -26,7 +26,7 @@
 								<div class="col-md-12">
 									<div class="card">
 										<div class="card-header border-bottom">
-											<h3 class="card-title">แก้ไขข้อมูลงาน</h3>
+											<h3 class="card-title">แก้ไข / ตรวจสอบข้อมูลงาน</h3>
 										</div>
 										<div class="card-body">
 											{{-- <p class="card-sub-title text-muted">แก้ไขงาน</p> --}}
@@ -291,6 +291,8 @@
 															{{-- <button type="submit" class="btn btn-secondary">Cancel</button> --}}
 														</div>
 													</div>
+
+													
 
 													{{-- <div class="row">
 														<div class="col-md-12 col-xl-3">

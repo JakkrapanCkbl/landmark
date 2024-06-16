@@ -38,10 +38,8 @@
 		<script src="{{asset('assets/plugins/fancyuploder/jquery.iframe-transport.js')}}"></script>
 		<script src="{{asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js')}}"></script>
 		<script src="{{asset('assets/plugins/fancyuploder/fancy-uploader.js')}}"></script>
-
-		<!-- FORM ELEMENTS JS -->
-		{{-- <script src="{{asset('assets/js/formelementadvnced.js')}}"></script> --}}
-
+        
+        
 		{{-- Custom Function --}}
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>

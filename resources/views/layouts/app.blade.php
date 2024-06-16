@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <!-- Include Alpine.js from CDN -->
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+       
         
        @livewireStyles
     </head>
@@ -72,6 +73,7 @@
             //alert('take action event from livewire JobOrderAdded emit');
         });
     </script>
+    
 
     </body>
 
