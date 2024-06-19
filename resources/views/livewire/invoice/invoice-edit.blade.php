@@ -38,8 +38,15 @@
                                         <input id="invoiceno" name ="invoiceno" type="text"
                                             class="form-control text-dark" placeholder="Enter Invoice Number"
                                             value="{{ old('invoiceno', $invoice->invoiceno) }}" required>
-                                        {{-- value="{{ $invoice->invoiceno }}" required> --}}
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md col-xl">
+                                <div class="form-group">
+                                    <label class="form-label text-muted">ชื่อลูกค้า: </label>
+                                    <textarea name="customer" class="form-control w-60 mb-2 text-dark" placeholder="Enter Client" id="customer"
+                                        cols="30" rows="3">{{ $invoice->customer }}</textarea>
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-12 col-xl">
@@ -50,74 +57,12 @@
                                                 class="fe fe-calendar text-primary-dark"></i></span>
                                         <input id="invoicedate" name="invoicedate" class="form-control" type="text"
                                             placeholder="Select Invoice Date"
-                                            value="{{ Carbon\Carbon::parse($invoice->invoicedate)->thaidate('D j M y') }}" />
-                                        {{-- <td class="text-muted fs-13"><a href="#"
-                                                wire:click="bindingPopup('{{ $invoice->id }}','{{ $invoice->invoicecode }}','{{ $invoice->reportcode }}','{{ $invoice->projectname }}','{{ $invoice->proplocation }}','{{ Carbon\Carbon::parse($invoice->invoicedate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($invoice->clientduedate)->thaidate('D j M y') }}','{{ $invoice->invoice_status }}')"
-                                                class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal"><span
-                                                    style="color:green;font-weight: bold;text-decoration: underline;">
-                                                    </p></a></td> --}}
-
-
+                                            value="{{ \Carbon\Carbon::parse($invoice->invoicedate)->format('d-m-Y') }}" />
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-xl">
-                                <div class="form-group">
-                                    <label for="invoice-date1" class="form-label text-muted">Due Date:</label>
-                                    <div id="due-datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-                                        <span class="input-group-addon input-group-text bg-primary-transparent"><i
-                                                class="fe fe-calendar text-primary-dark"></i></span>
-                                        <input id="invoice-date1" class="form-control" type="text"
-                                            placeholder="Select Due Date" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-xl">
-                                <div class="form-group">
-                                    <label for="currency-type" class="form-label text-muted">Currency:</label>
-                                    <select
-                                        class="form-control select2-show-search form-select select2-hidden-accessible text-dark"
-                                        id="currency-type" data-placeholder="Choose Type..." tabindex="-1"
-                                        aria-hidden="true">
-                                        <option label="Choose one"></option>
-                                        <option value="day" selected>Baht(฿)</option>
-                                        {{-- <option value="day" selected>USD($)</option>
-                                    <option value="day">GBP(£)</option>
-                                    <option value="day">EUR(€)</option>
-                                    <option value="day">INR(₹)</option> --}}
-                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row p-5 border-bottom">
-                            <div class="col-sm-12 col-md col-xl">
-                                <div class="form-group">
-                                    <label class="form-label text-muted">Client: </label>
-                                    <input type="text" class="form-control text-dark" id="client-name"
-                                        placeholder="Enter Client Name" value="{{ $invoice->customer }}">
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md col-xl">
-                                <div class="form-group">
-                                    <label for="project-name" class="form-label text-muted">Project:</label>
-                                    <input type="text" class="form-control text-dark" id="project-name"
-                                        placeholder="Enter Project Name" value="Project Spruko">
-                                </div>
-                            </div>
-                            {{-- <div class="col-sm-12 col-md col-xl">
-                                <div class="form-group">
-                                    <label for="add-tax" class="form-label text-muted">Add Tax:</label>
-                                    <select
-                                        class="form-control select2-show-search form-select select2-hidden-accessible text-dark"
-                                        id="add-tax" data-placeholder="Choose Type..." tabindex="-1"
-                                        aria-hidden="true">
-                                        <option label="Choose one"></option>
-                                        <option value="empty">---</option>
-                                        <option value="before discount">Before Discount</option>
-                                        <option value="after discount" selected>After Discount</option>
-                                    </select>
-                                </div>
-                            </div> --}}
                             <div class="col-xl-12">
                                 <div class="row">
                                     <div class="col-xl-5 col-md-5 col-sm-12">
@@ -128,16 +73,15 @@
                                                 บริษัท แลนด์มาร์ค คอนซัลแทนส์ จำกัด<br>
                                                 370/6 อาคารแฟร์ ทาวน์เวอร์ ชั้น 2 ซอยสุขุมวิท 50<br>
                                                 ถนนสุขุมวิท แขวงพระโขนง เขตคลองเตย กรุงเทพมหานคร 10260<br>
-                                                invoice@spruko.com
                                             </p>
                                         </div>
                                     </div>
                                     <div class="col-xl-7 col-md-7 col-sm-12">
                                         <div class="form-group">
-                                            <label for="shipping-address" class="form-label text-muted mb-2">Shipping
-                                                Address:</label>
-                                            <textarea name="shipping-address" class="form-control w-60 mb-2 text-dark" placeholder="Enter Address"
-                                                id="shipping-address" cols="30" rows="5">{{ $invoice->address }}</textarea>
+                                            <label for="shipping-address"
+                                                class="form-label text-muted mb-2">ที่อยู่ลูกค้า:</label>
+                                            <textarea name="address" class="form-control w-60 mb-2 text-dark" placeholder="Enter Address" id="address"
+                                                cols="30" rows="5">{{ $invoice->address }}</textarea>
                                             <a href="javascript:void(0)" role="button"
                                                 class="text-primary text-center d-none" id="addShippingAddress">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-inner-icn text-primary"
@@ -152,91 +96,57 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row p-5 border-bottom">
                             <div class="col-xl-12">
-                                {{-- <div class="select-product-container">
-                                <div class="form-group wp-30">
-                                    <label for="currency-type1" class="form-label text-muted">Product:</label>
-                                    <select class="form-control select2-show-search form-select select2-hidden-accessible"
-                                        id="currency-type1" data-placeholder="Select Product.." tabindex="-1"
-                                        aria-hidden="true">
-                                        <option label="Select Product"></option>
-                                        <option value="project management">Project Management</option>
-                                        <option value="server installation">Server Installation</option>
-                                        <option value="dashboard ui">Dashboard UI</option>
-                                        <option value="application management">Application Management</option>
-                                    </select>
-                                </div>
-                            </div> --}}
-                            </div>
-                            <div class="col-xl-12">
                                 <div class="product-description-list">
-                                    <div class="product-description-each mb-3 table-responsive">
-                                        <table class="invoice-product-table">
-                                            <thead>
-                                                <tr>
-                                                    <th width=60%>Description</th>
-                                                    <th width=10%>Quantity</th>
-                                                    <th>Unit Price</th>
-                                                    {{-- <th>Tax</th> --}}
-                                                    <th>Amount</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="border">
-                                                <tr class="dashed-border-bottom">
-                                                    <td>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Item Name" value="{{ $invoice->description }}">
-                                                    </td>
-                                                    <td class="w-10">
-                                                        <input type="number" class="form-control" placeholder="Quantity"
-                                                            value="{{ $invoice->qty }}" min="0">
-                                                    </td>
-                                                    <td class="w-10">
-                                                        <div class="input-group">
-                                                            <span
-                                                                class="input-group-text bg-primary-transparent text-primary-dark">฿</span>
-                                                            <input type="number" class="form-control"
-                                                                placeholder="Price" value="{{ $invoice->amountjob }}"
-                                                                min="0">
-                                                        </div>
-
-                                                    </td>
-                                                    {{-- <td class="w-10">
-                                                        <div class="form-group mb-0">
-                                                            <select
-                                                                class="form-control select2-show-search form-select select2-hidden-accessible"
-                                                                data-placeholder="Choose Type..." tabindex="-1"
-                                                                aria-hidden="true">
-                                                                <option label="Choose one"></option>
-                                                                <option value="day" selected>VAT: 7%</option>
-                                                                <option value="empty">---</option>
-                                                            </select>
-                                                        </div>
-                                                    </td> --}}
-                                                    <td rowspan="2" class="bg-primary-transparent w-15 amount-cell">
-                                                        {{ $invoice->amountjob * 1.07}}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="4">
-                                                        <textarea name="product-description" class="form-control border-0 p-2" id="productDescription"
-                                                            placeholder="Write Description(Optional)" cols="30" rows="5" value="{{ $invoice->remark }}"></textarea>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <i class="fe fe-delete fs-20 text-muted text-center delete-row-btn ms-2"></i>
-                                    </div>
+                                    @foreach ($invoiceitems as $index => $invoiceitem)
+                                        <div class="product-description-each mb-3 table-responsive">
+                                            <table class="invoice-product-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th width=60%>รายการ</th>
+                                                        <th>ราคา (ต่อยูนิต)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="border">
+                                                    <tr class="dashed-border-bottom">
+                                                        <td>
+                                                            <input type="text" class="form-control"
+                                                                name="description{{ $index }}"
+                                                                placeholder="ค่าบริการประเมินมูลค่าทรัพย์สิน"
+                                                                value="{{ $invoiceitem->description }}">
+                                                        </td>
+                                                        <td class="w-10">
+                                                            <div class="input-group">
+                                                                <span
+                                                                    class="input-group-text bg-primary-transparent text-primary-dark">฿</span>
+                                                                <input type="number" class="form-control"
+                                                                    name="amountjob{{ $index }}"
+                                                                    placeholder="ราคา (บาท)"
+                                                                    value="{{ $invoiceitem->amountjob }}" min="0">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            <textarea class="form-control border-0 p-2" placeholder="" cols="30" rows="1" value=""></textarea>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <i class="fe fe-delete fs-20 text-muted text-center delete-row-btn ms-2"></i>
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <a href="javascript:void(0)" role="button"
-                                    class="text-primary text-center add-invoice-item-btn mt-2">
+                                    class="text-primary text-center add-invoice-item-btn-new mt-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-inner-icn text-primary"
                                         enable-background="new 0 0 24 24" viewBox="0 0 24 24">
                                         <path
                                             d="M16,11.5h-3.5V8c0-0.276123-0.223877-0.5-0.5-0.5S11.5,7.723877,11.5,8v3.5H8c-0.276123,0-0.5,0.223877-0.5,0.5s0.223877,0.5,0.5,0.5h3.5v3.5005493C11.5001831,16.2765503,11.723999,16.5001831,12,16.5h0.0006104C12.2765503,16.4998169,12.5001831,16.276001,12.5,16v-3.5H16c0.276123,0,0.5-0.223877,0.5-0.5S16.276123,11.5,16,11.5z M12,2C6.4771729,2,2,6.4771729,2,12s4.4771729,10,10,10c5.5202026-0.0062866,9.9937134-4.4797974,10-10C22,6.4771729,17.5228271,2,12,2z M12,21c-4.9705811,0-9-4.0294189-9-9s4.0294189-9,9-9c4.9682617,0.0056152,8.9943848,4.0317383,9,9C21,16.9705811,16.9705811,21,12,21z" />
                                     </svg>
-                                    Add Item
+                                    เพิ่มรายการ
                                 </a>
                             </div>
                         </div>
@@ -247,52 +157,21 @@
                                         <tbody>
                                             <tr>
                                                 <td colspan="3" class="border-top-0">Sub Total</td>
-                                                <td class="border-top-0">{{ $invoice->amountjob * $invoice->qty }}
+                                                <td class="border-top-0">{{ $invoice->amountjob }}
                                                 </td>
                                             </tr>
-                                            {{-- <tr>
-                                                <td>Discount</td>
-                                                <td class="w-30">
-                                                    <input type="number" class="form-control text-end" value="0"
-                                                        min="0">
-                                                </td>
-                                                <td class="w-15">
-                                                    <div class="form-group mb-0">
-                                                        <select class="form-control select2 custom-select"
-                                                            data-placeholder="Choose Type">
-                                                            <option label="Choose one"></option>
-                                                            <option value="percentage" selected>%</option>
-                                                            <option value="amount">Amount</option>
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                                <td>1773.00</td>
-                                            </tr> --}}
                                             <tr>
                                                 <td>Tax</td>
-                                                <td colspan="3">{{ $invoice->amountjob * $invoice->qty }}</td>
+                                                <td colspan="3">{{ $invoice->amountjob }}</td>
                                             </tr>
                                             <tr class="bg-primary-transparent text-primary-dark fw-bold fs-15">
                                                 <td colspan="3">Total</td>
-                                                <td>{{ $invoice->amountjob * $invoice->qty *1.07}}</td>
+                                                <td>{{ $invoice->amountjob * 1.07 }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            {{-- <div class="col-xl-12 mt-4">
-                                <div class="row">
-                                    <div class="col-xl-6">
-                                        <label for="recipientNote" class="form-label text-muted mb-2">Note:</label>
-                                        <textarea name="recipient-note" class="form-control text-dark" placeholder="Write A Note For Recipient"
-                                            id="recipientNote" cols="30" rows="5"></textarea>
-                                    </div>
-                                    <div class="col-xl-6">
-                                        <label class="text-muted">Terms and Conditions:</label>
-                                        <p class="text-dark">Thank you for your business.</p>
-                                    </div>
-                                </div>
-                            </div> --}}
                         </div>
                         <div class="row p-5">
                             <div class="btn-list text-end">
@@ -316,12 +195,21 @@
 @endsection
 
 @section('scripts')
-    <!-- SELECT2 JS -->
-    <script src="{{ asset('assets/plugins/select2/select2.full.min.js') }}"></script>
-
     <!-- bootstrap-datepicker js -->
     <script src="{{ asset('assets/plugins/bootstrap-datepicker/js/datepicker.js') }}"></script>
 
     <!-- INVOICE EDIT JS-->
     <script src="{{ asset('assets/js/invoice-edit.js') }}"></script>
+
+    <script>
+        $(function() {
+            $("#inv-datepicker")
+                .datepicker({
+                    autoclose: !0,
+                    format: "dd-mm-yyyy",
+                    todayHighlight: !0,
+                })
+                .datepicker("update", "<?php echo \Carbon\Carbon::parse($invoice->invoicedate)->format('d-m-Y'); ?>")
+        });
+    </script>
 @endsection

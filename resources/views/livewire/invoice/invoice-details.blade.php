@@ -224,6 +224,17 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="text-end">
+                        <button type="button" class="btn btn-primary mb-1 no-print"
+                            onclick="window.location='{{ route('invoice.create') }}'"><i class="si si-plus"></i> Create
+                            New</button>
+                        <button type="button" class="btn btn-success mb-1 no-print"
+                            onclick="window.location='{{ route('invoice.edit', ['id' => $invoice->id]) }}'"><i
+                                class="si si-pencil"></i> Edit
+                            Invoice</button>
+                        <button type="button" class="btn btn-info mb-1 no-print" onclick="javascript:window.print();"><i
+                                class="si si-printer"></i> Print Invoice</button>
+                    </div>
                     <hr>
                     <div class="row mb-6">
                         <div class="col-sm-8">
@@ -259,31 +270,30 @@
                                     <th class="text-end">Amount (Baht)</th>
                                 </tr>
                                 @php
+                                    $totalAmount = 0;
+                                @endphp
+                                @foreach ($invoiceitems as $index => $invoiceitem)
+                                    <tr>
+                                        <td class="text-center">{{ $index + 1 }}.</td>
+                                        <td colspan="5">
+                                            <p class="font-w800 mb-1">ค่าบริการประเมินมูลค่าทรัพย์สิน</p>
+                                            <div class="text-muted">
+                                                <div class="text-muted">{{ Str::substr($invoiceitem->description, 31) }}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end"> {{ number_format($invoiceitem->amountjob, 2, '.', ',') }}
+                                        </td>
+                                    </tr>
+                                    @php
+                                        $totalAmount += $invoiceitem->amountjob;
+                                    @endphp
+                                @endforeach
+                                @php
                                     // php code in app/thaicounts.php to change number to thai counts
                                     //if error run composer dump-autoload
-                                    $totalAmount = round($invoice->amountjob * 1.07, 2);
-                                    $thaiWords = bahtText($totalAmount);
+                                    $thaiWords = bahtText(round($totalAmount * 1.07, 2));
                                 @endphp
-                                <tr>
-                                    <td class="text-center">1.</td>
-                                    <td colspan="5">
-                                        <p class="font-w800 mb-1">ค่าบริการประเมินมูลค่าทรัพย์สิน</p>
-                                        <div class="text-muted">
-                                            <div class="text-muted">{{ Str::substr($invoice->description, 31) }}</div>
-                                        </div>
-                                    </td>
-                                    <td class="text-end"> {{ number_format($invoice->amountjob, 2, '.', ',') }} </td>
-                                </tr>
-                                {{-- <tr>
-                                    <td class="text-center">2.</td>
-                                    <td colspan="5">
-                                        <p class="font-w800 mb-1">ค่าบริการประเมินมูลค่าทรัพย์สิน</p>
-                                        <div class="text-muted">
-                                            <div class="text-muted">LC/63BF-1101 HLHO 630800328</div>
-                                        </div>
-                                    </td>
-                                    <td class="text-end">1,600</td>
-                                </tr> --}}
                                 <tr>
                                     <td rowspan ="3"></td>
                                     <td colspan="4" width=76% rowspan="3"
@@ -291,18 +301,19 @@
                                         ( {{ $thaiWords }} )</td>
                                     <td colspan="1" class="fw-bold text-uppercase text-end">Sub Total</td>
                                     <td class="fw-bold text-end h5">
-                                        {{ number_format($invoice->amountjob, 2, '.', ',') }}
+                                        {{ number_format($totalAmount, 2, '.', ',') }}
                                     </td>
 
                                 </tr>
                                 <tr>
                                     <td colspan="1" class="fw-bold text-uppercase text-end">Vat 7%</td>
                                     <td class="fw-bold text-end h5">
-                                        {{ number_format($invoice->amountjob * 0.07, 2, '.', ',') }}</td>
+                                        {{ number_format($totalAmount * 0.07, 2, '.', ',') }}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="1" class="fw-bold text-uppercase text-end">Total</td>
-                                    <td class="fw-bold text-end h5">{{ number_format($totalAmount, 2, '.', ',') }}</td>
+                                    <td class="fw-bold text-end h5">{{ number_format($totalAmount * 1.07, 2, '.', ',') }}
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -349,12 +360,6 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary mb-1 no-print" onclick="javascript:window.print();"><i
-                            class="si si-wallet"></i> Pay Invoice</button>
-                    <button type="button" class="btn btn-success mb-1 no-print" onclick="javascript:window.print();"><i
-                            class="si si-paper-plane"></i> Send Invoice</button>
-                    <button type="button" class="btn btn-info mb-1 no-print" onclick="javascript:window.print();"><i
-                            class="si si-printer"></i> Print Invoice</button>
                 </div>
             </div><!-- COL-END -->
         </div>

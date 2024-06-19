@@ -114,20 +114,19 @@ Route::get('/invoice-old', function () {
 Route::get('/receipt-old', function () {
     return view('invoice.pdf_receipt', compact('receipt',));
 });
-Route::get('/invoice-details/{id}', [InvoiceDetails::class, 'render'])->name('invoice.details');
+Route::get('/invoice-details/{id}', [InvoiceDetails::class, 'render_details'])->name('invoice.details');
 Route::get('/invoice-details-og', [InvoiceDetails::class, 'render_original'])->name('invoice.detailsog');
 Route::get('/invoicelist', [InvoiceController::class, 'invoiceList'])->name('invoice.invoiceList');
 
-Route::get('/invoice-edit/{id}', [InvoiceController::class, 'edit'])->name('invoice.edit');
-Route::post('/invoice-edit/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
+// Route::get('/invoice-edit/{id}', [InvoiceController::class, 'edit'])->name('invoice.edit');
+// Route::post('/invoice-edit/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
+Route::get('/invoice-edit/{id}', [InvoiceDetails::class, 'render_edit'])->name('invoice.edit');
+Route::post('/invoice-edit/{id}', [InvoiceDetails::class, 'update'])->name('invoice.update');
 
-Route::get('/invoice-create', [InvoiceController::class, 'create'])->name('invoice.invoice-create');
-Route::post('/invoice-create', [InvoiceController::class, 'store'])->name('invoice.store');
+Route::get('/invoice-create', [InvoiceDetails::class, 'render_create'])->name('invoice.create');
+Route::post('/invoice-create', [InvoiceDetails::class, 'store'])->name('invoice.store');
 
 // Route::get('/receipt-details-og', [ReceiptDetails::class, 'render_original'])->name('receipt.detailsog');
 
 Route::get('/nhloan-details/{id}', [NhLoanDetails::class, 'render'])->name('nhloan.details');
 
-Route::get('/nhloan-details', function () {
-    return view('livewire.invoice.nhloan-details');
-});
