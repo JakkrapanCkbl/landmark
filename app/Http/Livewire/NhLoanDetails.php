@@ -25,4 +25,10 @@ class NhLoanDetails extends Component
         $this->mount($id);
         return view('livewire.invoice.nhloan-details', ['invoice' => $this->invoice, 'job' => $this->job]);
     }
+
+    public function render_edit($id)
+    {
+        $this->mount($id);
+        return view('livewire.invoice.nhloan-edit', ['invoice' => $this->invoice, 'job' => $this->job]);
+    }
 }

@@ -68,8 +68,8 @@ use App\Http\Livewire\GetProject;
 use App\Http\Livewire\Students;
 // use App\Http\Livewire\Counter;
 use App\Http\Livewire\InvoiceDetails;
-use App\Http\Livewire\InvoiceEdit;
 use App\Http\Livewire\NhLoanDetails;
+use App\Http\Livewire\OrderDetails;
 
 Route::view('/welcome', 'welcome');
 //Route::view('/test', 'joborder.joborder-add');
@@ -117,9 +117,7 @@ Route::get('/receipt-old', function () {
 Route::get('/invoice-details/{id}', [InvoiceDetails::class, 'render_details'])->name('invoice.details');
 Route::get('/invoice-details-og', [InvoiceDetails::class, 'render_original'])->name('invoice.detailsog');
 Route::get('/invoicelist', [InvoiceController::class, 'invoiceList'])->name('invoice.invoiceList');
-
-// Route::get('/invoice-edit/{id}', [InvoiceController::class, 'edit'])->name('invoice.edit');
-// Route::post('/invoice-edit/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
+;
 Route::get('/invoice-edit/{id}', [InvoiceDetails::class, 'render_edit'])->name('invoice.edit');
 Route::post('/invoice-edit/{id}', [InvoiceDetails::class, 'update'])->name('invoice.update');
 
@@ -130,3 +128,8 @@ Route::post('/invoice-create', [InvoiceDetails::class, 'store'])->name('invoice.
 
 Route::get('/nhloan-details/{id}', [NhLoanDetails::class, 'render'])->name('nhloan.details');
 
+Route::get('/nhloan-edit/{id}', [NhLoanDetails::class, 'render_edit'])->name('nhloan.edit');
+Route::post('/nhloan-edit/{id}', [NhLoanDetails::class, 'update'])->name('nhloan.update');
+
+Route::get('/invoice-details-copy/{id}', [OrderDetails::class, 'render_details_invoice'])->name('order.details');
+Route::get('/order-details/{id}', [OrderDetails::class, 'render_details'])->name('order.details');

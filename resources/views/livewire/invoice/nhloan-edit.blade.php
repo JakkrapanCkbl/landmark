@@ -241,10 +241,22 @@
                                 </tr>
                                 <tr>
                                     <td class="text-on-left">รายงานเลขที่</td>
-                                    <td class="text-center">{{ $job->jobcode }}</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
+                                    <td class="text-center">
+                                        <textarea name="invoiceno" class="form-control w-60 mb-2 text-dark" placeholder="Enter Client" id="customer"
+                                            cols="30" rows="1">{{ $job->jobcode }}</textarea>
+                                    </td>
+                                    <td class="text-center">
+                                        <textarea name="invoiceno" class="form-control w-60 mb-2 text-dark" placeholder="Enter Client" id="customer"
+                                            cols="30" rows="1">{{ $invoice->invoiceno }}</textarea>
+                                    </td>
+                                    <td class="text-center">
+                                        <textarea name="invoiceno" class="form-control w-60 mb-2 text-dark" placeholder="Enter Client" id="customer"
+                                            cols="30" rows="1">{{ $invoice->invoiceno }}</textarea>
+                                    </td>
+                                    <td class="text-center">
+                                        <textarea name="invoiceno" class="form-control w-60 mb-2 text-dark" placeholder="Enter Client" id="customer"
+                                            cols="30" rows="1">{{ $invoice->invoiceno }}</textarea>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="text-on-left">ชื่อลูกค้า</td>
@@ -271,7 +283,15 @@
                                     <td class="text-on-left">วันที่สำรวจ</td>
                                     <td class="text-center">
                                         {{ Carbon\Carbon::parse($job->inspectiondate)->thaidate('j M Y') }}</td>
-                                    <td class="text-center"></td>
+                                    <td class="text-center">
+                                        <div id="inv-datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
+                                            <span class="input-group-addon input-group-text bg-primary-transparent"><i
+                                                    class="fe fe-calendar text-primary-dark"></i></span><input
+                                                id="invoicedate" name="invoicedate" class="form-control" type="text"
+                                                placeholder="Select Invoice Date"
+                                                value="{{ \Carbon\Carbon::parse($invoice->invoicedate)->format('d-m-Y') }}" />
+                                        </div>
+                                    </td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                 </tr>
@@ -430,4 +450,19 @@
         <!-- ROW-1 CLOSED -->
     @endsection
     @section('scripts')
+        <!-- bootstrap-datepicker js -->
+        <script src="{{ asset('assets/plugins/bootstrap-datepicker/js/datepicker.js') }}"></script>
+        <!-- INVOICE EDIT JS-->
+        <script src="{{ asset('assets/js/invoice-edit.js') }}"></script>
+        <script>
+            $(function() {
+                $("#inv-datepicker")
+                    .datepicker({
+                        autoclose: !0,
+                        format: "dd-mm-yyyy",
+                        todayHighlight: !0,
+                    })
+                    .datepicker("update", "<?php echo \Carbon\Carbon::parse($invoice->invoicedate)->format('d-m-Y'); ?>")
+            });
+        </script>
     @endsection
