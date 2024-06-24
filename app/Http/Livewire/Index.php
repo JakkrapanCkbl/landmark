@@ -77,7 +77,7 @@ class Index extends Component
         // dd($this->sum);
     }
 
-    public function bindingPopup($value0,$value1,$value2,$value3,$value4,$value5,$value6,$value7){
+    public function bindingPopup($value0,$value1,$value2,$value3,$value4,$value5,$value6,$value7,$value8,$value9,$value10){
        
         $this->myid = $value0;
         $this->jobcode = $value1;
@@ -87,6 +87,10 @@ class Index extends Component
         $this->startdate = $value5;
         $this->clientduedate = $value6;
         $this->job_status = $value7;
+        $this->print_checked = $value8;
+        $this->link_checked = $value9;
+        $this->file_checked = $value10;
+
         
         // binding files list
         //$myjob = Job::find($this->myid);

@@ -19,7 +19,7 @@ class Job extends Model
         'lat', 'lng', 'valuationfee', 'remark', 'easydiff',
         'valuationfee_case', 'urgent', 'canceled', 'withcd', 'room_sum',
         'default_coordinates', 'job_status', 'job_gps', 'obj_method', 'job_checked', 
-        'prop_type2', 'prop_type2_note'
+        'prop_type2', 'prop_type2_note', 'print_checked', 'link_checked', 'file_checked'
     ];
 
 }
