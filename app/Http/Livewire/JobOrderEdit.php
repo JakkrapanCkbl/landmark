@@ -65,7 +65,8 @@ class JobOrderEdit extends Component
     public $selectedProptype2 = null;
     public $prop_type2_note;
 
-// -------------------------------------------------------------------------------------------
+
+    // -------------------------------------------------------------------------------------------
     public function addTwoNumbers($num1,$num2){
         $this->sum = $num1+$num2;
     }

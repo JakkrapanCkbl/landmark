@@ -122,7 +122,7 @@ class ApiJobController extends Controller
         $validatedData = $request->validate([
             'jobcode' => 'required|string',
             'reportcode' => 'required|string',
-            'projectname' => 'required|string',
+            'projectname' => 'nullable|string',
             'proplocation' => 'required|string',
             'client' => 'required|string',
             'customer' => 'required|string',
