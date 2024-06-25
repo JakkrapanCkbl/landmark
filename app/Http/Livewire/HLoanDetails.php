@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Invoice;
 use App\Models\Job;
 
-class NhLoanDetails extends Component
+class HLoanDetails extends Component
 {
     public $invoiceId;
     public $invoice;
@@ -23,12 +23,12 @@ class NhLoanDetails extends Component
     public function render_details($id)
     {
         $this->mount($id);
-        return view('livewire.invoice.nhloan-details', ['invoice' => $this->invoice, 'job' => $this->job]);
+        return view('livewire.invoice.h-loan-details', ['invoice' => $this->invoice, 'job' => $this->job]);
     }
 
     public function render_edit($id)
     {
         $this->mount($id);
-        return view('livewire.invoice.nhloan-edit', ['invoice' => $this->invoice, 'job' => $this->job]);
+        return view('livewire.invoice.h-loan-edit', ['invoice' => $this->invoice, 'job' => $this->job]);
     }
 }

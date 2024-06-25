@@ -38,9 +38,10 @@ class InvoiceDetails extends Component
         return view('livewire.invoice.invoice-edit', ['invoice' => $this->invoice, 'invoiceitems' => $this->invoice_items]);
     }
 
-    public function render_original()
+    public function render_receipt($id)
     {
-        return view('livewire.invoice.invoice-details-og', ['invoice' => $this->invoice]);
+        $this->mount($id);
+        return view('livewire.invoice.receipt-details', ['invoice' => $this->invoice, 'invoiceitems' => $this->invoice_items]);
     }
 
     public function store(Request $request)

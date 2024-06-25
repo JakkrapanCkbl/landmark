@@ -169,6 +169,20 @@
                 page-break-inside: avoid !important;
             }
 
+            .table-landscape {
+                transform: rotate(270deg);
+                transform-origin: top left;
+                width: 74vh;
+                max-width: 100vh;
+                /* Use viewport height for width in landscape mode */
+                height: 96vw;
+                /* Use viewport width for height in landscape mode */
+                overflow: visible;
+                position: absolute;
+                margin-top: 156px;
+                top: 90%;
+            }
+
         }
 
         @page {
@@ -192,14 +206,14 @@
             <img src="../assets2/images/logo.png">
         </div>
         <div class="text-center">
-            <p class="h3 page-title center fw-bold" style="margin-left: 20px; margin-top: 16px;">ใบเบิกค่าใช้จ่าย Non-Housing
-                Loan Site</p>
+            <p class="h3 page-title center fw-bold" style="margin-left: 20px; margin-top: 16px;">ใบเบิกค่าใช้จ่าย Housing
+                Loan (HL)</p>
         </div>
         <div class="ms-auto pageheader-btn no-print">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Apps</li>
-                <li class="breadcrumb-item"><a href="javascript:void(0);">NHLS {{ $invoice->invoiceno }}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">NHLS Details</li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">HL {{ $invoice->invoiceno }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">HL Details</li>
             </ol>
         </div>
 
@@ -218,9 +232,9 @@
                         <button type="button" class="btn btn-success mb-1 no-print"
                             onclick="window.location='{{ route('invoice.edit', ['id' => $invoice->id]) }}'"><i
                                 class="si si-pencil"></i> Edit
-                            NHLS</button>
+                            HL</button>
                         <button type="button" id="print-button" class="btn btn-info mb-1 no-print"><i
-                                class="si si-printer"></i> Print NHLS</button>
+                                class="si si-printer"></i> Print HL</button>
                     </div>
                     <hr>
                     <div class="col-sm-12">
@@ -232,11 +246,15 @@
                         <table class="table table-bordered table-hover mb-0 text-nowrap border-bottom">
                             <tbody>
                                 <tr>
-                                    <th class="text-center" width="20%">#</th>
-                                    <th class="text-center" width="20%">1</th>
-                                    <th class="text-center" width="20%">2</th>
-                                    <th class="text-center" width="20%">3</th>
-                                    <th class="text-center" width="20%">4</th>
+                                    <th class="text-center" width="16%">#</th>
+                                    <th class="text-center" width="14%">1</th>
+                                    <th class="text-center" width="14%">2</th>
+                                    <th class="text-center" width="14%">3</th>
+                                    <th class="text-center" width="14%">4</th>
+                                    <th class="text-center" width="14%">5</th>
+                                    <th class="text-center" width="14%">6</th>
+                                    {{-- <th class="text-center" width="10%">7</th>
+                                    <th class="text-center" width="10%">7</th> --}}
                                 </tr>
                                 <tr>
                                     <td class="text-on-left">รายงานเลขที่</td>
@@ -244,6 +262,9 @@
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center">123</td>
+                                    {{-- <td class="text-center"></td> --}}
                                 </tr>
                                 <tr>
                                     <td class="text-on-left">ชื่อลูกค้า</td>
@@ -251,6 +272,9 @@
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    {{-- <td class="text-center"></td> --}}
                                 </tr>
                                 <tr>
                                     <td class="text-on-left">ประเภททรัพย์สิน</td>
@@ -258,6 +282,9 @@
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    {{-- <td class="text-center"></td> --}}
                                 </tr>
                                 <tr>
                                     <td class="text-on-left">ที่ตั้ง</td>
@@ -265,6 +292,9 @@
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    {{-- <td class="text-center"></td> --}}
                                 </tr>
                                 <tr>
                                     <td class="text-on-left">วันที่สำรวจ</td>
@@ -273,6 +303,9 @@
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    {{-- <td class="text-center"></td> --}}
                                 </tr>
                                 <tr>
                                     <td class="text-on-left">โซน</td>
@@ -280,6 +313,9 @@
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    {{-- <td class="text-center"></td> --}}
                                 </tr>
                                 <tr>
                                     <td class="text-on-left">1. ค่าเดินทาง</td>
@@ -287,84 +323,49 @@
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    {{-- <td class="text-center"></td> --}}
                                 </tr>
                                 <tr>
-                                    <td class="text-on-left">2. ค่าเช่ารถ</td>
+                                    <td class="text-on-left">2. เพิ่มสำรวจวันหยุด</td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    {{-- <td class="text-center"></td> --}}
                                 </tr>
                                 <tr>
-                                    <td class="text-on-left">3. ค่าน้ำมัน</td>
+                                    <td class="text-on-left">3. เพิ่มเสร็จก่อนกำหนด</td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    {{-- <td class="text-center"></td> --}}
                                 </tr>
                                 <tr>
-                                    <td class="text-on-left">4. ค่าทางด่วน</td>
+                                    <td class="text-on-left">4. ค่าเช็คโฉนดที่ดิน</td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    <td class="text-center"></td>
+                                    {{-- <td class="text-center"></td> --}}
                                 </tr>
                                 <tr>
-                                    <td class="text-on-left">5. ค่าที่พัก</td>
+                                    <td class="text-on-left">5. อื่นๆ</td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-on-left">6. ค่าเบี้ยเลี้ยง</td>
+                                    <td class="text-center">123123123123123123121231233123123</td>
                                     <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-on-left">7. ค่าเขียนงาน</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-on-left">8. ค่าเช็คโฉนดที่ดิน</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-on-left">9. ระวาง</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-on-left">10. ค่าถ่ายเอกสาร</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-on-left">11. ค่าเร่งงานด่วน</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-on-left">12. อื่นๆ</td>
-                                    <td class="text-center">ช่องนี้มันจะขยายออกไปเป็นหลายบรรทัดหากใส่ข้อมูลเข้ามาเยอะเกิน 1
-                                        บรรทัด</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
+                                    {{-- <td class="text-center"></td> --}}
                                 </tr>
                                 <tr>
                                     <td class="text-on-left"><b>รวมทั้งสิ้น</b></td>
@@ -372,20 +373,9 @@
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-on-left">หัก-เงินเบิกล่วงหน้า</td>
                                     <td class="text-center"></td>
                                     <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-on-left">คงเหลือ</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
+                                    {{-- <td class="text-center"></td> --}}
                                 </tr>
                             </tbody>
                         </table>
@@ -429,12 +419,12 @@
         <!-- ROW-1 CLOSED -->
     @endsection
     @section('scripts')
-        <script>
-            document.getElementById('print-button').addEventListener('click', function() {
-                window.scrollTo(0, 0); // Scroll to the top
-                setTimeout(function() {
-                    window.print(); // Open print dialog
-                }, 200); // Delay to ensure scrolling happens first
-            });
-        </script>
+    <script>
+        document.getElementById('print-button').addEventListener('click', function() {
+            window.scrollTo(0, 0); // Scroll to the top
+            setTimeout(function() {
+                window.print(); // Open print dialog
+            }, 200); // Delay to ensure scrolling happens first
+        });
+    </script>
     @endsection
