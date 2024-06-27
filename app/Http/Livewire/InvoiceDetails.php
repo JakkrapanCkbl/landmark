@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Invoice;
 use App\Models\Invoice_items;
+use App\Models\Job;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -14,12 +15,14 @@ class InvoiceDetails extends Component
     public $invoiceId;
     public $invoice;
     public $invoice_items;
+    public $job;
 
     public function mount($id)
     {
         $this->invoiceId = $id;
         $this->invoice = Invoice::findOrFail($id);
         $this->invoice_items = Invoice_items::where('invoice_id', $id)->get();
+        $this->job = Job::findOrFail($id);
     }
 
     public function render_details($id)

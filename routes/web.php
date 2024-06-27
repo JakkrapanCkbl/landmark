@@ -72,6 +72,7 @@ use App\Http\Livewire\NhLoanDetails;
 use App\Http\Livewire\OrderDetails;
 use App\Http\Livewire\HLoanDetails;
 use App\Http\Livewire\OpeDetails;
+use App\Http\Livewire\QuotationDetails;
 
 Route::view('/welcome', 'welcome');
 //Route::view('/test', 'joborder.joborder-add');
@@ -141,3 +142,6 @@ Route::get('/hloan-details/{id}', [HLoanDetails::class, 'render_details'])->name
 
 
 Route::get('/ope-details/{id}', [OPEDetails::class, 'render_details'])->name('ope.details');
+
+
+Route::get('/quotation-details/{id}', [QuotationDetails::class, 'render_details_short_form'])->name('quotation.details');
