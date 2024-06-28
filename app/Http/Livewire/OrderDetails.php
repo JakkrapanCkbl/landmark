@@ -25,12 +25,6 @@ class OrderDetails extends Component
         $this->invoice_items = Invoice_items::where('invoice_id', $id)->get();
         $this->job = Job::findOrFail($id);
     }
-
-    public function render_details_invoice($id)
-    {
-        $this->mount($id);
-        return view('livewire.invoice.invoice-details_copy', ['invoice' => $this->invoice, 'invoiceitems' => $this->invoice_items]);
-    }
     public function render_details($id)
     {
         $this->mount($id);

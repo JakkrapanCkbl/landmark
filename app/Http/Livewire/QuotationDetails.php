@@ -23,11 +23,11 @@ class QuotationDetails extends Component
     public function render_details_short_form($id)
     {
         $this->mount($id);
-        return view('livewire.invoice.quotation-details', ['invoice' => $this->invoice, 'invoiceitems' => $this->invoice_items]);
+        return view('livewire.invoice.quotation-details-short', ['invoice' => $this->invoice, 'invoiceitems' => $this->invoice_items]);
     }
-    public function render_details_full_form($id)
+    public function render_details_long_form($id)
     {
         $this->mount($id);
-        return view('livewire.invoice.quotation-details', ['invoice' => $this->invoice, 'invoiceitems' => $this->invoice_items]);
+        return view('livewire.invoice.quotation-details-long', ['invoice' => $this->invoice, 'invoiceitems' => $this->invoice_items]);
     }
 }

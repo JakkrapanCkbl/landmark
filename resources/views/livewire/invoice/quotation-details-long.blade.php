@@ -2,13 +2,22 @@
 
 @section('styles')
     <style>
-        .signature-section {
+        .signature-section-start {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 100px;
+        }
+        .signature-section-end {
             display: flex;
             justify-content: flex-end;
             margin-top: 100px;
         }
 
-        .signature-block {
+        .signature-block-start {
+            text-align: start;
+        }
+
+        .signature-block-end {
             text-align: end;
         }
 
@@ -30,6 +39,34 @@
 
         .signature-name {
             font-size: 17px;
+        }
+
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            /* margin-top: 10px; */
+        }
+
+        .info-block {
+            display: flex;
+            align-items: baseline;
+        }
+
+        .info-topic {
+            margin-right: 4px;
+            font-size: 17px;
+        }
+
+        .info-line {
+            border-bottom: 1px solid #333;
+            width: 140px;
+            /* width: 20%; */
+            margin-bottom: 5px;
+        }
+
+        .info-line.long {
+            width: 140px;
         }
 
         .table-bordered tr td {
@@ -82,7 +119,7 @@
             }
 
             .card-body {
-                height: 1320px;
+                height: 1340px;
             }
 
             .page-title {
@@ -225,12 +262,6 @@
                     <hr>
                     <div class="row mb-6">
                         <div class="col-sm-8">
-                            {{-- <address>
-                                <b>บริษัท แลนด์มาร์ค คอนซัลแทนส์ จำกัด</b><br>
-                                370/6 อาคารแฟร์ ทาวน์เวอร์ ชั้น 2 ซอยสุขุมวิท 50<br>
-                                ถนนสุขุมวิท แขวงพระโขนง เขตคลองเตย กรุงเทพมหานคร 10260<br>
-                                <b>สำนักงานใหญ่</b> เลขประจำตัวผู้เสียภาษี 015547070351<br>
-                            </address> --}}
                             <p class="h4 card-title ms-1 mb-2 fw-bold">บริษัท แลนด์มาร์ค คอนซัลแทนส์ จำกัด</p>
                             <p class="h4 card-title ms-1 mb-2">370/6 อาคารแฟร์ ทาวน์เวอร์ ชั้น 2 ซอยสุขุมวิท 50
                             </p>
@@ -242,14 +273,14 @@
                             </p>
                         </div>
                         <div class="col-sm-4">
-                            <p class="h4 card-title ms-1 mb-2">#Quo-{{ $invoice->invoiceno }}</p>
-                            <p class="h4 card-title ms-1 mb-2">วันที่:
+                            <p class="h4 card-title ms-4 mb-2">#Quo-{{ $invoice->invoiceno }}</p>
+                            <p class="h4 card-title ms-4 mb-2">วันที่:
                                 {{ Carbon\Carbon::parse($invoice->invoicedate)->thaidate('j M Y') }}
                             </p>
-                            <p class="h4 card-title ms-1">
+                            <p class="h4 card-title ms-4">
                                 <i class="fa fa-phone"></i> โทร : 0-2331-4580-2<br>
                             </p>
-                            <p class="h4 card-title ms-1 mb-4">
+                            <p class="h4 card-title ms-4 mb-4">
                                 <i class="fa fa-globe"></i> www.landmarkcon.net
                             </p>
                         </div>
@@ -258,7 +289,7 @@
                         <table class="table table-bordered table-hover mb-0 text-nowrap border-bottom">
                             <tbody>
                                 <tr>
-                                    <th class="fw-bold" width="30%">ลูกค้า</th>
+                                    <th class="fw-bold" width="20%">ลูกค้า</th>
                                     <th>บริษัท เอ็ม บี เค การันตี จำกัด</th>
                                 </tr>
                                 <tr>
@@ -294,6 +325,11 @@
                                     <td class="fw-bold">รายงานที่จัดทำ</td>
                                     <td>ภาษาไทย 2 ชุด</td>
                                 </tr>
+                                {{-- Long Form --}}
+                                <tr>
+                                    <td class="fw-bold">วิธีการประเมิน</td>
+                                    <td>วิธีเปรียบเทียบกับข้อมูลตลาด (The Market Approach)</td>
+                                </tr>
                                 <tr>
                                     <td class="fw-bold">ค่าบริการประเมิน</td>
                                     <td>21,000 บาท (รวม VAT 7%)</td>
@@ -306,6 +342,7 @@
                                     <td class="fw-bold">เอกสารที่ใช้ในการประเมิน</td>
                                     <td>โฉนดที่ดิน แบบแปลนอาคาร ใบอนุญาตก่อสร้างอาคาร</td>
                                 </tr>
+                                {{-- Long Form --}}
                                 <tr>
                                     <td class="fw-bold">นิยามมูลค่าตลาด (Market Value)</td>
                                     <td>“มูลค่าเป็นตัวเงินซึ่งประมาณว่าเป็นราคาของทรัพย์สินที่สามารถใช้ตกลงซื้อขายกันได้ระหว่างผู้ซื้อเต็มใจซื้อ
@@ -326,21 +363,40 @@
                     </div>
 
                     <br>
-                    <br>
-                    <br>
                     <div class="print-bottom">
-                        <div class="text-end mr-6 mt-4">
-                            <p class="h4 me-8">ขอแสดงความนับถือ</p>
-                            <p class="h4">บริษัท แลนด์มาร์ค คอนซัลแทนส์ จำกัด</p>
-                        </div>
-                        <div class="signature-section no-screen text-end">
-                            <div class="signature-block text-center">
-                                <div class="signature-line long"></div>
-                                <div class="signature-name">(นายมงคล ชัยอรุณ)</div>
-                                <div class="signature-name">กรรมการผู้จัดการ</div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="text-start mt-4">
+                                    <p class="h4 text-start ms-8">ขอแสดงความนับถือ</p>
+                                    <p class="h4">บริษัท แลนด์มาร์ค คอนซัลแทนส์ จำกัด</p>
+                                </div>
+                                <div class="signature-section-start no-screen ">
+                                    <div class="signature-block-start text-center">
+                                        <div class="signature-line long"></div>
+                                        <div class="signature-name">(นายมงคล ชัยอรุณ)</div>
+                                        <div class="signature-name">กรรมการผู้จัดการ</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="text-end mt-4">
+                                    <p class="h4 me-7">ยินดีตอบรับข้อเสนองานนี้</p>
+                                    <br>
+                                </div>
+                                <div class="signature-section-end no-screen text-end">
+                                    <div class="signature-block-end text-center">
+                                        <div class="signature-line long"></div>
+                                        <div class="signature-name">(ผู้ว่าจ้าง/ลูกค้า)</div>
+                                        {{-- <div class="signature-name">วันที่</div> --}}
+                                        <div class="info-block text-center ms-7 mt-3">
+                                            <div class="info-topic">วันที่</div>
+                                            <div class="info-line long"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-
                     </div>
                 </div>
 

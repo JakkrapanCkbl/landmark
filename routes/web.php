@@ -111,12 +111,6 @@ Route::get('export-data', [AuthController::class, 'ExportData'])->middleware('au
 
 
 //Invoice by Note
-Route::get('/invoice-old', function () {
-    return view('invoice.invoice');
-});
-Route::get('/receipt-old', function () {
-    return view('invoice.pdf_receipt', compact('receipt',));
-});
 Route::get('/invoice-details/{id}', [InvoiceDetails::class, 'render_details'])->name('invoice.details');
 route::get('/receipt-details/{id}', [InvoiceDetails::class, 'render_receipt'])->name('receipt.details');
 Route::get('/invoice-details-og', [InvoiceDetails::class, 'render_original'])->name('invoice.detailsog');
@@ -125,23 +119,19 @@ Route::get('/invoicelist', [InvoiceController::class, 'invoiceList'])->name('inv
 Route::get('/invoice-edit/{id}', [InvoiceDetails::class, 'render_edit'])->name('invoice.edit');
 Route::post('/invoice-edit/{id}', [InvoiceDetails::class, 'update'])->name('invoice.update');
 
-Route::get('/invoice-create', [InvoiceDetails::class, 'render_create'])->name('invoice.create');
-Route::post('/invoice-create', [InvoiceDetails::class, 'store'])->name('invoice.store');
-
-// Route::get('/receipt-details-og', [ReceiptDetails::class, 'render_original'])->name('receipt.detailsog');
+Route::get('/invoice-create', [InvoiceDetails::class, 'render_create'])->name('invoice.create'); //todo
+Route::post('/invoice-create', [InvoiceDetails::class, 'store'])->name('invoice.store'); //todo
 
 Route::get('/nhloan-details/{id}', [NhLoanDetails::class, 'render_details'])->name('nhloan.details');
 
-Route::get('/nhloan-edit/{id}', [NhLoanDetails::class, 'render_edit'])->name('nhloan.edit');
-Route::post('/nhloan-edit/{id}', [NhLoanDetails::class, 'update'])->name('nhloan.update');
+Route::get('/nhloan-edit/{id}', [NhLoanDetails::class, 'render_edit'])->name('nhloan.edit'); //todo
+Route::post('/nhloan-edit/{id}', [NhLoanDetails::class, 'update'])->name('nhloan.update');//todo
 
-Route::get('/invoice-details-copy/{id}', [OrderDetails::class, 'render_details_invoice'])->name('order.details');
 Route::get('/order-details/{id}', [OrderDetails::class, 'render_details'])->name('order.details');
 
 Route::get('/hloan-details/{id}', [HLoanDetails::class, 'render_details'])->name('hloan.details');
 
-
 Route::get('/ope-details/{id}', [OPEDetails::class, 'render_details'])->name('ope.details');
 
-
-Route::get('/quotation-details/{id}', [QuotationDetails::class, 'render_details_short_form'])->name('quotation.details');
+Route::get('/quotation-details-short/{id}', [QuotationDetails::class, 'render_details_short_form'])->name('quotation-short.details');
+Route::get('/quotation-details-full/{id}', [QuotationDetails::class, 'render_details_long_form'])->name('quotation-long.details');
