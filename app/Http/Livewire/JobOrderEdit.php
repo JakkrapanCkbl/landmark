@@ -57,6 +57,9 @@ class JobOrderEdit extends Component
     public $obj_method;
     public $marketvalue;
     public $job_checked = 0;
+    public $print_checked = 0;
+    public $link_checked = 0;
+    public $file_checked = 0;
     public $proptypes = null;
     public $proptype;
     public $selectedProptype = null;
@@ -65,7 +68,8 @@ class JobOrderEdit extends Component
     public $selectedProptype2 = null;
     public $prop_type2_note;
 
-// -------------------------------------------------------------------------------------------
+
+    // -------------------------------------------------------------------------------------------
     public function addTwoNumbers($num1,$num2){
         $this->sum = $num1+$num2;
     }
@@ -116,6 +120,9 @@ class JobOrderEdit extends Component
         $this->obj_method = $this->job->obj_method;
         $this->marketvalue = number_format($this->job->marketvalue);
         $this->job_checked = $this->job->job_checked;
+        $this->print_checked = $this->job->print_checked;
+        $this->link_checked = $this->job->link_checked;
+        $this->file_checked = $this->job->file_checked;
 
         $this->proptypes = Proptype::orderBy('id')->get();
         $this->proptype = $this->job->prop_type;
@@ -205,6 +212,9 @@ class JobOrderEdit extends Component
                 'marketvalue' => (float) str_replace(',', '', $this->marketvalue),
                 'job_checked' => (bool) $this->job_checked,
                 'prop_type2_note' => $this->prop_type2_note,
+                'print_checked' => (bool) $this->print_checked,
+                'link_checked' => (bool) $this->link_checked,
+                'file_checked' => (bool) $this->file_checked,
                
             ]);
         }

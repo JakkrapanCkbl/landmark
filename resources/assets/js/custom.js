@@ -260,17 +260,17 @@
     // ICON OVERLAY SIDEMENU END
 
     // ICONTEXT SIDEMENU START
-        // $('body').addClass('icontext-menu');
-        // $('body').addClass('sidenav-toggled');
-        // if((document.querySelector('body').classList.contains('login-img')) ){
-        //     return;
-        // }
-        // else if((document.querySelector('body').classList.contains('error-bg'))){
-        //     return;
-        // }
-        // else{
-        //     icontext();
-        // }
+        $('body').addClass('icontext-menu');
+        $('body').addClass('sidenav-toggled');
+        if((document.querySelector('body').classList.contains('login-img')) ){
+            return;
+        }
+        else if((document.querySelector('body').classList.contains('error-bg'))){
+            return;
+        }
+        else{
+            icontext();
+        }
     // ICONTEXT SIDEMENU END
 
     // CLOSED SIDEMENU START
@@ -429,7 +429,7 @@ if (bodyRtl) {
 
 // ----- Horizontal Style ------- //
 
-// $('body').addClass('horizontal');
+$('body').addClass('horizontal');
 
 let bodyhorizontal = $('body').hasClass('horizontal');
     if (bodyhorizontal) {
@@ -484,7 +484,7 @@ let bodyhorizontal = $('body').hasClass('horizontal');
 // ----- Horizontal Style ------- //
 
 // ----- Horizontal Hover Style ------- //
-// $('body').addClass('horizontal-hover');
+$('body').addClass('horizontal-hover');
 
 let bodyhorizontal1 = $('body').hasClass('horizontal-hover');
     if (bodyhorizontal1) {
@@ -507,11 +507,12 @@ let bodyhorizontal1 = $('body').hasClass('horizontal-hover');
         $('body').removeClass('hover-submenu');
         $('body').removeClass('hover-submenu1');
         // To enable no-wrap horizontal style
-        $('#slide-left').addClass('d-none');
-        $('#slide-right').addClass('d-none');
-        // To enable wrap horizontal style
         // $('#slide-left').addClass('d-none');
         // $('#slide-right').addClass('d-none');
+        document.querySelector('.horizontal .side-menu').style.flexWrap = 'nowrap'
+        // To enable wrap horizontal style
+        $('#slide-left').addClass('d-none');
+        $('#slide-right').addClass('d-none');
         // document.querySelector('.horizontal .side-menu').style.flexWrap = 'wrap'
         if (!document.querySelector('body').classList.contains('login-img') && !document.querySelector('body').classList.contains('error-bg')) {
             document.querySelector('.horizontal .side-menu').style.flexWrap = 'nowrap'

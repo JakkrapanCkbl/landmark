@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en" dir="ltr"> <!-- This "app.blade.php" master page is used for all the pages content present in "views/livewire" except "custom" and "switcher" pages -->
-	<head>
-        
+	<head>       
 		<!-- META DATA -->
 		<meta charset="UTF-8">
 		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
@@ -36,7 +35,6 @@
 			<div class="page-main">
 
                 @include('layouts.components.app-header')
-
                 @include('layouts.components.app-sidebar')
 
                 <!--app-content open-->

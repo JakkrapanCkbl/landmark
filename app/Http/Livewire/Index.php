@@ -22,6 +22,13 @@ class Index extends Component
     public $SumOnHold;
     public $SumCancel;
 
+    public $SumBfCompletedByMonth;
+    public $SumRCompletedByMonth;
+    public $CountAllCompletedByMonth;
+    public $CountAllByMonth;
+    public $AvgCompletedByMonth;
+    public $TotalSaleByMonth;
+   
 
     public $myid = '0';
     public $jobcode;
@@ -47,6 +54,7 @@ class Index extends Component
         $this->jobs = DB::select('select * from jobs order by id desc LIMIT 200');
         $this->users = Auth::user();
         $this->CountTotalTask(Carbon::now()->year);
+        $this->CountCompletedTaskByMonth(Carbon::now()->year,Carbon::now()->month);
         return view('livewire.index');
         //return view('livewire.index',compact('jobs', 'users'));
         
@@ -69,7 +77,7 @@ class Index extends Component
         // dd($this->sum);
     }
 
-    public function bindingPopup($value0,$value1,$value2,$value3,$value4,$value5,$value6,$value7){
+    public function bindingPopup($value0,$value1,$value2,$value3,$value4,$value5,$value6,$value7,$value8,$value9,$value10){
        
         $this->myid = $value0;
         $this->jobcode = $value1;
@@ -79,6 +87,10 @@ class Index extends Component
         $this->startdate = $value5;
         $this->clientduedate = $value6;
         $this->job_status = $value7;
+        $this->print_checked = $value8;
+        $this->link_checked = $value9;
+        $this->file_checked = $value10;
+
         
         // binding files list
         //$myjob = Job::find($this->myid);
@@ -169,7 +181,72 @@ class Index extends Component
        
     }
 
-    
+    public function CountCompletedTaskByMonth($ProjectYear, $ProjectMonth){
+        //Completed BF by month
+        $strsql = "Select Year(jobs.startdate) As TaskYear, Month(jobs.startdate) As TaskMonth, Count(jobs.id) As Count_Task, ";
+        $strsql = $strsql . "jobs.job_status ";
+        $strsql = $strsql . "From jobs ";
+        $strsql = $strsql . "Where Year(jobs.startdate) = '" . $ProjectYear . "' ";
+        $strsql = $strsql . "And Month(jobs.startdate) = '" . $ProjectMonth . "' ";
+        $strsql = $strsql . "And jobs.jobcode like '%BF%' ";
+        $strsql = $strsql . "And jobs.job_status = 'Completed' ";
+        $strsql = $strsql . "Group By Year(jobs.startdate), Month(jobs.startdate), jobs.job_status";
+        $result = DB::select($strsql);
+        if (is_null($result) || empty($result)) {
+            $this->SumBfCompletedByMonth = 0;
+        }else{
+            $this->SumBfCompletedByMonth = $result[0]->Count_Task;
+        }
+        //Completed R by month
+        $strsql = "Select Year(jobs.startdate) As TaskYear, Month(jobs.startdate) As TaskMonth, Count(jobs.id) As Count_Task, ";
+        $strsql = $strsql . "jobs.job_status ";
+        $strsql = $strsql . "From jobs ";
+        $strsql = $strsql . "Where Year(jobs.startdate) = '" . $ProjectYear . "' ";
+        $strsql = $strsql . "And Month(jobs.startdate) = '" . $ProjectMonth . "' ";
+        $strsql = $strsql . "And jobs.jobcode like '%R%' ";
+        $strsql = $strsql . "And jobs.job_status = 'Completed' ";
+        $strsql = $strsql . "Group By Year(jobs.startdate), Month(jobs.startdate), jobs.job_status";
+        $result = DB::select($strsql);
+        if (is_null($result) || empty($result)) {
+            $this->SumRCompletedByMonth = 0;
+        }else{
+            $this->SumRCompletedByMonth = $result[0]->Count_Task;
+        }
+
+        // Avg. / Task (month)
+        $strsql = "Select Year(jobs.startdate) As TaskYear, Month(jobs.startdate) As TaskMonth, Count(jobs.id) As Count_Task, ";
+        $strsql = $strsql . "jobs.job_status ";
+        $strsql = $strsql . "From jobs ";
+        $strsql = $strsql . "Where Year(jobs.startdate) = '" . $ProjectYear . "' ";
+        $strsql = $strsql . "And Month(jobs.startdate) = '" . $ProjectMonth . "' ";
+        $strsql = $strsql . "And jobs.job_status = 'Completed' ";
+        $strsql = $strsql . "Group By Year(jobs.startdate), Month(jobs.startdate), jobs.job_status";
+        $result = DB::select($strsql);
+        if (is_null($result) || empty($result)) {
+            $this->CountAllCompletedByMonth = 0;
+        }else{
+            $this->CountAllCompletedByMonth = $result[0]->Count_Task;
+        }
+
+        $strsql = "Select Year(jobs.startdate) As TaskYear, Month(jobs.startdate) As TaskMonth, Count(jobs.id) As Count_Task ";
+        $strsql = $strsql . "From jobs ";
+        $strsql = $strsql . "Where Year(jobs.startdate) = '" . $ProjectYear . "' ";
+        $strsql = $strsql . "And Month(jobs.startdate) = '" . $ProjectMonth . "' ";
+        $strsql = $strsql . "Group By Year(jobs.startdate), Month(jobs.startdate)";
+        $result = DB::select($strsql);
+        
+        if (is_null($result) || empty($result)) {
+            $this->CountAllByMonth = 0;
+            $this->AvgCompletedByMonth = 0;
+        }else{
+            $this->CountAllByMonth = $result[0]->Count_Task;
+            //dd($result[0]->Count_Task);
+            $this->AvgCompletedByMonth = ($this->CountAllCompletedByMonth / $this->CountAllByMonth) * 100;
+        }
+        
+
+        $this->TotalSaleByMonth = 0;
+    }
 
 
 

@@ -481,27 +481,66 @@
                                 </tr>
 
                                  <tr>
-                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">บันทึก / ผ่านการตรวจสอบ</p></td>
+                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ตรวจสอบ ข้อมูล / ขั้นตอนการทำงาน</p></td>
                                     <td class="wp-70">
                                         <div class="row">
-                                            <div class="col-5">
-                                                 {{-- <div class="form-group">
-                                                    <input type="checkbox" id="job_checked" name="job_checked" wire:model="job_checked"> ผ่านการตรวจสอบเช็คข้อมูลแล้ว
-                                                </div> --}}
-                                                {{-- <div class="form-check form-switch">
-                                                    &nbsp;&nbsp;<input class="form-check-input" type="checkbox" id="job_checked" wire:model="job_checked">
-                                                    <label class="form-check-label" for="flexSwitchCheckDefault">ผ่านการตรวจสอบเช็คข้อมูลแล้ว</label>
-                                                </div> --}}
-                                                <label class="form-check-label" for="flexSwitchCheckDefault">ผ่านการตรวจสอบเช็คข้อมูลแล้ว</label>
+                                            <div class="col-3">
+                                                <label class="form-check-label" for="job_checked">ผ่านการตรวจสอบเช็คข้อมูลแล้ว</label>
                                                 <br>
                                                 <label>
-                                                    <input type="radio" name="options" value="0" wire:model="job_checked"> No
+                                                    <input type="radio" name="job_checked" value="0" wire:model="job_checked"> No
                                                 </label>
                                                 &nbsp;&nbsp;
                                                 <label>
-                                                    <input type="radio" name="options" value="1" wire:model="job_checked"> Yes
+                                                    <input type="radio" name="job_checked" value="1" wire:model="job_checked"> Yes
                                                 </label>
                                             </div>
+                                            <div class="col-3">
+                                                <label class="form-check-label" for="print_checked">Print เล่มรายงาน</label>
+                                                <br>
+                                                <label>
+                                                    <input type="radio" name="print_checked" value="0" wire:model="print_checked"> No
+                                                </label>
+                                                &nbsp;&nbsp;
+                                                <label>
+                                                    <input type="radio" name="print_checked" value="1" wire:model="print_checked"> Yes
+                                                </label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label class="form-check-label" for="link_checked">Link Folder</label>
+                                                <br>
+                                                <label>
+                                                    <input type="radio" name="link_checked" value="0" wire:model="link_checked"> No
+                                                </label>
+                                                &nbsp;&nbsp;
+                                                <label>
+                                                    <input type="radio" name="link_checked" value="1" wire:model="link_checked"> Yes
+                                                </label>
+                                            </div>
+
+                                            <div class="col-3">
+                                                <label class="form-check-label" for="file_checked">File Collect</label>
+                                                <br>
+                                                <label>
+                                                    <input type="radio" name="file_checked" value="0" wire:model="file_checked"> No
+                                                </label>
+                                                &nbsp;&nbsp;
+                                                <label>
+                                                    <input type="radio" name="file_checked" value="1" wire:model="file_checked"> Yes
+                                                </label>
+                                            </div>
+
+
+                                            
+                                        </div>            
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">บันทึก</p></td>
+                                    <td class="wp-70">
+                                        <div class="row">
+                                            
 
                                              <div class="col-2">
                                                 <div class="form-group">
