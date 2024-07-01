@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en" dir="ltr"> <!-- This "app.blade.php" master page is used for all the pages content present in "views/livewire" except "custom" and "switcher" pages -->
-	<head>
-        
+	<head>       
 		<!-- META DATA -->
 		<meta charset="UTF-8">
 		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
@@ -18,6 +17,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <!-- Include Alpine.js from CDN -->
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+       
         
        @livewireStyles
     </head>
@@ -35,7 +35,6 @@
 			<div class="page-main">
 
                 @include('layouts.components.app-header')
-
                 @include('layouts.components.app-sidebar')
 
                 <!--app-content open-->
@@ -72,6 +71,7 @@
             //alert('take action event from livewire JobOrderAdded emit');
         });
     </script>
+    
 
     </body>
 

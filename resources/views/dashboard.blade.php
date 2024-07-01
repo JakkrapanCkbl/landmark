@@ -10,8 +10,6 @@
 @endsection
 
 
-
-
 @section('scripts')
     <!-- APEXCHART JS -->
     <script src="{{asset('assets/js/apexcharts.js')}}"></script>
@@ -40,8 +38,10 @@
     {{-- <script src="{{asset('assets/js/table-data.js')}}"></script> --}}
 
     <!-- INDEX JS -->
+    {{-- แสดงกราฟ chartD --}}
     <script src="{{asset('assets/js/index1.js')}}"></script>
-    <script src="{{asset('assets/js/index.js')}}"></script>
+    {{-- แสดงฟอร์แมทดาต้าเทเบิล --}}
+    <script src="{{asset('assets/js/index.js')}}"></script> 
 
     <!-- Reply JS-->
     <script src="{{asset('assets/js/reply.js')}}"></script>

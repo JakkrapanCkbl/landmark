@@ -5,12 +5,13 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Invoice;
 use App\Models\Invoice_items;
+use App\Models\Order;
 use App\Models\Job;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
-class InvoiceDetails extends Component
+class OrderDetails extends Component
 {
     public $invoiceId;
     public $invoice;
@@ -24,16 +25,17 @@ class InvoiceDetails extends Component
         $this->invoice_items = Invoice_items::where('invoice_id', $id)->get();
         $this->job = Job::findOrFail($id);
     }
-
     public function render_details($id)
     {
         $this->mount($id);
-        return view('livewire.invoice.invoice-details', ['invoice' => $this->invoice, 'invoiceitems' => $this->invoice_items]);
+        return view('livewire.invoice.order-details', [
+            'invoice' => $this->invoice, 'invoiceitems' => $this->invoice_items,
+            'job' => $this -> job
+        ]);
     }
     public function render_create()
     {
-        // $this->mount($id);
-        return view('livewire.invoice.invoice-create');
+        return view('livewire.invoice.order-create');
     }
     public function render_edit($id)
     {
@@ -41,10 +43,9 @@ class InvoiceDetails extends Component
         return view('livewire.invoice.invoice-edit', ['invoice' => $this->invoice, 'invoiceitems' => $this->invoice_items]);
     }
 
-    public function render_receipt($id)
+    public function render_original()
     {
-        $this->mount($id);
-        return view('livewire.invoice.receipt-details', ['invoice' => $this->invoice, 'invoiceitems' => $this->invoice_items]);
+        return view('livewire.invoice.invoice-details-og', ['invoice' => $this->invoice]);
     }
 
     public function store(Request $request)

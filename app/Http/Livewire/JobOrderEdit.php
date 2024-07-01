@@ -11,6 +11,8 @@ use App\Http\Controllers\MainController;
 use App\Models\Job;
 use App\Models\Province;
 use App\Models\Amphure;
+use App\Models\Proptype;
+use App\Models\Proptype2;
 
 class JobOrderEdit extends Component
 {
@@ -23,7 +25,6 @@ class JobOrderEdit extends Component
     public $reportcode;
     public $projectname;
     public $client;
-    public $prop_type;
     public $prop_size;
     public $proplocation;
     public $provinces = null;
@@ -53,8 +54,22 @@ class JobOrderEdit extends Component
     public $lcduedate;
     public $clientduedate;
     public $่job_status;
-   
-// -------------------------------------------------------------------------------------------
+    public $obj_method;
+    public $marketvalue;
+    public $job_checked = 0;
+    public $print_checked = 0;
+    public $link_checked = 0;
+    public $file_checked = 0;
+    public $proptypes = null;
+    public $proptype;
+    public $selectedProptype = null;
+    public $proptype2s = null;
+    public $proptype2;
+    public $selectedProptype2 = null;
+    public $prop_type2_note;
+
+
+    // -------------------------------------------------------------------------------------------
     public function addTwoNumbers($num1,$num2){
         $this->sum = $num1+$num2;
     }
@@ -78,7 +93,6 @@ class JobOrderEdit extends Component
         $this->reportcode = $this->job->reportcode;
         $this->projectname = $this->job->projectname;
         $this->client = $this->job->client;
-        $this->prop_type = $this->job->prop_type;
         $this->prop_size = $this->job->prop_size;
         $this->proplocation = $this->job->proplocation;
         $this->province_code = $this->job->province_code;
@@ -103,7 +117,21 @@ class JobOrderEdit extends Component
         $this->lcduedate = Carbon::parse($this->job->lcduedate)->isoFormat('Do MMM Y');
         $this->clientduedate = Carbon::parse($this->job->clientduedate)->isoFormat('Do MMM Y');
         $this->job_status = $this->job->job_status;
-       
+        $this->obj_method = $this->job->obj_method;
+        $this->marketvalue = number_format($this->job->marketvalue);
+        $this->job_checked = $this->job->job_checked;
+        $this->print_checked = $this->job->print_checked;
+        $this->link_checked = $this->job->link_checked;
+        $this->file_checked = $this->job->file_checked;
+
+        $this->proptypes = Proptype::orderBy('id')->get();
+        $this->proptype = $this->job->prop_type;
+        $this->selectedProptype = $this->job->prop_type;
+
+        $this->proptype2s = Proptype2::where('show_prop_type', $this->job->prop_type)->get();
+        $this->proptype2 = $this->job->prop_type2;
+        $this->selectedProptype2 = $this->job->prop_type2;
+        $this->prop_type2_note = $this->job->prop_type2_note;
     }
 
     public function render()
@@ -117,6 +145,13 @@ class JobOrderEdit extends Component
         'updateValue'
         // Add more listeners as needed
     ];
+
+    // public function updatedSelectedProp_type($prop_typeId)
+    // {
+    //     dd($prop_typeId);
+    //     $this->prop_type2s = Proptype2::where('prop_type', $prop_typeId)->get();
+    //     $this->selectedProp_type2 = null;
+    // }
 
     public function callUpdate() {
         $this->updateData();
@@ -144,14 +179,16 @@ class JobOrderEdit extends Component
         
         if($this->edit_id){
             $my_job = Job::find($this->edit_id);
+            
             $my_job->update([
                 'reportcode' => $this->reportcode,
                 'client' => $this->client,
-                'prop_type' => $this->prop_type,
+                'prop_type' => $this->selectedProptype,
+                'prop_type2' => $this->selectedProptype2,
                 'prop_size' => $this->prop_size,
                 'projectname' => $this->projectname,
                 'proplocation' => $this->proplocation,
-                'province_code' => $this->province_code,
+                'province_code' => $this->selectedProvince,
                 'amphure_code' => $this->amphure_code,
                 'district' => $this->district,
                 'customer' => $this->customer,
@@ -171,10 +208,18 @@ class JobOrderEdit extends Component
                 'lcduedate' => $sql_lcduedate,
                 'clientduedate' => $sql_clientduedate,
                 'job_status' => $this->job_status,
+                'obj_method' => $this->obj_method,
+                'marketvalue' => (float) str_replace(',', '', $this->marketvalue),
+                'job_checked' => (bool) $this->job_checked,
+                'prop_type2_note' => $this->prop_type2_note,
+                'print_checked' => (bool) $this->print_checked,
+                'link_checked' => (bool) $this->link_checked,
+                'file_checked' => (bool) $this->file_checked,
+               
             ]);
         }
 
-        session()->flash('message', 'User updated successfully.');
+        session()->flash('message', 'Updated successfully.');
         //$this->emit('jobUpdated');
         //return redirect('/dashboard')->with('message', 'บันทึกข้อมูลเสร็จแล้ว');
     }
@@ -185,4 +230,23 @@ class JobOrderEdit extends Component
     {
         $this->amphures = Amphure::where('code', 'LIKE', $value . '%')->get();
     }
+
+    public function updatedSelectedProptype($value)
+    {
+            $this->proptype2s = Proptype2::where('show_prop_type', $value)->get();
+            if ($this->proptype2s->isEmpty()) {
+                $this->selectedProptype2 = "";
+            }
+            if ($value !== 'อื่น ๆ') {
+                $this->prop_type2_note = "";
+            }
+    }
+
+    public function updatedSelectedProptype2($value)
+    {
+        if ($value !== 'อื่น ๆ') {
+            $this->prop_type2_note = "";
+        }
+    }
+
 }

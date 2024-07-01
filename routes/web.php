@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\ForgetPasswordManager;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ConfirmationController;
-
+use App\Http\Controllers\InvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,28 +31,29 @@ Route::get('/projectmaster', function () {
     return view('projectmaster.listing-single');
 });
 
-Route::get('check-helper',[MainController::class, 'checkHelper']);
-Route::get('testcode',[JobController::class, 'testcode']);
+Route::get('check-helper', [MainController::class, 'checkHelper']);
+Route::get('testcode', [JobController::class, 'testcode']);
 
 Route::get('login', [AuthController::class, 'index'])->name('login');
 
-Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
+Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post');
 Route::get('registration', [AuthController::class, 'registration'])->name('register');
-Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post'); 
+Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post');
 
-Route::get('dashboard', [AuthController::class, 'dashboard']); 
+Route::get('dashboard', [AuthController::class, 'dashboard']);
 
 
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/forget-password',[ForgetPasswordManager::class, 'forgetPassword'])->name('forget.password');
-Route::post('/forget-password',[ForgetPasswordManager::class, 'forgetPasswordPost'])->name('forget.password.post');
-Route::get('/reset-password/{token}',[ForgetPasswordManager::class, "resetPassword"])->name("reset.password");
-Route::post('/reset-password',[ForgetPasswordManager::class, 'resetPasswordPost'])->name('reset.password.post');
+Route::get('/forget-password', [ForgetPasswordManager::class, 'forgetPassword'])->name('forget.password');
+Route::post('/forget-password', [ForgetPasswordManager::class, 'forgetPasswordPost'])->name('forget.password.post');
+Route::get('/reset-password/{token}', [ForgetPasswordManager::class, "resetPassword"])->name("reset.password");
+Route::post('/reset-password', [ForgetPasswordManager::class, 'resetPasswordPost'])->name('reset.password.post');
 
 
 
 
 use App\Http\Livewire\Login2;
+
 Route::get('login2', Login2::class);
 
 use App\Http\Livewire\Landing;
@@ -66,7 +67,12 @@ use App\Http\Livewire\JobInsertFiles;
 use App\Http\Livewire\GetProject;
 use App\Http\Livewire\Students;
 // use App\Http\Livewire\Counter;
-
+use App\Http\Livewire\InvoiceDetails;
+use App\Http\Livewire\NhLoanDetails;
+use App\Http\Livewire\OrderDetails;
+use App\Http\Livewire\HLoanDetails;
+use App\Http\Livewire\OpeDetails;
+use App\Http\Livewire\QuotationDetails;
 
 Route::view('/welcome', 'welcome');
 //Route::view('/test', 'joborder.joborder-add');
@@ -102,3 +108,30 @@ Route::get('/students', Students::class);
 // Route::get('/counter', Counter::class);
 Route::get('export-data', [AuthController::class, 'ExportData'])->middleware('auth')->name('joborder.export-data');
 
+
+
+//Invoice by Note
+Route::get('/invoice-details/{id}', [InvoiceDetails::class, 'render_details'])->name('invoice.details');
+route::get('/receipt-details/{id}', [InvoiceDetails::class, 'render_receipt'])->name('receipt.details');
+Route::get('/invoice-details-og', [InvoiceDetails::class, 'render_original'])->name('invoice.detailsog');
+Route::get('/invoicelist', [InvoiceController::class, 'invoiceList'])->name('invoice.invoiceList'); //todo
+
+Route::get('/invoice-edit/{id}', [InvoiceDetails::class, 'render_edit'])->name('invoice.edit');
+Route::post('/invoice-edit/{id}', [InvoiceDetails::class, 'update'])->name('invoice.update');
+
+Route::get('/invoice-create', [InvoiceDetails::class, 'render_create'])->name('invoice.create'); //todo
+Route::post('/invoice-create', [InvoiceDetails::class, 'store'])->name('invoice.store'); //todo
+
+Route::get('/nhloan-details/{id}', [NhLoanDetails::class, 'render_details'])->name('nhloan.details');
+
+Route::get('/nhloan-edit/{id}', [NhLoanDetails::class, 'render_edit'])->name('nhloan.edit'); //todo
+Route::post('/nhloan-edit/{id}', [NhLoanDetails::class, 'update'])->name('nhloan.update');//todo
+
+Route::get('/order-details/{id}', [OrderDetails::class, 'render_details'])->name('order.details');
+
+Route::get('/hloan-details/{id}', [HLoanDetails::class, 'render_details'])->name('hloan.details');
+
+Route::get('/ope-details/{id}', [OPEDetails::class, 'render_details'])->name('ope.details');
+
+Route::get('/quotation-details-short/{id}', [QuotationDetails::class, 'render_details_short_form'])->name('quotation-short.details');
+Route::get('/quotation-details-full/{id}', [QuotationDetails::class, 'render_details_long_form'])->name('quotation-long.details');

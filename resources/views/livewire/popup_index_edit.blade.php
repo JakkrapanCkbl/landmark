@@ -76,6 +76,16 @@
                             <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-upload">
                                 Upload
                             </a>
+                            <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-print">
+                                Print เล่มรายงาน
+                            </a>
+                             <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-link_folder">
+                                Link Folder
+                            </a>
+                             <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-file_collect">
+                                File Collect
+                            </a>
+
                             <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-subtask">
                                 To do
                             </a>
@@ -155,7 +165,54 @@
 									<input type="hidden" id="subfolder" name="subfolder" value={{$subfolder}}>
 								</form>
                             </div>
+                        </div>
 
+                        <div class="tab-pane" id="task-print">
+                            <div class="row">
+                                <div class="col-3">
+                                    <label class="form-check-label" for="print_checked">Print เล่มรายงาน</label>
+                                    <br>
+                                    <label>
+                                        <input type="radio" name="print_checked" value="0" wire:model="print_checked" disabled> No
+                                    </label>
+                                    &nbsp;&nbsp;
+                                    <label>
+                                        <input type="radio" name="print_checked" value="1" wire:model="print_checked" disabled> Yes
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="task-link_folder">
+                            <div class="row">
+                               <div class="col-3">
+                                    <label class="form-check-label" for="link_checked">Link Folder</label>
+                                    <br>
+                                    <label>
+                                        <input type="radio" name="link_checked" value="0" wire:model="link_checked" disabled> No
+                                    </label>
+                                    &nbsp;&nbsp;
+                                    <label>
+                                        <input type="radio" name="link_checked" value="1" wire:model="link_checked" disabled> Yes
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="task-file_collect">
+                            <div class="row">
+                               <div class="col-3">
+                                    <label class="form-check-label" for="file_checked">File Collect</label>
+                                    <br>
+                                    <label>
+                                        <input type="radio" name="file_checked" value="0" wire:model="file_checked" disabled> No
+                                    </label>
+                                    &nbsp;&nbsp;
+                                    <label>
+                                        <input type="radio" name="file_checked" value="1" wire:model="file_checked" disabled> Yes
+                                    </label>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="tab-pane" id="task-subtask">
