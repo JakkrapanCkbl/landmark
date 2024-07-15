@@ -8,18 +8,23 @@ var n=r.value;0!==n.length?(e.appendChild(t),t.children[0].children[1].innerText
 //______Data-Table
 var table = $('#data-table1').DataTable({
   buttons: ['copy', 'excel', 'pdf', 'colvis'],
+  
     responsive: true,
     language: {
       searchPlaceholder: 'Filter...',
       sSearch: '',
     },
     lengthMenu: [15, 25, 50, 100, 200, 500],
+    order: [[0, 'desc']],
     columnDefs: [
-      //{ targets: [0], visible: false, searchable: false },
-      { width: "10", targets: 0 },
+      { targets: [0], visible: false, searchable: false },
+      { width: "10", targets: 1 },
+      //{ width: "100", targets: 3, className: "dt-head-center text-end"},
+      //{ width: "100", targets: 3, className: "text-center text-end"},
       //{ width: "5%", targets: 3, className: "text-end" },
     ],
-    fixedColumns: true
+    fixedColumns: true,
+
   });
   table.buttons().container()
     .appendTo('#data-table1_wrapper .col-md-6:eq(0)');

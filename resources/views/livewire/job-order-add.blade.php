@@ -77,17 +77,18 @@
                                                 <div class="form-group">
                                                     <select name="prop_type" wire:model="prop_type" class="form-control form-select" id="prop_type"  data-bs-placeholder="Select Prop Type">
                                                         <option value="ห้องชุด" selected>ห้องชุด</option>
+                                                        <option value="ที่ดินว่างเปล่า">ที่ดินว่างเปล่า</option>
+                                                        <option value="ที่ดินพร้อมสิ่งปลูกสร้าง">ที่ดินพร้อมสิ่งปลูกสร้าง</option>
                                                         <option value="บ้านเดี่ยว">บ้านเดี่ยว</option>
                                                         <option value="บ้านแฝด">บ้านแฝด</option>
-                                                        <option value="ทาวน์เฮาส์/ทาวน์โฮม">ทาวน์เฮาส์/ทาวน์โฮม</option>
+                                                        <option value="ทาวน์เฮาส์">ทาวน์เฮาส์</option>
+                                                        <option value="ทาวน์โฮม">ทาวน์โฮม</option>
                                                         <option value="ตึกแถว">ตึกแถว</option>
-                                                        <option value="ที่ดินว่างเปล่า">ที่ดินว่างเปล่า</option>
                                                         <option value="โรงงาน/โกดัง">โรงงาน/โกดัง</option>
                                                         <option value="อพาร์ทเม้นท์">อพาร์ทเม้นท์</option>
                                                         <option value="โรงแรม">โรงแรม</option>
                                                         <option value="อาคารสำนักงาน">อาคารสำนักงาน</option>
-                                                        <option value="โฮมออฟฟิศ/มินิออฟฟิศ">โฮมออฟฟิศ/มินิออฟฟิศ</option>	
-                                                        <option value="ที่ดินพร้อมสิ่งปลูกสร้าง">ที่ดินพร้อมสิ่งปลูกสร้าง</option>
+                                                        <option value="โฮมออฟฟิศ">โฮมออฟฟิศ</option>	
                                                         <option value="สิทธิการเช่า">สิทธิการเช่า</option>
                                                         <option value="เครื่องจักร">เครื่องจักร</option>
                                                         <option value="อื่นๆ">อื่นๆ</option>
@@ -200,7 +201,7 @@
                                                 <div class="form-group">
                                                     <label for="valuer" class="form-label">ผู้ประเมิน</label>
                                                     <select name="valuer" wire:model="valuer" class="form-control valuer{{ $errors->has('valuer') ? ' is-invalid' : '' }}">
-                                                        @foreach($employees as $employee)
+                                                        @foreach($list_valuers as $employee)
                                                                 <option value="{{ $employee->name }}">
                                                                     {{ $employee->name }}
                                                                 </option>
@@ -212,8 +213,8 @@
                                                 <div class="form-group">
                                                     <label for="headvaluer" class="form-label">ผู้ตรวจ</label>
                                                     <select name="headvaluer" wire:model="headvaluer" class="form-control headvaluer{{ $errors->has('headvaluer') ? ' is-invalid' : '' }}">
-                                                        @foreach($employees as $employee)
-                                                            @if($employee->id =='1' or $employee->id =='2' or $employee->id =='3' or $employee->id =='4' or $employee->id =='5' or $employee->id =='6' ) 
+                                                        @foreach($list_headvaluers as $employee)
+                                                            {{-- @if($employee->id =='1' or $employee->id =='2' or $employee->id =='3' or $employee->id =='4' or $employee->id =='5' or $employee->id =='6' ) 
                                                                 @if($employee->id == '3')   
                                                                     <option value="{{ $employee->name }}">
                                                                         {{ $employee->name }}
@@ -223,8 +224,10 @@
                                                                         {{ $employee->name }}
                                                                     </option>        
                                                                 @endif
-                                                            @endif
-                                                           
+                                                            @endif --}}
+                                                            <option value="{{ $employee->name }}">
+                                                                {{ $employee->name }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -247,19 +250,19 @@
                                             
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="inspectiondate" class="form-label">วันที่สำรวจ</label>
+                                                    <label for="inspectiondate" class="form-label"><span style="color:green;font-weight: bold;">วันที่สำรวจ</label>
                                                     <input class="form-control" wire:model="inspectiondate" name="inspectiondate" id="inspectiondate" placeholder="dd-mm-yyyy" type="text">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="lcduedate" class="form-label">กำหนดส่ง LC ตรวจ</label>
+                                                    <label for="lcduedate" class="form-label"><span style="color:red;font-weight: bold;">กำหนดส่ง LC ตรวจ</label>
                                                     <input class="form-control" wire:model="lcduedate" name="lcduedate" id="lcduedate" placeholder="dd-mm-yyyy" type="text">
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="clientduedate" class="form-label">กำหนดส่งงานลูกค้า</label>
+                                                    <label for="clientduedate" class="form-label"><span style="color:green;font-weight: bold;">กำหนดส่งงานลูกค้า</label>
                                                     <input class="form-control" wire:model="clientduedate" name="clientduedate" id="clientduedate" placeholder="dd-mm-yyyy" type="text">
                                                 </div>
                                             </div>

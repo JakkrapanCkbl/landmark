@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('styles')
-
+    <style>
+        .dt-head-center {
+            text-align: center;
+        }
+    </style>
 @endsection  
 
 @section('content')
@@ -37,10 +41,11 @@
     <script src="{{asset('assets/plugins/datatable/pdfmake/vfs_fonts.js')}}"></script>
     {{-- <script src="{{asset('assets/js/table-data.js')}}"></script> --}}
 
+
     <!-- INDEX JS -->
     {{-- แสดงกราฟ chartD --}}
     <script src="{{asset('assets/js/index1.js')}}"></script>
-    {{-- แสดงฟอร์แมทดาต้าเทเบิล --}}
+    {{-- แสดงฟอร์แมทดาต้าเทเบิล set format datatable --}}
     <script src="{{asset('assets/js/index.js')}}"></script> 
 
     <!-- Reply JS-->

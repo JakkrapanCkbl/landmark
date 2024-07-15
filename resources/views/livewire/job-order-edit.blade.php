@@ -79,11 +79,19 @@
                                                         <option value="TTB">TTB</option>
                                                         <option value="KTB">KTB</option>
                                                         <option value="MBKG">MBKG</option>
+                                                        <option value="อื่นๆ">อื่นๆ</option>
                                                     </select>
                                                 </div>
                                             </div>
-                                            
-                                            
+                                            @if($client == 'อื่นๆ')
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label for="client_note" class="form-label">ถ้าเลือก อื่นๆ ให้ระบุ</label>
+                                                        <input type="text" class="form-control" name="client_note" id="client_note" wire:model="client_note">
+                                                        @error('client_note') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                    </div>
+                                                </div>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
@@ -120,6 +128,7 @@
                                                             <option value="{{ $item->show_prop_type }}" @if ($proptype == $item->show_prop_type) selected @endif>{{ $item->show_prop_type }}</option>
                                                         @endforeach
                                                     </select>
+
                                                     {{-- <p>You have selected: {{ $selectedProptype }}</p> --}}
                                                 </div>
                                             </div>
@@ -255,10 +264,10 @@
                                                 <div class="form-group">
 														<label for="jobtype" class="form-label">รายงานภาษา</label>
 														<select name="jobtype" id="jobtype" class="form-control form-select" wire:model="jobtype">
-															<option value="ไทย 1 ชุด">ไทย 1 ชุด</option>
-															<option value="ไทย 2 ชุด">ไทย 2 ชุด</option>
-															<option value="อังกฤษ 2 ชุด">อังกฤษ 2 ชุด</option>
-															<option value="ไทย 2 ชุด + อังกฤษ 2 ชุด">ไทย 2 ชุด + อังกฤษ 2 ชุด</option>
+															<option value="ไทย 1 ชุด">ไทย 1 เล่ม</option>
+															<option value="ไทย 2 ชุด">ไทย 2 เล่ม</option>
+															<option value="อังกฤษ 2 ชุด">อังกฤษ 2 เล่ม</option>
+															<option value="ไทย 2 ชุด + อังกฤษ 2 ชุด">ไทย 2 เล่ม + อังกฤษ 2 เล่ม</option>
 															<option value="-">-</option>
 														</select>
 													</div>
@@ -369,7 +378,7 @@
                                                 <div class="form-group">
                                                     <label for="valuer" class="form-label">ผู้ประเมิน</label>
                                                     <select name="valuer" wire:model="valuer" class="form-control form-select">
-                                                        @foreach($employees as $employee)
+                                                        @foreach($list_valuers as $employee)
                                                                 <option value="{{ $employee->name }}">
                                                                     {{ $employee->name }}
                                                                 </option>
@@ -381,8 +390,8 @@
                                                 <div class="form-group">
                                                     <label for="headvaluer" class="form-label">ผู้ตรวจ</label>
                                                     <select name="headvaluer" wire:model="headvaluer" class="form-control form-select">
-                                                        @foreach($employees as $employee)
-                                                            @if($employee->id =='1' or $employee->id =='2' or $employee->id =='3' or $employee->id =='4' or $employee->id =='5' or $employee->id =='6' ) 
+                                                        @foreach($list_headvaluers as $employee)
+                                                            {{-- @if($employee->id =='1' or $employee->id =='2' or $employee->id =='3' or $employee->id =='4' or $employee->id =='5' or $employee->id =='6' ) 
                                                                 @if($employee->id == '3')   
                                                                     <option value="{{ $employee->name }}">
                                                                         {{ $employee->name }}
@@ -392,7 +401,10 @@
                                                                         {{ $employee->name }}
                                                                     </option>        
                                                                 @endif
-                                                            @endif
+                                                            @endif --}}
+                                                            <option value="{{ $employee->name }}">
+                                                                {{ $employee->name }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -408,19 +420,19 @@
                                             
                                             <div class="col-2">
                                                 <div class="form-group">
-                                                    <label for="inspectiondate" class="form-label">วันที่สำรวจ</label>
+                                                    <label for="inspectiondate" class="form-label"><span style="color:green;font-weight: bold;">วันที่สำรวจ</label>
                                                     <input class="form-control" wire:model="inspectiondate" name="inspectiondate" id="inspectiondate" type="text">
                                                 </div>
                                             </div>
                                             <div class="col-2">
                                                 <div class="form-group">
-                                                    <label for="lcduedate" class="form-label">กำหนดส่ง LC ตรวจ</label>
+                                                    <label for="lcduedate" class="form-label"><span style="color:red;font-weight: bold;">กำหนดส่ง LC ตรวจ</label>
                                                     <input class="form-control" wire:model="lcduedate" name="lcduedate" id="lcduedate" type="text">
                                                 </div>
                                             </div>
                                             <div class="col-2">
                                                 <div class="form-group">
-                                                    <label for="clientduedate" class="form-label">กำหนดส่งงานลูกค้า</label>
+                                                    <label for="clientduedate" class="form-label"><span style="color:green;font-weight: bold;">กำหนดส่งงานลูกค้า</label>
                                                     <input class="form-control" wire:model="clientduedate" name="clientduedate" id="clientduedate" type="text">
                                                 </div>
                                             </div>
@@ -429,27 +441,25 @@
                                 </tr>
 
                                  <tr>
-                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">วิธีการประเมิน / ราคาประเมิน</p></td>
+                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">วิธีการประเมิน / มูลค่าตลาด</p></td>
                                     <td class="wp-70">
                                         <div class="row">
                                            <div class="col-5">
                                                 <div class="form-group">
-                                                    <label for="obj_method" class="form-label">วิธีการประเมิน</label>
+                                                    <label for="obj_method" class="form-label">วิธีการประเมิน (เพื่อกำหนดมูลค่าตลาด)</label>
                                                     <select name="obj_method" class="form-control form-select" wire:model="obj_method">
                                                         <option value=""></option>
-                                                        <option value="วิธีเปรียบเทียบตลาด">วิธีเปรียบเทียบตลาด</option>
-                                                        <option value="วิธีวิเคราะห์มูลค่าจากต้นทุน">วิธีวิเคราะห์มูลค่าจากต้นทุน</option>
-                                                        <option value="วิธีแปลงรายได้เป็นมูลค่า">วิธีแปลงรายได้เป็นมูลค่า</option>
-                                                        <option value="วิธีการตั้งสมมติฐานในการพัฒนา">วิธีการตั้งสมมติฐานในการพัฒนา</option>
-                                                        <option value="วิธีวิเคราะห์กระแสเงินสด">วิธีวิเคราะห์กระแสเงินสด</option>
-                                                        <option value="วิธีประเมินโดยแบบจำลอง">วิธีประเมินโดยแบบจำลอง</option>
+                                                        <option value="วิธีเปรียบเทียบกับข้อมูลตลาด (Market Approach)">วิธีเปรียบเทียบกับข้อมูลตลาด (Market Approach)</option>
+                                                        <option value="วิธีต้นทุนทดแทน (Cost Approach)">วิธีต้นทุนทดแทน (Cost Approach)</option>
+                                                        <option value="วิธีแปลงรายได้เป็นมูลค่า">วิธีพิจารณาจากรายได้ (Income Approach)</option>
+                                                        <option value="วิธีการตั้งสมมติฐานในการพัฒนา">วิธีคำนวณจากมูลค่าคงเหลือ (Residual Method)</option>
                                                     </select>
                                                 </div>
                                             </div>
 
                                             <div class="col-2">
                                                <div class="form-group">
-                                                    <label for="marketvalue" class="form-label">ราคาประเมิน</label>
+                                                    <label for="marketvalue" class="form-label">มูลค่าตลาด (Market Value)</label>
                                                     {{-- {{ number_format($Expense->price, 2) }} --}}
                                                     <input type="text" class="form-control" name="marketvalue" id="marketvalue" wire:model="marketvalue">
                                                     @error('marketvalue') <span class="error" style="color: red;">{{ $message }}</span> @enderror

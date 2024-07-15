@@ -11,7 +11,7 @@ class Job extends Model
 
     protected $fillable = [
         'id', 'jobcode', 'clientcode', 'reportcode','projectname', 
-        'jobsize', 'jobtype', 'client', 'customer_company', 'customer_address', 
+        'jobsize', 'jobtype', 'client', 'client_note', 'customer_company', 'customer_address', 
         'customer', 'prop_type', 'prop_size', 'proplocation', 'lcduedate',
         'headvaluer', 'headvaluer_n', 'valuer', 'valuer_n', 'percentfinish',
         'startdate', 'inspectiondate', 'lcduedate', 'clientduedate', 'created_at', 'updated_at',

@@ -49,6 +49,7 @@ class Index extends Component
         // Add more listeners as needed
     ];
 
+    
     public function render()
     {
         $this->jobs = DB::select('select * from jobs order by id desc LIMIT 200');

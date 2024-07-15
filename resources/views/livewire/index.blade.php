@@ -600,9 +600,10 @@
                     <div class="card-body">
                         <div class="table-responsive export-table">
                             <table id="data-table1" class="table text-nowrap mb-0 table-bordered w-100">
-                                <thead class="table-head">
+                                {{-- <thead class="table-head"> --}}
+                                <thead class="dt-head-center">
                                     <tr>
-                                        {{-- <th>test</th> --}}
+                                        <th>id</th>
                                         <th class="bg-transparent border-bottom-0">ลูกค้า</th>
                                         <th class="bg-transparent border-bottom-0">รายงานเลขที่</th>
                                         <th class="bg-transparent border-bottom-0">Bank's ID</th>
@@ -624,6 +625,7 @@
                                     
                                     @foreach ($jobs as $job)   
                                     <tr>
+                                        <td>{{ $job->id }}</td>
                                         {{-- <td>{{ $this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) }}</td> --}}
                                     
                                         @if($job->client == 'UOB')
@@ -637,7 +639,7 @@
                                         @else
                                             <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->customer }}">{{ Str::limit($job->customer, 15) }}</td>
                                         @endif
-                                        
+                 
                                         @if($job->job_status == 'Completed')
                                             <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
                                         @elseif($job->job_status == 'On Hold' || $job->job_status == 'Cancel')
@@ -727,9 +729,9 @@
                                         {{-- <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></td> --}}
                                         {{-- <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="_blank"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td> --}}
                                         @if($job->job_checked == true) 
-                                            <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="popup" onclick="window.open('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}','name','width=850,height=750')"><span style="color:black;font-weight: bold;">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td>
+                                            <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="popup" onclick="window.open('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}','name','width=1650,height=1037')"><span style="color:black;font-weight: bold;">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td>
                                         @else
-                                            <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="popup" onclick="window.open('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}','name','width=850,height=750')"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td>
+                                            <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="popup" onclick="window.open('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}','name','width=1650,height=1037')"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td>
                                         @endif
                                         
                                         {{-- <td class="text-muted fs-13 fw-semibold" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }}<br>{{ $job->proplocation }}"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" >{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,30) }}</a></td> --}}

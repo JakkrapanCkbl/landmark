@@ -35,8 +35,9 @@ class JobOrderAdd extends Component
     public $district;
     public $prop_size;
     public $customer;
-    public $employees = null; //for valuer and headvaluer
+    public $list_valuers = null; //for valuer 
     public $valuer;
+    public $list_headvaluers = null; //for head valuer 
     public $headvaluer = 'สาโรช';
     public $startdate;
     public $inspectiondate;
@@ -65,7 +66,9 @@ class JobOrderAdd extends Component
 
     public function render()
     {
-        $this->employees = DB::table('users')->get();
+        // $this->employees = DB::table('users')->get();
+        $this->list_valuers = $this->get_valuers();
+        $this->list_headvaluers = $this->get_headvaluers();
         return view('livewire.job-order-add');   
     }
 
@@ -249,7 +252,17 @@ class JobOrderAdd extends Component
         return $id;
     }
 
-    
+    public static function get_valuers()
+    {
+        $strsql = "SELECT * FROM users WHERE sequence_valuer is not null ORDER BY sequence_valuer";
+        return DB::select($strsql);
+    }
+
+    public static function get_headvaluers()
+    {
+        $strsql = "SELECT * FROM users WHERE sequence_head is not null ORDER BY sequence_head";
+        return DB::select($strsql);
+    }
     
    
 }

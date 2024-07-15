@@ -25,6 +25,7 @@ class JobOrderEdit extends Component
     public $reportcode;
     public $projectname;
     public $client;
+    public $client_note;
     public $prop_size;
     public $proplocation;
     public $provinces = null;
@@ -46,8 +47,9 @@ class JobOrderEdit extends Component
     public $job_gps;
     public $lat;
     public $lng;
-    public $employees = null; //for valuer and headvaluer
+    public $list_valuers = null; //for valuer 
     public $valuer = 'dido';
+    public $list_headvaluers = null; //for valuer 
     public $headvaluer = 'สาโรจน์';
     public $startdate;
     public $inspectiondate;
@@ -93,6 +95,7 @@ class JobOrderEdit extends Component
         $this->reportcode = $this->job->reportcode;
         $this->projectname = $this->job->projectname;
         $this->client = $this->job->client;
+        $this->client_note = $this->job->client_note;
         $this->prop_size = $this->job->prop_size;
         $this->proplocation = $this->job->proplocation;
         $this->province_code = $this->job->province_code;
@@ -136,7 +139,9 @@ class JobOrderEdit extends Component
 
     public function render()
     {        
-        $this->employees = DB::table('users')->get();
+        //$this->employees = DB::table('users')->get();
+        $this->list_valuers = $this->get_valuers();
+        $this->list_headvaluers = $this->get_headvaluers();
         return view('livewire.job-order-edit');
     }
  
@@ -179,10 +184,13 @@ class JobOrderEdit extends Component
         
         if($this->edit_id){
             $my_job = Job::find($this->edit_id);
-            
+            if ($this->client != 'อื่นๆ'){
+                $this->client_note = "";
+            }
             $my_job->update([
                 'reportcode' => $this->reportcode,
                 'client' => $this->client,
+                'client_note' => $this->client_note,
                 'prop_type' => $this->selectedProptype,
                 'prop_type2' => $this->selectedProptype2,
                 'prop_size' => $this->prop_size,
@@ -247,6 +255,30 @@ class JobOrderEdit extends Component
         if ($value !== 'อื่น ๆ') {
             $this->prop_type2_note = "";
         }
+    }
+
+    public static function get_valuers()
+    {
+        $strsql = "SELECT * FROM users WHERE sequence_valuer is not null ORDER BY sequence_valuer";
+        return DB::select($strsql);
+    }
+
+    public static function get_headvaluers()
+    {
+        $strsql = "SELECT * FROM users WHERE sequence_head is not null ORDER BY sequence_head";
+        return DB::select($strsql);
+    }
+
+   
+
+    public function updatedclient($value)
+    {
+        
+        if ($value == 'อื่นๆ') {
+            //dd('ok');
+            $this->client_note = '';
+        }
+        
     }
 
 }
