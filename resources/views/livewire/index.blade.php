@@ -722,27 +722,38 @@
                                         @endif
 
                                         @if($job->print_checked == true)
-                                            <td class="text-muted fs-13"><p class="mb-0 text-dark"><span style="color:black;font-weight: bold;">{{ $job->reportcode }}</p></td>
+                                            {{-- bold front --}}
+                                            {{-- <td class="text-muted fs-13"><p class="mb-0 text-dark"><span style="color:black;font-weight: bold;">{{ $job->reportcode }}</p></td> --}}
+                                            <td class="text-muted fs-13"><p class="mb-0 text-dark"><span style="font-weight: bold;">{{ $job->reportcode }}</p></td>
                                         @else
                                             <td class="text-muted fs-13"><p class="mb-0 text-dark">{{ $job->reportcode }}</p></td>
                                         @endif
                                         {{-- <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></td> --}}
                                         {{-- <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="_blank"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td> --}}
                                         @if($job->job_checked == true) 
-                                            <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="popup" onclick="window.open('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}','name','width=1650,height=1037')"><span style="color:black;font-weight: bold;">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td>
+                                            {{-- bold front --}}
+                                            {{-- <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="popup" onclick="window.open('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}','name','width=1650,height=1037')"><span style="color:black;font-weight: bold;">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td> --}}
+                                            {{-- <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="javascript:void(0);" onclick="openCenteredWindow('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}', 1400, 900)"><span style="font-weight: bold;">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td> --}}
+                                            <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="javascript:void(0);" onclick="openCenteredWindow('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}', 1500, 900, 1)"><span style="color:green;font-weight:bold;text-decoration:underline;" >{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td>
                                         @else
-                                            <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="popup" onclick="window.open('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}','name','width=1650,height=1037')"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td>
+                                            {{-- normal front --}}
+                                            {{-- <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="popup" onclick="window.open('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}','name','width=1650,height=1037')"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td> --}}
+                                            <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="javascript:void(0);" onclick="openCenteredWindow('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}', 1500, 900, 1)">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</a></td>
                                         @endif
                                         
                                         {{-- <td class="text-muted fs-13 fw-semibold" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }}<br>{{ $job->proplocation }}"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" >{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,30) }}</a></td> --}}
                                         {{-- <td class="text-muted fs-13"><a href="{{url('project-details')}}" class="text-dark">Noa Dashboard UI</a></td> --}}
                                         @if($job->link_checked == true)
-                                            <td class="fs-13"><p class="mb-0"><span style="color:black;font-weight: bold;">{{ $job->prop_type }}</p></td>
+                                            {{-- bold front --}}
+                                            {{-- <td class="fs-13"><p class="mb-0"><span style="color:black;font-weight: bold;">{{ $job->prop_type }}</p></td> --}}
+                                            <td class="fs-13"><p class="mb-0"><span style="font-weight: bold;">{{ $job->prop_type }}</p></td>
                                         @else
                                             <td class="fs-13"><p class="mb-0">{{ $job->prop_type }}</p></td>
                                         @endif
                                         @if($job->file_checked == true)
-                                            <td class="text-muted fs-13"><p class="mb-0 text-muted"><span style="color:black;font-weight: bold;">{{ $job->prop_size }}</p></td>
+                                            {{-- bold front --}}
+                                            {{-- <td class="text-muted fs-13"><p class="mb-0 text-muted"><span style="color:black;font-weight: bold;">{{ $job->prop_size }}</p></td> --}}
+                                            <td class="text-muted fs-13"><p class="mb-0 text-muted"><span style="font-weight: bold;">{{ $job->prop_size }}</p></td>
                                         @else
                                             <td class="text-muted fs-13"><p class="mb-0 text-muted">{{ $job->prop_size }}</p></td>
                                         @endif

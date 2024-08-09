@@ -32,7 +32,7 @@ Route::get('/projectmaster', function () {
 });
 
 Route::get('check-helper', [MainController::class, 'checkHelper']);
-Route::get('testcode', [JobController::class, 'testcode']);
+Route::get('testcode/{id}', [JobController::class, 'testcode'])->name('testcode');
 
 Route::get('login', [AuthController::class, 'index'])->name('login');
 

@@ -66,7 +66,33 @@
         function bindingPopup() {
             Livewire.emit('bindingPopup');
         }
+    </script>
 
+    {{-- for set windows center screen --}}
+    <script>
+        function openCenteredWindow(url, width, height, display = 1) {
+            var screenWidth = screen.width;
+            var screenHeight = screen.height;
+
+            var screenLeft = window.screenLeft || window.screenX;
+            var screenTop = window.screenTop || window.screenY;
+
+            var left, top;
+
+            // Assume primary display is 1 and secondary display is 2
+            if (display === 2) {
+                // Calculate position for secondary display
+                left = screenWidth + ((screenWidth / 2) - (width / 2)) + screenLeft;
+                top = (screenHeight / 2) - (height / 2) + screenTop;
+            } else {
+                // Default to primary display
+                left = (screenWidth / 2) - (width / 2) + screenLeft;
+                top = (screenHeight / 2) - (height / 2) + screenTop;
+            }
+
+            // Open the new window with the calculated position and size
+            window.open(url, 'CenteredWindow', `width=${width}, height=${height}, top=${top}, left=${left}`);
+        }
     </script>
 @endsection <!-- script -->
 

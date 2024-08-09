@@ -473,9 +473,10 @@ class JobController extends Controller
     }
 
 
-    public function testcode(){
-        $result = (new MainController)->MyFind('jobs','jobcode','where id = 15085','' );
-        dd($result);
+    public function testcode($id){
+        // $result = (new MainController)->MyFind('jobs','jobcode','where id = 12345' ,'' );
+        // dd($result);
+        dd($id);
     }
 
    

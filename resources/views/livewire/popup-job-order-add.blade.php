@@ -15,12 +15,34 @@
             <div class="form-group">
               <label for="jobtype" class="form-label">รายงานภาษา</label>
               <select name="jobtype" class="form-control" id="jobtype" wire:model="selectedJobType">
-              <option value="ไทย 1 ชุด" selected>ไทย 1 ชุด</option>
-              <option value="ไทย 2 ชุด">ไทย 2 ชุด</option>
-              <option value="ไทย 2 ชุด + CD">ไทย 2 ชุด + PDF</option>
-              <option value="อังกฤษ 2 ชุด">อังกฤษ 2 ชุด</option>
-              <option value="ไทย 2 ชุด + อังกฤษ 2 ชุด">ไทย 2 ชุด + อังกฤษ 2 ชุด</option>
-              <option value="-">-</option>
+                @if ($client === 'KK' || $client === 'CIMB')
+                  <option value="ไทย 1 (ส่ง Soft File Only)" selected>ไทย 1 (ส่ง Soft File Only)</option>
+                  <option value="ไทย 1 เล่ม">ไทย 1 เล่ม</option>
+                  <option value="ไทย 2 เล่ม">ไทย 2 เล่ม</option>
+                  <option value="ไทย 2 เล่ม + CD">ไทย 2 เล่ม + CD</option>
+                @elseif ($client == 'SCB' || $client == 'GSB')
+                  <option value="ไทย 2 เล่ม + CD" selected>ไทย 2 เล่ม + CD</option>
+                  <option value="ไทย 1 (ส่ง Soft File Only)">ไทย 1 (ส่ง Soft File Only)</option>
+                  <option value="ไทย 1 เล่ม">ไทย 1 เล่ม</option>
+                  <option value="ไทย 2 เล่ม">ไทย 2 เล่ม</option>
+                @elseif ($client == 'UOB')
+                  <option value="ไทย 1 เล่ม" selected>ไทย 1 เล่ม</option>
+                  <option value="ไทย 1 (ส่ง Soft File Only)">ไทย 1 (ส่ง Soft File Only)</option>
+                  <option value="ไทย 2 เล่ม">ไทย 2 เล่ม</option>
+                  <option value="ไทย 2 เล่ม + CD">ไทย 2 เล่ม + CD</option>
+                @else
+                  <option value="ไทย 2 เล่ม" selected>ไทย 2 เล่ม</option>
+                  <option value="ไทย 1 (ส่ง Soft File Only)">ไทย 1 (ส่ง Soft File Only)</option>
+                  <option value="ไทย 1 เล่ม">ไทย 1 เล่ม</option>
+                  <option value="ไทย 2 เล่ม + CD">ไทย 2 เล่ม + CD</option>
+                @endif
+                {{-- <option value="ไทย 1 (ส่ง Soft File Only)">ไทย 1 (ส่ง Soft File Only)</option> --}}
+                {{-- <option value="ไทย 1 เล่ม">ไทย 1 เล่ม</option> --}}
+                {{-- <option value="ไทย 2 เล่ม">ไทย 2 เล่ม</option> --}}
+                {{-- <option value="ไทย 2 เล่ม + CD">ไทย 2 เล่ม + CD</option> --}}
+                <option value="อังกฤษ 2 เล่ม">อังกฤษ 2 เล่ม</option>
+                <option value="ไทย 2 เล่ม + อังกฤษ 2 เล่ม">ไทย 2 เล่ม + อังกฤษ 2 เล่ม</option>
+                <option value="-">-</option>
               </select>
 						</div>
 

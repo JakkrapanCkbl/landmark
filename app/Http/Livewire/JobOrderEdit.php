@@ -13,6 +13,7 @@ use App\Models\Province;
 use App\Models\Amphure;
 use App\Models\Proptype;
 use App\Models\Proptype2;
+use App\Models\Client;
 
 class JobOrderEdit extends Component
 {
@@ -69,7 +70,7 @@ class JobOrderEdit extends Component
     public $proptype2;
     public $selectedProptype2 = null;
     public $prop_type2_note;
-
+    public $list_clients = null; //for dropdown client
 
     // -------------------------------------------------------------------------------------------
     public function addTwoNumbers($num1,$num2){
@@ -135,6 +136,8 @@ class JobOrderEdit extends Component
         $this->proptype2 = $this->job->prop_type2;
         $this->selectedProptype2 = $this->job->prop_type2;
         $this->prop_type2_note = $this->job->prop_type2_note;
+
+        
     }
 
     public function render()
@@ -142,6 +145,7 @@ class JobOrderEdit extends Component
         //$this->employees = DB::table('users')->get();
         $this->list_valuers = $this->get_valuers();
         $this->list_headvaluers = $this->get_headvaluers();
+        $this->list_clients = Client::orderBy('itemno', 'asc')->get();
         return view('livewire.job-order-edit');
     }
  
@@ -184,8 +188,22 @@ class JobOrderEdit extends Component
         
         if($this->edit_id){
             $my_job = Job::find($this->edit_id);
+            // for check add new value in client combobox
             if ($this->client != 'อื่นๆ'){
                 $this->client_note = "";
+            }else{
+                if ( $this->client_note != '') {
+                    // นำ client_note ไปเช็คในตาราง clients ถ้าไม่มีให้ Add new
+                    $result = (new MainController)->MyFind("clients","clientname","where clientname = '" . $this->client_note . "'","" ); 
+                    if ($result == '') {
+                        $new_itemno = $this->gen_new_itemno();
+                        Client::create([
+                            'itemno' => $new_itemno,
+                            'clientname' => $this->client_note,
+                        ]);
+                        $this->list_clients = Client::orderBy('itemno', 'asc')->get();
+                    }
+                }
             }
             $my_job->update([
                 'reportcode' => $this->reportcode,
@@ -223,8 +241,18 @@ class JobOrderEdit extends Component
                 'print_checked' => (bool) $this->print_checked,
                 'link_checked' => (bool) $this->link_checked,
                 'file_checked' => (bool) $this->file_checked,
-               
             ]);
+            // for set change new value in client combobox
+            if ($this->client == 'อื่นๆ'){
+                if ( $this->client_note != '') {
+                    $my_job->update([
+                        'client' => $this->client_note,
+                        'client_note' => '',
+                    ]);
+                    $this->client = $this->client_note;
+                    $this->client_note = "";
+                }
+            }
         }
 
         session()->flash('message', 'Updated successfully.');
@@ -233,7 +261,6 @@ class JobOrderEdit extends Component
     }
     
    
-
     public function updatedSelectedProvince($value)
     {
         $this->amphures = Amphure::where('code', 'LIKE', $value . '%')->get();
@@ -266,6 +293,7 @@ class JobOrderEdit extends Component
     public static function get_headvaluers()
     {
         $strsql = "SELECT * FROM users WHERE sequence_head is not null ORDER BY sequence_head";
+
         return DB::select($strsql);
     }
 
@@ -273,10 +301,29 @@ class JobOrderEdit extends Component
 
     public function updatedclient($value)
     {
-        
+        //dd('client updated');
         if ($value == 'อื่นๆ') {
             //dd('ok');
             $this->client_note = '';
+        }
+        
+    }
+
+    public function doSomething($id, $name) {
+        // Use $id and $name
+        dd($id . " hi " . $name);
+    }
+
+    public static function gen_new_itemno()
+    {
+        $strsql = "SELECT MAX(itemno) AS max_value ";
+        $strsql = $strsql . "FROM clients WHERE itemno <> 99";
+        $result = DB::select($strsql);
+        if ($result == null) {
+            // dd("null");
+            return 0;
+        }else {
+            return (int) $result[0]->max_value + 1;
         }
         
     }

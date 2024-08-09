@@ -63,6 +63,8 @@
                                                         <option value="TTB">TTB</option>
                                                         <option value="KTB">KTB</option>
                                                         <option value="MBKG">MBKG</option>
+                                                        <option value="GSB">GSB</option>
+                                                        <option value="อื่นๆ">อื่นๆ</option>
                                                     </select>
                                                 </div>
                                             </div>

@@ -50,7 +50,7 @@
                                     <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">รหัสรายงาน</p></td>
                                     <td class="wp-70">
                                         <div class="row">
-                                            <div class="col-2">
+                                            <div class="col-3">
                                                 <div class="form-group">
                                                     <label for="jobcode" class="form-label">รายงานเลขที่</label>
                                                     <input type="text" class="form-control" name="jobcode" id="jobcode" wire:model="jobcode">
@@ -67,7 +67,7 @@
                                             </div>
                                             <div class="col-2">
                                                 <div class="form-group">
-                                                    <label for="client" class="form-label">ส่งธนาคาร</label>
+                                                    {{-- <label for="client" class="form-label">ส่งธนาคาร</label>
                                                     <select name="client" class="form-control form-select" id="client" wire:model="client" data-bs-placeholder="Select Bank">
                                                         <option value="UOB" selected>UOB</option>
                                                         <option value="KK">KK</option>
@@ -80,22 +80,31 @@
                                                         <option value="KTB">KTB</option>
                                                         <option value="MBKG">MBKG</option>
                                                         <option value="อื่นๆ">อื่นๆ</option>
+                                                    </select> --}}
+                                                    <label for="client" class="form-label">ส่งธนาคาร</label>
+                                                    <select name="client" wire:model="client" class="form-control form-select">
+                                                        @foreach($list_clients as $my_client)
+                                                                <option value="{{ $my_client->clientname }}">
+                                                                    {{ $my_client->clientname }}
+                                                                </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
                                             @if($client == 'อื่นๆ')
-                                                <div class="col-3">
+                                                <div class="col-4">
                                                     <div class="form-group">
                                                         <label for="client_note" class="form-label">ถ้าเลือก อื่นๆ ให้ระบุ</label>
                                                         <input type="text" class="form-control" name="client_note" id="client_note" wire:model="client_note">
                                                         @error('client_note') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                        {{-- <button wire:click="doSomething(1, 'hello')">Click Me</button> --}}
+                                                        {{-- <span class="badge bg-secondary text-white" wire:click="doSomething(1, 'hello')">Add</span> --}}
                                                     </div>
                                                 </div>
                                             @endif
                                         </div>
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ประเภททรัพย์สิน / กลุ่มย่อย</p></td>
                                     <td class="wp-70">
@@ -262,17 +271,19 @@
                                         <div class="row">
                                             <div class="col-2">
                                                 <div class="form-group">
-														<label for="jobtype" class="form-label">รายงานภาษา</label>
-														<select name="jobtype" id="jobtype" class="form-control form-select" wire:model="jobtype">
-															<option value="ไทย 1 ชุด">ไทย 1 เล่ม</option>
-															<option value="ไทย 2 ชุด">ไทย 2 เล่ม</option>
-															<option value="อังกฤษ 2 ชุด">อังกฤษ 2 เล่ม</option>
-															<option value="ไทย 2 ชุด + อังกฤษ 2 ชุด">ไทย 2 เล่ม + อังกฤษ 2 เล่ม</option>
-															<option value="-">-</option>
-														</select>
-													</div>
+                                                    <label for="jobtype" class="form-label">รายงานภาษา</label>
+                                                    <select name="jobtype" id="jobtype" class="form-control form-select" wire:model="jobtype">
+                                                            <option value="ไทย 1 (ส่ง Soft File Only)">ไทย 1 (ส่ง Soft File Only)</option>
+                                                            <option value="ไทย 1 เล่ม">ไทย 1 เล่ม</option>
+                                                            <option value="ไทย 2 เล่ม">ไทย 2 เล่ม</option>
+                                                            <option value="ไทย 2 เล่ม + CD">ไทย 2 เล่ม + CD</option>
+                                                            <option value="อังกฤษ 2 เล่ม">อังกฤษ 2 เล่ม</option>
+                                                            <option value="ไทย 2 เล่ม + อังกฤษ 2 เล่ม">ไทย 2 เล่ม + อังกฤษ 2 เล่ม</option>
+                                                            <option value="-">-</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="col-1">
+                                            <div class="col-2">
                                                <div class="form-group">
                                                     <label for="jobsize" class="form-label">ขนาดรายงาน</label>
                                                     <select name="jobsize" class="form-control form-select" wire:model="jobsize">
@@ -291,7 +302,7 @@
                                                     <option value="Difficult">Difficult</option>
                                                 </select>
                                             </div>
-                                            <div class="col-3">
+                                            <div class="col-5">
                                                <div class="form-group">
 														<label for="obj_id" class="form-label">วัตถุประสงค์การประเมิน</label>
 														<select name="obj_id" class="form-control form-select" wire:model="obj_id">
