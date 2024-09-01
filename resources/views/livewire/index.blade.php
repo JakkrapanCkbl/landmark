@@ -28,12 +28,12 @@
                     <div class="row">
                         <div class="col">
                             <h3 class="mb-2 fw-semibold">{{$SumBfCompletedByMonth}}</h3>
-                            <p class="text-muted fs-13 mb-0">Completed Tasks - BF</p>
+                            <p class="text-muted fs-13 mb-0">F- Completed Tasks</p>
                             <p class="text-muted mb-0 mt-2 fs-12">
                                 {{-- <span class="icn-box text-success fw-semibold fs-13 me-1">
                                     <i class='fa fa-long-arrow-up'></i>
                                     42%</span> --}}
-                                since current month to date
+                                MTD
                             </p>
                         </div>
                         <div class="col col-auto top-icn dash">
@@ -51,12 +51,12 @@
                     <div class="row">
                         <div class="col">
                             <h3 class="mb-2 fw-semibold">{{$SumRCompletedByMonth}}</h3>
-                            <p class="text-muted fs-13 mb-0">Completed Tasks - R</p>
+                            <p class="text-muted fs-13 mb-0">R- Completed Tasks</p>
                             <p class="text-muted mb-0 mt-2 fs-12">
                                 {{-- <span class="icn-box text-danger fw-semibold fs-13 me-1">
                                     <i class='fa fa-long-arrow-down'></i>
                                     12%</span> --}}
-                                since current month to date
+                                MTD
                             </p>
                         </div>
                         <div class="col col-auto top-icn dash">
@@ -73,13 +73,14 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h3 class="mb-2 fw-semibold">Avg. {{$AvgCompletedByMonth}} %</h3>
-                            <p class="text-muted fs-13 mb-0">Completed/Tasks ({{$CountAllCompletedByMonth}} / {{$CountAllByMonth}}) </p>
+                            <h3 class="mb-2 fw-semibold">฿{{$AvgCompletedByMonth}}</h3>
+                            {{-- <p class="text-muted fs-13 mb-0">Average ({{$CountAllCompletedByMonth}} / {{$CountAllByMonth}}) </p> --}}
+                            <p class="text-muted fs-13 mb-0">Average </p>
                             <p class="text-muted mb-0 mt-2 fs-12">
                                 {{-- <span class="icn-box text-success fw-semibold fs-13 me-1">
                                     <i class='fa fa-long-arrow-up'></i>
                                     27%</span> --}}
-                                since current month to date
+                                MTD
                             </p>
                         </div>
                         <div class="col col-auto top-icn dash">
@@ -97,12 +98,12 @@
                     <div class="row">
                         <div class="col">
                             <h3 class="mb-2 fw-semibold">฿{{$TotalSaleByMonth}}</h3>
-                            <p class="text-muted fs-13 mb-0">Total Sale</p>
+                            <p class="text-muted fs-13 mb-0">SUM</p>
                             <p class="text-muted mb-0 mt-2 fs-12">
                                 {{-- <span class="icn-box text-success fw-semibold fs-13 me-1">
                                     <i class='fa fa-long-arrow-up'></i>
                                     9%</span> --}}
-                                since current month to date
+                                MTD
                             </p>
                         </div>
                         <div class="col col-auto top-icn dash">
@@ -125,7 +126,7 @@
                     <div class="card">
                         <div class="card-body pb-2">
                             <div class="title-head mb-3">
-                                <h3 class="mb-5 card-title">Revenue (since current year to date)</h3>
+                                <h3 class="mb-5 card-title">Revenue MTD</h3>
                                 <div class="storage-percent">
                                     <div class="progress fileprogress h-auto ps-0 shadow1">
                                         <span class="progress-bar progress-bar-xs wd-15p received" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></span>
@@ -156,7 +157,7 @@
                                         </span>
                                     </li>
                                     <li class="col-xl-6">
-                                        <span class="mb-0 fs-13 me-1"><i class="task-icon1 bg-custom-yellow"></i>BF</span>
+                                        <span class="mb-0 fs-13 me-1"><i class="task-icon1 bg-custom-yellow"></i>Others BF</span>
                                         <span class="text-success fw-semibold fs-12">
                                             <span class="mx-1"><i class="fa fa-caret-up"></i></span>
                                             <span class="">(62%)</span>
@@ -521,7 +522,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <h4>Total Tasks</h4>
-                                    <p>{{$SumTask}}</p>
+                                    <p>YTD {{$SumTask}}</p>
                                 </div>
                                 <div class="col-4">
                                     <div class="hpx-50 wpx-50 bg-primary br-5 d-flex align-items-center justify-content-center ms-auto">
@@ -538,7 +539,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <h4>Completed Tasks</h4>
-                                    <p>{{$this->SumCompleted}}</p>
+                                    <p>MYTD {{$this->SumCompleted}}</p>
                                 </div>
                                 <div class="col-4">
                                     <div class="hpx-50 wpx-50 br-5 d-flex align-items-center justify-content-center bg-secondary ms-auto">
@@ -555,7 +556,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <h4>In Progress</h4>
-                                    <p>{{$this->SumInprogress}}</p>
+                                    <p>YTD {{$this->SumInprogress}}</p>
                                 </div>
                                 <div class="col-4">
                                     <div class="hpx-50 wpx-50 br-5 d-flex align-items-center justify-content-center bg-info ms-auto">
@@ -572,7 +573,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <h4>On Hold | Cancel</h4>
-                                    <p>{{$this->SumOnHold}} | {{$this->SumCancel}}</p>
+                                    <p>YTD {{$this->SumOnHold}} | {{$this->SumCancel}}</p>
                                 </div>
                                 <div class="col-4">
                                     <div class="hpx-50 wpx-50 br-5 d-flex align-items-center justify-content-center bg-warning ms-auto">
