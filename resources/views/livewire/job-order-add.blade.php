@@ -49,10 +49,19 @@
                                                     <input type="text" class="form-control" name="reportcode" id="reportcode" wire:model="reportcode">
                                                 </div>
                                             </div>
-                                            <div class="col">
+                                            
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ส่งธนาคาร</p></td>
+                                    <td class="wp-70">
+                                       <div class="row">
+                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="client" class="form-label">ส่งธนาคาร</label>
-                                                    <select name="client" class="form-control form-select" id="client" wire:model="client" data-bs-placeholder="Select Bank">
+                                                    {{-- <select name="client" class="form-control form-select" id="client" wire:model="client" data-bs-placeholder="Select Bank">
                                                         <option value="UOB" selected>UOB</option>
                                                         <option value="KK">KK</option>
                                                         <option value="CIMB">CIMB</option>
@@ -65,12 +74,31 @@
                                                         <option value="MBKG">MBKG</option>
                                                         <option value="GSB">GSB</option>
                                                         <option value="อื่นๆ">อื่นๆ</option>
+                                                    </select> --}}
+                                                    <select name="client" wire:model="client" class="form-control form-select">
+                                                        @foreach($list_clients as $my_client)
+                                                                <option value="{{ $my_client->clientname }}">
+                                                                    {{ $my_client->clientname }}
+                                                                </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    @if($client == 'อื่นๆ')
+                                                            <div class="form-group">
+                                                                <label for="client_note" class="form-label">ถ้าเลือก อื่นๆ ให้ระบุ</label>
+                                                                <input type="text" class="form-control" name="client_note" id="client_note" wire:model="client_note">
+                                                                @error('client_note') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                            </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                       </div>
                                     </td>
                                 </tr>
+
                                 <tr>
                                     <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ประเภททรัพย์สิน</p></td>
                                     <td class="wp-70">

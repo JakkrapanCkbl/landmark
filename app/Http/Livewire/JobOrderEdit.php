@@ -69,6 +69,7 @@ class JobOrderEdit extends Component
     public $proptype2s = null;
     public $proptype2;
     public $selectedProptype2 = null;
+    public $prop_type_note = null;
     public $prop_type2_note;
     public $list_clients = null; //for dropdown client
 
@@ -128,14 +129,22 @@ class JobOrderEdit extends Component
         $this->link_checked = $this->job->link_checked;
         $this->file_checked = $this->job->file_checked;
 
-        $this->proptypes = Proptype::orderBy('id')->get();
+        $this->proptypes = Proptype::orderBy('itemno')->get();
         $this->proptype = $this->job->prop_type;
         $this->selectedProptype = $this->job->prop_type;
 
-        $this->proptype2s = Proptype2::where('show_prop_type', $this->job->prop_type)->get();
-        $this->proptype2 = $this->job->prop_type2;
-        $this->selectedProptype2 = $this->job->prop_type2;
-        $this->prop_type2_note = $this->job->prop_type2_note;
+        $this->proptype2s = Proptype2::where('show_prop_type', $this->job->prop_type)->orderBy('itemno', 'asc')->get();
+
+        if ($this->proptype2s->isEmpty()) {
+            $this->proptype2s = Proptype2::whereIn('itemno', [1, 99])->take(2)->get();
+            $this->selectedProptype2 = "";
+            $this->prop_type2_note = "";
+        }else{
+            $this->proptype2 = $this->job->prop_type2;
+            $this->selectedProptype2 = $this->job->prop_type2;
+            $this->prop_type2_note = $this->job->prop_type2_note;
+        }
+       
 
         
     }
@@ -205,12 +214,65 @@ class JobOrderEdit extends Component
                     }
                 }
             }
+            // for check add new value in proptype combobox
+            if ($this->selectedProptype == 'อื่นๆ'){
+                if ( $this->prop_type_note != '') {
+                    // นำ prop_type_not ไปเช็คในตาราง proptypes ถ้าไม่มีให้ Add new
+                    $result = (new MainController)->MyFind("proptypes","show_prop_type","where show_prop_type = '" . $this->prop_type_note . "'","" ); 
+                    if ($result == '') {
+                        $new_itemno = $this->gen_new_itemno_proptype();
+                        Proptype::create([
+                            'itemno' => $new_itemno,
+                            'show_prop_type' => $this->prop_type_note,
+                        ]);
+                        $this->proptypes = Proptype::orderBy('itemno', 'asc')->get();
+                    }
+                }
+            }
+            // for check add new value in proptype2 combobox
+             if ($this->selectedProptype2 == 'อื่นๆ'){
+                 if ( $this->prop_type2_note != '') {
+                    // นำ $prop_type2_note ไปเช็คในตาราง proptype2s ถ้าไม่มีให้ Add new
+                    //dd($this->selectedProptype . "   " . $this->prop_type2_note);
+                    $result = (new MainController)->MyFind("proptype2s","show_prop_type2","where show_prop_type = '" . $this->selectedProptype . "' and show_prop_type2 = '" . $this->prop_type2_note . "'","" ); 
+                    // dd($result);
+                    if ($result == '') {
+                        $new_itemno = $this->gen_new_itemno_proptype2($this->selectedProptype);
+                        if ($new_itemno == "1") {
+                            Proptype2::create([
+                                'show_prop_type' => $this->selectedProptype,
+                                'itemno' => 1,
+                                'show_prop_type2' => "",
+                            ]);
+                            Proptype2::create([
+                                'show_prop_type' => $this->selectedProptype,
+                                'itemno' => 99,
+                                'show_prop_type2' => "อื่นๆ",
+                            ]);
+                        }
+                        $new_itemno = $this->gen_new_itemno_proptype2($this->selectedProptype);
+                        if ((int)$new_itemno > 1) {
+                            Proptype2::create([
+                                'show_prop_type' => $this->selectedProptype,
+                                'itemno' => $new_itemno,
+                                'show_prop_type2' => $this->prop_type2_note,
+                            ]);
+                        }
+                        $this->proptypes2 = Proptype2::where('show_prop_type',$this->selectedProptype)->orderBy('itemno', 'asc')->get();
+                        
+                    }
+                }
+             }else{
+                $this->proptypes2 = Proptype2::where('show_prop_type',$this->selectedProptype)->orderBy('itemno', 'asc')->get();
+             }
+
             $my_job->update([
                 'reportcode' => $this->reportcode,
                 'client' => $this->client,
                 'client_note' => $this->client_note,
                 'prop_type' => $this->selectedProptype,
                 'prop_type2' => $this->selectedProptype2,
+                'prop_type2_note' => $this->prop_type2_note,
                 'prop_size' => $this->prop_size,
                 'projectname' => $this->projectname,
                 'proplocation' => $this->proplocation,
@@ -237,7 +299,6 @@ class JobOrderEdit extends Component
                 'obj_method' => $this->obj_method,
                 'marketvalue' => (float) str_replace(',', '', $this->marketvalue),
                 'job_checked' => (bool) $this->job_checked,
-                'prop_type2_note' => $this->prop_type2_note,
                 'print_checked' => (bool) $this->print_checked,
                 'link_checked' => (bool) $this->link_checked,
                 'file_checked' => (bool) $this->file_checked,
@@ -253,8 +314,33 @@ class JobOrderEdit extends Component
                     $this->client_note = "";
                 }
             }
+            // for set change new value in proptype combobox
+            if ($this->selectedProptype == 'อื่นๆ'){
+                if ( $this->prop_type_note != '') {
+                    $my_job->update([
+                        'prop_type' => $this->prop_type_note,
+                    ]);
+                    $this->selectedProptype = $this->prop_type_note;
+                    $this->prop_type_note = "";
+                }
+            }
+            // for set change new value in proptype2 combobox (selectedProptype2)
+            
+            if ($this->selectedProptype2 == 'อื่นๆ'){
+                //dd($this->prop_type2_note);
+                if ( $this->prop_type2_note != '') {
+                    $my_job->update([
+                        'prop_type2' => $this->prop_type2_note,
+                        'prop_type2_note' => "",
+                    ]);
+                    $this->selectedProptype2 = $this->prop_type2_note;
+                    $this->prop_type2_note = "";
+                }
+            }
+            $this->proptype2 = Job::find($this->edit_id)->prop_type2;
         }
 
+        
         session()->flash('message', 'Updated successfully.');
         //$this->emit('jobUpdated');
         //return redirect('/dashboard')->with('message', 'บันทึกข้อมูลเสร็จแล้ว');
@@ -268,18 +354,21 @@ class JobOrderEdit extends Component
 
     public function updatedSelectedProptype($value)
     {
-            $this->proptype2s = Proptype2::where('show_prop_type', $value)->get();
-            if ($this->proptype2s->isEmpty()) {
-                $this->selectedProptype2 = "";
-            }
-            if ($value !== 'อื่น ๆ') {
-                $this->prop_type2_note = "";
-            }
+       
+        $this->proptype2s = Proptype2::where('show_prop_type', $value)->orderBy('itemno', 'asc')->get();
+        if ($this->proptype2s->isEmpty()) {
+            $this->proptype2s = Proptype2::whereIn('itemno', [1, 99])->take(2)->get();
+            $this->selectedProptype2 = "";
+        }
+        if ($value !== 'อื่นๆ') {
+            $this->prop_type_note = "";
+            
+        }
     }
 
     public function updatedSelectedProptype2($value)
     {
-        if ($value !== 'อื่น ๆ') {
+        if ($value !== 'อื่นๆ') {
             $this->prop_type2_note = "";
         }
     }
@@ -318,6 +407,35 @@ class JobOrderEdit extends Component
     {
         $strsql = "SELECT MAX(itemno) AS max_value ";
         $strsql = $strsql . "FROM clients WHERE itemno <> 99";
+        $result = DB::select($strsql);
+        if ($result == null) {
+            // dd("null");
+            return 0;
+        }else {
+            return (int) $result[0]->max_value + 1;
+        }
+        
+    }
+
+    public static function gen_new_itemno_proptype()
+    {
+        $strsql = "SELECT MAX(itemno) AS max_value ";
+        $strsql = $strsql . "FROM proptypes WHERE itemno <> 99";
+        $result = DB::select($strsql);
+        if ($result == null) {
+            // dd("null");
+            return 0;
+        }else {
+            return (int) $result[0]->max_value + 1;
+        }
+        
+    }
+
+    public static function gen_new_itemno_proptype2($myproptype)
+    {
+        $strsql = "SELECT MAX(itemno) AS max_value ";
+        $strsql = $strsql . "FROM proptype2s ";
+        $strsql = $strsql . "WHERE itemno <> 99 And Show_prop_type = '" . $myproptype . "' ";
         $result = DB::select($strsql);
         if ($result == null) {
             // dd("null");

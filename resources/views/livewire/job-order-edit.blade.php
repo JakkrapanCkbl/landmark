@@ -106,31 +106,12 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ประเภททรัพย์สิน / กลุ่มย่อย</p></td>
+                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ประเภททรัพย์สิน</p></td>
                                     <td class="wp-70">
                                         <div class="row">
-                                            <div class="col-3">
+                                            <div class="col-5">
                                                 <div class="form-group">
                                                     <label for="prop_type" class="form-label">ประเภททรัพย์สิน</label>
-                                                    {{-- <select name="prop_type" class="form-control form-select" id="prop_type" wire:model="prop_type">				
-                                                        <option value="ห้องชุด">ห้องชุด</option>
-                                                        <option value="บ้านเดี่ยว">บ้านเดี่ยว</option>
-                                                        <option value="บ้านแฝด">บ้านแฝด</option>
-                                                        <option value="ทาวน์เฮาส์/ทาวน์โฮม">ทาวน์เฮาส์/ทาวน์โฮม</option>
-                                                        <option value="ทาวน์เฮาส์">ทาวน์เฮาส์</option>
-                                                        <option value="ทาวน์โฮม">ทาวน์โฮม</option>
-                                                        <option value="ตึกแถว">ตึกแถว</option>
-                                                        <option value="ที่ดินว่างเปล่า">ที่ดินว่างเปล่า</option>
-                                                        <option value="โรงงาน/โกดัง">โรงงาน/โกดัง</option>
-                                                        <option value="อพาร์ทเม้นท์">อพาร์ทเม้นท์</option>
-                                                        <option value="โรงแรม">โรงแรม</option>
-                                                        <option value="อาคารสำนักงาน">อาคารสำนักงาน</option>
-                                                        <option value="โฮมออฟฟิศ/มินิออฟฟิศ">โฮมออฟฟิศ/มินิออฟฟิศ</option>
-                                                        <option value="ที่ดินพร้อมสิ่งปลูกสร้าง">ที่ดินพร้อมสิ่งปลูกสร้าง</option>
-                                                        <option value="สิทธิการเช่า">สิทธิการเช่า</option>
-                                                        <option value="เครื่องจักร">เครื่องจักร</option>
-                                                        <option value="อื่น ๆ">อื่น ๆ</option>
-                                                    </select> --}}
                                                     <select class="form-control form-select" id="proptype" name="proptype"  wire:model="selectedProptype" >
                                                         <option value=""></option>
                                                         @foreach($proptypes as $item)
@@ -141,7 +122,25 @@
                                                     {{-- <p>You have selected: {{ $selectedProptype }}</p> --}}
                                                 </div>
                                             </div>
-                                            <div class="col-3">
+                                            @if($selectedProptype == 'อื่นๆ')
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="prop_type_note" class="form-label">อื่นๆ ระบุ</label>
+                                                        <input type="text" class="form-control" name="prop_type_note" id="prop_type_note" wire:model="prop_type_note">
+                                                        @error('prop_type_note') <span class="error" style="color: red;">{{ $message }}</span> @enderror                                                       
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ประเภททรัพย์สินกลุ่มย่อย / ขนาด</p></td>
+                                    <td class="wp-70">
+                                        <div class="row">
+                                          
+                                            <div class="col-5">
                                                 <div class="form-group">
                                                     <label for="prop_type2" class="form-label">กลุ่มย่อย</label>
                                                     {{-- <select name="prop_type2" id="prop_type2" class="form-control form-select" wire:model="prop_type2">
@@ -177,14 +176,17 @@
                                                     
                                                 </div>
                                             </div>
-                                            <div class="col-3">
-                                                <div class="form-group">
-                                                    <label for="prop_type2_note" class="form-label">อื่นๆ ระบุ</label>
-                                                    <input type="text" class="form-control" name="prop_type2_note" id="prop_type2_note" wire:model="prop_type2_note">
-                                                    @error('prop_type2_note') <span class="error" style="color: red;">{{ $message }}</span> @enderror
-                                                    
+                                            @if($selectedProptype2 == 'อื่นๆ')
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="prop_type2_note" class="form-label">อื่นๆ ระบุ</label>
+                                                        <input type="text" class="form-control" name="prop_type2_note" id="prop_type2_note" wire:model="prop_type2_note">
+                                                        @error('prop_type2_note') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                        
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            @endif
+                                            
 
                                             <div class="col-2">
                                                 <div class="form-group">
@@ -316,7 +318,7 @@
 															<option value="8">เพื่อกำหนดราคาซื้อขายทอดตลาด</option>
 															<option value="9">เพื่อประกอบการตั้งราคาขายทรัพย์สิน</option>
 															<option value="10">ปรับปรุงโครงสร้างหนี้</option>
-															<option value="11">อื่น ๆ</option>
+															<option value="11">อื่นๆ</option>
 														</select>
 													</div>
                                             </div>

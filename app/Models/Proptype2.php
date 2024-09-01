@@ -10,7 +10,7 @@ class Proptype2 extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id', 'show_prop_type', 'show_prop_type2'
+        'id', 'show_prop_type', 'itemno', 'show_prop_type2'
     ];
 
 

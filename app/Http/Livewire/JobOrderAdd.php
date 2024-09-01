@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\MainController;
+use App\Models\Client;
 
 use App\Models\Province;
 use App\Models\{Job,Amphure,District};
@@ -22,6 +23,7 @@ class JobOrderAdd extends Component
     public $new_id; //jobcode;
     public $reportcode;
     public $client = "UOB";  //bank short name
+    public $client_note;
     public $prop_type = "ห้องชุด";
     public $inputname;
     public $projectname = '';
@@ -51,6 +53,7 @@ class JobOrderAdd extends Component
     public $vat = '210';
     public $valuationfeeVat = '3,210';
     public $selectedvaluationfee_case = '100% วางบิลธนาคาร';
+    public $list_clients = null; //for dropdown client
 
     public function mount()
     {
@@ -69,6 +72,7 @@ class JobOrderAdd extends Component
         // $this->employees = DB::table('users')->get();
         $this->list_valuers = $this->get_valuers();
         $this->list_headvaluers = $this->get_headvaluers();
+        $this->list_clients = Client::orderBy('itemno', 'asc')->get();
         return view('livewire.job-order-add');   
     }
 
@@ -98,6 +102,35 @@ class JobOrderAdd extends Component
         $sql_inspectiondate = (new MainController)->ConvertThaiDate2SqlDate($this->inspectiondate);
         $sql_lcduedate = (new MainController)->ConvertThaiDate2SqlDate($this->lcduedate);
         $sql_clientduedate = (new MainController)->ConvertThaiDate2SqlDate($this->clientduedate);
+
+         // for check add new value in client combobox
+         if ($this->client != 'อื่นๆ'){
+            $this->client_note = "";
+        }else{
+            if ( $this->client_note != '') {
+                // นำ client_note ไปเช็คในตาราง clients ถ้าไม่มีให้ Add new
+                $result = (new MainController)->MyFind("clients","clientname","where clientname = '" . $this->client_note . "'","" ); 
+                if ($result == '') {
+                    $new_itemno = $this->gen_new_itemno();
+                    Client::create([
+                        'itemno' => $new_itemno,
+                        'clientname' => $this->client_note,
+                    ]);
+                    $this->list_clients = Client::orderBy('itemno', 'asc')->get();
+                }
+            }
+        }
+        // for set change new value in client combobox
+        if ($this->client == 'อื่นๆ'){
+            if ( $this->client_note != '') {
+                $my_job->update([
+                    'client' => $this->client_note,
+                    'client_note' => '',
+                ]);
+                $this->client = $this->client_note;
+                $this->client_note = "";
+            }
+        }
 
         Job::create([
             'jobcode' => $this->new_id,
@@ -262,6 +295,16 @@ class JobOrderAdd extends Component
     {
         $strsql = "SELECT * FROM users WHERE sequence_head is not null ORDER BY sequence_head";
         return DB::select($strsql);
+    }
+
+    public function updatedclient($value)
+    {
+        //dd('client updated');
+        if ($value == 'อื่นๆ') {
+            //dd('ok');
+            $this->client_note = '';
+        }
+        
     }
     
    
