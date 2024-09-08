@@ -14,7 +14,8 @@ var table = $('#data-table1').DataTable({
       searchPlaceholder: 'Filter...',
       sSearch: '',
     },
-    lengthMenu: [15, 25, 50, 100, 200, 500],
+    //lengthMenu: [15, 25, 50, 100, 200, 500],
+    "pageLength": -1, // Default to show all rows
     order: [[0, 'desc']],
     columnDefs: [
       { targets: [0], visible: false, searchable: false },

@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="col">
                             <h3 class="mb-2 fw-semibold">{{$SumBfCompletedByMonth}}</h3>
-                            <p class="text-muted fs-13 mb-0">F- Completed Tasks</p>
+                            <p class="text-muted fs-13 mb-0">BF- Completed Tasks</p>
                             <p class="text-muted mb-0 mt-2 fs-12">
                                 {{-- <span class="icn-box text-success fw-semibold fs-13 me-1">
                                     <i class='fa fa-long-arrow-up'></i>
@@ -539,7 +539,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <h4>Completed Tasks</h4>
-                                    <p>MYTD {{$this->SumCompleted}}</p>
+                                    <p>YTD {{$this->SumCompleted}}</p>
                                 </div>
                                 <div class="col-4">
                                     <div class="hpx-50 wpx-50 br-5 d-flex align-items-center justify-content-center bg-secondary ms-auto">

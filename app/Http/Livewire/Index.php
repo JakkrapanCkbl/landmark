@@ -52,7 +52,13 @@ class Index extends Component
     
     public function render()
     {
-        $this->jobs = DB::select('select * from jobs order by id desc LIMIT 200');
+        // $this->jobs = DB::select('select * from jobs order by id desc LIMIT 200');
+        //$this->jobs = DB::select('select * from jobs WHERE YEAR(startdate) = YEAR(NOW()) order by id desc');
+        $sql = "Select id, client, jobcode, reportcode, projectname, proplocation, prop_type, prop_size, startdate, ";
+        $sql = $sql . "inspectiondate, lcduedate, clientduedate, valuer, headvaluer, job_status, customer, ";
+        $sql = $sql . "jobsize, easydiff, print_checked, link_checked, file_checked, job_checked ";
+        $sql = $sql . "from jobs WHERE YEAR(startdate) = YEAR(NOW()) order by id desc ";
+        $this->jobs = DB::select($sql);
         $this->users = Auth::user();
         $this->CountTotalTask(Carbon::now()->year);
         $this->CountCompletedTaskByMonth(Carbon::now()->year,Carbon::now()->month);
