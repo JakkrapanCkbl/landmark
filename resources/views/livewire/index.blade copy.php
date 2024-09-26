@@ -27,13 +27,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h3 class="mb-2 fw-semibold">1,12,324</h3>
-                            <p class="text-muted fs-13 mb-0">Daily Visitors</p>
+                            <h3 class="mb-2 fw-semibold">{{$SumBfCompletedByMonth}}</h3>
+                            <p class="text-muted fs-13 mb-0">BF- Completed Tasks</p>
                             <p class="text-muted mb-0 mt-2 fs-12">
-                                <span class="icn-box text-success fw-semibold fs-13 me-1">
+                                {{-- <span class="icn-box text-success fw-semibold fs-13 me-1">
                                     <i class='fa fa-long-arrow-up'></i>
-                                    42%</span>
-                                since last month
+                                    42%</span> --}}
+                                MTD
                             </p>
                         </div>
                         <div class="col col-auto top-icn dash">
@@ -50,13 +50,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h3 class="mb-2 fw-semibold">12,563</h3>
-                            <p class="text-muted fs-13 mb-0">Total Orders</p>
+                            <h3 class="mb-2 fw-semibold">{{$SumRCompletedByMonth}}</h3>
+                            <p class="text-muted fs-13 mb-0">R- Completed Tasks</p>
                             <p class="text-muted mb-0 mt-2 fs-12">
-                                <span class="icn-box text-danger fw-semibold fs-13 me-1">
+                                {{-- <span class="icn-box text-danger fw-semibold fs-13 me-1">
                                     <i class='fa fa-long-arrow-down'></i>
-                                    12%</span>
-                                since last month
+                                    12%</span> --}}
+                                MTD
                             </p>
                         </div>
                         <div class="col col-auto top-icn dash">
@@ -73,13 +73,14 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h3 class="mb-2 fw-semibold">$5,178</h3>
-                            <p class="text-muted fs-13 mb-0">Conversion Rate</p>
+                            <h3 class="mb-2 fw-semibold">฿{{$AvgCompletedByMonth}}</h3>
+                            {{-- <p class="text-muted fs-13 mb-0">Average ({{$CountAllCompletedByMonth}} / {{$CountAllByMonth}}) </p> --}}
+                            <p class="text-muted fs-13 mb-0">Average </p>
                             <p class="text-muted mb-0 mt-2 fs-12">
-                                <span class="icn-box text-success fw-semibold fs-13 me-1">
+                                {{-- <span class="icn-box text-success fw-semibold fs-13 me-1">
                                     <i class='fa fa-long-arrow-up'></i>
-                                    27%</span>
-                                since last month
+                                    27%</span> --}}
+                                MTD
                             </p>
                         </div>
                         <div class="col col-auto top-icn dash">
@@ -96,13 +97,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h3 class="mb-2 fw-semibold">$43,987</h3>
-                            <p class="text-muted fs-13 mb-0">Avg Orders</p>
+                            <h3 class="mb-2 fw-semibold">฿{{$TotalSaleByMonth}}</h3>
+                            <p class="text-muted fs-13 mb-0">SUM</p>
                             <p class="text-muted mb-0 mt-2 fs-12">
-                                <span class="icn-box text-success fw-semibold fs-13 me-1">
+                                {{-- <span class="icn-box text-success fw-semibold fs-13 me-1">
                                     <i class='fa fa-long-arrow-up'></i>
-                                    9%</span>
-                                since last month
+                                    9%</span> --}}
+                                MTD
                             </p>
                         </div>
                         <div class="col col-auto top-icn dash">
@@ -125,7 +126,7 @@
                     <div class="card">
                         <div class="card-body pb-2">
                             <div class="title-head mb-3">
-                                <h3 class="mb-5 card-title">Revenue By channel</h3>
+                                <h3 class="mb-5 card-title">Revenue MTD</h3>
                                 <div class="storage-percent">
                                     <div class="progress fileprogress h-auto ps-0 shadow1">
                                         <span class="progress-bar progress-bar-xs wd-15p received" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></span>
@@ -135,35 +136,35 @@
                                     </div>
                                     <div class="remaining-storage">
                                         <div class="text-muted fs-13 mb-1 mt-3">Total Revenue Earned</div>
-                                        <div class="fw-semibold fs-14 mb-1 mt-3">$345,3467.72</div>
+                                        <div class="fw-semibold fs-14 mb-1 mt-3">฿0.00</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="content-main mt-5">
                                 <ul class="task-list1 row mx-auto">
                                     <li class="col-xl-6">
-                                        <span class="mb-0 fs-13 me-1"><i class="task-icon1 bg-primary me-3"></i>Direct</span>
+                                        <span class="mb-0 fs-13 me-1"><i class="task-icon1 bg-primary me-3"></i>UOB</span>
                                         <span class="text-success fw-semibold fs-12">
                                             <span class="mx-1"><i class="fa fa-caret-up"></i></span>
                                             <span class="">(42.34%)</span>
                                         </span>
                                     </li>
                                     <li class="col-xl-6">
-                                        <span class="mb-0 fs-13 me-1"><i class="task-icon1 bg-secondary"></i>Referral</span>
+                                        <span class="mb-0 fs-13 me-1"><i class="task-icon1 bg-secondary"></i>KK</span>
                                         <span class="text-danger fw-semibold fs-12">
                                             <span class="mx-1"><i class="fa fa-caret-down"></i></span>
                                             <span class="">(13%)</span>
                                         </span>
                                     </li>
                                     <li class="col-xl-6">
-                                        <span class="mb-0 fs-13 me-1"><i class="task-icon1 bg-custom-yellow"></i>Social</span>
+                                        <span class="mb-0 fs-13 me-1"><i class="task-icon1 bg-custom-yellow"></i>Others BF</span>
                                         <span class="text-success fw-semibold fs-12">
                                             <span class="mx-1"><i class="fa fa-caret-up"></i></span>
                                             <span class="">(62%)</span>
                                         </span>
                                     </li>
                                     <li class="col-xl-6 mb-xl-0">
-                                        <span class="mb-0 fs-13 me-1"><i class="task-icon1 bg-teritary"></i>Organic Search</span>
+                                        <span class="mb-0 fs-13 me-1"><i class="task-icon1 bg-teritary"></i>R</span>
                                         <span class="text-success fw-semibold fs-12">
                                             <span class="mx-1"><i class="fa fa-caret-up"></i></span>
                                             <span class="">(22.46%)</span>
@@ -265,7 +266,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-8">
             <div class="card">
                 <div class="card-header border-bottom">
@@ -288,10 +289,16 @@
                             <div><span class="text-success fs-13 me-1">32%</span>Increase Since last Year</div>
                         </div>
                     </div>
-                    <div id="chartD"></div>
+                    {{-- @if ($ShowGraph == "true")
+                        <div id="chartD"></div>
+                    @endif --}}
+                    <div wire:ignore>
+                        <div id="chartD"></div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
     <!-- ROW-2 END -->
 
@@ -515,7 +522,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <h4>Total Tasks</h4>
-                                    <p>35</p>
+                                    <p>YTD {{$SumTask}}</p>
                                 </div>
                                 <div class="col-4">
                                     <div class="hpx-50 wpx-50 bg-primary br-5 d-flex align-items-center justify-content-center ms-auto">
@@ -532,7 +539,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <h4>Completed Tasks</h4>
-                                    <p>15</p>
+                                    <p>YTD {{$this->SumCompleted}}</p>
                                 </div>
                                 <div class="col-4">
                                     <div class="hpx-50 wpx-50 br-5 d-flex align-items-center justify-content-center bg-secondary ms-auto">
@@ -549,7 +556,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <h4>In Progress</h4>
-                                    <p>4</p>
+                                    <p>YTD {{$this->SumInprogress}}</p>
                                 </div>
                                 <div class="col-4">
                                     <div class="hpx-50 wpx-50 br-5 d-flex align-items-center justify-content-center bg-info ms-auto">
@@ -565,8 +572,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-8">
-                                    <h4>On Hold</h4>
-                                    <p>6</p>
+                                    <h4>On Hold | Cancel</h4>
+                                    <p>YTD {{$this->SumOnHold}} | {{$this->SumCancel}}</p>
                                 </div>
                                 <div class="col-4">
                                     <div class="hpx-50 wpx-50 br-5 d-flex align-items-center justify-content-center bg-warning ms-auto">
@@ -590,163 +597,276 @@
                     {{-- <button type="button" class="btn btn-primary" onclick="location.href='{{ url('/job/create') }}';">ลงทะเบียน</button> --}}
                     <button type="button" class="btn btn-primary" onclick="location.href='{{ route('joborder.joborder-add') }}';">ลงทะเบียน</button>
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive export-table">
-                        <table id="data-table1" class="table text-nowrap mb-0 table-bordered w-100">
-                            <thead class="table-head">
-                                <tr>
-                                    <th>test</th>
-                                    <th class="bg-transparent border-bottom-0">ลูกค้า</th>
-                                    <th class="bg-transparent border-bottom-0">รายงานเลขที่</th>
-                                    <th class="bg-transparent border-bottom-0">ID (KK/UOB)</th>
-                                    <th class="bg-transparent border-bottom-0">โครงการ / ที่ตั้ง</th>
-                                    <th class="bg-transparent border-bottom-0">ปรเภท</th>
-                                    <th class="bg-transparent border-bottom-0">เนื้อที่</th>
-                                    <th class="bg-transparent border-bottom-0">รับงาน</th>
-                                    <th class="bg-transparent border-bottom-0">สำรวจ</th>
-                                    <th class="bg-transparent border-bottom-0">ส่งงาน LC</th>
-                                    <th class="bg-transparent border-bottom-0">ส่งงานลูกค้า</th>
-                                    <th class="bg-transparent border-bottom-0">ผู้ประเมิน</th>
-                                    <th class="bg-transparent border-bottom-0">ผู้ตรวจ</th>
-                                    <th class="bg-transparent border-bottom-0">สถานะ</th>
-                                    {{-- <th class="bg-transparent border-bottom-0 no-btn"></th> --}}
-                                </tr>
-                            </thead>
-                            
-                            <tbody class="table-body">
+                <div wire:ignore>
+                    <div class="card-body">
+                        <div class="table-responsive export-table">
+                            <table id="data-table1" class="table text-nowrap mb-0 table-bordered w-100">
+                                {{-- <thead class="table-head"> --}}
+                                <thead class="dt-head-center">
+                                    <tr>
+                                        <th>id</th>
+                                        <th class="bg-transparent border-bottom-0">ลูกค้า</th>
+                                        <th class="bg-transparent border-bottom-0">รายงานเลขที่</th>
+                                        <th class="bg-transparent border-bottom-0">Bank's ID</th>
+                                        <th class="bg-transparent border-bottom-0">โครงการ / ที่ตั้ง</th>
+                                        <th class="bg-transparent border-bottom-0">ปรเภท</th>
+                                        <th class="bg-transparent border-bottom-0">เนื้อที่</th>
+                                        <th class="bg-transparent border-bottom-0">รับงาน</th>
+                                        <th class="bg-transparent border-bottom-0">สำรวจ</th>
+                                        <th class="bg-transparent border-bottom-0">ส่งงาน LC</th>
+                                        <th class="bg-transparent border-bottom-0">ส่งงานลูกค้า</th>
+                                        <th class="bg-transparent border-bottom-0">ผู้ประเมิน</th>
+                                        <th class="bg-transparent border-bottom-0">ผู้ตรวจ</th>
+                                        <th class="bg-transparent border-bottom-0">สถานะ</th>
+                                        {{-- <th class="bg-transparent border-bottom-0 no-btn"></th> --}}
+                                    </tr>
+                                </thead>
                                 
-                                @foreach ($jobs as $job)   
-                                <tr>
+                                <tbody class="table-body">
+                                    @foreach ($jobs as $job)   
+                                    <tr>
+                                        <td>{{ $job->id }}</td>
+                                        {{-- <td>{{ $this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) }}</td> --}}
                                     
-                                    {{-- <td>{{ Carbon\Carbon::parse($job->clientduedate)->diffInDays(Carbon\Carbon::now())}}</td> --}}
-                                    <td>{{ $this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) }}</td>
-                                    {{-- @if($loop->iteration % 2 == 0)
-                                        <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->customer }}">{{ Str::limit($job->customer, 15) }}</td>
-                                    @else
-                                        <td class="text-center">
-                                            <img alt="avatar" class="rounded-circle" src="{{asset('storage/bank/48x48/uob.png')}}">
-                                        </td>
-                                    @endif --}}
-                                    @if($job->client == 'UOB')
-                                         <td class="text-center">
-                                            <img alt="avatar" class="rounded-circle" src="{{asset('storage/bank/48x48/uob.png')}}">
-                                        </td>
-                                    @elseif($job->client == 'KK')
-                                        <td class="text-center">
-                                            <img alt="avatar" class="rounded-circle" src="{{asset('storage/bank/48x48/kk.png')}}">
-                                        </td>
-                                    @else
-                                        <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->customer }}">{{ Str::limit($job->customer, 15) }}</td>
-                                    @endif
-                                    
-                                    {{-- <td class="text-muted fs-13"><a href="{{ url('/job/' . $job->id . '/edit') }}">{{ $job->jobcode }}</a></td> --}}
-                                    {{-- <td class="text-muted fs-13"><a href="{{ App\Http\Controllers\JobController::getS3FileWithDefault( $job->id,'pdf') }}">{{ $job->jobcode }}</a></td> --}}
-                                    
-                                    <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
-
-                                    {{-- <td>
-                                        <div class="d-flex align-items-center">
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('assets/images/users/11.jpg')}})"></span>
-                                            <div class="user-details ms-2">
-                                                <h6 class="mb-0">Skyler Hilda</h6>
-                                                <span class="text-muted fs-12">member@spruko.com</span>
-                                            </div>
-                                        </div>
-                                    </td> --}}
-                                    <td class="text-muted fs-13"><p class="mb-0 text-dark">{{ $job->reportcode }}</p></td>
-                                    {{-- <td class="text-muted fs-13 fw-semibold" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }}<br>{{ $job->proplocation }}"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" >{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,30) }}</a></td> --}}
-                                    <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td>
-                                    {{-- <td class="text-muted fs-13"><a href="{{url('project-details')}}" class="text-dark">Noa Dashboard UI</a></td> --}}
-                                    <td class="fs-13"><p class="mb-0">{{ $job->prop_type }}</p></td>
-                                    <td class="text-muted fs-13"><p class="mb-0 text-muted">{{ $job->prop_size }}</p></td>
-                                    <td class="text-muted fs-13">{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}</td>
-                                    <td class="text-muted fs-13">{{ Carbon\Carbon::parse($job->inspectiondate)->thaidate('D j M y') }}</td>
-                                    <td class="text-muted fs-13"><span style="color:red">{{ Carbon\Carbon::parse($job->lcduedate)->thaidate('D j M y') }}</span></td>
-                                    <td class="text-muted fs-13">{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}</td>
-                                    <td class="text-center">
-                                        @if ($job->valuer == 'มงคล')
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mkc.jpg')}})"></span> 
-                                        @elseif ($job->valuer == 'สาโรจน์')
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/srp.jpg')}})"></span> 
-                                        @elseif ($job->valuer == 'นิรันดร')
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/nda.jpg')}})"></span> 
-                                        @elseif ($job->valuer == 'มนต์ชัย')
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mcm.jpg')}})"></span>
-                                        @elseif ($job->valuer == 'ภัทรกร')
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/pks.jpg')}})"></span>                                                                    
+                                        @if($job->client == 'UOB')
+                                            <td class="text-center">
+                                                <img alt="avatar" class="rounded-circle" src="{{asset('storage/bank/48x48/uob.png')}}">
+                                            </td>
+                                        @elseif($job->client == 'KK')
+                                            <td class="text-center"><img alt="avatar" class="rounded-circle" src="{{asset('storage/bank/48x48/kk.png')}}"></td>
                                         @else
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/avatar.jpg')}})"></span> 
+                                            <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->customer }}">{{ Str::limit($job->customer, 15) }}</td>
                                         @endif
-                                    </td>
-                                    <td class="text-center">
-                                        @if ($job->headvaluer == 'มงคล')
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mkc.jpg')}})"></span> 
-                                        @elseif ($job->headvaluer == 'สาโรจน์')
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/srp.jpg')}})"></span> 
-                                        @elseif ($job->headvaluer == 'นิรันดร')
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/nda.jpg')}})"></span> 
-                                        @elseif ($job->headvaluer == 'มนต์ชัย')
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mcm.jpg')}})"></span>
-                                        @elseif ($job->headvaluer == 'ภัทรกร')
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/pks.jpg')}})"></span>                                                                    
+                 
+                                        @if($job->job_status == 'Completed')
+                                            <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                        @elseif($job->job_status == 'On Hold' || $job->job_status == 'Cancel')
+                                            <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:red;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
                                         @else
-                                            <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/avatar.jpg')}})"></span> 
+                                            @if($job->jobsize == 'HL')
+                                                @if($job->easydiff == 'Easy' || $job->easydiff == 'Normal' || $job->easydiff == 'NORM / +++' || $job->easydiff == 'NORM')
+                                                    @if($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == 0)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:orange;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @elseif($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) > 0)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:red;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @else
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:black;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @endif
+                                                @elseif($job->easydiff == 'Difficult')
+                                                    @if($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == 0 || $this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == -1)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:orange;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @elseif($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) > 0)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:red;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @else
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:black;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @endif
+                                                @endif
+                                            @elseif($job->jobsize == 'S')
+                                                @if($job->easydiff == 'Easy')
+                                                    @if($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == 0)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:orange;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @elseif($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) > 0)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:red;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @else
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:black;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @endif
+                                                @elseif($job->easydiff == 'Normal' || $job->easydiff == 'NORM / +++' || $job->easydiff == 'NORM' || $job->easydiff == 'Difficult')
+                                                    @if($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == 0 || $this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == -1)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:orange;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @elseif($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) > 0)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:red;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @else
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:black;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @endif
+                                                @endif
+                                            @elseif($job->jobsize == 'M')
+                                                @if($job->easydiff == 'Easy' || $job->easydiff == 'Normal' || $job->easydiff == 'NORM / +++' || $job->easydiff == 'NORM')
+                                                    @if($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == 0 || $this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == -1)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:orange;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @elseif($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) > 0)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:red;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @else
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:black;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @endif
+                                                @elseif($job->easydiff == 'Difficult')
+                                                    @if($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == 0 || $this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == -1 || $this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == -2)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:orange;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @elseif($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) > 0)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:red;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @else
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:black;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @endif
+                                                @endif
+                                            @elseif($job->jobsize == 'L')
+                                                @if($job->easydiff == 'Easy')
+                                                    @if($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == 0 || $this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == -1)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:orange;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @elseif($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) > 0)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:red;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @else
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:black;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @endif
+                                                @elseif($job->easydiff == 'Normal' || $job->easydiff == 'NORM / +++' || $job->easydiff == 'NORM' || $job->easydiff == 'Difficult')
+                                                    @if($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == 0 || $this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == -1 || $this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) == -2)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:orange;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @elseif($this->countDaySendJob(Carbon\Carbon::parse($job->clientduedate)) > 0)
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:red;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @else
+                                                        <td class="text-muted fs-13"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}','{{ $job->print_checked }}','{{ $job->link_checked }}','{{ $job->file_checked }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:black;font-weight: bold;text-decoration: underline;" >{{ $job->jobcode }}</p></a></td>
+                                                    @endif
+                                                @endif
+                                            @endif
+
+                                        @endif
+
+                                        @if($job->print_checked == true)
+                                            {{-- bold front --}}
+                                            {{-- <td class="text-muted fs-13"><p class="mb-0 text-dark"><span style="color:black;font-weight: bold;">{{ $job->reportcode }}</p></td> --}}
+                                            <td class="text-muted fs-13"><p class="mb-0 text-dark"><span style="font-weight: bold;">{{ $job->reportcode }}</p></td>
+                                        @else
+                                            <td class="text-muted fs-13"><p class="mb-0 text-dark">{{ $job->reportcode }}</p></td>
+                                        @endif
+                                        {{-- <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></td> --}}
+                                        {{-- <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="_blank"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td> --}}
+                                        @if($job->job_checked == true) 
+                                            {{-- bold front --}}
+                                            {{-- <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="popup" onclick="window.open('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}','name','width=1650,height=1037')"><span style="color:black;font-weight: bold;">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td> --}}
+                                            {{-- <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="javascript:void(0);" onclick="openCenteredWindow('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}', 1400, 900)"><span style="font-weight: bold;">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td> --}}
+                                            <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="javascript:void(0);" onclick="openCenteredWindow('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}', 1500, 900, 1)"><span style="color:green;font-weight:bold;text-decoration:underline;" >{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td>
+                                        @else
+                                            {{-- normal front --}}
+                                            {{-- <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}" target="popup" onclick="window.open('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}','name','width=1650,height=1037')"><span style="color:black">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</p></a></td> --}}
+                                            <td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }} {{ $job->proplocation }}"><a href="javascript:void(0);" onclick="openCenteredWindow('{{ route('joborder.joborder-edit', ['id' => $job->id]) }}', 1500, 900, 1)">{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,50) }}</a></td>
                                         @endif
                                         
-                                    </td>
-                                    <td>
-                                        <div class="form-group mb-0">
-                                            <ul>
-                                                <li class="select-status">
-                                                    <select class="form-control select2-status-search" data-placeholder="Select Status">
-                                                        {{-- <option value="IP" selected>In Progress</option>
-                                                        <option value="OH">On Hold</option>
-                                                        <option value="CP">Completed</option>
-                                                        <option value="CL">Canceled</option> --}}
-
-                                                        {{-- <option value="In Progress" selected>In Progress</option>
-                                                        <option value="On Hold">On Hold</option>
-                                                        <option value="Completed">Completed</option>
-                                                        <option value="Canceled">Cancel</option> --}}
-
-														<option value="In Progress" {{$job->job_status=='In Progress'?'selected':''}}>In Progress</option>
-														<option value="Completed" {{$job->job_status=='Completed'?'selected':''}}>Completed</option>
-														<option value="On Hold" {{$job->job_status=='On Hold'?'selected':''}}>On Hold</option>
-														<option value="Cancel" {{$job->job_status=='Cancel'?'selected':''}}>Cancel</option>
-
-                                                    </select>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                    {{-- <td>
-                                        <div class="d-flex align-items-stretch">
-                                            <a href="#" class="border br-5 px-2 py-1 d-flex align-items-center justify-content-center" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
+                                        {{-- <td class="text-muted fs-13 fw-semibold" data-bs-placement="top" data-bs-toggle="tooltip" title="" data-bs-original-title="{{ $job->projectname }}<br>{{ $job->proplocation }}"><a href="#" wire:click="bindingPopup('{{ $job->id }}','{{ $job->jobcode }}','{{ $job->reportcode }}','{{ $job->projectname }}','{{ $job->proplocation }}','{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}','{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}','{{ $job->job_status }}')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" >{{ $job->projectname }}<br>{{ Str::limit($job->proplocation,30) }}</a></td> --}}
+                                        {{-- <td class="text-muted fs-13"><a href="{{url('project-details')}}" class="text-dark">Noa Dashboard UI</a></td> --}}
+                                        @if($job->link_checked == true)
+                                            {{-- bold front --}}
+                                            {{-- <td class="fs-13"><p class="mb-0"><span style="color:black;font-weight: bold;">{{ $job->prop_type }}</p></td> --}}
+                                            <td class="fs-13"><p class="mb-0"><span style="font-weight: bold;">{{ $job->prop_type }}</p></td>
+                                        @else
+                                            <td class="fs-13"><p class="mb-0">{{ $job->prop_type }}</p></td>
+                                        @endif
+                                        @if($job->file_checked == true)
+                                            {{-- bold front --}}
+                                            {{-- <td class="text-muted fs-13"><p class="mb-0 text-muted"><span style="color:black;font-weight: bold;">{{ $job->prop_size }}</p></td> --}}
+                                            <td class="text-muted fs-13"><p class="mb-0 text-muted"><span style="font-weight: bold;">{{ $job->prop_size }}</p></td>
+                                        @else
+                                            <td class="text-muted fs-13"><p class="mb-0 text-muted">{{ $job->prop_size }}</p></td>
+                                        @endif
+                                        
+                                        <td class="text-muted fs-13">{{ Carbon\Carbon::parse($job->startdate)->thaidate('D j M y') }}</td>
+                                        <td class="text-muted fs-13">{{ Carbon\Carbon::parse($job->inspectiondate)->thaidate('D j M y') }}</td>
+                                        <td class="text-muted fs-13">{{ Carbon\Carbon::parse($job->lcduedate)->thaidate('D j M y') }}</span></td>
+                                        <td class="text-muted fs-13">{{ Carbon\Carbon::parse($job->clientduedate)->thaidate('D j M y') }}</td>
+                                        <td class="text-center">
+                                            @if ($job->valuer == 'มงคล')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mkc.jpg')}})"></span> 
+                                            @elseif ($job->valuer == 'สาโรจน์')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/srp.jpg')}})"></span> 
+                                            @elseif ($job->valuer == 'นิรันดร')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/nda.jpg')}})"></span> 
+                                            @elseif ($job->valuer == 'วรงค์')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/wrg.jpg')}})"></span> 
+                                            @elseif ($job->valuer == 'อานิพงศ์')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/anp.jpg')}})"></span> 
+                                            @elseif ($job->valuer == 'ปริวรรต')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/prw.jpg')}})"></span> 
+                                            @elseif ($job->valuer == 'อธิวัฒน์')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ath.jpg')}})"></span> 
+                                            @elseif ($job->valuer == 'มนต์ชัย')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mcm.jpg')}})"></span>
+                                            @elseif ($job->valuer == 'ภัทรกร')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ptk.jpg')}})"></span>                                                                    
+                                            @elseif ($job->valuer == 'ณัฐวุฒิ')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ntw.jpg')}})"></span>
+                                            @else
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/avatar.jpg')}})"></span> 
+                                            @endif
                                             
-                                            <div class="dropdown-menu dropdown-menu-start">
-                                                <a class="dropdown-item" href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}"><i class="icon icon-pencil"></i>&nbsp;Edit Assign Job</a>
-                                                <a class="dropdown-item" href="{{ url('/editJobInsertFiles/' . $job->id . '/working_files/APPENDIX')}}"><i class="fa fa-file-pdf-o me-2"></i>Insert File</a>
-                                                
+                                        </td>
+                                        <td class="text-center">
+                                            @if ($job->headvaluer == 'มงคล')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mkc.jpg')}})"></span> 
+                                            @elseif ($job->headvaluer == 'สาโรจน์')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/srp.jpg')}})"></span> 
+                                            @elseif ($job->headvaluer == 'นิรันดร')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/nda.jpg')}})"></span> 
+                                            @elseif ($job->headvaluer == 'วรงค์')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/wrg.jpg')}})"></span> 
+                                            @elseif ($job->headvaluer == 'อานิพงศ์')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/anp.jpg')}})"></span> 
+                                            @elseif ($job->headvaluer == 'ปริวรรต')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/prw.jpg')}})"></span> 
+                                            @elseif ($job->headvaluer == 'อธิวัฒน์')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ath.jpg')}})"></span> 
+                                            @elseif ($job->headvaluer == 'มนต์ชัย')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mcm.jpg')}})"></span>
+                                            @elseif ($job->headvaluer == 'ภัทรกร')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ptk.jpg')}})"></span>                                                                    
+                                            @elseif ($job->headvaluer == 'ณัฐวุฒิ')
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ntw.jpg')}})"></span>
+                                            @else
+                                                <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/avatar.jpg')}})"></span> 
+                                            @endif
+                                            
+                                        </td>
+                                        <td>
+                                            <div class="form-group mb-0">
+                                                <ul>
+                                                    <li class="select-status">
+                                                        <select class="form-control select2-status-search" data-placeholder="Select Status">
+                                                            {{-- <option value="IP" selected>In Progress</option>
+                                                            <option value="OH">On Hold</option>
+                                                            <option value="CP">Completed</option>
+                                                            <option value="CL">Canceled</option> --}}
+
+                                                            {{-- <option value="In Progress" selected>In Progress</option>
+                                                            <option value="On Hold">On Hold</option>
+                                                            <option value="Completed">Completed</option>
+                                                            <option value="Canceled">Cancel</option> --}}
+
+                                                            <option value="In Progress" {{$job->job_status=='In Progress'?'selected':''}}>In Progress</option>
+                                                            <option value="Completed" {{$job->job_status=='Completed'?'selected':''}}>Completed</option>
+                                                            <option value="On Hold" {{$job->job_status=='On Hold'?'selected':''}}>On Hold</option>
+                                                            <option value="Cancel" {{$job->job_status=='Cancel'?'selected':''}}>Cancel</option>
+
+                                                        </select>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                            <p>&nbsp;</p>
-                                            <a class="btn btn-sm btn-outline-info border me-2" href="{{ url('/projectmaster') }}" data-bs-toggle="tooltip" data-bs-original-title="Project Detail">
-                                                <svg style="color: green" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16"> <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" fill="green"></path> </svg>
-                                            </a>
-                                            <a class="btn btn-sm btn-outline-info border me-2" href="{{ url('/editJobInsertFiles/' . $job->id)}}" data-bs-toggle="tooltip" data-bs-original-title="Report Template">
-                                               
-                                                <svg style="color: blue" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16"> <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" fill="blue"></path> </svg>
-                                            </a>
-                                            <a class="btn btn-sm btn-outline-info border me-2" href="{{ url('/editJobInsertFiles/' . $job->id)}}" data-bs-toggle="tooltip" data-bs-original-title="Final Report">
-                                                <svg style="color: purple" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16"> <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" fill="purple"></path> </svg>
-                                            </a>
-                                        </div>
-                                    </td> --}}
-                                </tr>                                            
-                                @endforeach
-                            </tbody>
-                        </table>
+                                        </td>
+                                        {{-- <td>
+                                            <div class="d-flex align-items-stretch">
+                                                <a href="#" class="border br-5 px-2 py-1 d-flex align-items-center justify-content-center" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fe fe-more-vertical"></i></a>
+                                                
+                                                <div class="dropdown-menu dropdown-menu-start">
+                                                    <a class="dropdown-item" href="{{ route('joborder.joborder-edit', ['id' => $job->id]) }}"><i class="icon icon-pencil"></i>&nbsp;Edit Assign Job</a>
+                                                    <a class="dropdown-item" href="{{ url('/editJobInsertFiles/' . $job->id . '/working_files/APPENDIX')}}"><i class="fa fa-file-pdf-o me-2"></i>Insert File</a>
+                                                    
+                                                </div>
+                                                <p>&nbsp;</p>
+                                                <a class="btn btn-sm btn-outline-info border me-2" href="{{ url('/projectmaster') }}" data-bs-toggle="tooltip" data-bs-original-title="Project Detail">
+                                                    <svg style="color: green" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16"> <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" fill="green"></path> </svg>
+                                                </a>
+                                                <a class="btn btn-sm btn-outline-info border me-2" href="{{ url('/editJobInsertFiles/' . $job->id)}}" data-bs-toggle="tooltip" data-bs-original-title="Report Template">
+                                                
+                                                    <svg style="color: blue" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16"> <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" fill="blue"></path> </svg>
+                                                </a>
+                                                <a class="btn btn-sm btn-outline-info border me-2" href="{{ url('/editJobInsertFiles/' . $job->id)}}" data-bs-toggle="tooltip" data-bs-original-title="Final Report">
+                                                    <svg style="color: purple" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16"> <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" fill="purple"></path> </svg>
+                                                </a>
+                                            </div>
+                                        </td> --}}
+                                    </tr>                                            
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+                
             </div>
         </div><!-- COL END -->
     </div>

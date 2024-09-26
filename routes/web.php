@@ -27,6 +27,8 @@ Route::get('/storagelink', function () {
     Artisan::call('storage:link');
 });
 
+
+
 Route::get('/projectmaster', function () {
     return view('projectmaster.listing-single');
 });
@@ -57,7 +59,7 @@ use App\Http\Livewire\Login2;
 Route::get('login2', Login2::class);
 
 use App\Http\Livewire\Landing;
-// use App\Http\Livewire\Index;
+use App\Http\Livewire\Index;
 use App\Http\Livewire\Buttons;
 use App\Http\Livewire\FormAdvanced;
 use App\Http\Livewire\JobAdd;
@@ -73,6 +75,9 @@ use App\Http\Livewire\OrderDetails;
 use App\Http\Livewire\HLoanDetails;
 use App\Http\Livewire\OpeDetails;
 use App\Http\Livewire\QuotationDetails;
+
+
+Route::get('/jobs/data', [Index::class, 'getData'])->name('home_jobs_data');
 
 Route::view('/welcome', 'welcome');
 //Route::view('/test', 'joborder.joborder-add');

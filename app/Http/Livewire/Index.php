@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\{Job,Amphure};
@@ -45,7 +46,9 @@ class Index extends Component
     protected $listeners = [
         'updateValue',
         'showSum',
-        'bindingPopup'
+        'bindingPopup',
+        'test',
+        'addTwoNumbers'
         // Add more listeners as needed
     ];
 
@@ -54,11 +57,12 @@ class Index extends Component
     {
         // $this->jobs = DB::select('select * from jobs order by id desc LIMIT 200');
         //$this->jobs = DB::select('select * from jobs WHERE YEAR(startdate) = YEAR(NOW()) order by id desc');
-        $sql = "Select id, client, jobcode, reportcode, projectname, proplocation, prop_type, prop_size, startdate, ";
-        $sql = $sql . "inspectiondate, lcduedate, clientduedate, valuer, headvaluer, job_status, customer, ";
-        $sql = $sql . "jobsize, easydiff, print_checked, link_checked, file_checked, job_checked ";
-        $sql = $sql . "from jobs WHERE YEAR(startdate) = YEAR(NOW()) order by id desc ";
-        $this->jobs = DB::select($sql);
+        // $sql = "Select id, client, jobcode, reportcode, projectname, proplocation, prop_type, prop_size, startdate, ";
+        // $sql = $sql . "inspectiondate, lcduedate, clientduedate, valuer, headvaluer, job_status, customer, ";
+        // $sql = $sql . "jobsize, easydiff, print_checked, link_checked, file_checked, job_checked ";
+        // $sql = $sql . "from jobs WHERE YEAR(startdate) = YEAR(NOW()) order by id desc ";
+        // $this->jobs = DB::select($sql);
+        // $this->jobs = Job::whereYear('startdate', Carbon::now()->year)->get();
         $this->users = Auth::user();
         $this->CountTotalTask(Carbon::now()->year);
         $this->CountCompletedTaskByMonth(Carbon::now()->year,Carbon::now()->month);
@@ -67,9 +71,22 @@ class Index extends Component
         
     }
 
-    public function addTwoNumbers($num1,$num2){
-        $this->sum = $num1+$num2;
+    public function getData(Request $request)
+    {
+        // Perform the SQL query
+        //$jobs = Job::whereYear('startdate', Carbon::now()->year)->get();
+        $sql = "Select id, client, jobcode, reportcode, CONCAT(projectname, '/ ', proplocation) AS projectname, prop_type, prop_size, startdate, ";
+        $sql = $sql . "inspectiondate, lcduedate, clientduedate, valuer, headvaluer, job_status, customer, ";
+        $sql = $sql . "jobsize, easydiff, print_checked, link_checked, file_checked, job_checked, ";
+        $sql = $sql . "customer, proplocation, print_checked, link_checked, file_checked ";
+        //$sql = "Select id, client ";
+        $sql = $sql . "from jobs WHERE YEAR(startdate) = YEAR(NOW()) order by id desc ";
+        $jobs = DB::select($sql);
+        // Return as JSON
+        return response()->json(['data' => $jobs]);
     }
+
+    
 
     public function updateValue()
     {
@@ -78,14 +95,28 @@ class Index extends Component
         dd($this->sum);
     }
 
-    public function showSum()
+    public function addTwoNumbers($num1,$num2){
+        dd('ok');
+        $this->sum = $num1 + $num2;
+        dd($this->sum);
+    }
+
+    public function showSum($num1,$num2)
     {
+        dd($num1 + $num2);
         $this->sum = $this->sum + 5;
-        // dd($this->sum);
+        dd($this->sum);
+    }
+
+    public function test()
+    {
+       
+        dd('test');
     }
 
     public function bindingPopup($value0,$value1,$value2,$value3,$value4,$value5,$value6,$value7,$value8,$value9,$value10){
        
+        //dd($value0);
         $this->myid = $value0;
         $this->jobcode = $value1;
         $this->reportcode = $value2;

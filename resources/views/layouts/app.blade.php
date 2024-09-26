@@ -65,14 +65,12 @@
 
    
     @livewireScripts
-    
-    <script>
-        window.livewire.on('JobOrderAdded',()=>{
-            //alert('take action event from livewire JobOrderAdded emit');
-        });
-    </script>
-    
-
+        <script>
+            window.livewire.on('JobOrderAdded',()=>{
+                //alert('take action event from livewire JobOrderAdded emit');
+            });
+        </script>
+        
     </body>
 
 </html>
