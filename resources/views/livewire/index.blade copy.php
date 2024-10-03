@@ -785,6 +785,7 @@
                                                 <span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/avatar.jpg')}})"></span> 
                                             @endif
                                             
+                                            
                                         </td>
                                         <td class="text-center">
                                             @if ($job->headvaluer == 'มงคล')

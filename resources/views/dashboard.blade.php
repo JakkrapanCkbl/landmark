@@ -116,6 +116,7 @@
                         alert('Error: ' + code);
                     }
                 },
+                "order": [[ 0, "desc" ]],
                 "columns": [
                     { "data": "id" },
                     { "data": "client" },
@@ -155,7 +156,219 @@
                         render: function(data, type, row) {
                             return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="bindingPopup('` + row.id + `','` + row.jobcode + `','` + row.reportcode + `','` + row.projectname + `','` + row.proplocation + `','` + row.startdate + `','` + row.clientduedate + `','` + row.job_status + `','` + row.print_checked + `','` + row.link_checked + `','` + row.file_checked + `')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
                         }
-                    }
+                    },
+                    {
+                        targets: 7, // startdate column
+                        render: function(data, type, row) {
+                            let dateObj = new Date(row.startdate);
+                            let referenceDate = new Date('1976-04-27');
+                            if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
+                                // Define Thai weekday and month arrays
+                                const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
+                                const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
+                                                    'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                                // Get the day, month, and year
+                                let day = dateObj.getDate(); // Get the day of the month
+                                let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
+                                //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
+                                let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
+
+                                // Get the day of the week (0-6) and convert to Thai weekday name
+                                let weekday = thaiWeekdays[dateObj.getDay()];
+
+                                // Format the date as 'Weekday Day Month Year'
+                                let formattedDate = `${weekday} ${day} ${month} ${year}`;
+
+                                // Return the HTML with the formatted date
+                                return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                            }else{
+                                return `<td class="text-muted fs-13"></td>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: 8, // inspectiondate column
+                        render: function(data, type, row) {
+                            let dateObj = new Date(row.inspectiondate);
+                            let referenceDate = new Date('1976-04-27');
+                            if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
+                                // Define Thai weekday and month arrays
+                                const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
+                                const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
+                                                    'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                                // Get the day, month, and year
+                                let day = dateObj.getDate(); // Get the day of the month
+                                let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
+                                //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
+                                let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
+
+                                // Get the day of the week (0-6) and convert to Thai weekday name
+                                let weekday = thaiWeekdays[dateObj.getDay()];
+
+                                // Format the date as 'Weekday Day Month Year'
+                                let formattedDate = `${weekday} ${day} ${month} ${year}`;
+
+                                // Return the HTML with the formatted date
+                                return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                            }else{
+                                return `<td class="text-muted fs-13"></td>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: 9, // lcduedate column
+                        render: function(data, type, row) {
+                            let dateObj = new Date(row.lcduedate);
+                            let referenceDate = new Date('1976-04-27');
+                            if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
+                                // Define Thai weekday and month arrays
+                                const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
+                                const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
+                                                    'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                                // Get the day, month, and year
+                                let day = dateObj.getDate(); // Get the day of the month
+                                let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
+                                //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
+                                let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
+
+                                // Get the day of the week (0-6) and convert to Thai weekday name
+                                let weekday = thaiWeekdays[dateObj.getDay()];
+
+                                // Format the date as 'Weekday Day Month Year'
+                                let formattedDate = `${weekday} ${day} ${month} ${year}`;
+
+                                // Return the HTML with the formatted date
+                                return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                            }else{
+                                return `<td class="text-muted fs-13"></td>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: 10, // clientduedate column
+                        render: function(data, type, row) {
+                            let dateObj = new Date(row.clientduedate);
+                            // Define the reference date
+                            let referenceDate = new Date('1976-04-27');
+                            if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
+                                // Define Thai weekday and month arrays
+                                const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
+                                const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
+                                                    'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                                // Get the day, month, and year
+                                let day = dateObj.getDate(); // Get the day of the month
+                                let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
+                                //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
+                                let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
+                                // Get the day of the week (0-6) and convert to Thai weekday name
+                                let weekday = thaiWeekdays[dateObj.getDay()];
+
+                                // Format the date as 'Weekday Day Month Year'
+                                let formattedDate = `${weekday} ${day} ${month} ${year}`;
+
+                                // Return the HTML with the formatted date
+                                return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                            }else{
+                                return `<td class="text-muted fs-13"></td>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: 11, // valuer column
+                        render: function(data, type, row) {
+                            if (row.valuer == 'มงคล') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mkc.jpg')}})"></span></td>`;
+                            } else if (row.valuer == 'สาโรจน์') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/srp.jpg')}})"></span></td>`;
+                            } else if (row.valuer == 'นิรันดร') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/nda.jpg')}})"></span></td>`;
+                            } else if (row.valuer == 'วรงค์') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/wrg.jpg')}})"></span></td>`;
+                            } else if (row.valuer == 'อานิพงศ์') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/anp.jpg')}})"></span></td>`;
+                            } else if (row.valuer == 'ปริวรรต') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/prw.jpg')}})"></span></td>`;
+                            } else if (row.valuer == 'อธิวัฒน์') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ath.jpg')}})"></span></td>`;
+                            } else if (row.valuer == 'มนต์ชัย') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mcm.jpg')}})"></span></td>`;
+                            } else if (row.valuer == 'ภัทรกร') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ptk.jpg')}})"></span></td>`;
+                            } else if (row.valuer == 'ณัฐวุฒิ') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ntw.jpg')}})"></span></td>`;
+                            }
+                             else {
+                                 return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/avatar.jpg')}})"></span></td>`;
+                            }
+                            
+                        }
+                    },
+                    {
+                        targets: 12, // headvaluer column
+                        render: function(data, type, row) {
+                            if (row.headvaluer == 'มงคล') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mkc.jpg')}})"></span></td>`;
+                            } else if (row.headvaluer == 'สาโรจน์') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/srp.jpg')}})"></span></td>`;
+                            } else if (row.headvaluer == 'นิรันดร') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/nda.jpg')}})"></span></td>`;
+                            } else if (row.headvaluer == 'วรงค์') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/wrg.jpg')}})"></span></td>`;
+                            } else if (row.headvaluer == 'อานิพงศ์') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/anp.jpg')}})"></span></td>`;
+                            } else if (row.headvaluer == 'ปริวรรต') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/prw.jpg')}})"></span></td>`;
+                            } else if (row.headvaluer == 'อธิวัฒน์') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ath.jpg')}})"></span></td>`;
+                            } else if (row.headvaluer == 'มนต์ชัย') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mcm.jpg')}})"></span></td>`;
+                            } else if (row.headvaluer == 'ภัทรกร') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ptk.jpg')}})"></span></td>`;
+                            } else if (row.headvaluer == 'ณัฐวุฒิ') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/ntw.jpg')}})"></span></td>`;
+                            }
+                             else {
+                                 return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/avatar.jpg')}})"></span></td>`;
+                            }
+                            
+                        }
+                    },
+                    {
+                        targets: 13, // job_status column
+                        render: function(data, type, row) {
+                             if (row.job_status == 'In Progress') {
+                                return `<td class="text-center">In Progress</td>`;
+                            }else if (row.job_status == 'Completed') {
+                                return `<td class="text-center">Completed</td>`;
+                            }else if (row.job_status == 'On Hold') {
+                                return `<td class="text-center">On Hold</td>`;
+                            }else if (row.job_status == 'Cancel') {
+                                return `<td class="text-center">Cancel</td>`;
+                            }else {
+                                 return `<td class="text-center"></td>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: 14,  // Adjust based on the index of another column to hide
+                        visible: false // Hide the third column
+                    },
+                    {
+                        targets: 15,  // Adjust based on the index of another column to hide
+                        visible: false // Hide the third column
+                    },
+                    {
+                        targets: 16,  // Adjust based on the index of another column to hide
+                        visible: false // Hide the third column
+                    },
+                    {
+                        targets: 17,  // Adjust based on the index of another column to hide
+                        visible: false // Hide the third column
+                    },
+                    {
+                        targets: 18,  // Adjust based on the index of another column to hide
+                        visible: false // Hide the third column
+                    },
                 ],
             
             });
