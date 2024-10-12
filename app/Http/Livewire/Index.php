@@ -75,7 +75,7 @@ class Index extends Component
     {
         // Perform the SQL query
         //$jobs = Job::whereYear('startdate', Carbon::now()->year)->get();
-        $sql = "Select id, client, jobcode, reportcode, CONCAT(projectname, '/ ', proplocation) AS projectname, prop_type, prop_size, startdate, ";
+        $sql = "Select id, client, jobcode, reportcode, CONCAT(projectname, '<BR> ', proplocation) AS projectname, prop_type, prop_size, startdate, ";
         $sql = $sql . "inspectiondate, lcduedate, clientduedate, valuer, headvaluer, job_status, customer, ";
         $sql = $sql . "jobsize, easydiff, print_checked, link_checked, file_checked, job_checked, ";
         $sql = $sql . "customer, proplocation, print_checked, link_checked, file_checked ";
