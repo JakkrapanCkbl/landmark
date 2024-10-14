@@ -30,31 +30,12 @@
         <!-- PAGE -->
 		<div class="page">
 			<div class="page-main">
-                @include('layouts.components.app-header')
-                @include('layouts.components.app-sidebar')
-                <!--app-content open-->
-                <div class="app-content main-content mt-0">
-                    <div class="side-app">
-                        <!-- CONTAINER -->
-                        <div class="main-container container-fluid">
-                                @yield('content')
-                        </div>
-                    </div>
-                </div>
-                    <!-- CONTAINER CLOSED -->
+                @yield('content')
              </div>
-            @include('layouts.components.modal')
-            @yield('modal')
-            @include('layouts.components.footer')
         </div>
         <!-- page -->
         @include('layouts.components.scripts')
         @livewireScripts
-        <script>
-            window.livewire.on('JobOrderAdded',()=>{
-                //alert('take action event from livewire JobOrderAdded emit');
-            });
-        </script>
     </body>
 </html>
 

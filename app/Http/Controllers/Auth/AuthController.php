@@ -80,6 +80,7 @@ class AuthController extends Controller
      *
      * @return response()
      */
+
     public function dashboard()
     {
         if(Auth::check()){
@@ -93,6 +94,16 @@ class AuthController extends Controller
             //$users = Auth::user();
             //return view('livewire.index',compact('jobs', 'users'));
             
+        }
+  
+        return redirect("login")->withSuccess('Opps! You do not have access');
+    }
+
+    public function homefoundation()
+    {
+        if(Auth::check()){
+            //dd('ok');
+            return view('homefoundation');
         }
   
         return redirect("login")->withSuccess('Opps! You do not have access');

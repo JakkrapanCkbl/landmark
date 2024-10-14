@@ -452,6 +452,34 @@ class JobController extends Controller
         return response()->json(['upload success'=>$imageName]);
     }
 
+    public function Dz_StoreFoundationFiles(Request $request)
+    {
+        $id = $request->get('jobid');
+        $mainfolder = $request->get('mainfolder');
+        $subfolder = $request->get('subfolder');
+        $image = $request->file('file');
+        $imageName = $image->getClientOriginalName();
+        $file_size = $request->file('file')->getSize();
+        $fullPath = $mainfolder . '/' . $subfolder . '/';
+        $file_date = now();
+        $image->storeAs($fullPath, $imageName, 's3');
+        // check existing files in table
+        $result = (new MainController)->MyFind("foundation_files","id","where job_id = '" . $id . "' and file_name = '" . $image->getClientOriginalName() ."' ","" );     
+        if($result == '') {
+            $fz = (new MainController)->formatBytes($file_size);
+            DB::table('foundation_files')->insert([
+                'job_id' => $id,
+                'file_name' => pathinfo($fullPath . $imageName, PATHINFO_BASENAME),
+                'file_date' => $file_date,
+                'file_type' => pathinfo($fullPath . $imageName, PATHINFO_EXTENSION),
+                'file_size' => $fz,
+                'file_path' => $fullPath . $imageName
+            ]);
+        }
+        
+        return response()->json(['upload success'=>$imageName]);
+    }
+
     
     public function deletejobfile($id,$fn){
         //dd($id . "   fn = " . $fn);
@@ -470,6 +498,20 @@ class JobController extends Controller
         // return redirect()->route('editJobInsertFiles',$id);
         //return response()->json(['delete file success'=> $fn]);
         return redirect('/dashboard');
+    }
+
+    public function deletefoundationfile($id,$fn){
+        $img_fn = (new MainController)->MyFind("foundation_files","file_path","where job_id = '" . $id . "' and file_name = '" . $fn ."' ","" );
+        $img_id = (new MainController)->MyFind("foundation_files","id","where job_id = '" . $id . "' and file_name = '" . $fn ."' ","" );
+        //dd($img_id);
+
+        DB::table('foundation_files')->where('id', $img_id)->delete();
+
+        $s3 = Storage::disk('s3');
+        if($s3->exists($img_fn)){
+            $s3->delete($img_fn);
+        }
+        return redirect('/homefoundation');
     }
 
 

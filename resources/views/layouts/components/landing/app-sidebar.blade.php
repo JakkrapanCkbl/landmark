@@ -3,7 +3,7 @@
 						<div class="app-sidebar bg-transparent horizontal-main">
 							<div class="container">
 								<div class="main-sidemenu navbar px-0">
-									<a class="navbar-brand ps-0 d-none d-lg-block" href="{{url('index')}}">
+									<a class="navbar-brand ps-0 d-none d-lg-block" href="{{url('/')}}">
 									<img alt="" class="logo-2" src="{{asset('assets/images/brand/logo-3.png')}}">
 										<img alt="" class="dark-landinglogo" src="{{asset('assets/images/brand/logo.png')}}">
 									</a>
@@ -27,6 +27,9 @@
 										<li class="slide">
 											<a class="side-menu__item" data-bs-toggle="slide" href="#Contact"><span class="side-menu__label">ติดต่อ</span></a>
 										</li>
+										<li class="slide">
+											<a class="side-menu__item" data-bs-toggle="slide" href="{{ route('homefoundation')}}"><span class="side-menu__label">รายการทรัพย์สินของมูลนิธิฯ</span></a>
+										</li>
 									</ul>
 									<div class="header-nav-right d-flex">
 										<!-- <a href="#" target="_blank" class="btn btn-pill btn-outline-primary btn-w-md py-2 me-1 my-auto  d-lg-none d-xl-block d-block">
@@ -45,6 +48,7 @@
 													<a href="{{ url('/dashboard') }}" class="btn btn-pill btn-primary btn-w-md py-2 my-auto d-lg-none d-xl-block d-block">
 														Dashboard
 													</a>
+													{{-- <a href="{{ route('homefoundation') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">รายการทรัพย์สินมูลนิธิ</a> --}}
 												@else
 													<a href="{{ route('login') }}" class="btn btn-pill btn-primary btn-w-md py-2 my-auto d-lg-none d-xl-block d-block">
 														Login

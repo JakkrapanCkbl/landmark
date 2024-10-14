@@ -66,6 +66,7 @@
         function bindingPopup(value0,value1,value2,value3,value4,value5,value6,value7,value8,value9,value10) {
             Livewire.emit('bindingPopup',value0,value1,value2,value3,value4,value5,value6,value7,value8,value9,value10);
         }
+        
 
         function addTwoNumbers(num1, num2) {
             // Emit the event to the Livewire component with the numbers
@@ -103,7 +104,6 @@
         }
     </script>
 
- 
     <script>
             var table = $('#home-data-table1').DataTable({
                 "processing": true,

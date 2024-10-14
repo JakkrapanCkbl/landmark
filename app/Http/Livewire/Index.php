@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 use App\Models\{Job,Amphure};
 use Carbon\Carbon;
 
-
 class Index extends Component
 {
     public $sum = '5';
@@ -87,7 +86,6 @@ class Index extends Component
     }
 
     
-
     public function updateValue()
     {
         // The property $newValue is automatically updated with the value from the input field

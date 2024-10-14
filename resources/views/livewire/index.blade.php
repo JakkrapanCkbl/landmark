@@ -4,17 +4,18 @@
     <div class="page-header">
         <div>
             <h1 class="page-title">Dashboard</h1>
-            <div>
+            {{-- <div>
                 <button type="button" class="btn btn-primary" wire:click="addTwoNumbers(5,5)">sum</button>
                 Sum : {{ $sum }}
                 <button wire:click="showMessage">Click Me</button>
                 <p>{{ $message }}</p>
-            </div>
+            </div> --}}
         </div>
         <div class="ms-auto pageheader-btn">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                <li class="breadcrumb-item"><a href="{{url('/homefoundation')}}">มูลนิธิแห่งสภาคริสตจักรในประเทศไทย</a></li>
             </ol>
         </div>
     </div>

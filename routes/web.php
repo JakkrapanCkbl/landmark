@@ -45,6 +45,7 @@ Route::post('post-registration', [AuthController::class, 'postRegistration'])->n
 Route::get('dashboard', [AuthController::class, 'dashboard']);
 
 
+
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/forget-password', [ForgetPasswordManager::class, 'forgetPassword'])->name('forget.password');
 Route::post('/forget-password', [ForgetPasswordManager::class, 'forgetPasswordPost'])->name('forget.password.post');
@@ -60,6 +61,7 @@ Route::get('login2', Login2::class);
 
 use App\Http\Livewire\Landing;
 use App\Http\Livewire\Index;
+use App\Http\Livewire\HomeFoundation;
 use App\Http\Livewire\Buttons;
 use App\Http\Livewire\FormAdvanced;
 use App\Http\Livewire\JobAdd;
@@ -78,15 +80,17 @@ use App\Http\Livewire\QuotationDetails;
 
 
 Route::get('/jobs/data', [Index::class, 'getData'])->name('home_jobs_data');
-
+Route::get('/fund/data', [HomeFoundation::class, 'getData'])->name('home_fund_data');
 Route::view('/welcome', 'welcome');
-//Route::view('/test', 'joborder.joborder-add');
+Route::get('homefoundation', [AuthController::class, 'homefoundation'])->name('homefoundation');
+//Route::view('/homefoundation', 'homefoundation');
 Route::view('/testlivewireview', 'testlivewireview');
 
 Route::get('landing', Landing::class);
 // Route::get('index', Index::class);
 Route::get('buttons', Buttons::class);
 Route::get('form-advanced', FormAdvanced::class);
+
 
 
 //job
@@ -107,7 +111,9 @@ Route::post('dropzone/storepdf', [JobController::class, 'dropzoneStorepdf'])->na
 Route::post('dropzone/storeimg', [JobController::class, 'dropzoneStoreimg'])->name('dropzone.storeimg');
 Route::post('dropzone/storefiles', [JobController::class, 'dropzoneStoreFiles'])->name('dropzone.storefiles');
 Route::post('dropzone/dz_storefiles', [JobController::class, 'Dz_StoreFiles'])->name('dropzone.dz_storefiles');
+Route::post('dropzone/dz_storefoundationfiles', [JobController::class, 'Dz_StoreFoundationFiles'])->name('dropzone.dz_storefoundationfiles');
 Route::get('deletejobfile/{id}/{fn}', [JobController::class, 'deletejobfile'])->name('deletejobfile');
+Route::get('deletefoundationfile/{id}/{fn}', [JobController::class, 'deletefoundationfile'])->name('deletefoundationfile');
 //Route::get('/postx', Postx::class);
 Route::get('/students', Students::class);
 // Route::get('/counter', Counter::class);
