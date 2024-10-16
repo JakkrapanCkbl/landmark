@@ -457,6 +457,7 @@ class JobController extends Controller
         $id = $request->get('jobid');
         $mainfolder = $request->get('mainfolder');
         $subfolder = $request->get('subfolder');
+        $doc_type = $request->get('doc_type');
         $image = $request->file('file');
         $imageName = $image->getClientOriginalName();
         $file_size = $request->file('file')->getSize();
@@ -473,12 +474,15 @@ class JobController extends Controller
                 'file_date' => $file_date,
                 'file_type' => pathinfo($fullPath . $imageName, PATHINFO_EXTENSION),
                 'file_size' => $fz,
-                'file_path' => $fullPath . $imageName
+                'file_path' => $fullPath . $imageName,
+                'doc_type' => $doc_type
             ]);
         }
         
         return response()->json(['upload success'=>$imageName]);
     }
+
+   
 
     
     public function deletejobfile($id,$fn){

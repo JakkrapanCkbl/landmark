@@ -17,6 +17,11 @@ class HomeFoundation extends Component
     public $job_imgs;
     public $mainfolder = 'foundation_files';
     public $subfolder;
+    public $landindex;
+    public $disclaim;
+    public $building;
+    public $appendix;
+    public $other;
 
     protected $listeners = [
         'updateValue',
@@ -53,7 +58,7 @@ class HomeFoundation extends Component
         return response()->json(['data' => $jobs]);
     }
 
-    public function bindingPopup($value1,$value2,$value3){
+    public function bindingPopup($value1,$value2,$value3,){
        
         //dd($value0);
         $this->myid = $value1;
@@ -61,7 +66,11 @@ class HomeFoundation extends Component
         $this->prop_location = $value3;
         // binding files list
         $this->subfolder = str_replace('/', '_', $this->myid);
-        $this->job_imgs = DB::select('select * from foundation_files where job_id = ' . $this->myid . ' order by file_name');
-        
+        $this->job_imgs = DB::select("select * from foundation_files where job_id = " . $this->myid . " and doc_type = 'deed' order by file_name");
+        $this->landindex = DB::select("select * from foundation_files where job_id = " . $this->myid . " and doc_type = 'landindex' order by file_name");
+        $this->disclaim = DB::select("select * from foundation_files where job_id = " . $this->myid . " and doc_type = 'disclaim' order by file_name");
+        $this->building = DB::select("select * from foundation_files where job_id = " . $this->myid . " and doc_type = 'building' order by file_name");
+        $this->appendix = DB::select("select * from foundation_files where job_id = " . $this->myid . " and doc_type = 'appendix' order by file_name");
+        $this->other = DB::select("select * from foundation_files where job_id = " . $this->myid . " and doc_type = 'other' order by file_name");
     }
 }
