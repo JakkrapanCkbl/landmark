@@ -127,16 +127,45 @@
                     { "data": "owner_how" },
                     { "data": "certificate" },
                     { "data": "remark" },
-                    { "data": "prop_operator" },
-                    { "data": "PDF" },
-                    { "data": "Appendix" }
+                    { "data": "prop_operator" }
+                   
                 ],
                 columnDefs: [
+                     {
+                        targets: 1, // prop typ
+                        className: 'text-center',
+                        render: function(data, type, row) {
+                            if (data === 'รพ') {
+                                return `<td class="text-center"><img src="{{ asset('storage/icons/hospital32.png') }}"></td>`;
+                            }else if (data === 'สนง') {
+                                return `<td class="text-center"><img src="{{ asset('storage/icons/office32.png') }}"></td>`;
+                            }else if (data === 'สุสาน') {
+                                return `<td class="text-center"><img src="{{ asset('storage/icons/tombstone32.png') }}"></td>`;
+                            }else if (data === 'รร') {
+                                return `<td class="text-center"><img src="{{ asset('storage/icons/school32.png') }}"></td>`;
+                            }else{
+                                return `<td class="text-muted fs-13">` + data + `</td>`;
+                            } 
+                        }
+                    },
                     {
                         targets: 2, // prop name
                         render: function(data, type, row) {
                              //return `<td class="text-muted fs-13">` + data + `</td>`;
                              return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="bindingPopup('` + row.id + `','` + row.prop_name + `','` + row.prop_location + `')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.prop_name + `</p></a></td>`;
+                        }
+                    },
+                    {
+                        targets: 13, // staff
+                        className: 'text-center',
+                        render: function(data, type, row) {
+                            if (row.valuer == 'staff1') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/staff1.jpg')}})"></span></td>`;
+                            } else if (row.valuer == 'staff2') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/staff2.jpg')}})"></span></td>`;
+                            }else {
+                                 return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/staff1.jpg')}})"></span></td>`;
+                            }
                         }
                     },
                 ],

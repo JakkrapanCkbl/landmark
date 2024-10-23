@@ -139,25 +139,33 @@
                     { "data": "file_checked" }
                 ],
 
-                columnDefs: [{
+                columnDefs: [
+                    {
                     targets: 1, // The "Image" column index
+                    className: 'text-center',
                     render: function(data, type, row) {
                         if (data === 'UOB') {
                             return `<td class="text-center"><img alt="avatar" class="rounded-circle" src="{{ asset('storage/bank/48x48/uob.png') }}"></td>`;
                         } else if (data === 'KK') {
                             return `<td class="text-center"><img alt="avatar" class="rounded-circle" src="{{asset('storage/bank/48x48/kk.png')}}"></td>`;
                         } else {
-                            return `<td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="` + row.customer + `">` + row.customer.substring(0, 15) + `</td>`;
+                            //return `<td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="` + row.customer + `">` + row.customer.substring(0, 15) + `</td>`;
+                            //return `<td class="text-muted fs-13">` + row.customer + `</td>`;
+                            if (row.customer === null) {
+                                return `<td class="text-muted fs-13"></td>`;
+                            }else{
+                                return `<td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="` + row.customer + `">` + row.customer.substring(0, 15) + `</td>`;
+                            }
                         }
                     }
                     },
+                    
                     {
                         targets: 2, // jobcode column
                         render: function(data, type, row) {
                             return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="bindingPopup('` + row.id + `','` + row.jobcode + `','` + row.reportcode + `','` + row.projectname + `','` + row.proplocation + `','` + row.startdate + `','` + row.clientduedate + `','` + row.job_status + `','` + row.print_checked + `','` + row.link_checked + `','` + row.file_checked + `')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
                         }
                     },
-                    
                     {
                         targets: 7, // startdate column
                         render: function(data, type, row) {
@@ -276,6 +284,7 @@
                     },
                     {
                         targets: 11, // valuer column
+                        className: 'text-center',
                         render: function(data, type, row) {
                             if (row.valuer == 'มงคล') {
                                 return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mkc.jpg')}})"></span></td>`;
@@ -306,6 +315,7 @@
                     },
                     {
                         targets: 12, // headvaluer column
+                        className: 'text-center',
                         render: function(data, type, row) {
                             if (row.headvaluer == 'มงคล') {
                                 return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/mkc.jpg')}})"></span></td>`;

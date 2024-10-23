@@ -49,8 +49,7 @@ class HomeFoundation extends Component
         
         $sql = "SELECT id, prop_type, prop_name, prop_location, deed_no, ";
         $sql = $sql . "rai, ngan, wha, owner, prop_status, ";
-        $sql = $sql . "owner_how, certificate, remark, prop_operator, '' AS PDF, ";
-        $sql = $sql . "'' AS Appendix  ";
+        $sql = $sql . "owner_how, certificate, remark, prop_operator ";
         $sql = $sql . "FROM foundation_prop ";
         $sql = $sql . "ORDER BY id ";
         $jobs = DB::select($sql);

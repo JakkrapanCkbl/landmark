@@ -33,8 +33,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-8">
-                                    <h4>Total Tasks</h4>
-                                    <p>YTD 99</p>
+                                    <h4>โรงเรียน</h4>
+                                    <p>99 รายการ</p>
                                 </div>
                                 <div class="col-4">
                                     <div class="hpx-50 wpx-50 bg-primary br-5 d-flex align-items-center justify-content-center ms-auto">
@@ -50,8 +50,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-8">
-                                    <h4>Completed Tasks</h4>
-                                    <p>YTD 99</p>
+                                    <h4>โรงพยาบาล</h4>
+                                    <p>99 รายการ</p>
                                 </div>
                                 <div class="col-4">
                                     <div class="hpx-50 wpx-50 br-5 d-flex align-items-center justify-content-center bg-secondary ms-auto">
@@ -67,8 +67,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-8">
-                                    <h4>In Progress</h4>
-                                    <p>YTD 99</p>
+                                    <h4>สุสาน</h4>
+                                    <p>99 รายการ</p>
                                 </div>
                                 <div class="col-4">
                                     <div class="hpx-50 wpx-50 br-5 d-flex align-items-center justify-content-center bg-info ms-auto">
@@ -84,8 +84,8 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-8">
-                                    <h4>On Hold | Cancel</h4>
-                                    <p>YTD 99</p>
+                                    <h4>ที่ดินว่างเปล่า</h4>
+                                    <p>99 รายการ</p>
                                 </div>
                                 <div class="col-4">
                                     <div class="hpx-50 wpx-50 br-5 d-flex align-items-center justify-content-center bg-warning ms-auto">
@@ -107,7 +107,7 @@
             <div class="card product-sales-main">
                 <div class="card-header border-bottom">
                     {{-- <button type="button" class="btn btn-primary" onclick="location.href='{{ url('/job/create') }}';">ลงทะเบียน</button> --}}
-                    <button type="button" class="btn btn-primary" onclick="location.href='{{ route('joborder.joborder-add') }}';">ลงทะเบียน</button>
+                    <button type="button" class="btn btn-primary" onclick="location.href='#';">ลงทะเบียน</button>
                 </div>
                 <div wire:ignore>
                     <div class="card-body">
@@ -129,8 +129,7 @@
                                         <th class="bg-transparent border-bottom-0">หนังสือรับอนุญาตเลขที่ / เมื่อวันที่</th>
                                         <th class="bg-transparent border-bottom-0">หมายเหตุ</th>
                                         <th class="bg-transparent border-bottom-0">ผู้ดำเนินการ</th>
-                                        <th class="bg-transparent border-bottom-0">เอกสารPDF</th>
-                                        <th class="bg-transparent border-bottom-0">Appendix</th>
+                                        
                                     </tr>
                                 </thead>
                                 

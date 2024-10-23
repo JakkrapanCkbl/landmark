@@ -79,7 +79,7 @@ class Index extends Component
         $sql = $sql . "jobsize, easydiff, print_checked, link_checked, file_checked, job_checked, ";
         $sql = $sql . "customer, proplocation, print_checked, link_checked, file_checked ";
         //$sql = "Select id, client ";
-        $sql = $sql . "from jobs WHERE YEAR(startdate) = YEAR(NOW()) order by id desc ";
+        $sql = $sql . "from jobs WHERE YEAR(startdate) = YEAR(NOW()) order by id desc LIMIT 100";
         $jobs = DB::select($sql);
         // Return as JSON
         return response()->json(['data' => $jobs]);
