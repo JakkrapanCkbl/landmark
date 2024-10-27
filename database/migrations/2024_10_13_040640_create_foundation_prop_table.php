@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('foundation_prop', function (Blueprint $table) {
+        Schema::create('foundation_props', function (Blueprint $table) {
             $table->id();
             $table->string('prop_type', 20)->nullable();
             $table->string('prop_name', 250)->nullable();
@@ -44,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('foundation_prop');
+        Schema::dropIfExists('foundation_props');
     }
 };

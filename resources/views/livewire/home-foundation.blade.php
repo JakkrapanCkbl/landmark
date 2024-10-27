@@ -1,5 +1,6 @@
 <div>
     @include('livewire.popup_homefound_edit')
+    @include('livewire.popup_homefound_editdata')
     <!-- PAGE-HEADER -->
     <div class="page-header">
         <div>
@@ -127,9 +128,10 @@
                                         <th class="bg-transparent border-bottom-0">สถานะ</th>
                                         <th class="bg-transparent border-bottom-0">วันที่จดทะเบียนที่ดินล่าสุด</th>
                                         <th class="bg-transparent border-bottom-0">หนังสือรับอนุญาตเลขที่ / เมื่อวันที่</th>
+                                        <th class="bg-transparent border-bottom-0">ผู้ดำเนินการ 1</th>
+                                        <th class="bg-transparent border-bottom-0">ผู้ดำเนินการ 2</th>
                                         <th class="bg-transparent border-bottom-0">หมายเหตุ</th>
-                                        <th class="bg-transparent border-bottom-0">ผู้ดำเนินการ</th>
-                                        
+                                        <th class="bg-transparent border-bottom-0">พิกัด GPS</th>
                                     </tr>
                                 </thead>
                                 

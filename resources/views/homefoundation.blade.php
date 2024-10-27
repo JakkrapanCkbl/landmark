@@ -59,9 +59,16 @@
             }
         }
 
+      
+
         function bindingPopup(value1,value2,value3) {
             Livewire.emit('bindingPopup',value1,value2,value3);
         }
+
+         function bindingPopupEditData(value1,value2,value3,value4,value5,value6,value7,value8,value9,value10,value11,value12,value13,value14,value15,value16) {
+            Livewire.emit('bindingPopupEditData',value1,value2,value3,value4,value5,value6,value7,value8,value9,value10,value11,value12,value13,value14,value15,value16);
+        }
+
 
         function addTwoNumbers(num1, num2) {
             // Emit the event to the Livewire component with the numbers
@@ -126,25 +133,28 @@
                     { "data": "prop_status" },
                     { "data": "owner_how" },
                     { "data": "certificate" },
+                    { "data": "prop_operator" },
+                    { "data": "prop_operator2" },
                     { "data": "remark" },
-                    { "data": "prop_operator" }
-                   
+                    { "data": "gps" }
                 ],
                 columnDefs: [
                      {
-                        targets: 1, // prop typ
+                        targets: 1, // prop type
                         className: 'text-center',
                         render: function(data, type, row) {
                             if (data === 'รพ') {
-                                return `<td class="text-center"><img src="{{ asset('storage/icons/hospital32.png') }}"></td>`;
+                                //return `<td class="text-center"><img src="{{ asset('storage/icons/hospital32.png') }}"></td>`;
+                                 return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.prop_type + `','` + row.prop_name + `','` + row.prop_location + `','` + row.deed_no + `','`  + row.rai + `','` + row.ngan + `','` + row.wha + `','` + row.owner + `','` + row.prop_status + `','` + row.owner_how + `','` + row.certificate  + `','` + row.prop_operator + `','` + row.prop_operator2 + `','` + row.remark + `','` + row.gps + `')" class="text-dark" data-bs-target="#PopupHomeFoundEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" ><img src="{{ asset('storage/icons/hospital32.png') }}"></p></a></td>`;
                             }else if (data === 'สนง') {
-                                return `<td class="text-center"><img src="{{ asset('storage/icons/office32.png') }}"></td>`;
+                                return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.prop_type + `','` + row.prop_name + `','` + row.prop_location + `','` + row.deed_no + `','`  + row.rai + `','` + row.ngan + `','` + row.wha + `','` + row.owner + `','` + row.prop_status + `','` + row.owner_how + `','` + row.certificate  + `','` + row.prop_operator + `','` + row.prop_operator2 + `','` + row.remark + `','` + row.gps + `')" class="text-dark" data-bs-target="#PopupHomeFoundEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" ><img src="{{ asset('storage/icons/office32.png') }}"></p></a></td>`;
                             }else if (data === 'สุสาน') {
-                                return `<td class="text-center"><img src="{{ asset('storage/icons/tombstone32.png') }}"></td>`;
+                                return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.prop_type + `','` + row.prop_name + `','` + row.prop_location + `','` + row.deed_no + `','`  + row.rai + `','` + row.ngan + `','` + row.wha + `','` + row.owner + `','` + row.prop_status + `','` + row.owner_how + `','` + row.certificate  + `','` + row.prop_operator + `','` + row.prop_operator2 + `','` + row.remark + `','` + row.gps + `')" class="text-dark" data-bs-target="#PopupHomeFoundEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" ><img src="{{ asset('storage/icons/tombstone32.png') }}"></p></a></td>`;
                             }else if (data === 'รร') {
-                                return `<td class="text-center"><img src="{{ asset('storage/icons/school32.png') }}"></td>`;
+                                return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.prop_type + `','` + row.prop_name + `','` + row.prop_location + `','` + row.deed_no + `','`  + row.rai + `','` + row.ngan + `','` + row.wha + `','` + row.owner + `','` + row.prop_status + `','` + row.owner_how + `','` + row.certificate  + `','` + row.prop_operator + `','` + row.prop_operator2 + `','` + row.remark + `','` + row.gps + `')" class="text-dark" data-bs-target="#PopupHomeFoundEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" ><img src="{{ asset('storage/icons/school32.png') }}"></p></a></td>`;
                             }else{
-                                return `<td class="text-muted fs-13">` + data + `</td>`;
+                                //return `<td class="text-muted fs-13">` + data + `</td>`;
+                                return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.prop_type + `','` + row.prop_name + `','` + row.prop_location + `','` + row.deed_no + `','`  + row.rai + `','` + row.ngan + `','` + row.wha + `','` + row.owner + `','` + row.prop_status + `','` + row.owner_how + `','` + row.certificate + `','` + row.prop_operator + `','` + row.prop_operator2 + `','` + row.remark + `','` + row.gps + `')" class="text-dark" data-bs-target="#PopupHomeFoundEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + data + `</p></a></td>`;
                             } 
                         }
                     },
@@ -156,24 +166,65 @@
                         }
                     },
                     {
-                        targets: 13, // staff
+                        targets: 12, // staff
                         className: 'text-center',
                         render: function(data, type, row) {
-                            if (row.valuer == 'staff1') {
+                            if (data == 'staff1') {
                                 return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/staff1.jpg')}})"></span></td>`;
-                            } else if (row.valuer == 'staff2') {
+                            } else if (data == 'staff2') {
                                 return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/staff2.jpg')}})"></span></td>`;
                             }else {
-                                 return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/staff1.jpg')}})"></span></td>`;
+                                 return `<td class="text-center"></td>`;
                             }
                         }
                     },
+                    {
+                        targets: 13, // staff 2
+                        className: 'text-center',
+                        render: function(data, type, row) {
+                            if (data == 'staff1') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/staff1.jpg')}})"></span></td>`;
+                            } else if (data == 'staff2') {
+                                return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/staff2.jpg')}})"></span></td>`;
+                            }else {
+                                 return `<td class="text-center"></td>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: 15,       // GPS Index of the column to hide (0-based)
+                        visible: false    // Set visibility to false
+                    }
                 ],
             
             });
+
+    </script>
+
+     <script>
+        document.addEventListener('livewire:load', function () {
+            var table =  $('#home-data-table').DataTable();
+            // Listen for the 'userSaved' event emitted by Livewire
+            Livewire.on('userSaved', function () {
+                // Reload the DataTable
+                table.ajax.reload(null, false); // Keep the current page
+                alert("Save completed");
+                $('#PopupHomeFoundEditData').modal('hide');
+            });
+        });
     </script>
         
-  
+    <script>
+        document.addEventListener('livewire:load', function () {
+            // Listen for the 'reloadPage' event emitted by Livewire
+            Livewire.on('reloadPage', function () {
+                // Reload the entire page
+                location.reload();
+            });
+        });
+    </script>
+
+   
   
 
 @endsection <!-- script -->
