@@ -174,6 +174,15 @@ class AuthController extends Controller
         return redirect("login")->withSuccess('Opps! You do not have access');
     }
 
+    public function foundpropmap()
+    {
+        if(Auth::check()){
+            return view('foundpropmap');
+        }
+  
+        return redirect("login")->withSuccess('Opps! You do not have access');
+    }
+
 
 
 }

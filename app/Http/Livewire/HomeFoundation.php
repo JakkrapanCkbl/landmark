@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Foundation_prop;
 
+
 class HomeFoundation extends Component
 {
     public $sum = '5';
@@ -29,7 +30,6 @@ class HomeFoundation extends Component
     public $remark;
     public $gps;
     
-
     public $job_imgs;
     public $mainfolder = 'foundation_files';
     public $subfolder;
@@ -38,6 +38,21 @@ class HomeFoundation extends Component
     public $building;
     public $appendix;
     public $other;
+
+    public $c_school = 0;
+    public $c_hospital = 0;
+    public $c_tomb = 0;
+    public $c_land = 0;
+
+    public $labels = [];
+    public $values = [];
+
+    public function initializeChartData()
+    {
+        // Sample data - replace this with your actual data
+        $this->labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+        $this->values = [65, 59, 80, 81, 56, 55, 40];
+    }
 
     protected $listeners = [
         'updateValue',
@@ -49,9 +64,17 @@ class HomeFoundation extends Component
         // Add more listeners as needed
     ];
 
+    // Use mount to initialize data
+    public function mount()
+    {
+        $this->initializeChartData();
+    }
+
     public function render()
     {
-         // binding files list
+        // count prop_type
+        $this->CountPropType(); 
+        // binding files list
          $this->subfolder = str_replace('/', '_', $this->myid);
          $this->job_imgs = DB::select("select * from foundation_files where job_id = " . $this->myid . " and doc_type = 'deed' order by file_name");
          $this->landindex = DB::select("select * from foundation_files where job_id = " . $this->myid . " and doc_type = 'landindex' order by file_name");
@@ -59,7 +82,9 @@ class HomeFoundation extends Component
          $this->building = DB::select("select * from foundation_files where job_id = " . $this->myid . " and doc_type = 'building' order by file_name");
          $this->appendix = DB::select("select * from foundation_files where job_id = " . $this->myid . " and doc_type = 'appendix' order by file_name");
          $this->other = DB::select("select * from foundation_files where job_id = " . $this->myid . " and doc_type = 'other' order by file_name");
-        return view('livewire.home-foundation');
+        
+
+         return view('livewire.home-foundation');
     }
 
     public function addTwoNumbers($num1,$num2){
@@ -141,6 +166,49 @@ class HomeFoundation extends Component
             'gps' => $this->gps
         ]);
         $this->emit('userSaved');
+    }
+
+    public function CountPropType(){
+        $strsql = "SELECT COUNT(*) AS count ";
+        $strsql = $strsql . "FROM foundation_props ";
+        $strsql = $strsql . "WHERE prop_type = 'รร' ";
+        $result = DB::select($strsql);
+        if (is_null($result) || empty($result)) {
+            $this->c_school = 0;
+        }else{
+            $this->c_school = $result[0]->count;
+        }
+
+        $strsql = "SELECT COUNT(*) AS count ";
+        $strsql = $strsql . "FROM foundation_props ";
+        $strsql = $strsql . "WHERE prop_type = 'รพ' ";
+        $result = DB::select($strsql);
+        if (is_null($result) || empty($result)) {
+            $this->c_hospital = 0;
+        }else{
+            $this->c_hospital = $result[0]->count;
+        }
+
+        $strsql = "SELECT COUNT(*) AS count ";
+        $strsql = $strsql . "FROM foundation_props ";
+        $strsql = $strsql . "WHERE prop_type = 'สุสาน' ";
+        $result = DB::select($strsql);
+        if (is_null($result) || empty($result)) {
+            $this->c_tomb = 0;
+        }else{
+            $this->c_tomb = $result[0]->count;
+        }
+
+        $strsql = "SELECT COUNT(*) AS count ";
+        $strsql = $strsql . "FROM foundation_props ";
+        $strsql = $strsql . "WHERE prop_type = 'ดิน' ";
+        $result = DB::select($strsql);
+        if (is_null($result) || empty($result)) {
+            $this->c_land = 0;
+        }else{
+            $this->c_land = $result[0]->count;
+        }
+
     }
 
     

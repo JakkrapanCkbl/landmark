@@ -47,6 +47,12 @@
     <!-- Reply JS-->
     <script src="{{asset('assets/js/reply.js')}}"></script>
 
+    <!-- CHARTJS JS -->
+    <script src="{{asset('assets/plugins/chart/Chart.bundle.js')}}"></script>
+    <script src="{{asset('assets/plugins/chart/utils.js')}}"></script>
+    <script src="{{asset('assets/js/chart.js')}}"></script>
+
+
     {{-- for livewire properties --}}
     <script>
          function showSum(num1,num2) {
@@ -150,11 +156,19 @@
                                 return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.prop_type + `','` + row.prop_name + `','` + row.prop_location + `','` + row.deed_no + `','`  + row.rai + `','` + row.ngan + `','` + row.wha + `','` + row.owner + `','` + row.prop_status + `','` + row.owner_how + `','` + row.certificate  + `','` + row.prop_operator + `','` + row.prop_operator2 + `','` + row.remark + `','` + row.gps + `')" class="text-dark" data-bs-target="#PopupHomeFoundEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" ><img src="{{ asset('storage/icons/office32.png') }}"></p></a></td>`;
                             }else if (data === 'สุสาน') {
                                 return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.prop_type + `','` + row.prop_name + `','` + row.prop_location + `','` + row.deed_no + `','`  + row.rai + `','` + row.ngan + `','` + row.wha + `','` + row.owner + `','` + row.prop_status + `','` + row.owner_how + `','` + row.certificate  + `','` + row.prop_operator + `','` + row.prop_operator2 + `','` + row.remark + `','` + row.gps + `')" class="text-dark" data-bs-target="#PopupHomeFoundEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" ><img src="{{ asset('storage/icons/tombstone32.png') }}"></p></a></td>`;
-                            }else if (data === 'รร') {
+                            }else if ((data === 'รร') || (data === 'ว')){
                                 return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.prop_type + `','` + row.prop_name + `','` + row.prop_location + `','` + row.deed_no + `','`  + row.rai + `','` + row.ngan + `','` + row.wha + `','` + row.owner + `','` + row.prop_status + `','` + row.owner_how + `','` + row.certificate  + `','` + row.prop_operator + `','` + row.prop_operator2 + `','` + row.remark + `','` + row.gps + `')" class="text-dark" data-bs-target="#PopupHomeFoundEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" ><img src="{{ asset('storage/icons/school32.png') }}"></p></a></td>`;
+                            }else if (data === 'บ้าน') {
+                                return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.prop_type + `','` + row.prop_name + `','` + row.prop_location + `','` + row.deed_no + `','`  + row.rai + `','` + row.ngan + `','` + row.wha + `','` + row.owner + `','` + row.prop_status + `','` + row.owner_how + `','` + row.certificate  + `','` + row.prop_operator + `','` + row.prop_operator2 + `','` + row.remark + `','` + row.gps + `')" class="text-dark" data-bs-target="#PopupHomeFoundEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" ><img src="{{ asset('storage/icons/home32.png') }}"></p></a></td>`;
+                            }else if (data === 'ดิน') {
+                                return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.prop_type + `','` + row.prop_name + `','` + row.prop_location + `','` + row.deed_no + `','`  + row.rai + `','` + row.ngan + `','` + row.wha + `','` + row.owner + `','` + row.prop_status + `','` + row.owner_how + `','` + row.certificate  + `','` + row.prop_operator + `','` + row.prop_operator2 + `','` + row.remark + `','` + row.gps + `')" class="text-dark" data-bs-target="#PopupHomeFoundEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" ><img src="{{ asset('storage/icons/land32.png') }}"></p></a></td>`;
+                            }else if (data === 'ถนน') {
+                                return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.prop_type + `','` + row.prop_name + `','` + row.prop_location + `','` + row.deed_no + `','`  + row.rai + `','` + row.ngan + `','` + row.wha + `','` + row.owner + `','` + row.prop_status + `','` + row.owner_how + `','` + row.certificate  + `','` + row.prop_operator + `','` + row.prop_operator2 + `','` + row.remark + `','` + row.gps + `')" class="text-dark" data-bs-target="#PopupHomeFoundEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" ><img src="{{ asset('storage/icons/road32.png') }}"></p></a></td>`;
+                            }else if (data === '') {
+                                return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.prop_type + `','` + row.prop_name + `','` + row.prop_location + `','` + row.deed_no + `','`  + row.rai + `','` + row.ngan + `','` + row.wha + `','` + row.owner + `','` + row.prop_status + `','` + row.owner_how + `','` + row.certificate  + `','` + row.prop_operator + `','` + row.prop_operator2 + `','` + row.remark + `','` + row.gps + `')" class="text-dark" data-bs-target="#PopupHomeFoundEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" ><img src="{{ asset('storage/icons/road32.png') }}"></p></a></td>`;
                             }else{
                                 //return `<td class="text-muted fs-13">` + data + `</td>`;
-                                return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.prop_type + `','` + row.prop_name + `','` + row.prop_location + `','` + row.deed_no + `','`  + row.rai + `','` + row.ngan + `','` + row.wha + `','` + row.owner + `','` + row.prop_status + `','` + row.owner_how + `','` + row.certificate + `','` + row.prop_operator + `','` + row.prop_operator2 + `','` + row.remark + `','` + row.gps + `')" class="text-dark" data-bs-target="#PopupHomeFoundEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + data + `</p></a></td>`;
+                                return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.prop_type + `','` + row.prop_name + `','` + row.prop_location + `','` + row.deed_no + `','`  + row.rai + `','` + row.ngan + `','` + row.wha + `','` + row.owner + `','` + row.prop_status + `','` + row.owner_how + `','` + row.certificate + `','` + row.prop_operator + `','` + row.prop_operator2 + `','` + row.remark + `','` + row.gps + `')" class="text-dark" data-bs-target="#PopupHomeFoundEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;">-</p></a></td>`;
                             } 
                         }
                     },
@@ -203,6 +217,8 @@
 
      <script>
         document.addEventListener('livewire:load', function () {
+            //start --
+
             var table =  $('#home-data-table').DataTable();
             // Listen for the 'userSaved' event emitted by Livewire
             Livewire.on('userSaved', function () {
@@ -211,6 +227,31 @@
                 alert("Save completed");
                 $('#PopupHomeFoundEditData').modal('hide');
             });
+
+            //chart
+            const ctx = document.getElementById('myBarChart').getContext('2d');
+            const myBarChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],  // This should work now
+                    datasets: [{
+                        label: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                        data: [65, 59, 80, 81, 56, 55, 40],  // This should also work now
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            //end--
         });
     </script>
         
