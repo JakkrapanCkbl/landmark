@@ -27,10 +27,12 @@ Route::get('/storagelink', function () {
     Artisan::call('storage:link');
 });
 
-Route::get('/map', function () {
-    return view('map');
-});
+// Route::get('/map', function () {
+//     return view('map');
+// });
 
+Route::get('/map', \App\Http\Livewire\FoundPropMap::class)->name('map');
+Route::get('/foundpropmap/{lat}/{lng}', [AuthController::class, 'foundpropmap'])->name('foundpropmap');
 
 Route::get('/projectmaster', function () {
     return view('projectmaster.listing-single');
@@ -86,6 +88,7 @@ Route::get('/jobs/data', [Index::class, 'getData'])->name('home_jobs_data');
 Route::get('/fund/data', [HomeFoundation::class, 'getData'])->name('home_fund_data');
 Route::view('/welcome', 'welcome');
 Route::get('homefoundation', [AuthController::class, 'homefoundation'])->name('homefoundation');
+
 Route::get('foundpropmap', [AuthController::class, 'foundpropmap'])->name('foundpropmap');
 
 //Route::view('/homefoundation', 'homefoundation');

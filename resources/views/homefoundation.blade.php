@@ -9,6 +9,7 @@
 
 @section('content')
     @livewire('home-foundation')
+    
 @endsection
 
 
@@ -80,9 +81,7 @@
             // Emit the event to the Livewire component with the numbers
             Livewire.emit('addTwoNumbers', num1, num2);
         }
-
-        
-
+       
     </script>
 
     {{-- for set windows center screen --}}
@@ -142,7 +141,9 @@
                     { "data": "prop_operator" },
                     { "data": "prop_operator2" },
                     { "data": "remark" },
-                    { "data": "gps" }
+                    { "data": "gps" },
+                    { "data": "lat" },
+                    { "data": "lng" }
                 ],
                 columnDefs: [
                      {
@@ -180,6 +181,17 @@
                         }
                     },
                     {
+                        targets: 3, // prop location
+                        render: function(data, type, row) {
+                            //return `<td class="text-muted fs-13"><a href="#" onclick="loadMap(37.7749, -122.4194)"><span style="color:green;font-weight: bold;text-decoration: underline;">` + row.prop_location + `</p></a></td>`;
+                            //return `<td class="text-muted fs-13"><a href="#" onclick="openMap(` + {{ 37.7749 }} + `,` + {{ -122.4194 }} + `)"><span style="color:green;font-weight: bold;text-decoration: underline;">` + row.prop_location + `</p></a></td>`;
+                            //return `<td class="text-muted fs-13"><a href="#" onclick="sendCoordinates()"><span style="color:green;font-weight: bold;text-decoration: underline;">` + row.prop_location + `</p></a></td>`;
+                            //return `<td class="text-muted fs-13"><a href="{{ route('foundpropmap', ['lat' => '13.7479686', 'lng' => '100.4916953']) }}" target="_blank"><span style="color:green;font-weight: bold;text-decoration: underline;">` + row.prop_location + `</p></a></td>`;
+                            //return `<td class="text-muted fs-13"><a href="{{ route('foundpropmap', ['lat' => '13.7479686', 'lng' => '100.4916953']) }}" target="_blank"><span style="color:green;font-weight: bold;text-decoration: underline;">` + row.prop_location + `</p></a></td>`;
+                            return `<td class="text-muted fs-13"><a href="/foundpropmap?lat=` + row.lat.trim() + `&lng=` + row.lng.trim() + `" target="_blank"><span style="color:green;font-weight: bold;text-decoration: underline;">` + row.prop_location + `</p></a></td>`;
+                        }
+                    },
+                    {
                         targets: 12, // staff
                         className: 'text-center',
                         render: function(data, type, row) {
@@ -207,8 +219,17 @@
                     },
                     {
                         targets: 15,       // GPS Index of the column to hide (0-based)
-                        visible: false    // Set visibility to false
+                        visible: true    // Set visibility to false
+                    },
+                    {
+                        targets: 16,       // GPS Index of the column to hide (0-based)
+                        visible: true    // Set visibility to false
+                    },
+                    {
+                        targets: 17,       // GPS Index of the column to hide (0-based)
+                        visible: true    // Set visibility to false
                     }
+
                 ],
             
             });
@@ -262,7 +283,16 @@
                 // Reload the entire page
                 location.reload();
             });
+
+
         });
+    </script>
+
+    <script>
+        function openMap(lat, lng) {
+            const googleMapsUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+            window.open(googleMapsUrl, '_blank');
+        }
     </script>
 
    

@@ -55,6 +55,10 @@
         }
     </script>
 
+    
+
+
+
     {{-- for set windows center screen --}}
     <script>
         function openCenteredWindow(url, width, height, display = 1) {

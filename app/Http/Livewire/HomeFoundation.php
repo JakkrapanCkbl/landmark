@@ -47,6 +47,9 @@ class HomeFoundation extends Component
     public $labels = [];
     public $values = [];
 
+    public $lat = '13.7479686';
+    public $lng= '100.4916953';
+
     public function initializeChartData()
     {
         // Sample data - replace this with your actual data
@@ -99,7 +102,8 @@ class HomeFoundation extends Component
         
         $sql = "SELECT id, prop_type, prop_name, prop_location, deed_no, ";
         $sql = $sql . "rai, ngan, wha, owner, prop_status, ";
-        $sql = $sql . "owner_how, certificate, prop_operator, prop_operator2, remark, gps ";
+        $sql = $sql . "owner_how, certificate, prop_operator, prop_operator2, remark, gps, ";
+        $sql = $sql . "SUBSTRING_INDEX(gps, ',', 1) AS lat, SUBSTRING_INDEX(gps, ',', -1) AS lng ";
         $sql = $sql . "FROM foundation_props ";
         $sql = $sql . "ORDER BY id ";
         $jobs = DB::select($sql);

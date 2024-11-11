@@ -173,6 +173,8 @@
                                         <th class="bg-transparent border-bottom-0">ผู้ดำเนินการ 2</th>
                                         <th class="bg-transparent border-bottom-0">หมายเหตุ</th>
                                         <th class="bg-transparent border-bottom-0">พิกัด GPS</th>
+                                        <th class="bg-transparent border-bottom-0">latitude</th>
+                                        <th class="bg-transparent border-bottom-0">longitude</th>
                                     </tr>
                                 </thead>
                                 
