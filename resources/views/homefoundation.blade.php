@@ -249,29 +249,52 @@
                 $('#PopupHomeFoundEditData').modal('hide');
             });
 
-            //chart
+            //chart Bar
+             // Get the canvas element
             const ctx = document.getElementById('myBarChart').getContext('2d');
+
+            // Create the chart
             const myBarChart = new Chart(ctx, {
-                type: 'bar',
+                type: 'bar', // Changed to 'bar'
                 data: {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],  // This should work now
+                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
                     datasets: [{
-                        label: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                        data: [65, 59, 80, 81, 56, 55, 40],  // This should also work now
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
+                        label: 'Dataset 1',
+                        data: [12, 19, 3, 5, 2],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
                         borderWidth: 1
                     }]
                 },
                 options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            enabled: true,
+                        }
+                    },
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true // Ensures the y-axis starts at 0
                         }
                     }
                 }
             });
-
             //end--
         });
     </script>
@@ -295,7 +318,115 @@
         }
     </script>
 
-   
+    <script>
+        // Get the canvas element
+        const ctx = document.getElementById('myPieChart').getContext('2d');
+
+        // Create the chart
+        const myPieChart = new Chart(ctx, {
+            type: 'pie', // Changed to 'pie'
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+                datasets: [{
+                    label: 'Dataset 1',
+                    data: [12, 19, 3, 5, 2],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 255, 255, 1)' // Optional: white borders for better separation
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top', // Adjust legend position
+                    },
+                    tooltip: {
+                        enabled: true,
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        function createBarChart(canvasId, labels, data, datasetLabel = 'Dataset', backgroundColor = 'rgba(75, 192, 192, 0.2)', borderColor = 'rgba(75, 192, 192, 1)') {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            return new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels, // Dynamic labels for the x-axis
+                    datasets: [{
+                        label: datasetLabel, // Dynamic dataset label
+                        data: data, // Dynamic dataset values
+                        backgroundColor: backgroundColor, // Dynamic bar fill color
+                        borderColor: borderColor, // Dynamic bar border color
+                        borderWidth: 1 // Fixed bar border width
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true // Ensures y-axis starts at zero
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+  
+
+   <script>
+        // Get the canvas element
+        const ctx1 = document.getElementById('myDonutChart').getContext('2d');
+
+        // Create the chart
+        const myDonutChart = new Chart(ctx1, {
+            type: 'doughnut',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+                datasets: [{
+                    label: 'Dataset 1',
+                    data: [12, 19, 3, 5, 2],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        enabled: true,
+                    }
+                }
+            }
+        });
+    </script>
   
 
 @endsection <!-- script -->

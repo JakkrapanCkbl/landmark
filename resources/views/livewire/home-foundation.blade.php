@@ -110,19 +110,7 @@
                 </div>
                 <div class="card-body">
                     <div class="chart-container">
-                        <canvas id="myBarChart" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-12">
-            <div class="card">
-                <div class="card-header border-bottom">
-                    <h3 class="card-title">Donut Chart</h3>
-                </div>
-                <div class="card-body">
-                    <div class="chart-container">
-                        <canvas id="chartPie" class="h-275" width="672" height="343" style="display: block; box-sizing: border-box; height: 274.4px; width: 537.6px;"></canvas>
+                        <canvas id="myBarChart" class="h-275" width="672" height="343" style="display: block; box-sizing: border-box; height: 274.4px; width: 537.6px;"></canvas>
                     </div>
                 </div>
             </div>
@@ -134,11 +122,26 @@
                 </div>
                 <div class="card-body">
                     <div class="chart-container">
-                        <canvas id="chartDonut" class="h-275" width="672" height="343" style="display: block; box-sizing: border-box; height: 274.4px; width: 537.6px;"></canvas>
+                        <canvas id="myPieChart" class="h-275" width="672" height="343" style="display: block; box-sizing: border-box; height: 274.4px; width: 537.6px;"></canvas>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="col-lg-4 col-md-12">
+            <div class="card">
+                <div class="card-header border-bottom">
+                    <h3 class="card-title">Donut Chart</h3>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="myDonutChart" class="h-275" width="672" height="343" style="display: block; box-sizing: border-box; height: 274.4px; width: 537.6px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
 
     
     </div>
