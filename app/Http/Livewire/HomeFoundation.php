@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Models\Foundation_prop;
 
 
+
 class HomeFoundation extends Component
 {
     public $sum = '5';
@@ -64,7 +65,8 @@ class HomeFoundation extends Component
         'bindingPopupEditData',
         'test',
         'addTwoNumbers'
-        // Add more listeners as needed
+        
+
     ];
 
     // Use mount to initialize data

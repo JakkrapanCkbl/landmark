@@ -482,7 +482,35 @@ class JobController extends Controller
         return response()->json(['upload success'=>$imageName]);
     }
 
-   
+    public function Dz_StoreCityPlanFiles(Request $request)
+    {
+        $id = $request->get('jobid');
+        $mainfolder = $request->get('mainfolder');
+        $subfolder = $request->get('subfolder');
+        $doc_type = $request->get('doc_type');
+        $image = $request->file('file');
+        $imageName = $image->getClientOriginalName();
+        $file_size = $request->file('file')->getSize();
+        $fullPath = $mainfolder . '/' . $subfolder . '/';
+        $file_date = now();
+        $image->storeAs($fullPath, $imageName, 's3');
+        // check existing files in table
+        $result = (new MainController)->MyFind("cityplan_files","id","where job_id = '" . $id . "' and file_name = '" . $image->getClientOriginalName() ."' ","" );     
+        if($result == '') {
+            $fz = (new MainController)->formatBytes($file_size);
+            DB::table('cityplan_files')->insert([
+                'job_id' => $id,
+                'file_name' => pathinfo($fullPath . $imageName, PATHINFO_BASENAME),
+                'file_date' => $file_date,
+                'file_type' => pathinfo($fullPath . $imageName, PATHINFO_EXTENSION),
+                'file_size' => $fz,
+                'file_path' => $fullPath . $imageName,
+                'doc_type' => $doc_type
+            ]);
+        }
+        
+        return response()->json(['upload success'=>$imageName]);
+    }
 
     
     public function deletejobfile($id,$fn){
@@ -516,6 +544,20 @@ class JobController extends Controller
             $s3->delete($img_fn);
         }
         return redirect('/homefoundation');
+    }
+
+    public function deletecityplanfile($id,$fn,$doctype){
+        $img_fn = (new MainController)->MyFind("cityplan_files","file_path","where job_id = '" . $id . "' and file_name = '" . $fn ."' and doc_type = '" . $doctype . "' ","" );
+        $img_id = (new MainController)->MyFind("cityplan_files","id","where job_id = '" . $id . "' and file_name = '" . $fn ."' and doc_type = '" . $doctype . "' ","" );
+        //dd($img_id);
+
+        DB::table('cityplan_files')->where('id', $img_id)->delete();
+
+        $s3 = Storage::disk('s3');
+        if($s3->exists($img_fn)){
+            $s3->delete($img_fn);
+        }
+        return redirect('/cityplan');
     }
 
 

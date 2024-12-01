@@ -67,7 +67,6 @@
         }
 
       
-
         function bindingPopup(value1,value2,value3) {
             Livewire.emit('bindingPopup',value1,value2,value3);
         }

@@ -67,6 +67,7 @@ Route::get('login2', Login2::class);
 use App\Http\Livewire\Landing;
 use App\Http\Livewire\Index;
 use App\Http\Livewire\HomeFoundation;
+use App\Http\Livewire\CityPlan;
 use App\Http\Livewire\Buttons;
 use App\Http\Livewire\FormAdvanced;
 use App\Http\Livewire\JobAdd;
@@ -86,10 +87,14 @@ use App\Http\Livewire\QuotationDetails;
 
 Route::get('/jobs/data', [Index::class, 'getData'])->name('home_jobs_data');
 Route::get('/fund/data', [HomeFoundation::class, 'getData'])->name('home_fund_data');
+Route::get('/cityplan/data', [CityPlan::class, 'getData'])->name('city_plan_data');
+
 Route::view('/welcome', 'welcome');
 Route::get('homefoundation', [AuthController::class, 'homefoundation'])->name('homefoundation');
-
 Route::get('foundpropmap', [AuthController::class, 'foundpropmap'])->name('foundpropmap');
+
+Route::get('cityplan', [AuthController::class, 'cityplan'])->name('cityplan');
+
 
 //Route::view('/homefoundation', 'homefoundation');
 Route::view('/testlivewireview', 'testlivewireview');
@@ -122,6 +127,11 @@ Route::post('dropzone/dz_storefiles', [JobController::class, 'Dz_StoreFiles'])->
 Route::post('dropzone/dz_storefoundationfiles', [JobController::class, 'Dz_StoreFoundationFiles'])->name('dropzone.dz_storefoundationfiles');
 Route::get('deletejobfile/{id}/{fn}', [JobController::class, 'deletejobfile'])->name('deletejobfile');
 Route::get('deletefoundationfile/{id}/{fn}', [JobController::class, 'deletefoundationfile'])->name('deletefoundationfile');
+
+Route::post('dropzone/dz_storecityplanfiles', [JobController::class, 'Dz_StoreCityPlanFiles'])->name('dropzone.dz_storecityplanfiles');
+Route::get('deletecityplanfile/{id}/{fn}/{doctype}', [JobController::class, 'deletecityplanfile'])->name('deletecityplanfile');
+
+
 //Route::get('/postx', Postx::class);
 Route::get('/students', Students::class);
 // Route::get('/counter', Counter::class);
