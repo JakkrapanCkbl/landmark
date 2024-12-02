@@ -83,7 +83,6 @@
                     Livewire.emit('updateValue');
             }
         }
-
        
     </script>
 

@@ -2,6 +2,7 @@
     @include('livewire.popup_cityplan_files')
     @include('livewire.file-viewer')
     @include('livewire.popup_cityplan_editdata')
+    @include('livewire.popup_cityplan_adddata')
     <!-- PAGE-HEADER -->
     <div class="page-header">
         <div>
@@ -29,7 +30,8 @@
             <div class="card product-sales-main">
                 <div class="card-header border-bottom">
                     {{-- <button type="button" class="btn btn-primary" onclick="location.href='{{ url('/job/create') }}';">ลงทะเบียน</button> --}}
-                    <button type="button" class="btn btn-primary" onclick="location.href='#';">ลงทะเบียน</button>
+                    <button type="button" class="btn btn-primary" data-bs-target="#PopupCityplanAddData" data-bs-toggle="modal">ลงทะเบียน</button>
+                    {{-- <a href="#" class="text-dark" data-bs-target="#PopupCityplanAddData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;">Add New</p></a> --}}
                 </div>
                 <div wire:ignore>
                     <div class="card-body">

@@ -122,4 +122,24 @@ class CityPlan extends Component
         $this->emit('userSaved');
     }
 
+    public function submit()
+    {
+        // $this->validate();
+
+        City_plan::create([
+            'doc_group' => $this->doc_group,
+            'asa_no' => $this->asa_no,
+            'publish_date' => $this->publish_date,
+            'law_type' => $this->province,
+            'province' => $this->asa_no,
+            'description' => $this->description,
+            'expire_date' => $this->expire_date,
+            'organization' => $this->organization,
+            'remark' => $this->remark,
+        ]);
+
+        session()->flash('success', 'Data added successfully!');
+        $this->reset();
+    }
+
 }

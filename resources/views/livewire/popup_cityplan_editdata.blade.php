@@ -85,9 +85,14 @@
 
                 <div class="modal-footer p-0 border-top-0">
                     <div class="row">
-                        <div class="col-md-12 d-flex mb-4">
+                        {{-- <div class="col-md-12 d-flex mb-4">
                             <p class="m-0 wp-50 text-muted"></p>
                             <p class="m-0 wp-50 text-dark"><button class="btn btn-primary" onclick="updateValue()">บันทึกข้อมูล</button></p>
+                        </div> --}}
+                        <div class="col-md-12 d-flex mb-8">
+                            <button class="btn btn-primary" onclick="updateValue()">บันทึกข้อมูล</button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
