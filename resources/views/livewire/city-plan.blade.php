@@ -30,8 +30,8 @@
             <div class="card product-sales-main">
                 <div class="card-header border-bottom">
                     {{-- <button type="button" class="btn btn-primary" onclick="location.href='{{ url('/job/create') }}';">ลงทะเบียน</button> --}}
-                    <button type="button" class="btn btn-primary" data-bs-target="#PopupCityplanAddData" data-bs-toggle="modal">ลงทะเบียน</button>
-                    {{-- <a href="#" class="text-dark" data-bs-target="#PopupCityplanAddData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;">Add New</p></a> --}}
+                    <button type="button" class="btn btn-primary" data-bs-target="#PopupCityplanAddData" data-bs-toggle="modal" onclick="@this.resetInput()">ลงทะเบียน</button>
+                    
                 </div>
                 <div wire:ignore>
                     <div class="card-body">
@@ -51,6 +51,7 @@
                                         <th class="bg-transparent border-bottom-0">Word</th>
                                         <th class="bg-transparent border-bottom-0">Print แนบรายงาน</th>
                                         <th class="bg-transparent border-bottom-0">doc_group</th>
+                                        <th class="bg-transparent border-bottom-0">law_type</th>
                                     </tr>
                                 </thead>
                                 

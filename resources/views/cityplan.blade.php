@@ -83,6 +83,10 @@
                     Livewire.emit('updateValue');
             }
         }
+
+         function resetInput() {
+            Livewire.emit('resetInput');
+        }
        
     </script>
 
@@ -139,7 +143,8 @@
                     { "data": "PDF" },
                     { "data": "Word" },
                     { "data": "Print" },
-                    { "data": "doc_group" }
+                    { "data": "doc_group" },
+                    { "data": "law_type" }
                 ],
                 columnDefs: [
                     {
@@ -181,6 +186,10 @@
                     },
                     {
                         targets: 11, //  doc_group
+                        visible: false,
+                    },
+                    {
+                        targets: 12, //  law_type
                         visible: false,
                     }
                 ],

@@ -41,7 +41,8 @@ class CityPlan extends Component
         'bindingPopup',
         "opens3file",
         'bindingPopupEditData',
-        'updateValue'
+        'updateValue',
+        'resetInput'
     ];
 
     public function render()
@@ -60,7 +61,7 @@ class CityPlan extends Component
         // Perform the SQL query
         
         $sql = "Select id, asa_no, publish_date, province, description, expire_date, organization, remark, ";
-        $sql = $sql . "'' As PDF, '' As Word, '' As Print, doc_group ";
+        $sql = $sql . "'' As PDF, '' As Word, '' As Print, doc_group, law_type ";
         $sql = $sql . "From city_plans ";
         $sql = $sql . "ORDER BY id ";
         $cityplans = DB::select($sql);
@@ -120,6 +121,19 @@ class CityPlan extends Component
             'remark' => $this->remark
         ]);
         $this->emit('userSaved');
+    }
+
+    public function resetInput(){
+        $this->doc_group = "";
+        $this->asa_no = "";
+        $this->publish_date = "";
+        $this->law_type = "";
+        $this->province = "";
+        $this->asa_no = "";
+        $this->description = "";
+        $this->expire_date = "";
+        $this->organization = "";
+        $this->remark = "";
     }
 
     public function submit()
