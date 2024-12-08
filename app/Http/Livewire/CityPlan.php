@@ -60,10 +60,22 @@ class CityPlan extends Component
     {
         // Perform the SQL query
         
-        $sql = "Select id, asa_no, publish_date, province, description, expire_date, organization, remark, ";
-        $sql = $sql . "'' As PDF, '' As Word, '' As Print, doc_group, law_type ";
-        $sql = $sql . "From city_plans ";
-        $sql = $sql . "ORDER BY id ";
+        //$sql = "Select city_plans.id, asa_no, publish_date, province, description, expire_date, organization, remark, ";
+        //$sql = $sql . "cityplan_files.doc_type As PDF, '' As Word, '' As Print, doc_group, law_type ";
+        //$sql = $sql . "From city_plans Left Join ";
+        //$sql = $sql . "cityplan_files On cityplan_files.job_id = city_plans.id ";
+        //$sql = $sql . "ORDER BY city_plans.id ";
+        $sql = "SELECT city_plans.id, city_plans.asa_no, city_plans.publish_date, city_plans.province, city_plans.description, ";
+        $sql = $sql . "city_plans.expire_date, city_plans.organization, city_plans.remark, ";
+        $sql = $sql . "MAX(CASE WHEN cityplan_files.doc_type = 'cityplan_pdf' THEN 'True' ELSE '' END) AS PDF, ";
+        $sql = $sql . "MAX(CASE WHEN cityplan_files.doc_type = 'cityplan_word' THEN 'True' ELSE '' END) AS Word, ";
+        $sql = $sql . "MAX(CASE WHEN cityplan_files.doc_type = 'cityplan_print' THEN 'True' ELSE '' END) AS Print, ";
+        $sql = $sql . "city_plans.doc_group, city_plans.law_type ";
+        $sql = $sql . "FROM city_plans LEFT JOIN cityplan_files ON cityplan_files.job_id = city_plans.id ";
+        $sql = $sql . "GROUP BY city_plans.id, city_plans.asa_no, city_plans.publish_date, city_plans.province, city_plans.description, ";
+        $sql = $sql . "city_plans.expire_date, city_plans.organization, city_plans.remark, city_plans.doc_group, city_plans.law_type ";
+        $sql = $sql . "ORDER BY city_plans.id ";
+
         $cityplans = DB::select($sql);
         // Return as JSON
         return response()->json(['data' => $cityplans]);
@@ -93,6 +105,7 @@ class CityPlan extends Component
 
     public function bindingPopupEditData($value1,$value2,$value3,$value4,$value5,$value6,$value7,$value8,$value9,$value10){
        
+        
         //dd($value16);
         $this->myid = $value1;
         $this->doc_group = $value2;
@@ -104,6 +117,12 @@ class CityPlan extends Component
         $this->expire_date = $value8;
         $this->organization = $value9;
         $this->remark = $value10;
+
+        // binding files list
+        $this->subfolder = str_replace('/', '_', $this->myid);
+        $this->job_imgs = DB::select("select * from cityplan_files where job_id = " . $this->myid . " and doc_type = 'cityplan_pdf' order by file_name");
+        $this->landindex = DB::select("select * from cityplan_files where job_id = " . $this->myid . " and doc_type = 'cityplan_word' order by file_name");
+        $this->disclaim = DB::select("select * from cityplan_files where job_id = " . $this->myid . " and doc_type = 'cityplan_print' order by file_name");
     }
 
     public function updateValue(){
