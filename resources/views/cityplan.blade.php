@@ -140,6 +140,7 @@
                     { "data": "expire_date" },
                     { "data": "organization" },
                     { "data": "remark" },
+                    { "data": "Map" },
                     { "data": "PDF" },
                     { "data": "Word" },
                     { "data": "Print" },
@@ -163,14 +164,20 @@
                         }
                     },
                     {
-                        targets: 8, //  PDF
+                        targets: 8, //  Map
                         className: 'text-center',
                         render: function(data, type, row) {
-                            //if (row.PDF === null || row.PDF === undefined) {
-                                //return `<td class="text-center text-muted"></td>`;
-                            //} else {
-                                //return `<td class="text-center"><a href="javascript:void(0)" onclick="opens3file('` + row.id +  `','cityplan_pdf')"  class="text-dark" data-bs-target="#viewfile" data-bs-toggle="modal" ><i class="fa fa-file-pdf-o fa-2x" data-bs-toggle="tooltip" title="PDF" data-bs-original-title="fa fa-file-pdf-o fa-2x" aria-label="fa fa-file-pdf-o fa-2x" style="color: red;"></i></a></td>`;
-                            //}
+                            if (row.Map === "True") {
+                                return `<td class="text-center"><a href="javascript:void(0)" onclick="opens3file('` + row.id +  `','cityplan_map')"  class="text-dark" data-bs-target="#viewfile" data-bs-toggle="modal" ><i class="fa fa-file-pdf-o fa-2x" data-bs-toggle="tooltip" title="PDF" data-bs-original-title="fa fa-file-pdf-o fa-2x" aria-label="fa fa-file-pdf-o fa-2x" style="color: red;"></i></a></td>`;
+                            } else {
+                                 return `<td class="text-center text-muted"></td>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: 9, //  PDF
+                        className: 'text-center',
+                        render: function(data, type, row) {
                             if (row.PDF === "True") {
                                 return `<td class="text-center"><a href="javascript:void(0)" onclick="opens3file('` + row.id +  `','cityplan_pdf')"  class="text-dark" data-bs-target="#viewfile" data-bs-toggle="modal" ><i class="fa fa-file-pdf-o fa-2x" data-bs-toggle="tooltip" title="PDF" data-bs-original-title="fa fa-file-pdf-o fa-2x" aria-label="fa fa-file-pdf-o fa-2x" style="color: red;"></i></a></td>`;
                             } else {
@@ -179,14 +186,9 @@
                         }
                     },
                     {
-                        targets: 9, //  Word
+                        targets: 10, //  Word
                         className: 'text-center',
                         render: function(data, type, row) {
-                           //if (row.Word === null || row.Word === undefined) {
-                                //return `<td class="text-center text-muted"></td>`;
-                            //} else {
-                                //return `<td class="text-center"><a href="javascript:void(0)" onclick="opens3file('` + row.id +  `','cityplan_word')"  class="text-dark"><i class="fa fa-file-word-o fa-2x" data-bs-toggle="tooltip" title="Word" data-bs-original-title="fa fa-file-word-o fa-2x" aria-label="fa fa-file-word-o fa-2x" style="color: blue;"></i></a></td>`;
-                            //}
                             if (row.Word === "True") {
                                 return `<td class="text-center"><a href="javascript:void(0)" onclick="opens3file('` + row.id +  `','cityplan_word')"  class="text-dark"><i class="fa fa-file-word-o fa-2x" data-bs-toggle="tooltip" title="Word" data-bs-original-title="fa fa-file-word-o fa-2x" aria-label="fa fa-file-word-o fa-2x" style="color: blue;"></i></a></td>`;
                             } else {
@@ -195,7 +197,7 @@
                         }
                     },
                     {
-                        targets: 10, //  Print
+                        targets: 11, //  Print
                         className: 'text-center',
                         render: function(data, type, row) {
                            //if (row.Print === null || row.Print === undefined) {
@@ -214,11 +216,11 @@
                         }
                     },
                     {
-                        targets: 11, //  doc_group
+                        targets: 12, //  doc_group
                         visible: false,
                     },
                     {
-                        targets: 12, //  law_type
+                        targets: 13, //  law_type
                         visible: false,
                     }
                 ],

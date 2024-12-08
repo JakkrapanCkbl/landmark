@@ -47,6 +47,7 @@
                                         <th class="bg-transparent border-bottom-0">สิ้นสุดอายุ</th>
                                         <th class="bg-transparent border-bottom-0">หน่วยงาน</th>
                                         <th class="bg-transparent border-bottom-0">หมายเหตุ</th>
+                                        <th class="bg-transparent border-bottom-0">แผนที่ผังเมือง</th>
                                         <th class="bg-transparent border-bottom-0">PDF ต้นฉบับ</th>
                                         <th class="bg-transparent border-bottom-0">Word</th>
                                         <th class="bg-transparent border-bottom-0">Print แนบรายงาน</th>

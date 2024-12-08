@@ -26,6 +26,7 @@ class CityPlan extends Component
     public $organization;
     public $remark;
 
+    public $job_maps;
     public $job_imgs;
     public $landindex;
     public $disclaim;
@@ -67,6 +68,7 @@ class CityPlan extends Component
         //$sql = $sql . "ORDER BY city_plans.id ";
         $sql = "SELECT city_plans.id, city_plans.asa_no, city_plans.publish_date, city_plans.province, city_plans.description, ";
         $sql = $sql . "city_plans.expire_date, city_plans.organization, city_plans.remark, ";
+        $sql = $sql . "MAX(CASE WHEN cityplan_files.doc_type = 'cityplan_map' THEN 'True' ELSE '' END) AS Map, ";
         $sql = $sql . "MAX(CASE WHEN cityplan_files.doc_type = 'cityplan_pdf' THEN 'True' ELSE '' END) AS PDF, ";
         $sql = $sql . "MAX(CASE WHEN cityplan_files.doc_type = 'cityplan_word' THEN 'True' ELSE '' END) AS Word, ";
         $sql = $sql . "MAX(CASE WHEN cityplan_files.doc_type = 'cityplan_print' THEN 'True' ELSE '' END) AS Print, ";
@@ -89,6 +91,7 @@ class CityPlan extends Component
 
         // binding files list
         $this->subfolder = str_replace('/', '_', $this->myid);
+        $this->job_maps = DB::select("select * from cityplan_files where job_id = " . $this->myid . " and doc_type = 'cityplan_map' order by file_name");
         $this->job_imgs = DB::select("select * from cityplan_files where job_id = " . $this->myid . " and doc_type = 'cityplan_pdf' order by file_name");
         $this->landindex = DB::select("select * from cityplan_files where job_id = " . $this->myid . " and doc_type = 'cityplan_word' order by file_name");
         $this->disclaim = DB::select("select * from cityplan_files where job_id = " . $this->myid . " and doc_type = 'cityplan_print' order by file_name");
@@ -120,6 +123,7 @@ class CityPlan extends Component
 
         // binding files list
         $this->subfolder = str_replace('/', '_', $this->myid);
+        $this->job_maps = DB::select("select * from cityplan_files where job_id = " . $this->myid . " and doc_type = 'cityplan_map' order by file_name");
         $this->job_imgs = DB::select("select * from cityplan_files where job_id = " . $this->myid . " and doc_type = 'cityplan_pdf' order by file_name");
         $this->landindex = DB::select("select * from cityplan_files where job_id = " . $this->myid . " and doc_type = 'cityplan_word' order by file_name");
         $this->disclaim = DB::select("select * from cityplan_files where job_id = " . $this->myid . " and doc_type = 'cityplan_print' order by file_name");
