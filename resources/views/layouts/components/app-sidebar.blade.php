@@ -38,8 +38,7 @@
                                     <li><a href="{{url('form-layouts')}}" class="slide-item">ป่าไม้</a></li>
                                     <li><a href="{{url('form-validation')}}" class="slide-item">โครงการพัฒนาของรัฐ</a></li>
                                     <li><a href="{{url('form-advanced')}}" class="slide-item">เวนคืนที่ดิน</a></li>
-                                    <li><a href="{{url('wysiwyag')}}" class="slide-item">แปลงคงที่ดิน/โครงการหมุ่บ้าน</a></li>
-                                    <li><a href="{{url('form-editable')}}" class="slide-item">อช.10/ อช.13</a></li>
+                                    <li><a href="{{url('form-editable')}}" class="slide-item">แปลงคง + อช.10, 13</a></li>
                                 </ul>
                             </li>
                              <li class="slide">

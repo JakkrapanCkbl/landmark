@@ -32,7 +32,7 @@ Route::get('/storagelink', function () {
 // });
 
 Route::get('/map', \App\Http\Livewire\FoundPropMap::class)->name('map');
-Route::get('/foundpropmap/{lat}/{lng}', [AuthController::class, 'foundpropmap'])->name('foundpropmap');
+//Route::get('/foundpropmap/{lat}/{lng}', [AuthController::class, 'foundpropmap'])->name('foundpropmap');
 
 Route::get('/projectmaster', function () {
     return view('projectmaster.listing-single');

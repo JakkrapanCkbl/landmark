@@ -188,6 +188,7 @@
                             //return `<td class="text-muted fs-13"><a href="{{ route('foundpropmap', ['lat' => '13.7479686', 'lng' => '100.4916953']) }}" target="_blank"><span style="color:green;font-weight: bold;text-decoration: underline;">` + row.prop_location + `</p></a></td>`;
                             //return `<td class="text-muted fs-13"><a href="{{ route('foundpropmap', ['lat' => '13.7479686', 'lng' => '100.4916953']) }}" target="_blank"><span style="color:green;font-weight: bold;text-decoration: underline;">` + row.prop_location + `</p></a></td>`;
                             return `<td class="text-muted fs-13"><a href="/foundpropmap?lat=` + row.lat.trim() + `&lng=` + row.lng.trim() + `" target="_blank"><span style="color:green;font-weight: bold;text-decoration: underline;">` + row.prop_location + `</p></a></td>`;
+                        
                         }
                     },
                     {
