@@ -27,9 +27,9 @@
 										<li class="slide">
 											<a class="side-menu__item" data-bs-toggle="slide" href="#Contact"><span class="side-menu__label">ติดต่อ</span></a>
 										</li>
-										<li class="slide">
+										{{-- <li class="slide">
 											<a class="side-menu__item" data-bs-toggle="slide" href="{{ route('homefoundation')}}"><span class="side-menu__label">รายการทรัพย์สินของมูลนิธิฯ</span></a>
-										</li>
+										</li> --}}
 									</ul>
 									<div class="header-nav-right d-flex">
 										<!-- <a href="#" target="_blank" class="btn btn-pill btn-outline-primary btn-w-md py-2 me-1 my-auto  d-lg-none d-xl-block d-block">
