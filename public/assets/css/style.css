@@ -11848,6 +11848,7 @@ textarea.form-control.parsley-success {
   }
 
   .modal-dialog-centered {
+    /*min-height: calc(100% - 3.5rem);*/
     min-height: calc(100% - 3.5rem);
   }
 
@@ -11855,6 +11856,7 @@ textarea.form-control.parsley-success {
     max-width: 300px;
   }
 }
+
 
 @media (min-width: 992px) {
 
@@ -21471,8 +21473,11 @@ svg {
 
 @media (min-width: 576px) {
   .modal-dialog.task-view-modal {
-    max-width: 850px;
+    /*max-width: 850px;*/
+    max-width: 1400px;
   }
+
+ 
 
   .modal-dialog.new-ticket-modal {
     max-width: 768px;

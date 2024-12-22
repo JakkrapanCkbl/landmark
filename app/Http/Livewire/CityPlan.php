@@ -102,6 +102,13 @@ class CityPlan extends Component
     }
 
     function opens3file($id,$doc_type){
+        // binding files list
+        $this->subfolder = str_replace('/', '_', $id);
+        $this->job_maps = DB::select("select * from cityplan_files where job_id = " . $id . " and doc_type = 'cityplan_map' order by file_name");
+        $this->job_imgs = DB::select("select * from cityplan_files where job_id = " . $id . " and doc_type = 'cityplan_pdf' order by file_name");
+        $this->landindex = DB::select("select * from cityplan_files where job_id = " . $id . " and doc_type = 'cityplan_word' order by file_name");
+        $this->disclaim = DB::select("select * from cityplan_files where job_id = " . $id . " and doc_type = 'cityplan_print' order by file_name");
+        // open file
         $mypath = (new MainController)->MyFind("cityplan_files","file_path","where job_id = '" . $id . "' and doc_type = '" . $doc_type ."' ","" );
         $this->fileUrl = Storage::disk('s3')->url($mypath);
     }

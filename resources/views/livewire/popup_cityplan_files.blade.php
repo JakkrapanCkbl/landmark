@@ -4,6 +4,7 @@
         <div class="modal-dialog modal-dialog-centered task-view-modal" role="document">
             <div class="modal-content modal-content-demo">
 
+
                 <div class="modal-header p-5">
                 
                     {{-- <h4 class="modal-title text-dark"> รหัสรายงาน : <u><a href= "{{ route('joborder.joborder-edit', ['id' => $myid]) }}" target='_blank'>{{$jobcode}}</a></u></h4><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button> --}}
@@ -88,6 +89,7 @@
                                                 <th></th>
                                             </tr>
                                         </thead>
+
 
                                         <tbody>
                                             @if (!is_null($job_maps))
