@@ -179,7 +179,7 @@
                         className: 'text-center',
                         render: function(data, type, row) {
                             if (row.PDF === "True") {
-                                return `<td class="text-center"><a href="javascript:void(0)" onclick="opens3file('` + row.id +  `','cityplan_pdf')"  class="text-dark" data-bs-target="#viewfile" data-bs-toggle="modal" ><i class="fa fa-file-pdf-o fa-2x" data-bs-toggle="tooltip" title="PDF" data-bs-original-title="fa fa-file-pdf-o fa-2x" aria-label="fa fa-file-pdf-o fa-2x" style="color: red;"></i></a></td>`;
+                                return `<td class="text-center"><a href="javascript:void(0)" onclick="opens3file('` + row.id +  `','cityplan_pdf')"  class="text-dark" data-bs-target="#viewfile" data-bs-toggle="modal" ><i class="fa fa-file-pdf-o fa-2x" data-bs-toggle="tooltip" title="PDF" data-bs-original-title="fa fa-file-pdf-o fa-2x" aria-label="fa fa-file-pdf-o fa-2x" style="color: green;"></i></a></td>`;
                             } else {
                                  return `<td class="text-center text-muted"></td>`;
                             }
@@ -190,7 +190,7 @@
                         className: 'text-center',
                         render: function(data, type, row) {
                             if (row.Word === "True") {
-                                return `<td class="text-center"><a href="javascript:void(0)" onclick="opens3file('` + row.id +  `','cityplan_word')"  class="text-dark"><i class="fa fa-file-word-o fa-2x" data-bs-toggle="tooltip" title="Word" data-bs-original-title="fa fa-file-word-o fa-2x" aria-label="fa fa-file-word-o fa-2x" style="color: blue;"></i></a></td>`;
+                                return `<td class="text-center"><a href="javascript:void(0)" onclick="opens3file('` + row.id +  `','cityplan_word')"  class="text-dark"><i class="fa fa-file-word-o fa-2x" data-bs-toggle="tooltip" title="Word" data-bs-original-title="fa fa-file-word-o fa-2x" aria-label="fa fa-file-word-o fa-2x" style="color: purple;"></i></a></td>`;
                             } else {
                                 return `<td class="text-center text-muted"></td>`;
                             }
@@ -207,7 +207,7 @@
                             //}
 
                             if (row.Print === "True") {
-                                return `<td class="text-center"><a href="javascript:void(0)" onclick="opens3file('` + row.id +  `','cityplan_print')"  class="text-dark" data-bs-target="#viewfile" data-bs-toggle="modal" ><i class="fa fa-file-pdf-o fa-2x" data-bs-toggle="tooltip" title="PDF" data-bs-original-title="fa fa-file-pdf-o fa-2x" aria-label="fa fa-file-pdf-o fa-2x" style="color: red;"></i></a></td>`;
+                                return `<td class="text-center"><a href="javascript:void(0)" onclick="opens3file('` + row.id +  `','cityplan_print')"  class="text-dark" data-bs-target="#viewfile" data-bs-toggle="modal" ><i class="fa fa-file-pdf-o fa-2x" data-bs-toggle="tooltip" title="PDF" data-bs-original-title="fa fa-file-pdf-o fa-2x" aria-label="fa fa-file-pdf-o fa-2x" style="color: blue;"></i></a></td>`;
                             } else {
                                 return `<td class="text-center text-muted"></td>`;
                             }
