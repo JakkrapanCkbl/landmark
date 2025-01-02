@@ -70,10 +70,16 @@
                     <!-- Tabs -->
                     <div class="tabs-menu4 w-100">
                         <nav class="nav border-bottom px-4 d-block d-lg-flex flex-2">
-                            <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-files">
-                                Files
+                            <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1 active" data-bs-toggle="tab" href="#task-files">
+                                {{-- Files 
+                                 @if (is_null($job_maps) || empty($job_maps))
+                                    แผนที่ผังเมือง
+                                @else
+                                    <p style="font-weight: bold; color: blue;">แผนที่ผังเมือง</p>
+                                @endif --}}
+                                <p style="font-weight: bold; color: blue;">Files</p>
                             </a>
-                            <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1 active" data-bs-toggle="tab" href="#task-upload">
+                            <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-upload">
                                 Upload
                             </a>
                             <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-print">
@@ -99,8 +105,7 @@
                     </div><!-- /Tabs -->
 
                     <div class="tab-content w-100">
-                        <div class="tab-pane" id="task-files">
-                            
+                        <div class="tab-pane  active task-files-tab" id="task-files">
                             <div class="row">
                                 <div class="mt-3">
                                     <table class="table table-bordered br-7">
@@ -155,7 +160,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane active task-files-tab" id="task-upload">
+                        <div class="tab-pane" id="task-upload">
                             <div class="row">
                                 <form action="{{route('dropzone.dz_storefiles')}}" method="POST" enctype="multipart/form-data" id="files-upload" class="dropzone">
 									@csrf

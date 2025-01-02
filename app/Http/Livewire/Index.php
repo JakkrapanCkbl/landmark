@@ -29,7 +29,6 @@ class Index extends Component
     public $AvgCompletedByMonth;
     public $TotalSaleByMonth;
    
-
     public $myid = '0';
     public $jobcode;
     public $reportcode;
@@ -79,7 +78,7 @@ class Index extends Component
         $sql = $sql . "jobsize, easydiff, print_checked, link_checked, file_checked, job_checked, ";
         $sql = $sql . "customer, proplocation, print_checked, link_checked, file_checked ";
         //$sql = "Select id, client ";
-        $sql = $sql . "from jobs WHERE YEAR(startdate) = YEAR(NOW()) order by id desc LIMIT 100";
+        $sql = $sql . "from jobs WHERE YEAR(startdate) >= YEAR(NOW()) - 1 order by id desc";
         $jobs = DB::select($sql);
         // Return as JSON
         return response()->json(['data' => $jobs]);

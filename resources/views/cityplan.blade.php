@@ -84,7 +84,7 @@
             }
         }
 
-         function resetInput() {
+        function resetInput() {
             Livewire.emit('resetInput');
         }
        
@@ -114,6 +114,13 @@
 
             // Open the new window with the calculated position and size
             window.open(url, 'CenteredWindow', `width=${width}, height=${height}, top=${top}, left=${left}`);
+        }
+    </script>
+
+    <script>
+        function HidePopup() {
+            alert("Save completed");
+            $('#Vertically').modal('hide');
         }
     </script>
 
@@ -148,6 +155,7 @@
                     { "data": "law_type" }
                 ],
                 columnDefs: [
+
                     {
                         targets: 0, //  id
                         className: 'text-center',

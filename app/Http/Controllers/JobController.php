@@ -10,7 +10,6 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Carbon\Carbon;
 
 use App\Http\Controllers\MainController;
-
 use App\Models\{Job,Amphure};
 
 class JobController extends Controller
@@ -557,7 +556,10 @@ class JobController extends Controller
         if($s3->exists($img_fn)){
             $s3->delete($img_fn);
         }
-        return redirect('/cityplan');
+        //return redirect('/cityplan');
+        //return response()->json(['success' => true, 'message' => 'Item deleted successfully']);
+        
+        return response()->noContent();
     }
 
 
