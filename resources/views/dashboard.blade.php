@@ -78,7 +78,19 @@
             // Listen for the browser event
             window.addEventListener('open-url', function (event) {
                 const url = event.detail.url;
-                window.open(url, '_blank'); // Open the returned URL in a new tab
+               
+                var screenWidth = screen.width;
+                var screenHeight = screen.height;
+                var screenLeft = window.screenLeft || window.screenX;
+                var screenTop = window.screenTop || window.screenY;
+                var left, top
+                var width = 1350;
+                var height = 1000;
+                left = (screenWidth / 2) - (width / 2) + screenLeft;
+                top = (screenHeight / 2) - (height / 2) + screenTop;
+                
+                window.open(url, 'CenteredWindow', `width=${width}, height=${height}, top=${top}, left=${left}`);
+               
             });
         });
 
