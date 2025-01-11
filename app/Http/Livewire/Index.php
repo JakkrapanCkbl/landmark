@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\{Job,Amphure};
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class Index extends Component
 {
@@ -46,6 +47,7 @@ class Index extends Component
         'showSum',
         'bindingPopup',
         'test',
+        'openreport',
         'addTwoNumbers'
         // Add more listeners as needed
     ];
@@ -78,7 +80,7 @@ class Index extends Component
         $sql = $sql . "jobsize, easydiff, print_checked, link_checked, file_checked, job_checked, ";
         $sql = $sql . "customer, proplocation, print_checked, link_checked, file_checked ";
         //$sql = "Select id, client ";
-        $sql = $sql . "from jobs WHERE YEAR(startdate) >= YEAR(NOW()) - 1 order by id desc";
+        $sql = $sql . "from jobs WHERE YEAR(startdate) >= YEAR(NOW()) - 3 order by id desc";
         $jobs = DB::select($sql);
         // Return as JSON
         return response()->json(['data' => $jobs]);
@@ -133,6 +135,40 @@ class Index extends Component
         $this->job_imgs = DB::select('select * from jobs_img where job_id = ' . $this->myid . ' order by file_name');
         
     }
+
+    public function openreport($jobid){
+       
+        //dd($jobid);
+        //$this->myid = $jobid;
+        //$this->subfolder = str_replace('/', '_', $this->jobcode);
+        //$this->job_imgs = DB::select('select * from jobs_img where job_id = ' . $this->myid . ' order by file_name');
+        //return Storage::disk("s3")->url("/working_files/LC_66BF_0824/LC-66BF-0824-T.pdf");
+
+        //$filePath = '/working_files/LC_66BF_0824/LC-66BF-0824-T.pdf';
+        $filePath = DB::select('select * from jobs_img where job_id = ' . $jobid . ' order by file_name');
+        if (empty($filePath)) {
+            // No records found
+            return response()->json(['message' => 'No files found'], 404);
+        }else{
+            $firstFile = $filePath[0]->file_path ?? null;
+            //dd($firstFile);
+            if ($firstFile) {
+                $mypath = $filePath[0]->file_path;
+                if (Storage::disk('s3')->exists($mypath)) {
+                    $url = Storage::disk('s3')->temporaryUrl(
+                        $mypath,
+                        now()->addMinutes(5) // Expiration time
+                    );
+                    $this->dispatchBrowserEvent('open-url', ['url' => $url]);
+                    //return redirect()->to($url);
+                    //dd('ok');
+                }
+            }
+            return response()->json(['message' => 'File not found'], 404);
+        }
+        
+    }
+
 
     public function showMessage()
     {

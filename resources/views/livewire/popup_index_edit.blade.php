@@ -1,5 +1,6 @@
 
     <!--TASK MODAL-->
+    
     <div wire:ignore.self class="modal fade" id="Vertically">
         <div class="modal-dialog modal-dialog-centered task-view-modal" role="document">
             <div class="modal-content modal-content-demo">

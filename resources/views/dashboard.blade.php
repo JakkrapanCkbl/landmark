@@ -66,6 +66,7 @@
         function bindingPopup(value0,value1,value2,value3,value4,value5,value6,value7,value8,value9,value10) {
             Livewire.emit('bindingPopup',value0,value1,value2,value3,value4,value5,value6,value7,value8,value9,value10);
         }
+
         
 
         function addTwoNumbers(num1, num2) {
@@ -73,7 +74,20 @@
             Livewire.emit('addTwoNumbers', num1, num2);
         }
 
-        
+        document.addEventListener('DOMContentLoaded', function () {
+            // Listen for the browser event
+            window.addEventListener('open-url', function (event) {
+                const url = event.detail.url;
+                window.open(url, '_blank'); // Open the returned URL in a new tab
+            });
+        });
+
+        function openreport(jobid) {
+            Livewire.emit('openreport',jobid);
+        }
+
+
+
 
     </script>
 
@@ -163,7 +177,9 @@
                     {
                         targets: 2, // jobcode column
                         render: function(data, type, row) {
-                            return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="bindingPopup('` + row.id + `','` + row.jobcode + `','` + row.reportcode + `','` + row.projectname + `','` + row.proplocation + `','` + row.startdate + `','` + row.clientduedate + `','` + row.job_status + `','` + row.print_checked + `','` + row.link_checked + `','` + row.file_checked + `')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
+                            //return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="bindingPopup('` + row.id + `','` + row.jobcode + `','` + row.reportcode + `','` + row.projectname + `','` + row.proplocation + `','` + row.startdate + `','` + row.clientduedate + `','` + row.job_status + `','` + row.print_checked + `','` + row.link_checked + `','` + row.file_checked + `')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
+                            //return `<td class="text-muted fs-13"><a data-bs-toggle="tooltip" data-bs-original-title="Open PDF" href="` + {{ Storage::disk("s3")->url("/working_files/LC_66BF_0824/LC-66BF-0824-T.pdf") }} + `" target="_blank"><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
+                            return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="openreport('` + row.id + `')""><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
                         }
                     },
                     {
