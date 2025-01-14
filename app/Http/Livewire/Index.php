@@ -75,13 +75,15 @@ class Index extends Component
     {
         // Perform the SQL query
         //$jobs = Job::whereYear('startdate', Carbon::now()->year)->get();
-        $sql = "Select id, client, jobcode, reportcode, CONCAT(projectname, '<BR> ', proplocation) AS projectname, ";
-        $sql = $sql . "obj_method, marketvalue, marketvalue_unit, ";
-        $sql = $sql . "prop_type, prop_size, startdate, ";
-        $sql = $sql . "inspectiondate, lcduedate, clientduedate, valuer, headvaluer, job_status, customer, ";
-        $sql = $sql . "jobsize, easydiff, print_checked, link_checked, file_checked, job_checked, ";
-        $sql = $sql . "customer, proplocation, print_checked, link_checked, file_checked ";
-        $sql = $sql . "from jobs WHERE YEAR(startdate) >= YEAR(NOW()) - 3 order by id desc";
+        $sql = "Select jobs.id, jobs.client, jobs.jobcode, jobs.reportcode, CONCAT(jobs.projectname, '<BR> ', jobs.proplocation) AS projectname, ";
+        $sql = $sql . "jobs.obj_method, jobs.marketvalue, jobs.marketvalue_unit, ";
+        $sql = $sql . "jobs.prop_type, jobs.prop_size, jobs.startdate, ";
+        $sql = $sql . "jobs.inspectiondate, jobs.lcduedate, jobs.clientduedate, jobs.valuer, jobs.headvaluer, jobs.job_status, jobs.customer, ";
+        $sql = $sql . "jobs.jobsize, jobs.easydiff, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs.job_checked, ";
+        $sql = $sql . "jobs.customer, jobs.proplocation, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs_img.file_name ";
+        $sql = $sql . "From jobs Left Join ";
+        $sql = $sql . "jobs_img On jobs_img.jobcode = jobs.jobcode ";
+        $sql = $sql . "WHERE Year(jobs.startdate) >= Year(Now()) - 3 Order By jobs.id Desc";
         $jobs = DB::select($sql);
         // Return as JSON
         return response()->json(['data' => $jobs]);

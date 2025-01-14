@@ -165,7 +165,8 @@
                     { "data": "proplocation" },
                     { "data": "print_checked" },
                     { "data": "link_checked" },
-                    { "data": "file_checked" }
+                    { "data": "file_checked" },
+                    { "data": "file_name" }
                 ],
 
                 columnDefs: [
@@ -174,7 +175,12 @@
                         render: function(data, type, row) {
                             //return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="bindingPopup('` + row.id + `','` + row.jobcode + `','` + row.reportcode + `','` + row.projectname + `','` + row.proplocation + `','` + row.startdate + `','` + row.clientduedate + `','` + row.job_status + `','` + row.print_checked + `','` + row.link_checked + `','` + row.file_checked + `')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
                             //return `<td class="text-muted fs-13"><a data-bs-toggle="tooltip" data-bs-original-title="Open PDF" href="` + {{ Storage::disk("s3")->url("/working_files/LC_66BF_0824/LC-66BF-0824-T.pdf") }} + `" target="_blank"><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
-                            return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="openreport('` + row.id + `')""><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.id + `</p></a></td>`;
+                            if (row.file_name === null) {
+                                return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="openreport('` + row.id + `')""><span style="color:black;font-weight: bold;text-decoration: underline;" >` + row.id + `</p></a></td>`;
+                            }else{
+                                return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="openreport('` + row.id + `')""><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.id + `</p></a></td>`;
+                            }
+                            
                         }
                     },
 
@@ -384,7 +390,7 @@
                     {
                         targets: 16, // job_status column
                         render: function(data, type, row) {
-                             if (row.job_status == 'In Progress') {
+                            if (row.job_status == 'In Progress') {
                                 return `<td class="text-center">In Progress</td>`;
                             }else if (row.job_status == 'Completed') {
                                 return `<td class="text-center">Completed</td>`;
@@ -417,6 +423,11 @@
                         targets: 21,  // Adjust based on the index of another column to hide
                         visible: false // Hide the third column
                     },
+                    {
+                        targets: 22,  // file_name
+                        visible: false // Hide the third column
+                    },
+                    
                 ],
             
             });

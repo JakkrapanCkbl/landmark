@@ -628,6 +628,7 @@
                                         <th class="bg-transparent border-bottom-0">print_checked</th>
                                         <th class="bg-transparent border-bottom-0">link_checked</th>
                                         <th class="bg-transparent border-bottom-0">file_checked</th>
+                                        <th class="bg-transparent border-bottom-0">file_name</th>
                                     </tr>
                                 </thead>
                                 
