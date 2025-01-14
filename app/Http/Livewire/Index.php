@@ -75,11 +75,12 @@ class Index extends Component
     {
         // Perform the SQL query
         //$jobs = Job::whereYear('startdate', Carbon::now()->year)->get();
-        $sql = "Select id, client, jobcode, reportcode, CONCAT(projectname, '<BR> ', proplocation) AS projectname, prop_type, prop_size, startdate, ";
+        $sql = "Select id, client, jobcode, reportcode, CONCAT(projectname, '<BR> ', proplocation) AS projectname, ";
+        $sql = $sql . "obj_method, marketvalue, marketvalue_unit, ";
+        $sql = $sql . "prop_type, prop_size, startdate, ";
         $sql = $sql . "inspectiondate, lcduedate, clientduedate, valuer, headvaluer, job_status, customer, ";
         $sql = $sql . "jobsize, easydiff, print_checked, link_checked, file_checked, job_checked, ";
         $sql = $sql . "customer, proplocation, print_checked, link_checked, file_checked ";
-        //$sql = "Select id, client ";
         $sql = $sql . "from jobs WHERE YEAR(startdate) >= YEAR(NOW()) - 3 order by id desc";
         $jobs = DB::select($sql);
         // Return as JSON

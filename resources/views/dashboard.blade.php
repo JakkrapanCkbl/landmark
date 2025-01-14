@@ -149,6 +149,9 @@
                     { "data": "jobcode" },
                     { "data": "reportcode" },
                     { "data": "projectname" },
+                    { "data": "obj_method" },
+                    { "data": "marketvalue" },
+                    { "data": "marketvalue_unit" },
                     { "data": "prop_type" },
                     { "data": "prop_size" },
                     { "data": "startdate" },
@@ -166,10 +169,19 @@
                 ],
 
                 columnDefs: [
+                     {
+                        targets: 0, // jobcode column
+                        render: function(data, type, row) {
+                            //return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="bindingPopup('` + row.id + `','` + row.jobcode + `','` + row.reportcode + `','` + row.projectname + `','` + row.proplocation + `','` + row.startdate + `','` + row.clientduedate + `','` + row.job_status + `','` + row.print_checked + `','` + row.link_checked + `','` + row.file_checked + `')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
+                            //return `<td class="text-muted fs-13"><a data-bs-toggle="tooltip" data-bs-original-title="Open PDF" href="` + {{ Storage::disk("s3")->url("/working_files/LC_66BF_0824/LC-66BF-0824-T.pdf") }} + `" target="_blank"><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
+                            return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="openreport('` + row.id + `')""><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.id + `</p></a></td>`;
+                        }
+                    },
+
                     {
-                    targets: 1, // The "Image" column index
-                    className: 'text-center',
-                    render: function(data, type, row) {
+                        targets: 1, // The "Image" column index
+                        className: 'text-center',
+                        render: function(data, type, row) {
                         if (data === 'UOB') {
                             return `<td class="text-center"><img alt="avatar" class="rounded-circle" src="{{ asset('storage/bank/48x48/uob.png') }}"></td>`;
                         } else if (data === 'KK') {
@@ -183,19 +195,16 @@
                                 return `<td class="text-muted fs-13" data-bs-placement="top" data-bs-toggle="tooltip" title="` + row.customer + `">` + row.customer.substring(0, 15) + `</td>`;
                             }
                         }
-                    }
-                    },
-                    
-                    {
-                        targets: 2, // jobcode column
-                        render: function(data, type, row) {
-                            //return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="bindingPopup('` + row.id + `','` + row.jobcode + `','` + row.reportcode + `','` + row.projectname + `','` + row.proplocation + `','` + row.startdate + `','` + row.clientduedate + `','` + row.job_status + `','` + row.print_checked + `','` + row.link_checked + `','` + row.file_checked + `')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
-                            //return `<td class="text-muted fs-13"><a data-bs-toggle="tooltip" data-bs-original-title="Open PDF" href="` + {{ Storage::disk("s3")->url("/working_files/LC_66BF_0824/LC-66BF-0824-T.pdf") }} + `" target="_blank"><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
-                            return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="openreport('` + row.id + `')""><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
                         }
                     },
                     {
-                        targets: 7, // startdate column
+                        targets: 2, // jobcode column
+                        render: function(data, type, row) {
+                            return `<td class="text-muted fs-13"><a href="/joborder-edit/${row.id}" target="_blank"><span style="color:green;font-weight: bold;text-decoration: underline;">` + row.jobcode + `</p></a></td>`;
+                        }
+                    },
+                    {
+                        targets: 10, // startdate column
                         render: function(data, type, row) {
                             let dateObj = new Date(row.startdate);
                             let referenceDate = new Date('1976-04-27');
@@ -224,7 +233,7 @@
                         }
                     },
                     {
-                        targets: 8, // inspectiondate column
+                        targets: 11, // inspectiondate column
                         render: function(data, type, row) {
                             let dateObj = new Date(row.inspectiondate);
                             let referenceDate = new Date('1976-04-27');
@@ -253,7 +262,7 @@
                         }
                     },
                     {
-                        targets: 9, // lcduedate column
+                        targets: 12, // lcduedate column
                         render: function(data, type, row) {
                             let dateObj = new Date(row.lcduedate);
                             let referenceDate = new Date('1976-04-27');
@@ -282,7 +291,7 @@
                         }
                     },
                     {
-                        targets: 10, // clientduedate column
+                        targets: 13, // clientduedate column
                         render: function(data, type, row) {
                             let dateObj = new Date(row.clientduedate);
                             // Define the reference date
@@ -311,7 +320,7 @@
                         }
                     },
                     {
-                        targets: 11, // valuer column
+                        targets: 14, // valuer column
                         className: 'text-center',
                         render: function(data, type, row) {
                             if (row.valuer == 'มงคล') {
@@ -342,7 +351,7 @@
                         }
                     },
                     {
-                        targets: 12, // headvaluer column
+                        targets: 15, // headvaluer column
                         className: 'text-center',
                         render: function(data, type, row) {
                             if (row.headvaluer == 'มงคล') {
@@ -373,7 +382,7 @@
                         }
                     },
                     {
-                        targets: 13, // job_status column
+                        targets: 16, // job_status column
                         render: function(data, type, row) {
                              if (row.job_status == 'In Progress') {
                                 return `<td class="text-center">In Progress</td>`;
@@ -389,23 +398,23 @@
                         }
                     },
                     {
-                        targets: 14,  // Adjust based on the index of another column to hide
-                        visible: false // Hide the third column
-                    },
-                    {
-                        targets: 15,  // Adjust based on the index of another column to hide
-                        visible: false // Hide the third column
-                    },
-                    {
-                        targets: 16,  // Adjust based on the index of another column to hide
-                        visible: false // Hide the third column
-                    },
-                    {
                         targets: 17,  // Adjust based on the index of another column to hide
                         visible: false // Hide the third column
                     },
                     {
                         targets: 18,  // Adjust based on the index of another column to hide
+                        visible: false // Hide the third column
+                    },
+                    {
+                        targets: 19,  // Adjust based on the index of another column to hide
+                        visible: false // Hide the third column
+                    },
+                    {
+                        targets: 20,  // Adjust based on the index of another column to hide
+                        visible: false // Hide the third column
+                    },
+                    {
+                        targets: 21,  // Adjust based on the index of another column to hide
                         visible: false // Hide the third column
                     },
                 ],

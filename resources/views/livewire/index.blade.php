@@ -611,6 +611,9 @@
                                         <th class="bg-transparent border-bottom-0">รายงานเลขที่</th>
                                         <th class="bg-transparent border-bottom-0">Bank's ID</th>
                                         <th class="bg-transparent border-bottom-0">โครงการ / ที่ตั้ง</th>
+                                        <th class="bg-transparent border-bottom-0">วิธีการประเมิน</th>
+                                        <th class="bg-transparent border-bottom-0">มูลค่าตลาด (บาท)</th>
+                                        <th class="bg-transparent border-bottom-0">บาท/หน่วย</th>
                                         <th class="bg-transparent border-bottom-0">ปรเภท</th>
                                         <th class="bg-transparent border-bottom-0">เนื้อที่</th>
                                         <th class="bg-transparent border-bottom-0">รับงาน</th>
