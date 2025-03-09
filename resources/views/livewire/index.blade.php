@@ -514,7 +514,112 @@
     </div>
     <!-- ROW-3 END -->
 
-    <!-- count task -->
+    <!-- ROW-4 count check task1 -->
+    <div class="row">
+        <div class="col-md-12 col-xl-12">
+            <div class="row">
+                <div class="col-md-12 col-lg-6 col-xl-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h4>ส่งตรวจงาน (วันนี้)</h4>
+                                    <p>Today {{$SumTask}}</p>
+                                </div>
+                                <div class="col-4">
+                                    <div class="hpx-50 wpx-50 bg-primary br-5 d-flex align-items-center justify-content-center ms-auto">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="text-white w-icn" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M17,4h-1.1846313C15.4013672,2.8383179,14.3035889,2.0014648,13,2h-2C9.6964111,2.0014648,8.5986328,2.8383179,8.1846313,4H7C5.3438721,4.0018311,4.0018311,5.3438721,4,7v12c0.0018311,1.6561279,1.3438721,2.9981689,3,3h10c1.6561279-0.0018311,2.9981689-1.3438721,3-3V7C19.9981689,5.3438721,18.6561279,4.0018311,17,4z M9,5c0.0014038-1.1040039,0.8959961-1.9985962,2-2h2c1.1040039,0.0014038,1.9985962,0.8959961,2,2v2H9V5z M19,19c-0.0014038,1.1040039-0.8959961,1.9985962-2,2H7c-1.1040039-0.0014038-1.9985962-0.8959961-2-2V7c0.0014038-1.1040039,0.8959961-1.9985962,2-2h1v2.5006104C8.0001831,7.7765503,8.223999,8.0001831,8.5,8h7.0006104C15.7765503,7.9998169,16.0001831,7.776001,16,7.5V5h1c1.1040039,0.0014038,1.9985962,0.8959961,2,2V19z"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6 col-xl-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h4>ส่งตรวจงาน (ทั้งหมด)</h4>
+                                    <p>YTD {{$this->SumCompleted}}</p>
+                                </div>
+                                <div class="col-4">
+                                    <div class="hpx-50 wpx-50 br-5 d-flex align-items-center justify-content-center bg-secondary ms-auto">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="text-white w-icn" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M17,4h-1.1846313C15.4013672,2.8383179,14.3035889,2.0014648,13,2h-2C9.6964111,2.0014648,8.5986328,2.8383179,8.1846313,4H7C5.3438721,4.0018311,4.0018311,5.3438721,4,7v12c0.0018311,1.6561279,1.3438721,2.9981689,3,3h10c1.6561279-0.0018311,2.9981689-1.3438721,3-3V7C19.9981689,5.3438721,18.6561279,4.0018311,17,4z M9,5c0.0014038-1.1040039,0.8959961-1.9985962,2-2h2c1.1040039,0.0014038,1.9985962,0.8959961,2,2v2H9V5z M19,19c-0.0014038,1.1040039-0.8959961,1.9985962-2,2H7c-1.1040039-0.0014038-1.9985962-0.8959961-2-2V7c0.0014038-1.1040039,0.8959961-1.9985962,2-2h1v2.5006104C8.0001831,7.7765503,8.223999,8.0001831,8.5,8h7.0006104C15.7765503,7.9998169,16.0001831,7.776001,16,7.5V5h1c1.1040039,0.0014038,1.9985962,0.8959961,2,2V19z"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6 col-xl-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h4>Update data</h4>
+                                    <p>YTD {{$this->SumInprogress}}</p>
+                                </div>
+                                <div class="col-4">
+                                    <div class="hpx-50 wpx-50 br-5 d-flex align-items-center justify-content-center bg-info ms-auto">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="text-white w-icn" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M17,4h-1.1846313C15.4013672,2.8383179,14.3035889,2.0014648,13,2h-2C9.6964111,2.0014648,8.5986328,2.8383179,8.1846313,4H7C5.3438721,4.0018311,4.0018311,5.3438721,4,7v12c0.0018311,1.6561279,1.3438721,2.9981689,3,3h10c1.6561279-0.0018311,2.9981689-1.3438721,3-3V7C19.9981689,5.3438721,18.6561279,4.0018311,17,4z M9,5c0.0014038-1.1040039,0.8959961-1.9985962,2-2h2c1.1040039,0.0014038,1.9985962,0.8959961,2,2v2H9V5z M19,19c-0.0014038,1.1040039-0.8959961,1.9985962-2,2H7c-1.1040039-0.0014038-1.9985962-0.8959961-2-2V7c0.0014038-1.1040039,0.8959961-1.9985962,2-2h1v2.5006104C8.0001831,7.7765503,8.223999,8.0001831,8.5,8h7.0006104C15.7765503,7.9998169,16.0001831,7.776001,16,7.5V5h1c1.1040039,0.0014038,1.9985962,0.8959961,2,2V19z"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- ROW-4 end count check task1 -->
+    
+    <!-- ROW-5 count check task2 -->
+    <div class="row">
+        <div class="col-md-12 col-xl-12">
+            <div class="row">
+                <div class="col-md-12 col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h4>Print เล่มรายงาน</h4>
+                                    <p>YTD {{$this->SumOnHold}} | {{$this->SumCancel}}</p>
+                                </div>
+                                <div class="col-4">
+                                    <div class="hpx-50 wpx-50 br-5 d-flex align-items-center justify-content-center bg-warning ms-auto">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="text-white w-icn" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M17,4h-1.1846313C15.4013672,2.8383179,14.3035889,2.0014648,13,2h-2C9.6964111,2.0014648,8.5986328,2.8383179,8.1846313,4H7C5.3438721,4.0018311,4.0018311,5.3438721,4,7v12c0.0018311,1.6561279,1.3438721,2.9981689,3,3h10c1.6561279-0.0018311,2.9981689-1.3438721,3-3V7C19.9981689,5.3438721,18.6561279,4.0018311,17,4z M9,5c0.0014038-1.1040039,0.8959961-1.9985962,2-2h2c1.1040039,0.0014038,1.9985962,0.8959961,2,2v2H9V5z M19,19c-0.0014038,1.1040039-0.8959961,1.9985962-2,2H7c-1.1040039-0.0014038-1.9985962-0.8959961-2-2V7c0.0014038-1.1040039,0.8959961-1.9985962,2-2h1v2.5006104C8.0001831,7.7765503,8.223999,8.0001831,8.5,8h7.0006104C15.7765503,7.9998169,16.0001831,7.776001,16,7.5V5h1c1.1040039,0.0014038,1.9985962,0.8959961,2,2V19z"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h4>Collect File</h4>
+                                    <p>YTD {{$SumTask}}</p>
+                                </div>
+                                <div class="col-4">
+                                    <div class="hpx-50 wpx-50 bg-primary br-5 d-flex align-items-center justify-content-center ms-auto">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="text-white w-icn" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M17,4h-1.1846313C15.4013672,2.8383179,14.3035889,2.0014648,13,2h-2C9.6964111,2.0014648,8.5986328,2.8383179,8.1846313,4H7C5.3438721,4.0018311,4.0018311,5.3438721,4,7v12c0.0018311,1.6561279,1.3438721,2.9981689,3,3h10c1.6561279-0.0018311,2.9981689-1.3438721,3-3V7C19.9981689,5.3438721,18.6561279,4.0018311,17,4z M9,5c0.0014038-1.1040039,0.8959961-1.9985962,2-2h2c1.1040039,0.0014038,1.9985962,0.8959961,2,2v2H9V5z M19,19c-0.0014038,1.1040039-0.8959961,1.9985962-2,2H7c-1.1040039-0.0014038-1.9985962-0.8959961-2-2V7c0.0014038-1.1040039,0.8959961-1.9985962,2-2h1v2.5006104C8.0001831,7.7765503,8.223999,8.0001831,8.5,8h7.0006104C15.7765503,7.9998169,16.0001831,7.776001,16,7.5V5h1c1.1040039,0.0014038,1.9985962,0.8959961,2,2V19z"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ROW-5 end count check task2 -->
+    
+    <!-- ROW-6 count summary job -->
     <div class="row">
         <div class="col-md-12 col-xl-12">
             <div class="row">
@@ -589,9 +694,9 @@
             </div>
         </div>
     </div>
-    <!-- end count task -->
+    <!-- ROW-6 end count summary job -->
 
-    <!-- ROW-4 -->
+    <!-- ROW-7 datatable -->
     <div class="row">
         <div class="col-12 col-sm-12">
             <div class="card product-sales-main">
@@ -605,6 +710,7 @@
                             <table id="home-data-table1" class="table text-nowrap mb-0 table-bordered w-100">
                                 {{-- <thead class="table-head"> --}}
                                 <thead class="dt-head-center">
+
                                     <tr>
                                         <th>id</th>
                                         <th class="bg-transparent border-bottom-0">ลูกค้า</th>
@@ -620,6 +726,8 @@
                                         <th class="bg-transparent border-bottom-0">สำรวจ</th>
                                         <th class="bg-transparent border-bottom-0">ส่งงาน LC</th>
                                         <th class="bg-transparent border-bottom-0">ส่งงานลูกค้า</th>
+                                        <th class="bg-transparent border-bottom-0">ตรวจรายงาน</th>
+                                        <th class="bg-transparent border-bottom-0">อนุมัติรายงาน</th>
                                         <th class="bg-transparent border-bottom-0">ผู้ประเมิน</th>
                                         <th class="bg-transparent border-bottom-0">ผู้ตรวจ</th>
                                         <th class="bg-transparent border-bottom-0">สถานะ</th>
@@ -643,7 +751,7 @@
             </div>
         </div><!-- COL END -->
     </div>
-    <!-- ROW-4 END -->
+    <!-- ROW-7 END -->
 
 
 

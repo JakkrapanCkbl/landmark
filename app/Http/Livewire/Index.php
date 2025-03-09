@@ -37,6 +37,8 @@ class Index extends Component
     public $proplocation;
     public $startdate;
     public $clientduedate;
+    public $report_checked_date;
+    public $approve_checked_date;
     public $job_status;
     public $job_imgs;
     public $mainfolder = 'working_files';
@@ -78,12 +80,15 @@ class Index extends Component
         $sql = "Select jobs.id, jobs.client, jobs.jobcode, jobs.reportcode, CONCAT(jobs.projectname, '<BR> ', jobs.proplocation) AS projectname, ";
         $sql = $sql . "jobs.obj_method, jobs.marketvalue, jobs.marketvalue_unit, ";
         $sql = $sql . "jobs.prop_type, jobs.prop_size, jobs.startdate, ";
-        $sql = $sql . "jobs.inspectiondate, jobs.lcduedate, jobs.clientduedate, jobs.valuer, jobs.headvaluer, jobs.job_status, jobs.customer, ";
+        $sql = $sql . "jobs.inspectiondate, jobs.lcduedate, jobs.clientduedate, ";
+        $sql = $sql . "jobs.report_checked_date, jobs.approve_checked_date, ";
+        $sql = $sql . "jobs.valuer, jobs.headvaluer, jobs.job_status, jobs.customer, ";
         $sql = $sql . "jobs.jobsize, jobs.easydiff, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs.job_checked, ";
         $sql = $sql . "jobs.customer, jobs.proplocation, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs_img.file_name ";
         $sql = $sql . "From jobs Left Join ";
         $sql = $sql . "jobs_img On jobs_img.jobcode = jobs.jobcode ";
-        $sql = $sql . "WHERE Year(jobs.startdate) >= Year(Now()) - 3 Order By jobs.id Desc";
+        $sql = $sql . "WHERE Year(jobs.startdate) >= Year(Now()) - 2 Order By jobs.id Desc";
+        //dd($sql);
         $jobs = DB::select($sql);
         // Return as JSON
         return response()->json(['data' => $jobs]);
@@ -130,6 +135,7 @@ class Index extends Component
         $this->print_checked = $value8;
         $this->link_checked = $value9;
         $this->file_checked = $value10;
+        
 
         
         // binding files list

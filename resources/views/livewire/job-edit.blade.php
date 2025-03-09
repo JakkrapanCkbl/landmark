@@ -170,6 +170,7 @@
 															<option value="DIFF" {{$jobs->easydiff=='DIFF'?'selected':''}}>Difficult</option>
 														</select>
 													</div>
+													
 													<div class="form-group">
 														<label for="obj_id" class="form-label">วัตถุประสงค์การประเมิน</label>
 														<select name="obj_id" class="form-control">

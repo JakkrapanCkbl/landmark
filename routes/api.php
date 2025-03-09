@@ -41,6 +41,17 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 
 });
 
+
+Route::put('/update_job_from_report/{fieldValue}', [ApiJobController::class, 'update_job_from_report'])->where('fieldValue', '.*');
+
+
+
+
+
+
+
+
+
 // Route::get('/addjobapi', function(){
 //     return 'this is api';
 // });

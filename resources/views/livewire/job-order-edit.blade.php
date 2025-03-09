@@ -484,30 +484,10 @@
                                 </tr>
 
                                 <tr>
-                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">สถานะงาน</p></td>
-                                    <td class="wp-70">
-                                        <div class="row">
-                                            <div class="col-2">
-                                                <div class="form-group">
-                                                    
-                                                    <select name="job_status" class="form-control form-select" wire:model="job_status">
-                                                        <option value="In Progress">In Progress</option>
-                                                        <option value="Completed">Completed</option>
-                                                        <option value="On Hold">On Hold</option>
-                                                        <option value="Cancel">Cancel</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>            
-                                    </td>
-                                </tr>
-
-                                 <tr>
                                     <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ตรวจสอบ ข้อมูล / ขั้นตอนการทำงาน</p></td>
                                     <td class="wp-70">
                                         <div class="row">
-                                            <div class="col-3">
+                                            {{-- <div class="col-3">
                                                 <label class="form-check-label" for="job_checked">ผ่านการตรวจสอบเช็คข้อมูลแล้ว</label>
                                                 <br>
                                                 <label>
@@ -517,7 +497,7 @@
                                                 <label>
                                                     <input type="radio" name="job_checked" value="1" wire:model="job_checked"> Yes
                                                 </label>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-3">
                                                 <label class="form-check-label" for="print_checked">Print เล่มรายงาน</label>
                                                 <br>
@@ -542,7 +522,7 @@
                                             </div>
 
                                             <div class="col-3">
-                                                <label class="form-check-label" for="file_checked">File Collect</label>
+                                                <label class="form-check-label" for="file_checked">Collect File</label>
                                                 <br>
                                                 <label>
                                                     <input type="radio" name="file_checked" value="0" wire:model="file_checked"> No
@@ -558,6 +538,82 @@
                                         </div>            
                                     </td>
                                 </tr>
+
+                                 <tr>
+                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ผู้ประเมินราคา/วันที่</p></td>
+                                    <td class="wp-70">
+                                        <div class="row">
+
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <label for="checker" class="form-label">ผู้ตรวจเล่มรายงาน</label>
+                                                    <select name="checker" wire:model="checker" class="form-control form-select">
+                                                        @foreach($list_checkers as $employee)
+                                                                <option value="{{ $employee->name }}">
+                                                                    {{ $employee->name }}
+                                                                </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <label for="report_checked_date" class="form-label">วันที่ตรวจเล่มรายงาน</label>
+                                                    {{-- <input class="form-control" wire:model="startdate" name="startdate" id="startdate" placeholder="dd-mm-yyyy" type="text" value="{{ old('date', \Carbon\Carbon::now()->format('d-m-Y')) }}"> --}}
+                                                    <input class="form-control" wire:model="report_checked_date" name="report_checked_date" id="report_checked_date" type="text">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <label for="approve_checked_date" class="form-label">วันที่อนุมัติเล่มรายงาน</label>
+                                                    {{-- <input class="form-control" wire:model="startdate" name="startdate" id="startdate" placeholder="dd-mm-yyyy" type="text" value="{{ old('date', \Carbon\Carbon::now()->format('d-m-Y')) }}"> --}}
+                                                    <input class="form-control" wire:model="approve_checked_date" name="approve_checked_date" id="approve_checked_date" type="text">
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                           
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">สถานะงาน</p></td>
+                                    <td class="wp-70">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label class="form-check-label" for="job_checked">Project Completed</label>
+                                                <br>
+                                                <label>
+                                                    <input type="radio" name="job_checked" value="0" wire:model="job_checked"> No
+                                                </label>
+                                                &nbsp;&nbsp;
+                                                <label>
+                                                    <input type="radio" name="job_checked" value="1" wire:model="job_checked"> Yes
+                                                </label>
+                                            </div>
+
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <label class="form-check-label" for="job_checked">สถานะ</label>
+                                                    <br>
+                                                    <select name="job_status" class="form-control form-select" wire:model="job_status">
+                                                        <option value="In Progress">In Progress</option>
+                                                        <option value="Completed">Completed</option>
+                                                        <option value="On Hold">On Hold</option>
+                                                        <option value="Cancel">Cancel</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                        </div>            
+                                    </td>
+                                </tr>
+
+                                
 
                                 <tr>
                                     <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">บันทึก</p></td>

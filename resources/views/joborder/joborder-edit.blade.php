@@ -87,6 +87,30 @@
                 },
             });
 
+            flatpickr("#report_checked_date", {
+                dateFormat: "d M Y",
+                locale: "th",
+                onReady: function(selectedDates, dateStr, instance) {
+                // Convert and display the year in Thai Buddhist Era (พ.ศ.)
+                const thaiBuddhistYear = instance.currentYear + 543;
+                document.getElementById("report_checked_date").value = dateStr.replace(instance.currentYear.toString(), thaiBuddhistYear.toString());
+               
+                },
+            });
+
+            flatpickr("#approve_checked_date", {
+                dateFormat: "d M Y",
+                locale: "th",
+                onReady: function(selectedDates, dateStr, instance) {
+                // Convert and display the year in Thai Buddhist Era (พ.ศ.)
+                const thaiBuddhistYear = instance.currentYear + 543;
+                document.getElementById("approve_checked_date").value = dateStr.replace(instance.currentYear.toString(), thaiBuddhistYear.toString());
+               
+                },
+            });
+
+
+
         </script>
 		 
 		 <script>

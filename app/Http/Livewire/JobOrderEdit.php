@@ -51,11 +51,15 @@ class JobOrderEdit extends Component
     public $list_valuers = null; //for valuer 
     public $valuer = 'dido';
     public $list_headvaluers = null; //for valuer 
+    public $list_checkers = null; //for checker
     public $headvaluer = 'สาโรจน์';
+    public $checker = 'dido';
     public $startdate;
     public $inspectiondate;
     public $lcduedate;
     public $clientduedate;
+    public $report_checked_date;
+    public $approve_checked_date;
     public $่job_status;
     public $obj_method;
     public $marketvalue;
@@ -117,10 +121,13 @@ class JobOrderEdit extends Component
         $this->lng = $this->job->lng;
         $this->valuer = $this->job->valuer;
         $this->headvaluer = $this->job->headvaluer;
+        $this->checker = $this->job->checker;
         $this->startdate = Carbon::parse($this->job->startdate)->isoFormat('Do MMM Y');
         $this->inspectiondate = Carbon::parse($this->job->inspectiondate)->isoFormat('Do MMM Y');
         $this->lcduedate = Carbon::parse($this->job->lcduedate)->isoFormat('Do MMM Y');
         $this->clientduedate = Carbon::parse($this->job->clientduedate)->isoFormat('Do MMM Y');
+        $this->report_checked_date = Carbon::parse($this->job->report_checked_date)->isoFormat('Do MMM Y');
+        $this->approve_checked_date = Carbon::parse($this->job->approve_checked_date)->isoFormat('Do MMM Y');
         $this->job_status = $this->job->job_status;
         $this->obj_method = $this->job->obj_method;
         $this->marketvalue = number_format($this->job->marketvalue);
@@ -154,6 +161,7 @@ class JobOrderEdit extends Component
         //$this->employees = DB::table('users')->get();
         $this->list_valuers = $this->get_valuers();
         $this->list_headvaluers = $this->get_headvaluers();
+        $this->list_checkers = $this->get_checkers();
         $this->list_clients = Client::orderBy('itemno', 'asc')->get();
         return view('livewire.job-order-edit');
     }
@@ -194,6 +202,8 @@ class JobOrderEdit extends Component
         $sql_inspectiondate = (new MainController)->ConvertThaiDate2SqlDate($this->inspectiondate);
         $sql_lcduedate = (new MainController)->ConvertThaiDate2SqlDate($this->lcduedate);
         $sql_clientduedate = (new MainController)->ConvertThaiDate2SqlDate($this->clientduedate);
+        $sql_report_checked_date = (new MainController)->ConvertThaiDate2SqlDate($this->report_checked_date);
+        $sql_approve_checked_date = (new MainController)->ConvertThaiDate2SqlDate($this->approve_checked_date);
         
         if($this->edit_id){
             $my_job = Job::find($this->edit_id);
@@ -291,10 +301,13 @@ class JobOrderEdit extends Component
                 'lng' => $this->lng,
                 'valuer' => $this->valuer,
                 'headvaluer' => $this->headvaluer,
+                'checker' => $this->checker,
                 'startdate' => $sql_startdate,
                 'inspectiondate' => $sql_inspectiondate,
                 'lcduedate' => $sql_lcduedate,
                 'clientduedate' => $sql_clientduedate,
+                'report_checked_date' => $sql_report_checked_date,
+                'approve_checked_date' => $sql_approve_checked_date,
                 'job_status' => $this->job_status,
                 'obj_method' => $this->obj_method,
                 'marketvalue' => (float) str_replace(',', '', $this->marketvalue),
@@ -386,7 +399,11 @@ class JobOrderEdit extends Component
         return DB::select($strsql);
     }
 
-   
+    public static function get_checkers()
+    {
+        $strsql = "SELECT * FROM users WHERE utype = 'ADM' AND name NOT IN ('dido', 'มงคล') ORDER BY sequence_valuer";
+        return DB::select($strsql);
+    }
 
     public function updatedclient($value)
     {

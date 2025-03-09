@@ -132,6 +132,24 @@
 
     <script>
             var table = $('#home-data-table1').DataTable({
+                dom: 'Bfrtip', // Define where the buttons appear
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Export to Excel',
+                        title: 'Data Export',
+                        exportOptions: {
+                            //columns: ':visible' // Export only visible columns
+                            //columns: ':visible' // Export only visible columns
+                            columns: [0, 2, 3, 4, 5,
+                            6, 7, 8, 9, 10,
+                            11, 12, 13, 14, 15, 
+                            16, 22] // Specify the columns to export (0-based index)
+                        }
+                    }
+                ],
+
+                pageLength: 10,
                 "processing": true,
                 "serverSide": false,
                 "ajax": {
@@ -158,6 +176,8 @@
                     { "data": "inspectiondate" },
                     { "data": "lcduedate" },
                     { "data": "clientduedate" },
+                    { "data": "report_checked" },
+                    { "data": "approve_checked" },
                     { "data": "valuer" },
                     { "data": "headvaluer" },
                     { "data": "job_status" },
@@ -168,7 +188,6 @@
                     { "data": "file_checked" },
                     { "data": "file_name" }
                 ],
-
                 columnDefs: [
                      {
                         targets: 0, // jobcode column
@@ -176,14 +195,13 @@
                             //return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="bindingPopup('` + row.id + `','` + row.jobcode + `','` + row.reportcode + `','` + row.projectname + `','` + row.proplocation + `','` + row.startdate + `','` + row.clientduedate + `','` + row.job_status + `','` + row.print_checked + `','` + row.link_checked + `','` + row.file_checked + `')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
                             //return `<td class="text-muted fs-13"><a data-bs-toggle="tooltip" data-bs-original-title="Open PDF" href="` + {{ Storage::disk("s3")->url("/working_files/LC_66BF_0824/LC-66BF-0824-T.pdf") }} + `" target="_blank"><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
                             if (row.file_name === null) {
-                                return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="openreport('` + row.id + `')""><span style="color:black;font-weight: bold;text-decoration: underline;" >` + row.id + `</p></a></td>`;
+                                return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="openreport('` + row.id + `')""><span style="color:black;" >` + row.id + `</p></a></td>`;
                             }else{
-                                return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="openreport('` + row.id + `')""><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.id + `</p></a></td>`;
+                                return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="openreport('` + row.id + `')""><span style="color:green;text-decoration: underline;" >` + row.id + `</p></a></td>`;
                             }
                             
                         }
                     },
-
                     {
                         targets: 1, // The "Image" column index
                         className: 'text-center',
@@ -210,29 +228,47 @@
                         }
                     },
                     {
+                        targets: 6, // market value
+                        className: 'text-end',
+                        render: function(data, type, row) {
+                            return `<td class="text-muted fs-13">` + row.marketvalue + `</td>`;
+                        }
+                    },
+                    {
+                        targets: 7, // market value unit
+                        className: 'text-end',
+                        render: function(data, type, row) {
+                            return `<td class="text-muted fs-13">` + row.marketvalue_unit + `</td>`;
+                        }
+                    },
+                    {
                         targets: 10, // startdate column
                         render: function(data, type, row) {
                             let dateObj = new Date(row.startdate);
                             let referenceDate = new Date('1976-04-27');
                             if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
-                                // Define Thai weekday and month arrays
-                                const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
-                                const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
-                                                    'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
-                                // Get the day, month, and year
-                                let day = dateObj.getDate(); // Get the day of the month
-                                let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
-                                //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
-                                let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
+                                if (row.startdate === null) {
+                                    return `<td class="text-muted fs-13"></td>`;
+                                }else{
+                                    // Define Thai weekday and month arrays
+                                    const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
+                                    const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
+                                                        'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                                    // Get the day, month, and year
+                                    let day = dateObj.getDate(); // Get the day of the month
+                                    let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
+                                    //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
+                                    let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
 
-                                // Get the day of the week (0-6) and convert to Thai weekday name
-                                let weekday = thaiWeekdays[dateObj.getDay()];
+                                    // Get the day of the week (0-6) and convert to Thai weekday name
+                                    let weekday = thaiWeekdays[dateObj.getDay()];
 
-                                // Format the date as 'Weekday Day Month Year'
-                                let formattedDate = `${weekday} ${day} ${month} ${year}`;
+                                    // Format the date as 'Weekday Day Month Year'
+                                    let formattedDate = `${weekday} ${day} ${month} ${year}`;
 
-                                // Return the HTML with the formatted date
-                                return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                                    // Return the HTML with the formatted date
+                                    return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                                }
                             }else{
                                 return `<td class="text-muted fs-13"></td>`;
                             }
@@ -244,24 +280,28 @@
                             let dateObj = new Date(row.inspectiondate);
                             let referenceDate = new Date('1976-04-27');
                             if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
-                                // Define Thai weekday and month arrays
-                                const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
-                                const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
-                                                    'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
-                                // Get the day, month, and year
-                                let day = dateObj.getDate(); // Get the day of the month
-                                let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
-                                //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
-                                let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
+                                if (row.inspectiondate === null) {
+                                    return `<td class="text-muted fs-13"></td>`;
+                                }else{
+                                    // Define Thai weekday and month arrays
+                                    const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
+                                    const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
+                                                        'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                                    // Get the day, month, and year
+                                    let day = dateObj.getDate(); // Get the day of the month
+                                    let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
+                                    //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
+                                    let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
 
-                                // Get the day of the week (0-6) and convert to Thai weekday name
-                                let weekday = thaiWeekdays[dateObj.getDay()];
+                                    // Get the day of the week (0-6) and convert to Thai weekday name
+                                    let weekday = thaiWeekdays[dateObj.getDay()];
 
-                                // Format the date as 'Weekday Day Month Year'
-                                let formattedDate = `${weekday} ${day} ${month} ${year}`;
+                                    // Format the date as 'Weekday Day Month Year'
+                                    let formattedDate = `${weekday} ${day} ${month} ${year}`;
 
-                                // Return the HTML with the formatted date
-                                return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                                    // Return the HTML with the formatted date
+                                    return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                                }
                             }else{
                                 return `<td class="text-muted fs-13"></td>`;
                             }
@@ -273,24 +313,28 @@
                             let dateObj = new Date(row.lcduedate);
                             let referenceDate = new Date('1976-04-27');
                             if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
-                                // Define Thai weekday and month arrays
-                                const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
-                                const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
-                                                    'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
-                                // Get the day, month, and year
-                                let day = dateObj.getDate(); // Get the day of the month
-                                let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
-                                //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
-                                let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
+                                if (row.lcduedate === null) {
+                                    return `<td class="text-muted fs-13"></td>`;
+                                }else{
+                                    // Define Thai weekday and month arrays
+                                    const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
+                                    const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
+                                                        'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                                    // Get the day, month, and year
+                                    let day = dateObj.getDate(); // Get the day of the month
+                                    let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
+                                    //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
+                                    let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
 
-                                // Get the day of the week (0-6) and convert to Thai weekday name
-                                let weekday = thaiWeekdays[dateObj.getDay()];
+                                    // Get the day of the week (0-6) and convert to Thai weekday name
+                                    let weekday = thaiWeekdays[dateObj.getDay()];
 
-                                // Format the date as 'Weekday Day Month Year'
-                                let formattedDate = `${weekday} ${day} ${month} ${year}`;
+                                    // Format the date as 'Weekday Day Month Year'
+                                    let formattedDate = `${weekday} ${day} ${month} ${year}`;
 
-                                // Return the HTML with the formatted date
-                                return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                                    // Return the HTML with the formatted date
+                                    return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                                }
                             }else{
                                 return `<td class="text-muted fs-13"></td>`;
                             }
@@ -303,30 +347,104 @@
                             // Define the reference date
                             let referenceDate = new Date('1976-04-27');
                             if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
-                                // Define Thai weekday and month arrays
-                                const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
-                                const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
-                                                    'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
-                                // Get the day, month, and year
-                                let day = dateObj.getDate(); // Get the day of the month
-                                let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
-                                //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
-                                let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
-                                // Get the day of the week (0-6) and convert to Thai weekday name
-                                let weekday = thaiWeekdays[dateObj.getDay()];
+                                // Check if dateObj is invalid
+                                if (row.clientduedate === null) {
+                                    return `<td class="text-muted fs-13"></td>`;
+                                }else{
+                                    // Define Thai weekday and month arrays
+                                    const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
+                                    const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
+                                                        'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                                    // Get the day, month, and year
+                                    let day = dateObj.getDate(); // Get the day of the month
+                                    let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
+                                    //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
+                                    let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
+                                    // Get the day of the week (0-6) and convert to Thai weekday name
+                                    let weekday = thaiWeekdays[dateObj.getDay()];
 
-                                // Format the date as 'Weekday Day Month Year'
-                                let formattedDate = `${weekday} ${day} ${month} ${year}`;
+                                    // Format the date as 'Weekday Day Month Year'
+                                    let formattedDate = `${weekday} ${day} ${month} ${year}`;
 
-                                // Return the HTML with the formatted date
-                                return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                                    // Return the HTML with the formatted date
+                                    return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                                }
                             }else{
                                 return `<td class="text-muted fs-13"></td>`;
                             }
                         }
                     },
                     {
-                        targets: 14, // valuer column
+                        targets: 14, // report_checked_date
+                        render: function(data, type, row) {
+                            let dateObj = new Date(row.report_checked_date);
+                            // Define the reference date
+                            let referenceDate = new Date('1976-04-27');
+                            if  (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
+                                // Check if dateObj is invalid
+                                if (row.report_checked_date === null) {
+                                    return `<td class="text-muted fs-13"></td>`;
+                                }else{
+                                    // Define Thai weekday and month arrays
+                                    const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
+                                    const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
+                                                        'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                                    // Get the day, month, and year
+                                    let day = dateObj.getDate(); // Get the day of the month
+                                    let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
+                                    //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
+                                    let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
+                                    // Get the day of the week (0-6) and convert to Thai weekday name
+                                    let weekday = thaiWeekdays[dateObj.getDay()];
+
+                                    // Format the date as 'Weekday Day Month Year'
+                                    let formattedDate = `${weekday} ${day} ${month} ${year}`;
+
+                                    // Return the HTML with the formatted date
+                                    return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                                }
+                                
+                            }else{
+                                return `<td class="text-muted fs-13"></td>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: 15, // approve_checked_date
+                        render: function(data, type, row) {
+                            let dateObj = new Date(row.approve_checked_date);
+                            // Define the reference date
+                            let referenceDate = new Date('1976-04-27');
+                            if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
+                                // Check if dateObj is invalid
+                                if (row.approve_checked_date === null) {
+                                    return `<td class="text-muted fs-13"></td>`;
+                                }else{
+                                    // Define Thai weekday and month arrays
+                                    const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
+                                    const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
+                                                        'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                                    // Get the day, month, and year
+                                    let day = dateObj.getDate(); // Get the day of the month
+                                    let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
+                                    //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
+                                    let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
+                                    // Get the day of the week (0-6) and convert to Thai weekday name
+                                    let weekday = thaiWeekdays[dateObj.getDay()];
+
+                                    // Format the date as 'Weekday Day Month Year'
+                                    let formattedDate = `${weekday} ${day} ${month} ${year}`;
+
+                                    // Return the HTML with the formatted date
+                                    return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                                }
+                            }else{
+                                return `<td class="text-muted fs-13"></td>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: 16, // valuer column
                         className: 'text-center',
                         render: function(data, type, row) {
                             if (row.valuer == 'มงคล') {
@@ -357,7 +475,7 @@
                         }
                     },
                     {
-                        targets: 15, // headvaluer column
+                        targets: 17, // headvaluer column
                         className: 'text-center',
                         render: function(data, type, row) {
                             if (row.headvaluer == 'มงคล') {
@@ -388,7 +506,7 @@
                         }
                     },
                     {
-                        targets: 16, // job_status column
+                        targets: 18, // job_status column
                         render: function(data, type, row) {
                             if (row.job_status == 'In Progress') {
                                 return `<td class="text-center">In Progress</td>`;
@@ -404,14 +522,6 @@
                         }
                     },
                     {
-                        targets: 17,  // Adjust based on the index of another column to hide
-                        visible: false // Hide the third column
-                    },
-                    {
-                        targets: 18,  // Adjust based on the index of another column to hide
-                        visible: false // Hide the third column
-                    },
-                    {
                         targets: 19,  // Adjust based on the index of another column to hide
                         visible: false // Hide the third column
                     },
@@ -424,7 +534,15 @@
                         visible: false // Hide the third column
                     },
                     {
-                        targets: 22,  // file_name
+                        targets: 22,  // Adjust based on the index of another column to hide
+                        visible: false // Hide the third column
+                    },
+                    {
+                        targets: 23,  // Adjust based on the index of another column to hide
+                        visible: false // Hide the third column
+                    },
+                    {
+                        targets: 24,  // file_name
                         visible: false // Hide the third column
                     },
                     

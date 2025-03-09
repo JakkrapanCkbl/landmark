@@ -177,5 +177,35 @@ class ApiJobController extends Controller
     //     return response($response, 201);
     // }
 
+    public function update_job_from_report(Request $request, $fieldValue)
+    {
+        $validatedData = $request->validate([
+             'jobsize' => 'nullable|string'
+            // 'prop_type' => 'nullable|string',
+            // 'projectname' => 'nullable|string',
+            // 'proplocation' => 'nullable|string',
+            // 'startdate' => 'nullable|date_format:Y-m-d',  // Specific date format
+            // 'inspectiondate' => 'nullable|date_format:Y-m-d',
+            // 'lcduedate' => 'nullable|date_format:Y-m-d',
+            // 'clientduedate' => 'nullable|date_format:Y-m-d',
+            // 'job_gps' => 'nullable|string',
+            // 'lat' => 'nullable|string',
+            // 'lng' => 'nullable|string',
+            // 'marketvalue' => 'nullable|string'
+        ]);
+
+        // Find the model using the alternative field (e.g., 'slug' or 'email')
+        $item = Job::where('jobcode', $fieldValue)->firstOrFail();
+        
+        // Update the resource
+        $item->update($validatedData);
+
+        // Return a response
+        return response()->json([
+            'success' => true,
+            'message' => 'jobsize updated successfully.',
+            'data' => $item,
+        ]);
+    }
 
 }
