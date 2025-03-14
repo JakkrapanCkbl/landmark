@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiJobController;
 use App\Http\Controllers\Api\ApiComputerController;
 use App\Models\User;
+use App\Http\Controllers\UpdateFromVbController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,17 +39,8 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::post('addjobapi', [ApiJobController::class, 'store']);
     Route::get('addjobapi', [ApiJobController::class, 'index']);
     Route::put('/editjobapi/{id}', [ApiJobController::class, 'update']);
-
+    Route::put('/update_job_from_report/{fieldValue}', [ApiJobController::class, 'update_job_from_report'])->where('fieldValue', '.*');
 });
-
-
-Route::put('/update_job_from_report/{fieldValue}', [ApiJobController::class, 'update_job_from_report'])->where('fieldValue', '.*');
-
-
-
-
-
-
 
 
 

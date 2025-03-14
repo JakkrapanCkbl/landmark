@@ -73,6 +73,7 @@ class Index extends Component
         
     }
 
+    
     public function getData(Request $request)
     {
         // Perform the SQL query
@@ -80,8 +81,8 @@ class Index extends Component
         $sql = "Select jobs.id, jobs.client, jobs.jobcode, jobs.reportcode, CONCAT(jobs.projectname, '<BR> ', jobs.proplocation) AS projectname, ";
         $sql = $sql . "jobs.obj_method, jobs.marketvalue, jobs.marketvalue_unit, ";
         $sql = $sql . "jobs.prop_type, jobs.prop_size, jobs.startdate, ";
-        $sql = $sql . "jobs.inspectiondate, jobs.lcduedate, jobs.clientduedate, ";
-        $sql = $sql . "jobs.report_checked_date, jobs.approve_checked_date, ";
+        $sql = $sql . "jobs.inspectiondate, jobs.lcduedate, ";
+        $sql = $sql . "jobs.report_checked_date, jobs.approve_checked_date, jobs.clientduedate, ";
         $sql = $sql . "jobs.valuer, jobs.headvaluer, jobs.job_status, jobs.customer, ";
         $sql = $sql . "jobs.jobsize, jobs.easydiff, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs.job_checked, ";
         $sql = $sql . "jobs.customer, jobs.proplocation, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs_img.file_name ";

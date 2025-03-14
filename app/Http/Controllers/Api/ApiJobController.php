@@ -116,6 +116,7 @@ class ApiJobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
     public function update(Request $request, $id)
     {
         // Validate the incoming request data
@@ -151,8 +152,6 @@ class ApiJobController extends Controller
             'message' => 'Job updated successfully',
             'item' => $job,
         ], 200);
-
-
     }
 
     /**
@@ -180,18 +179,35 @@ class ApiJobController extends Controller
     public function update_job_from_report(Request $request, $fieldValue)
     {
         $validatedData = $request->validate([
-             'jobsize' => 'nullable|string'
-            // 'prop_type' => 'nullable|string',
-            // 'projectname' => 'nullable|string',
-            // 'proplocation' => 'nullable|string',
-            // 'startdate' => 'nullable|date_format:Y-m-d',  // Specific date format
-            // 'inspectiondate' => 'nullable|date_format:Y-m-d',
-            // 'lcduedate' => 'nullable|date_format:Y-m-d',
-            // 'clientduedate' => 'nullable|date_format:Y-m-d',
-            // 'job_gps' => 'nullable|string',
-            // 'lat' => 'nullable|string',
-            // 'lng' => 'nullable|string',
-            // 'marketvalue' => 'nullable|string'
+            'client' => 'nullable|string',
+            'prop_type' => 'nullable|string',
+            'projectname' => 'nullable|string',
+            'proplocation' => 'nullable|string',
+            'reportcode' => 'nullable|string',
+            'obj_method' => 'nullable|string',
+            'startdate' => 'nullable|date_format:Y-m-d',  // Specific date format
+            'inspectiondate' => 'nullable|date_format:Y-m-d',
+            'lcduedate' => 'nullable|date_format:Y-m-d',
+            'clientduedate' => 'nullable|date_format:Y-m-d',
+            'report_checked_date' => 'nullable|date_format:Y-m-d',
+            'approve_checked_date' => 'nullable|date_format:Y-m-d',
+            'job_gps' => 'nullable|string',
+            'lat' => 'nullable|string',
+            'lng' => 'nullable|string',
+            'customer'=> 'nullable|string',
+            'remark'=> 'nullable|string',
+            'deedtumbon'=> 'nullable|string',
+            'deedamphur'=> 'nullable|string',
+            'deedprovince'=> 'nullable|string',
+            'deedno'=> 'nullable|string',
+            'land_size'=> 'nullable|string',
+            'ownership_building'=> 'nullable|string',
+            'marketvalue_ac'=> 'nullable|string',
+            'assessmentvalue'=> 'nullable|string',
+            'marketvalue_unit' => 'nullable|string',
+            'marketvalue' => 'nullable|string', 
+            'valuer' => 'nullable|string',
+            'headvaluer' => 'nullable|string'
         ]);
 
         // Find the model using the alternative field (e.g., 'slug' or 'email')

@@ -175,9 +175,9 @@
                     { "data": "startdate" },
                     { "data": "inspectiondate" },
                     { "data": "lcduedate" },
-                    { "data": "clientduedate" },
                     { "data": "report_checked" },
                     { "data": "approve_checked" },
+                    { "data": "clientduedate" },
                     { "data": "valuer" },
                     { "data": "headvaluer" },
                     { "data": "job_status" },
@@ -221,6 +221,7 @@
                         }
                         }
                     },
+
                     {
                         targets: 2, // jobcode column
                         render: function(data, type, row) {
@@ -231,14 +232,29 @@
                         targets: 6, // market value
                         className: 'text-end',
                         render: function(data, type, row) {
-                            return `<td class="text-muted fs-13">` + row.marketvalue + `</td>`;
+                            //return `<td class="text-muted fs-13">` + row.marketvalue + `</td>`;
+                            if (type === 'display' && !isNaN(data)) {
+                                // Format the number with commas and no decimal places
+                                return parseFloat(data).toLocaleString('en-US', {
+                                    maximumFractionDigits: 0
+                                });
+                            }
+                            return `<td class="text-muted fs-13">` + data + `</td>`;
                         }
                     },
                     {
                         targets: 7, // market value unit
                         className: 'text-end',
                         render: function(data, type, row) {
-                            return `<td class="text-muted fs-13">` + row.marketvalue_unit + `</td>`;
+                            //return `<td class="text-muted fs-13">` + row.marketvalue_unit + `</td>`;
+                             if (type === 'display' && !isNaN(data)) {
+                                // Format the number with commas and no decimal places
+                                return parseFloat(data).toLocaleString('en-US', {
+                                    maximumFractionDigits: 0
+                                });
+                            }
+                            //return data;
+                            return `<td class="text-muted fs-13">` + data + `</td>`;
                         }
                     },
                     {
@@ -340,42 +356,9 @@
                             }
                         }
                     },
+                    
                     {
-                        targets: 13, // clientduedate column
-                        render: function(data, type, row) {
-                            let dateObj = new Date(row.clientduedate);
-                            // Define the reference date
-                            let referenceDate = new Date('1976-04-27');
-                            if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
-                                // Check if dateObj is invalid
-                                if (row.clientduedate === null) {
-                                    return `<td class="text-muted fs-13"></td>`;
-                                }else{
-                                    // Define Thai weekday and month arrays
-                                    const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
-                                    const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
-                                                        'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
-                                    // Get the day, month, and year
-                                    let day = dateObj.getDate(); // Get the day of the month
-                                    let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
-                                    //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
-                                    let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
-                                    // Get the day of the week (0-6) and convert to Thai weekday name
-                                    let weekday = thaiWeekdays[dateObj.getDay()];
-
-                                    // Format the date as 'Weekday Day Month Year'
-                                    let formattedDate = `${weekday} ${day} ${month} ${year}`;
-
-                                    // Return the HTML with the formatted date
-                                    return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
-                                }
-                            }else{
-                                return `<td class="text-muted fs-13"></td>`;
-                            }
-                        }
-                    },
-                    {
-                        targets: 14, // report_checked_date
+                        targets: 13, // report_checked_date
                         render: function(data, type, row) {
                             let dateObj = new Date(row.report_checked_date);
                             // Define the reference date
@@ -410,7 +393,7 @@
                         }
                     },
                     {
-                        targets: 15, // approve_checked_date
+                        targets: 14, // approve_checked_date
                         render: function(data, type, row) {
                             let dateObj = new Date(row.approve_checked_date);
                             // Define the reference date
@@ -418,6 +401,40 @@
                             if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
                                 // Check if dateObj is invalid
                                 if (row.approve_checked_date === null) {
+                                    return `<td class="text-muted fs-13"></td>`;
+                                }else{
+                                    // Define Thai weekday and month arrays
+                                    const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
+                                    const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
+                                                        'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                                    // Get the day, month, and year
+                                    let day = dateObj.getDate(); // Get the day of the month
+                                    let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
+                                    //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
+                                    let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
+                                    // Get the day of the week (0-6) and convert to Thai weekday name
+                                    let weekday = thaiWeekdays[dateObj.getDay()];
+
+                                    // Format the date as 'Weekday Day Month Year'
+                                    let formattedDate = `${weekday} ${day} ${month} ${year}`;
+
+                                    // Return the HTML with the formatted date
+                                    return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                                }
+                            }else{
+                                return `<td class="text-muted fs-13"></td>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: 15, // clientduedate column
+                        render: function(data, type, row) {
+                            let dateObj = new Date(row.clientduedate);
+                            // Define the reference date
+                            let referenceDate = new Date('1976-04-27');
+                            if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
+                                // Check if dateObj is invalid
+                                if (row.clientduedate === null) {
                                     return `<td class="text-muted fs-13"></td>`;
                                 }else{
                                     // Define Thai weekday and month arrays

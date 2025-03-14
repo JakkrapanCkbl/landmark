@@ -725,9 +725,9 @@
                                         <th class="bg-transparent border-bottom-0">รับงาน</th>
                                         <th class="bg-transparent border-bottom-0">สำรวจ</th>
                                         <th class="bg-transparent border-bottom-0">ส่งงาน LC</th>
-                                        <th class="bg-transparent border-bottom-0">ส่งงานลูกค้า</th>
-                                        <th class="bg-transparent border-bottom-0">ตรวจรายงาน</th>
+                                        <th class="bg-transparent border-bottom-0">ส่งตรวจรายงาน</th>
                                         <th class="bg-transparent border-bottom-0">อนุมัติรายงาน</th>
+                                        <th class="bg-transparent border-bottom-0">ส่งงานลูกค้า</th>
                                         <th class="bg-transparent border-bottom-0">ผู้ประเมิน</th>
                                         <th class="bg-transparent border-bottom-0">ผู้ตรวจ</th>
                                         <th class="bg-transparent border-bottom-0">สถานะ</th>

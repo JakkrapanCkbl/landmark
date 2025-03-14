@@ -16,7 +16,7 @@ class Job extends Model
         'customer', 'prop_type', 'prop_size', 'proplocation', 'lcduedate',
         'headvaluer', 'headvaluer_n', 'valuer', 'valuer_n', 'percentfinish',
         'startdate', 'inspectiondate', 'lcduedate', 'clientduedate', 'created_at', 'updated_at',
-        'propd_id', 'province_code', 'amphure_code', 'district', 'obj_id', 'marketvalue',
+        'propd_id', 'province_code', 'amphure_code', 'district', 'obj_id', 'marketvalue', 'marketvalue_unit',
         'lat', 'lng', 'valuationfee', 'remark', 'easydiff',
         'valuationfee_case', 'urgent', 'canceled', 'withcd', 'room_sum',
         'default_coordinates', 'job_status', 'job_gps', 'obj_method', 'job_checked', 
