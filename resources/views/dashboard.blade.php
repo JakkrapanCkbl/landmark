@@ -180,6 +180,7 @@
                     { "data": "clientduedate" },
                     { "data": "valuer" },
                     { "data": "headvaluer" },
+                    { "data": "do_advance" },
                     { "data": "job_status" },
                     { "data": "customer" },
                     { "data": "proplocation" },
@@ -523,7 +524,14 @@
                         }
                     },
                     {
-                        targets: 18, // job_status column
+                        targets: 18, // do_advance
+                        className: 'text-center',
+                        render: function(data, type, row) {
+                            return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/avatar.jpg')}})"></span></td>`;
+                        }
+                    },
+                    {
+                        targets: 19, // job_status column
                         render: function(data, type, row) {
                             if (row.job_status == 'In Progress') {
                                 return `<td class="text-center">In Progress</td>`;
@@ -537,10 +545,6 @@
                                  return `<td class="text-center"></td>`;
                             }
                         }
-                    },
-                    {
-                        targets: 19,  // Adjust based on the index of another column to hide
-                        visible: false // Hide the third column
                     },
                     {
                         targets: 20,  // Adjust based on the index of another column to hide
@@ -559,7 +563,11 @@
                         visible: false // Hide the third column
                     },
                     {
-                        targets: 24,  // file_name
+                        targets: 24,  // Adjust based on the index of another column to hide
+                        visible: false // Hide the third column
+                    },
+                    {
+                        targets: 25,  // file_name
                         visible: false // Hide the third column
                     },
                     

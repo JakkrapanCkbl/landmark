@@ -730,6 +730,7 @@
                                         <th class="bg-transparent border-bottom-0">ส่งงานลูกค้า</th>
                                         <th class="bg-transparent border-bottom-0">ผู้ประเมิน</th>
                                         <th class="bg-transparent border-bottom-0">ผู้ตรวจ</th>
+                                        <th class="bg-transparent border-bottom-0">ทำล่วงหน้า</th>
                                         <th class="bg-transparent border-bottom-0">สถานะ</th>
                                         <th class="bg-transparent border-bottom-0">customer</th>
                                         <th class="bg-transparent border-bottom-0">proplocation</th>
