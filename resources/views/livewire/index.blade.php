@@ -1,6 +1,7 @@
 <div>
 
     @include('livewire.popup_index_edit')
+    {{-- @include('livewire.popup_cityplan_editdata') --}}
     <!-- PAGE-HEADER -->
     <div class="page-header">
         <div>
@@ -738,6 +739,7 @@
                                         <th class="bg-transparent border-bottom-0">link_checked</th>
                                         <th class="bg-transparent border-bottom-0">file_checked</th>
                                         <th class="bg-transparent border-bottom-0">file_name</th>
+                                        <th class="bg-transparent border-bottom-0">projectname</th>
                                     </tr>
                                 </thead>
                                 

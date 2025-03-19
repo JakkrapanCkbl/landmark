@@ -48,6 +48,7 @@
                                 <input class="form-control form-control-sm  mb-4" type="text" name="prop_name" id="prop_name" wire:model="prop_name">
                                 </td>
                             </tr>
+                            
                             <tr>
                                 <td class="wp-30">ที่ตั้ง</td>
                                 <td class="wp-70">

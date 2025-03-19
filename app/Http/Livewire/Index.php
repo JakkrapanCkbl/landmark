@@ -35,6 +35,8 @@ class Index extends Component
     public $reportcode;
     public $projectname;
     public $proplocation;
+    public $client;
+    public $client_note;
     public $startdate;
     public $clientduedate;
     public $report_checked_date;
@@ -78,14 +80,14 @@ class Index extends Component
     {
         // Perform the SQL query
         //$jobs = Job::whereYear('startdate', Carbon::now()->year)->get();
-        $sql = "Select jobs.id, jobs.client, jobs.jobcode, jobs.reportcode, CONCAT(jobs.projectname, '<BR> ', jobs.proplocation) AS projectname, ";
+        $sql = "Select jobs.id, jobs.client, jobs.jobcode, jobs.reportcode, CONCAT(jobs.projectname, '<BR> ', jobs.proplocation) AS showprojectname, ";
         $sql = $sql . "jobs.obj_method, jobs.marketvalue, jobs.marketvalue_unit, ";
         $sql = $sql . "jobs.prop_type, jobs.prop_size, jobs.startdate, ";
         $sql = $sql . "jobs.inspectiondate, jobs.lcduedate, ";
         $sql = $sql . "jobs.report_checked_date, jobs.approve_checked_date, jobs.clientduedate, ";
         $sql = $sql . "jobs.valuer, jobs.headvaluer, '' as 'do_advance', jobs.job_status, jobs.customer, ";
         $sql = $sql . "jobs.jobsize, jobs.easydiff, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs.job_checked, ";
-        $sql = $sql . "jobs.customer, jobs.proplocation, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs_img.file_name ";
+        $sql = $sql . "jobs.customer, jobs.proplocation, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs_img.file_name, jobs.projectname ";
         $sql = $sql . "From jobs Left Join ";
         $sql = $sql . "jobs_img On jobs_img.jobcode = jobs.jobcode ";
         $sql = $sql . "WHERE Year(jobs.startdate) >= Year(Now()) - 2 Order By jobs.id Desc";
@@ -122,7 +124,7 @@ class Index extends Component
         dd('test');
     }
 
-    public function bindingPopup($value0,$value1,$value2,$value3,$value4,$value5,$value6,$value7,$value8,$value9,$value10){
+    public function bindingPopup($value0,$value1,$value2,$value3,$value4,$value5,$value6,$value7,$value8,$value9,$value10,$value11){
        
         //dd($value0);
         $this->myid = $value0;
@@ -136,6 +138,8 @@ class Index extends Component
         $this->print_checked = $value8;
         $this->link_checked = $value9;
         $this->file_checked = $value10;
+        $this->client = $value11;
+
         
 
         
@@ -329,7 +333,6 @@ class Index extends Component
         $this->TotalSaleByMonth = 0;
     }
 
-
-
+   
 }
 

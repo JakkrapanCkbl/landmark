@@ -57,6 +57,7 @@
                                                     @error('jobcode') <span class="error" style="color: red;">{{ $message }}</span> @enderror
                                                 </div>
                                             </div>
+                                            
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <label for="reportcode" class="form-label">Bank's ID</label>

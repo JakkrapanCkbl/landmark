@@ -83,6 +83,7 @@ class CityPlan extends Component
         return response()->json(['data' => $cityplans]);
     }
 
+    
     public function bindingPopup($value1,$value2,$value3,){       
         //dd($value1);
         $this->myid = $value1;

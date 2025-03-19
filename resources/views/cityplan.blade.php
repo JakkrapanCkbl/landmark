@@ -12,6 +12,7 @@
 @endsection
 
 
+
 @section('scripts')
     <!-- APEXCHART JS -->
     <script src="{{asset('assets/js/apexcharts.js')}}"></script>

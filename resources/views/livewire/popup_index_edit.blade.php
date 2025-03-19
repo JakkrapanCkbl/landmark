@@ -6,94 +6,44 @@
             <div class="modal-content modal-content-demo">
 
                 <div class="modal-header p-5">
-                
-                    <h4 class="modal-title text-dark"> รหัสรายงาน : <u><a href= "{{ route('joborder.joborder-edit', ['id' => $myid]) }}" target='_blank'>{{$jobcode}}</a></u></h4><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-dark"> id : {{$myid}} </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
+                    {{-- <h4 class="modal-title text-dark"> รหัสรายงาน : <u><a href= "{{ route('joborder.joborder-edit', ['id' => $myid]) }}" target='_blank'>{{$jobcode}}</a></u></h4><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button> --}}
                      {{-- <button class="btn btn-primary" onclick="updateValue()">บันทึกข้อมูล</button> --}}
                 </div>
 
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12 d-flex mb-4">
-                            <p class="m-0 wp-30 text-muted">รหัสรายงานลูกค้า</p>
-                            <p class="m-0 wp-70 text-dark">{{$reportcode}}</p>
-                        </div>
-                        <div class="col-md-12 d-flex mb-4">
-                            <p class="m-0 wp-30 text-muted">ชื่อโครงการ</p>
-                            <p class="m-0 wp-70 text-dark">{{$projectname}}</p>
-                        </div>
-                        <div class="col-md-12 d-flex mb-4">
-                            <p class="m-0 wp-30 text-muted">ทำเลที่ตั้ง</p>
-                            <p class="m-0 wp-70 text-dark">{{$proplocation}}</p>
-                        </div>
-                        {{-- <div class="col-md-12 d-flex mb-4">
-                            <p class="m-0 wp-30 text-muted">Assigned To</p>
-                            <div class="m-0 wp-70 text-dark d-flex align-items-center">
-                                <div class="me-2">
-                                    <img alt="User Avatar" class="rounded-circle avatar-sm" src="{{asset('assets/images/users/7.jpg')}}">
-                                </div>
-                                <div>
-                                    <p class="mb-1">Daniel Obrien</p>
-                                </div>
-                            </div>
-                        </div> --}}
-                        <div class="col-md-12 d-flex mb-4">
-                            <p class="m-0 wp-30 text-muted">วันที่เริ่มงาน</p>
-                            <p class="m-0 wp-70 text-dark">{{$startdate}}</p>
-                        </div>
-                        <div class="col-md-12 d-flex mb-4">
-                            <p class="m-0 wp-30 text-muted">Status</p>
-                            <div class="m-0 wp-70 text-dark">
-                                @if($job_status == 'Completed')
-                                    <span class="mb-0 mt-1 status-main completed">{{$job_status}}</span>
-                                @elseif ($job_status == 'In Progress')
-                                    <span class="mb-0 mt-1 status-main in-progress">{{$job_status}}</span>
-                                @elseif ($job_status == 'On Hold')
-                                    <span class="mb-0 mt-1 status-main on-hold">{{$job_status}}</span>
-                                @elseif ($job_status == 'Cancel')
-                                    <span class="mb-0 mt-1 status-main cancel">{{$job_status}}</span>
-                                @endif
-                                
-                            </div>
-                        </div>
-                        <div class="col-md-12 d-flex mb-4">
-                            <p class="m-0 wp-30 text-muted">กำหนดส่งลูกค้า</p>
-                            <p class="m-0 wp-70 text-dark">{{$clientduedate}}</p>
-                        </div>
-                        {{-- <div class="col-md-12 d-flex mb-4">
-                            <p class="m-0 wp-30 text-muted">Description</p>
-                            <p class="m-0 wp-70 text-dark">Kasd dolore lorem eos stet at, dolor ipsum elitr sea amet amet stet justo, sed.</p>
-                        </div> --}}
-                    </div>
-                </div>
-
-                <div class="modal-footer p-0 border-top-0">
-
-                    <!-- Tabs -->
+                     <!-- Tabs -->
                     <div class="tabs-menu4 w-100">
                         <nav class="nav border-bottom px-4 d-block d-lg-flex flex-2">
-                            <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1 active" data-bs-toggle="tab" href="#task-files">
+                            <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1 active" data-bs-toggle="tab" href="#task-admin">
+                                แก้ไขข้อมูล (Admin)
+                            </a>
+                            <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-files">
                                 {{-- Files 
                                  @if (is_null($job_maps) || empty($job_maps))
                                     แผนที่ผังเมือง
                                 @else
                                     <p style="font-weight: bold; color: blue;">แผนที่ผังเมือง</p>
                                 @endif --}}
-                                <p style="font-weight: bold; color: blue;">Files</p>
+                                {{-- <p style="font-weight: bold; color: blue;">Files</p> --}}
+                                Files
                             </a>
                             <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-upload">
                                 Upload
                             </a>
-                            <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-print">
-                                Print เล่มรายงาน
+                             <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-valuer">
+                                แก้ไขข้อมูล (Valuer)
                             </a>
-                             <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-link_folder">
+                           
+                             {{-- <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-link_folder">
                                 Link Folder
                             </a>
                              <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-file_collect">
                                 File Collect
-                            </a>
+                            </a> --}}
 
-                            <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-subtask">
+                            {{-- <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-subtask">
                                 To do
                             </a>
                             <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-tracktime">
@@ -101,12 +51,577 @@
                             </a>
                             <a class="nav-link border border-bottom-0 py-1 br-5 mx-1 mx-md-1" data-bs-toggle="tab" href="#task-comments">
                                 Comments
-                            </a>
+                            </a> --}}
                         </nav>
                     </div><!-- /Tabs -->
 
                     <div class="tab-content w-100">
-                        <div class="tab-pane  active task-files-tab" id="task-files">
+                        <div class="tab-pane active task-files-tab" id="task-admin">
+                            <div class="table-responsive">
+                                <table class="table text-nowrap text-md-nowrap table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">รหัสรายงาน</p></td>
+                                            <td class="wp-70">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <div class="form-group">
+                                                            <label for="jobcode" class="form-label">รายงานเลขที่</label>
+                                                            <input type="text" class="form-control" name="jobcode" id="jobcode" wire:model="jobcode">
+                                                            @error('jobcode') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-3">
+                                                        <div class="form-group">
+                                                            <label for="reportcode" class="form-label">Bank's ID</label>
+                                                            <input type="text" class="form-control" name="reportcode" id="reportcode" wire:model="reportcode">
+                                                            @error('reportcode') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="client" class="form-label">ส่งธนาคาร</label>
+                                                            <select name="client" class="form-control form-select" id="client" wire:model="client" data-bs-placeholder="Select Bank">
+                                                                <option value="UOB" selected>UOB</option>
+                                                                <option value="KK">KK</option>
+                                                                <option value="CIMB">CIMB</option>
+                                                                <option value="SCB">SCB</option>
+                                                                <option value="BOC">BOC</option>
+                                                                <option value="ICBC">ICBC</option>
+                                                                <option value="LHB">LHB</option>
+                                                                <option value="TTB">TTB</option>
+                                                                <option value="KTB">KTB</option>
+                                                                <option value="MBKG">MBKG</option>
+                                                                <option value="อื่นๆ">อื่นๆ</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    @if($client === 'อื่นๆ')
+                                                        <div class="col-3">
+                                                            <div class="form-group">
+                                                                <label for="reportcode" class="form-label">ระบุ</label>
+                                                                <input type="text" class="form-control" name="client_note" id="client_note" wire:model="client_note">
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ลูกค้าราย/ผู้ติดต่อ</p></td>
+                                            <td class="wp-70">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="customer" id="customer" wire:model="customer">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ประเภททรัพย์สิน/ขนาด</p></td>
+                                            <td class="wp-70">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <div class="form-group">
+                                                            <label for="prop_type" class="form-label">ประเภททรัพย์สิน</label>
+                                                            <input type="text" class="form-control" name="prop_type" id="prop_type" wire:model="prop_type">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <div class="form-group">
+                                                            <label for="prop_type2" class="form-label">ประเภททรัพย์สิน (กลุ่มย่อย)</label>
+                                                            <select class="form-control form-select" id="proptype2" name="proptype2" wire:model="selectedProptype2">
+                                                                {{-- @foreach ($proptype2s as $item)
+                                                                    <option value="{{ $item->show_prop_type2 }}" @if ($proptype2 == $item->show_prop_type2) selected @endif>{{ $item->show_prop_type2 }}</option>
+                                                                @endforeach --}}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    {{-- @if($selectedProptype == 'อื่นๆ')
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <label for="prop_type_note" class="form-label">อื่นๆ ระบุ</label>
+                                                                <input type="text" class="form-control" name="prop_type_note" id="prop_type_note" wire:model="prop_type_note">
+                                                                @error('prop_type_note') <span class="error" style="color: red;">{{ $message }}</span> @enderror                                                       
+                                                            </div>
+                                                        </div>
+                                                    @endif --}}
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="prop_size" class="form-label">เนื้อที่</label>
+                                                            <input type="text" class="form-control" name="prop_size" id="prop_size" wire:model="prop_size">
+                                                            @error('prop_size') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ชื่อโครงการ/GPS</p></td>
+                                            <td class="wp-70">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <div class="form-group">
+                                                            <label for="prop_type" class="form-label">ชื่อโครงการ</label>
+                                                            <input type="text" class="form-control" name="projectname" id="projectname" wire:model="projectname">
+                                                        </div>
+                                                    </div>
+
+
+                                                   
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="job_gps" class="form-label">GPS (LAT, LONG)</label>
+                                                            <input type="text" class="form-control" name="job_gps" id="job_gps" wire:model="job_gps">
+                                                            @error('job_gps') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {{-- <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ประเภททรัพย์สินกลุ่มย่อย / ขนาด</p></td>
+                                            <td class="wp-70">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <div class="form-group">
+                                                            <label for="prop_type2" class="form-label">กลุ่มย่อย</label>
+                                                            <select class="form-control form-select" id="proptype2" name="proptype2" wire:model="selectedProptype2">
+                                                                @foreach ($proptype2s as $item)
+                                                                    <option value="{{ $item->show_prop_type2 }}" @if ($proptype2 == $item->show_prop_type2) selected @endif>{{ $item->show_prop_type2 }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    @if($selectedProptype2 == 'อื่นๆ')
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <label for="prop_type2_note" class="form-label">อื่นๆ ระบุ</label>
+                                                                <input type="text" class="form-control" name="prop_type2_note" id="prop_type2_note" wire:model="prop_type2_note">
+                                                                @error('prop_type2_note') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                    
+
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="prop_size" class="form-label">เนื้อที่</label>
+                                                            <input type="text" class="form-control" name="prop_size" id="prop_size" wire:model="prop_size">
+                                                            @error('prop_size') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </td>
+                                        </tr> --}}
+                                        {{-- <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ชื่อโครงการ</p></td>
+                                            <td class="wp-70">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="projectname" id="projectname" wire:model="projectname">
+                                                        @error('projectname') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr> --}}
+                                        <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ทำเลที่ตั้ง</p></td>
+                                            <td class="wp-70">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="proplocation" id="proplocation" wire:model="proplocation">
+                                                        @error('proplocation') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">จังหวัด/อำเภอ/ตำบล</p></td>
+                                            <td class="wp-70">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="province_code" class="form-label">จังหวัด</label>
+                                                            {{-- <select class="form-control form-select" id="province_code" name="province_code" wire:model="selectedProvince">
+                                                                @foreach ($provinces as $province)
+                                                                    <option value="{{ $province->code }}" @if ($province_code == $province->code) selected @endif>{{ $province->name_th }}</option>
+                                                                @endforeach
+                                                            </select> --}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="amphure_code" class="form-label">อำเภอ / เขต</label>
+                                                            {{-- <select class="form-control form-select" id="amphure_code" name="amphure_code" wire:model="amphure_code">
+                                                                @foreach ($amphures as $amphure)
+                                                                    <option value="{{ $amphure->code }}" @if ($amphure_code == $amphure->code) selected @endif>{{ $amphure->name_th }}</option>
+                                                                @endforeach
+                                                            </select> --}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="district" class="form-label">ตำบล / แขวง</label>
+                                                            <input type="text" class="form-control" name="district" id="district" wire:model="district">
+                                                            @error('district') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                        </div>
+                                                    </div>
+                                                    {{-- <div class="col">
+                                                        <div class="form-group">
+                                                            <label for="customer" class="form-label">ลูกค้าราย/ผู้ติดต่อ</label>
+                                                            <input type="text" class="form-control" name="customer" id="customer" wire:model="customer">
+                                                            @error('customer') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                        </div>
+                                                    </div> --}}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">คุณสมบัติรายงาน</p></td>
+                                            <td class="wp-70">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="jobtype" class="form-label">รายงานภาษา</label>
+                                                            <select name="jobtype" id="jobtype" class="form-control form-select" wire:model="jobtype">
+                                                                    <option value="ไทย 1 (ส่ง Soft File Only)">ไทย 1 (ส่ง Soft File Only)</option>
+                                                                    <option value="ไทย 1 เล่ม">ไทย 1 เล่ม</option>
+                                                                    <option value="ไทย 2 เล่ม">ไทย 2 เล่ม</option>
+                                                                    <option value="ไทย 2 เล่ม + CD">ไทย 2 เล่ม + CD</option>
+                                                                    <option value="อังกฤษ 2 เล่ม">อังกฤษ 2 เล่ม</option>
+                                                                    <option value="ไทย 2 เล่ม + อังกฤษ 2 เล่ม">ไทย 2 เล่ม + อังกฤษ 2 เล่ม</option>
+                                                                    <option value="-">-</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                    <div class="form-group">
+                                                            <label for="jobsize" class="form-label">ขนาดรายงาน</label>
+                                                            <select name="jobsize" class="form-control form-select" wire:model="jobsize">
+                                                                <option value="HL">HL</option>
+                                                                <option value="S">S</option>
+                                                                <option value="M">M</option>
+                                                                <option value="L">L</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                    <label for="easydiff" class="form-label">Job Difficulty</label>
+                                                        <select name="easydiff" class="form-control form-select" wire:model="easydiff">
+                                                            <option value="Easy">Easy</option>
+                                                            <option value="Normal">Normal</option>
+                                                            <option value="Difficult">Difficult</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-5">
+                                                    <div class="form-group">
+                                                                <label for="obj_id" class="form-label">วัตถุประสงค์การประเมิน</label>
+                                                                <select name="obj_id" class="form-control form-select" wire:model="obj_id">
+                                                                    <option value="1">เพื่อประกอบการพิจารณาสินเชื่อ</option>
+                                                                    <option value="2">เพื่อทบทวนราคาประเมิน</option>
+                                                                    <option value="3">ทราบมูลค่าตลาด</option>
+                                                                    <option value="4">สาธารณะ</option>
+                                                                    <option value="5">บันทึกมูลค่าทางบัญชี</option>
+                                                                    <option value="6">พิจารณาภายในบริษัท, ใช้เป็นข้อมูลภายในบริษัท</option>
+                                                                    <option value="7">เพื่ออ้างอิงในการเจรจาต่อรองราคา</option>
+                                                                    <option value="8">เพื่อกำหนดราคาซื้อขายทอดตลาด</option>
+                                                                    <option value="9">เพื่อประกอบการตั้งราคาขายทรัพย์สิน</option>
+                                                                    <option value="10">ปรับปรุงโครงสร้างหนี้</option>
+                                                                    <option value="11">อื่นๆ</option>
+                                                                </select>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ค่าประเมินราคา</p></td>
+                                            <td class="wp-70">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                    <div class="form-group">
+                                                            <label for="valuationfee" class="form-label">ค่าประเมิน (ไม่รวม VAT)</label>
+                                                            <input type="text" class="form-control" name="valuationfee" id="valuationfee" wire:model="valuationfee">
+                                                            @error('valuationfee') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <div class="form-group">
+                                                            <label for="valuationfee_case" class="form-label">เงื่อนไขการเก็บเงินลูกค้า</label>
+                                                            <select name="valuationfee_case" class="form-control form-select" wire:model="valuationfee_case">
+                                                                <option value="100% วางบิลธนาคาร">100% วางบิลธนาคาร</option>
+                                                                <option value="100% เก็บเงินลูกค้าหน้างาน">100% เก็บเงินลูกค้าหน้างาน</option>
+                                                                <option value="50%/50% วางบิล/เก็บเงินก่อนสำรวจและ ณ วันที่ส่งมอบงาน">50%/50% วางบิล/เก็บเงินก่อนสำรวจและ ณ วันที่ส่งมอบงาน</option>
+                                                                <option value="100% วางบิล/เก็บเงิน ณ วันที่มอบรายงาน">100% วางบิล/เก็บเงิน ณ วันที่มอบรายงาน</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ผู้ประเมินราคา</p></td>
+                                            <td class="wp-70">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="valuer" class="form-label">ผู้ประเมิน</label>
+                                                            <select name="valuer" wire:model="valuer" class="form-control form-select">
+                                                                {{-- @foreach($list_valuers as $employee)
+                                                                        <option value="{{ $employee->name }}">
+                                                                            {{ $employee->name }}
+                                                                        </option>
+                                                                @endforeach --}}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="startdate" class="form-label">วันที่เริ่มงาน</label>
+                                                            <input class="form-control" wire:model="startdate" name="startdate" id="startdate" type="text">
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="inspectiondate" class="form-label"><span style="color:green;font-weight: bold;">วันที่สำรวจ</label>
+                                                            <input class="form-control" wire:model="inspectiondate" name="inspectiondate" id="inspectiondate" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="lcduedate" class="form-label"><span style="color:red;font-weight: bold;">ส่งงาน LC ตรวจ</label>
+                                                            <input class="form-control" wire:model="lcduedate" name="lcduedate" id="lcduedate" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="clientduedate" class="form-label"><span style="color:green;font-weight: bold;">ส่งงานลูกค้า</label>
+                                                            <input class="form-control" wire:model="clientduedate" name="clientduedate" id="clientduedate" type="text">
+                                                        </div>
+                                                    </div>
+                                                     <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="clientduedate" class="form-label"><span style="color:blue;font-weight: bold;">ส่งตรวจรายงาน</label>
+                                                            <input class="form-control" wire:model="clientduedate" name="clientduedate" id="clientduedate" type="text">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ผู้ประเมินราคา</p></td>
+                                            <td class="wp-70">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="headvaluer" class="form-label">ผู้ตรวจ</label>
+                                                            <select name="headvaluer" wire:model="headvaluer" class="form-control form-select">
+                                                                {{-- @foreach($list_headvaluers as $employee)
+                                                                    <option value="{{ $employee->name }}">
+                                                                        {{ $employee->name }}
+                                                                    </option>
+                                                                @endforeach --}}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="clientduedate" class="form-label"><span style="color:green;font-weight: bold;">วันที่อนุมัติเล่มรายงาน</label>
+                                                            <input class="form-control" wire:model="clientduedate" name="clientduedate" id="clientduedate" type="text">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+
+                                        {{-- <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">วิธีการประเมิน / มูลค่าตลาด</p></td>
+                                            <td class="wp-70">
+                                                <div class="row">
+                                                <div class="col-5">
+                                                        <div class="form-group">
+                                                            <label for="obj_method" class="form-label">วิธีการประเมิน (เพื่อกำหนดมูลค่าตลาด)</label>
+                                                            <select name="obj_method" class="form-control form-select" wire:model="obj_method">
+                                                                <option value=""></option>
+                                                                <option value="วิธีเปรียบเทียบกับข้อมูลตลาด (Market Approach)">วิธีเปรียบเทียบกับข้อมูลตลาด (Market Approach)</option>
+                                                                <option value="วิธีต้นทุนทดแทน (Cost Approach)">วิธีต้นทุนทดแทน (Cost Approach)</option>
+                                                                <option value="วิธีแปลงรายได้เป็นมูลค่า">วิธีพิจารณาจากรายได้ (Income Approach)</option>
+                                                                <option value="วิธีการตั้งสมมติฐานในการพัฒนา">วิธีคำนวณจากมูลค่าคงเหลือ (Residual Method)</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-2">
+                                                    <div class="form-group">
+                                                            <label for="marketvalue" class="form-label">มูลค่าตลาด (Market Value)</label>
+                                                           
+                                                            <input type="text" class="form-control" name="marketvalue" id="marketvalue" wire:model="marketvalue">
+                                                            @error('marketvalue') <span class="error" style="color: red;">{{ $message }}</span> @enderror
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </td>
+                                        </tr> --}}
+                                        <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ตรวจสอบข้อมูล/จัดเก็บไฟล์</p></td>
+                                            <td class="wp-70">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <label class="form-check-label" for="print_checked">Collect soft File</label>
+                                                        <br>
+                                                        <label>
+                                                            <input type="radio" name="print_checked" value="0" wire:model="print_checked"> No
+                                                        </label>
+                                                        &nbsp;&nbsp;
+                                                        <label>
+                                                            <input type="radio" name="print_checked" value="1" wire:model="print_checked"> Yes
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <label class="form-check-label" for="link_checked">Update Data</label>
+                                                        <br>
+                                                        <label>
+                                                            <input type="radio" name="link_checked" value="0" wire:model="link_checked"> No
+                                                        </label>
+                                                        &nbsp;&nbsp;
+                                                        <label>
+                                                            <input type="radio" name="link_checked" value="1" wire:model="link_checked"> Yes
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="col-3">
+                                                        <label class="form-check-label" for="file_checked">Print เล่มรายงาน</label>
+                                                        <br>
+                                                        <label>
+                                                            <input type="radio" name="file_checked" value="0" wire:model="file_checked"> No
+                                                        </label>
+                                                        &nbsp;&nbsp;
+                                                        <label>
+                                                            <input type="radio" name="file_checked" value="1" wire:model="file_checked"> Yes
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="col-3">
+                                                        <label class="form-check-label" for="file_checked">Collect Hard File</label>
+                                                        <br>
+                                                        <label>
+                                                            <input type="radio" name="file_checked" value="0" wire:model="file_checked"> No
+                                                        </label>
+                                                        &nbsp;&nbsp;
+                                                        <label>
+                                                            <input type="radio" name="file_checked" value="1" wire:model="file_checked"> Yes
+                                                        </label>
+                                                    </div>
+
+
+                                                    
+                                                </div>            
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ผู้ตรวจรายงานเบื้องต้น (Checker)</p></td>
+                                            <td class="wp-70">
+                                                <div class="row">
+
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="checker" class="form-label">ผู้ตรวจเล่มรายงาน</label>
+                                                            <select name="checker" wire:model="checker" class="form-control form-select">
+                                                                {{-- @foreach($list_checkers as $employee)
+                                                                        <option value="{{ $employee->name }}">
+                                                                            {{ $employee->name }}
+                                                                        </option>
+                                                                @endforeach --}}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="report_checked_date" class="form-label">วันที่ตรวจรายงาน</label>
+                                                            <input class="form-control" wire:model="report_checked_date" name="report_checked_date" id="report_checked_date" type="text">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label for="approve_checked_date" class="form-label">วันที่อนุมัติเล่มรายงาน</label>
+                                                            <input class="form-control" wire:model="report_checked_date" name="report_checked_date" id="report_checked_date" type="text">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">สถานะงาน</p></td>
+                                            <td class="wp-70">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label class="form-check-label" for="job_checked">สถานะ</label>
+                                                            <br>
+                                                            <select name="job_status" class="form-control form-select" wire:model="job_status">
+                                                                <option value="In Progress">In Progress</option>
+                                                                <option value="Completed">Completed</option>
+                                                                <option value="On Hold">On Hold</option>
+                                                                <option value="Cancel">Cancel</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-3">
+                                                        <label class="form-check-label" for="job_checked">Project Completed</label>
+                                                        <br>
+                                                        <label>
+                                                            <input type="radio" name="job_checked" value="0" wire:model="job_checked"> No
+                                                        </label>
+                                                        &nbsp;&nbsp;
+                                                        <label>
+                                                            <input type="radio" name="job_checked" value="1" wire:model="job_checked"> Yes
+                                                        </label>
+                                                    </div>
+
+                                                </div>            
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">บันทึก</p></td>
+                                            <td class="wp-70">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            {{-- <button class="btn btn-primary" onclick="confirmEdit()">บันทึกข้อมูล</button> --}}
+                                                            <button class="btn btn-primary" onclick="#">บันทึกข้อมูล</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-3">
+                                                        @if(session()->has('message'))
+                                                            <div class="alert alert-success">{{session('message')}}</div>
+                                                        @endif
+                                                    </div>
+                                                </div>            
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="task-files">
                             <div class="row">
                                 <div class="mt-3">
                                     <table class="table table-bordered br-7">
@@ -173,39 +688,10 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane" id="task-print">
-                            <div class="row">
-                                <div class="col-3">
-                                    <label class="form-check-label" for="print_checked">Print เล่มรายงาน</label>
-                                    <br>
-                                    <label>
-                                        <input type="radio" name="print_checked" value="0" wire:model="print_checked" disabled> No
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label>
-                                        <input type="radio" name="print_checked" value="1" wire:model="print_checked" disabled> Yes
-                                    </label>
-                                </div>
-                            </div>
+                        <div class="tab-pane" id="task-valuer">
                         </div>
 
-                        <div class="tab-pane" id="task-link_folder">
-                            <div class="row">
-                               <div class="col-3">
-                                    <label class="form-check-label" for="link_checked">Link Folder</label>
-                                    <br>
-                                    <label>
-                                        <input type="radio" name="link_checked" value="0" wire:model="link_checked" disabled> No
-                                    </label>
-                                    &nbsp;&nbsp;
-                                    <label>
-                                        <input type="radio" name="link_checked" value="1" wire:model="link_checked" disabled> Yes
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane" id="task-file_collect">
+                        {{-- <div class="tab-pane" id="task-file_collect">
                             <div class="row">
                                <div class="col-3">
                                     <label class="form-check-label" for="file_checked">File Collect</label>
@@ -418,8 +904,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
+                    
+                </div>
+
+                <div class="modal-footer p-0 border-top-0">
+                   
                 </div>
             </div>
         </div>
