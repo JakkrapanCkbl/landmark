@@ -7,8 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\{Job,Amphure};
-use Carbon\Carbon;
+// use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Proptype;
+use App\Models\Proptype2;
+use App\Models\Client;
 
 class Index extends Component
 {
@@ -35,9 +39,13 @@ class Index extends Component
     public $reportcode;
     public $projectname;
     public $proplocation;
+    public $jobsize;
+    public $prop_size;
     public $client;
     public $client_note;
     public $startdate;
+    public $inspectiondate;
+    public $lcduedate;
     public $clientduedate;
     public $report_checked_date;
     public $approve_checked_date;
@@ -45,6 +53,30 @@ class Index extends Component
     public $job_imgs;
     public $mainfolder = 'working_files';
     public $subfolder;
+    public $list_valuers = null; //for valuer 
+    public $valuer = 'dido';
+    public $list_headvaluers = null; //for valuer 
+    public $list_checkers = null; //for checker
+    public $headvaluer = 'สาโรจน์';
+    public $checker = 'dido';
+    public $proptypes = null;
+    public $proptype;
+    public $selectedProptype = null;
+    public $proptype2s = null;
+    public $proptype2;
+    public $selectedProptype2 = null;
+    public $prop_type_note = null;
+    public $prop_type2_note;
+    public $list_clients = null; //for dropdown client
+    public $print_checked = 0;
+    public $print_checked_by;
+    public $link_checked = 0;
+    public $link_checked_by;
+    public $file_checked = 0;
+    public $file_checked_by;
+
+    public $job_checked = 0;
+    public $report_checked_by;
 
     protected $listeners = [
         'updateValue',
@@ -70,9 +102,13 @@ class Index extends Component
         $this->users = Auth::user();
         $this->CountTotalTask(Carbon::now()->year);
         $this->CountCompletedTaskByMonth(Carbon::now()->year,Carbon::now()->month);
+        $this->proptypes = Proptype::orderBy('itemno')->get();
+        $this->list_clients = Client::orderBy('itemno', 'asc')->get();
+        $this->list_valuers = $this->get_valuers();
+        $this->list_headvaluers = $this->get_headvaluers();
+        $this->list_checkers = $this->get_checkers();
         return view('livewire.index');
         //return view('livewire.index',compact('jobs', 'users'));
-        
     }
 
     
@@ -128,21 +164,19 @@ class Index extends Component
        
         //dd($value0);
         $this->myid = $value0;
+        $this->BindingData($value0);
         $this->jobcode = $value1;
         $this->reportcode = $value2;
         $this->projectname = $value3;
         $this->proplocation = $value4;
-        $this->startdate = $value5;
+        // $this->startdate = $value5;
+        //$this->startdate = Carbon::parse($value5)->isoFormat('Do MMM Y');
         $this->clientduedate = $value6;
         $this->job_status = $value7;
-        $this->print_checked = $value8;
+        //$this->print_checked = $value8;
         $this->link_checked = $value9;
         $this->file_checked = $value10;
         $this->client = $value11;
-
-        
-
-        
         // binding files list
         //$myjob = Job::find($this->myid);
         $this->subfolder = str_replace('/', '_', $this->jobcode);
@@ -333,6 +367,142 @@ class Index extends Component
         $this->TotalSaleByMonth = 0;
     }
 
-   
+    public function BindingData($jobid)
+    {
+        //dd($jobid);
+        $this->job = Job::find($jobid);
+        $this->selectedProptype = $this->job->prop_type;
+        $this->proptype2s = Proptype2::where('show_prop_type', $this->job->prop_type)->orderBy('itemno', 'asc')->get();
+        if ($this->proptype2s->isEmpty()) {
+            $this->proptype2s = Proptype2::whereIn('itemno', [1, 99])->take(2)->get();
+            $this->selectedProptype2 = "";
+            $this->prop_type2_note = "";
+        }else{
+            $this->proptype2 = $this->job->prop_type2;
+            $this->selectedProptype2 = $this->job->prop_type2;
+            $this->prop_type2_note = $this->job->prop_type2_note;
+        }
+        $this->jobsize = $this->job->jobsize;
+        $this->prop_size = $this->job->prop_size;
+        $this->client_note = $this->job->client_note;
+        $this->valuationfee = $this->job->valuationfee;
+        $this->valuer = $this->job->valuer;
+        $this->headvaluer = $this->job->headvaluer;
+        $this->checker = $this->job->checker;
+        //$this->startdate = Carbon::parse($this->job->startdate)->isoFormat('Do MMM Y');
+        $this->startdate = $this->job->startdate;
+        $this->inspectiondate = $this->job->inspectiondate;
+        $this->lcduedate = $this->job->lcduedate;
+        
+        $this->print_checked = $this->job->print_checked;
+        $this->print_checked_by = $this->job->print_checked_by;
+        $this->link_checked = $this->job->link_checked;
+        $this->link_checked_by = $this->job->link_checked_by;
+        $this->file_checked = $this->job->file_checked;
+        $this->file_checked_by = $this->job->file_checked_by;
+
+        $this->job_checked = $this->job->job_checked;
+        $this->report_checked_by = $this->job->report_checked_by;
+        $this->report_checked_date = $this->job->report_checked_date;
+        $this->approve_checked_date= $this->job->approve_checked_date;
+
+    }
+
+    public function updatedSelectedProptype($value)
+    {
+       
+        $this->proptype2s = Proptype2::where('show_prop_type', $value)->orderBy('itemno', 'asc')->get();
+        if ($this->proptype2s->isEmpty()) {
+            $this->proptype2s = Proptype2::whereIn('itemno', [1, 99])->take(2)->get();
+            $this->selectedProptype2 = "";
+        }
+        if ($value !== 'อื่นๆ') {
+            $this->prop_type_note = "";
+            
+        }
+    }
+
+    public function updatedSelectedProptype2($value)
+    {
+        if ($value !== 'อื่นๆ') {
+            $this->prop_type2_note = "";
+        }
+    }
+
+    public function updatedclient($value)
+    {
+        //dd('client updated');
+        if ($value == 'อื่นๆ') {
+            //dd('ok');
+            $this->client_note = '';
+        }
+        
+    }
+
+    public static function gen_new_itemno()
+    {
+        $strsql = "SELECT MAX(itemno) AS max_value ";
+        $strsql = $strsql . "FROM clients WHERE itemno <> 99";
+        $result = DB::select($strsql);
+        if ($result == null) {
+            // dd("null");
+            return 0;
+        }else {
+            return (int) $result[0]->max_value + 1;
+        }
+        
+    }
+
+    public static function gen_new_itemno_proptype()
+    {
+        $strsql = "SELECT MAX(itemno) AS max_value ";
+        $strsql = $strsql . "FROM proptypes WHERE itemno <> 99";
+        $result = DB::select($strsql);
+        if ($result == null) {
+            // dd("null");
+            return 0;
+        }else {
+            return (int) $result[0]->max_value + 1;
+        }
+        
+    }
+
+    
+    public static function gen_new_itemno_proptype2($myproptype)
+    {
+        $strsql = "SELECT MAX(itemno) AS max_value ";
+        $strsql = $strsql . "FROM proptype2s ";
+        $strsql = $strsql . "WHERE itemno <> 99 And Show_prop_type = '" . $myproptype . "' ";
+        $result = DB::select($strsql);
+        if ($result == null) {
+            // dd("null");
+            return 0;
+        }else {
+            return (int) $result[0]->max_value + 1;
+        }
+        
+    }
+
+    public static function get_valuers()
+    {
+        $strsql = "SELECT * FROM users WHERE sequence_valuer is not null ORDER BY sequence_valuer";
+        return DB::select($strsql);
+    }
+
+    public static function get_headvaluers()
+    {
+        $strsql = "SELECT * FROM users WHERE sequence_head is not null ORDER BY sequence_head";
+
+        return DB::select($strsql);
+    }
+
+    public static function get_checkers()
+    {
+        $strsql = "SELECT * FROM users WHERE utype = 'ADM' AND name NOT IN ('dido', 'มงคล') ORDER BY sequence_valuer";
+        return DB::select($strsql);
+    }
+
+
+
 }
 

@@ -703,7 +703,7 @@
             <div class="card product-sales-main">
                 <div class="card-header border-bottom">
                     {{-- <button type="button" class="btn btn-primary" onclick="location.href='{{ url('/job/create') }}';">ลงทะเบียน</button> --}}
-                    <button type="button" class="btn btn-primary" onclick="location.href='{{ route('joborder.joborder-add') }}';">ลงทะเบียน</button>
+                    {{-- <button type="button" class="btn btn-primary" onclick="location.href='{{ route('joborder.joborder-add') }}';">ลงทะเบียน</button> --}}
                 </div>
                 <div wire:ignore>
                     <div class="card-body">
@@ -711,14 +711,13 @@
                             <table id="home-data-table1" class="table text-nowrap mb-0 table-bordered w-100">
                                 {{-- <thead class="table-head"> --}}
                                 <thead class="dt-head-center">
-
                                     <tr>
                                         <th>id</th>
                                         <th class="bg-transparent border-bottom-0">ลูกค้า</th>
                                         <th class="bg-transparent border-bottom-0">รายงานเลขที่</th>
                                         <th class="bg-transparent border-bottom-0">Bank's ID</th>
                                         <th class="bg-transparent border-bottom-0">โครงการ / ที่ตั้ง</th>
-                                        <th class="bg-transparent border-bottom-0">วิธีการประเมิน</th>
+                                        <th class="bg-transparent border-bottom-0">วิธีประเมิน</th>
                                         <th class="bg-transparent border-bottom-0">มูลค่าตลาด (บาท)</th>
                                         <th class="bg-transparent border-bottom-0">บาท/หน่วย</th>
                                         <th class="bg-transparent border-bottom-0">ปรเภท</th>

@@ -19,10 +19,13 @@ class Job extends Model
         'propd_id', 'province_code', 'amphure_code', 'district', 'obj_id', 'marketvalue', 'marketvalue_unit',
         'lat', 'lng', 'valuationfee', 'remark', 'easydiff',
         'valuationfee_case', 'urgent', 'canceled', 'withcd', 'room_sum',
-        'default_coordinates', 'job_status', 'job_gps', 'obj_method', 'job_checked', 
-        'prop_type2', 'prop_type2_note', 'print_checked', 'link_checked', 'file_checked',
-        'report_checked_date', 'approve_checked_date', 'land_size'
-
+        'default_coordinates', 'job_status', 'job_gps', 'obj_method',  
+        'prop_type2', 'prop_type2_note', 
+        'link_checked', 'link_checked_by', 'link_checked_date',
+        'print_checked', 'print_checked_by', 'print_checked_date', 
+        'file_checked', 'file_checked_by', 'file_checked_date',
+        'job_checked', 'report_checked_by', 'report_checked_date', 'approve_checked_date', 
+        'land_size'
     ];
 
 }

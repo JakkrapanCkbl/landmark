@@ -448,6 +448,7 @@ class JobOrderEdit extends Component
         
     }
 
+    
     public static function gen_new_itemno_proptype2($myproptype)
     {
         $strsql = "SELECT MAX(itemno) AS max_value ";

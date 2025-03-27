@@ -583,6 +583,76 @@
             
             });
     </script>
+
+    {{-- Custom Function --}}
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/th.js"></script>
+        <script>
+            flatpickr("#startdate", {
+                dateFormat: "d M Y",
+                locale: "th",
+                onReady: function(selectedDates, dateStr, instance) {
+                // Convert and display the year in Thai Buddhist Era (พ.ศ.)
+                const thaiBuddhistYear = instance.currentYear + 543;
+                document.getElementById("startdate").value = dateStr.replace(instance.currentYear.toString(), thaiBuddhistYear.toString());   
+                }
+            });
+            
+            flatpickr("#inspectiondate", {
+                dateFormat: "d M Y",
+                locale: "th",
+                onReady: function(selectedDates, dateStr, instance) {
+                // Convert and display the year in Thai Buddhist Era (พ.ศ.)
+                const thaiBuddhistYear = instance.currentYear + 543;
+                document.getElementById("inspectiondate").value = dateStr.replace(instance.currentYear.toString(), thaiBuddhistYear.toString());
+               
+                },
+            });
+
+            flatpickr("#lcduedate", {
+                dateFormat: "d M Y",
+                locale: "th",
+                onReady: function(selectedDates, dateStr, instance) {
+                // Convert and display the year in Thai Buddhist Era (พ.ศ.)
+                const thaiBuddhistYear = instance.currentYear + 543;
+                document.getElementById("lcduedate").value = dateStr.replace(instance.currentYear.toString(), thaiBuddhistYear.toString());
+               
+                },
+            });
+
+            flatpickr("#clientduedate", {
+                dateFormat: "d M Y",
+                locale: "th",
+                onReady: function(selectedDates, dateStr, instance) {
+                // Convert and display the year in Thai Buddhist Era (พ.ศ.)
+                const thaiBuddhistYear = instance.currentYear + 543;
+                document.getElementById("clientduedate").value = dateStr.replace(instance.currentYear.toString(), thaiBuddhistYear.toString());
+               
+                },
+            });
+
+            flatpickr("#report_checked_date", {
+                dateFormat: "d M Y",
+                locale: "th",
+                onReady: function(selectedDates, dateStr, instance) {
+                // Convert and display the year in Thai Buddhist Era (พ.ศ.)
+                const thaiBuddhistYear = instance.currentYear + 543;
+                document.getElementById("report_checked_date").value = dateStr.replace(instance.currentYear.toString(), thaiBuddhistYear.toString());
+               
+                },
+            });
+
+            flatpickr("#approve_checked_date", {
+                dateFormat: "d M Y",
+                locale: "th",
+                onReady: function(selectedDates, dateStr, instance) {
+                // Convert and display the year in Thai Buddhist Era (พ.ศ.)
+                const thaiBuddhistYear = instance.currentYear + 543;
+                document.getElementById("approve_checked_date").value = dateStr.replace(instance.currentYear.toString(), thaiBuddhistYear.toString());
+               
+                },
+            });
+    </script>
   
 
 @endsection <!-- script -->
