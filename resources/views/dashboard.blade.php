@@ -98,12 +98,16 @@
             Livewire.emit('openreport',jobid);
         }
 
-        
-
-
-
-
+         
     </script>
+    <script>
+        function confirmEdit($continue) {
+            if (confirm('ยืนยันการการบันทึกข้อมูล?')) {
+                    Livewire.emit('callUpdate');
+            }
+        }
+    </script>
+
 
     {{-- for set windows center screen --}}
     <script>

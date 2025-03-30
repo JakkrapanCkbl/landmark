@@ -6,10 +6,10 @@ use Livewire\Component;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Models\{Job,Amphure};
-// use Carbon\Carbon;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use App\Models\{Job,Amphure};
 use App\Models\Proptype;
 use App\Models\Proptype2;
 use App\Models\Client;
@@ -43,12 +43,12 @@ class Index extends Component
     public $prop_size;
     public $client;
     public $client_note;
+    public $valuationfee;
     public $startdate;
     public $inspectiondate;
     public $lcduedate;
     public $clientduedate;
-    public $report_checked_date;
-    public $approve_checked_date;
+    
     public $job_status;
     public $job_imgs;
     public $mainfolder = 'working_files';
@@ -57,8 +57,8 @@ class Index extends Component
     public $valuer = 'dido';
     public $list_headvaluers = null; //for valuer 
     public $list_checkers = null; //for checker
-    public $headvaluer = 'สาโรจน์';
-    public $checker = 'dido';
+    
+    public $job_gps;
     public $proptypes = null;
     public $proptype;
     public $selectedProptype = null;
@@ -76,29 +76,38 @@ class Index extends Component
     public $file_checked_by;
 
     public $job_checked = 0;
-    public $report_checked_by;
+    public $checker = 'dido';
+    public $report_checked_date;
+
+    public $approve_checked = 0;
+    public $headvaluer = 'สาโรจน์';
+    public $approve_checked_date;
+
+
+
+
 
     protected $listeners = [
         'updateValue',
         'showSum',
         'bindingPopup',
+        'callUpdate',
         'test',
         'openreport',
         'addTwoNumbers'
         // Add more listeners as needed
     ];
 
+    public function mount()
+    {
+        // $this->subfolder = str_replace('/', '_', $this->jobcode);
+        // $this->job_imgs = DB::select('select * from jobs_img where job_id = ' . $this->myid . ' order by file_name');
+       
+    }
+
     
     public function render()
     {
-        // $this->jobs = DB::select('select * from jobs order by id desc LIMIT 200');
-        //$this->jobs = DB::select('select * from jobs WHERE YEAR(startdate) = YEAR(NOW()) order by id desc');
-        // $sql = "Select id, client, jobcode, reportcode, projectname, proplocation, prop_type, prop_size, startdate, ";
-        // $sql = $sql . "inspectiondate, lcduedate, clientduedate, valuer, headvaluer, job_status, customer, ";
-        // $sql = $sql . "jobsize, easydiff, print_checked, link_checked, file_checked, job_checked ";
-        // $sql = $sql . "from jobs WHERE YEAR(startdate) = YEAR(NOW()) order by id desc ";
-        // $this->jobs = DB::select($sql);
-        // $this->jobs = Job::whereYear('startdate', Carbon::now()->year)->get();
         $this->users = Auth::user();
         $this->CountTotalTask(Carbon::now()->year);
         $this->CountCompletedTaskByMonth(Carbon::now()->year,Carbon::now()->month);
@@ -108,7 +117,6 @@ class Index extends Component
         $this->list_headvaluers = $this->get_headvaluers();
         $this->list_checkers = $this->get_checkers();
         return view('livewire.index');
-        //return view('livewire.index',compact('jobs', 'users'));
     }
 
     
@@ -126,6 +134,7 @@ class Index extends Component
         $sql = $sql . "jobs.customer, jobs.proplocation, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs_img.file_name, jobs.projectname ";
         $sql = $sql . "From jobs Left Join ";
         $sql = $sql . "jobs_img On jobs_img.jobcode = jobs.jobcode ";
+        //$sql = $sql . "WHERE jobs.jobcode = 'LC/66BF-0002' Order By jobs.id Desc";
         $sql = $sql . "WHERE Year(jobs.startdate) >= Year(Now()) - 2 Order By jobs.id Desc";
         //dd($sql);
         $jobs = DB::select($sql);
@@ -170,19 +179,269 @@ class Index extends Component
         $this->projectname = $value3;
         $this->proplocation = $value4;
         // $this->startdate = $value5;
-        //$this->startdate = Carbon::parse($value5)->isoFormat('Do MMM Y');
-        $this->clientduedate = $value6;
+        //$this->clientduedate = $value6;
         $this->job_status = $value7;
         //$this->print_checked = $value8;
         $this->link_checked = $value9;
         $this->file_checked = $value10;
         $this->client = $value11;
-        // binding files list
-        //$myjob = Job::find($this->myid);
-        $this->subfolder = str_replace('/', '_', $this->jobcode);
-        $this->job_imgs = DB::select('select * from jobs_img where job_id = ' . $this->myid . ' order by file_name');
+        
         
     }
+
+    public function BindingData($jobid)
+    {
+        //dd($jobid);
+        Carbon::setLocale('th');
+        $this->job = Job::find($jobid);
+        $this->selectedProptype = $this->job->prop_type;
+        $this->proptype2s = Proptype2::where('show_prop_type', $this->job->prop_type)->orderBy('itemno', 'asc')->get();
+        if ($this->proptype2s->isEmpty()) {
+            $this->proptype2s = Proptype2::whereIn('itemno', [1, 99])->take(2)->get();
+            $this->selectedProptype2 = "";
+            $this->prop_type2_note = "";
+        }else{
+            $this->proptype2 = $this->job->prop_type2;
+            $this->selectedProptype2 = $this->job->prop_type2;
+            $this->prop_type2_note = $this->job->prop_type2_note;
+        }
+        $this->jobsize = $this->job->jobsize;
+        $this->prop_size = $this->job->prop_size;
+        $this->client_note = $this->job->client_note;
+        $this->valuationfee = number_format($this->job->valuationfee);
+        $this->valuer = $this->job->valuer;
+        $this->headvaluer = $this->job->headvaluer;
+        $this->job_gps = $this->job->job_gps;
+        
+        if ($this->job->startdate === '1976-04-27') {
+            $this->startdate = null;
+        } else {
+            $this->startdate = Carbon::parse($this->job->startdate)->locale('th')->translatedFormat('j M Y');
+        }
+        if ($this->job->inspectiondate === '1976-04-27') {
+            $this->inspectiondate = null;
+        } else {
+            $this->inspectiondate = Carbon::parse($this->job->inspectiondate)->locale('th')->translatedFormat('j M Y');
+        }
+        if ($this->job->lcduedate === '1976-04-27') {
+            $this->lcduedate = null;
+        } else {
+            $this->lcduedate = Carbon::parse($this->job->lcduedate)->locale('th')->translatedFormat('j M Y');
+        }
+        if ($this->job->clientduedate === '1976-04-27') {
+            $this->clientduedate = null;
+        } else {
+            $this->clientduedate = Carbon::parse($this->job->clientduedate)->locale('th')->translatedFormat('j M Y');
+        }
+
+        
+        $this->print_checked = $this->job->print_checked;
+        $this->print_checked_by = $this->job->print_checked_by;
+        $this->link_checked = $this->job->link_checked;
+        $this->link_checked_by = $this->job->link_checked_by;
+        $this->file_checked = $this->job->file_checked;
+        $this->file_checked_by = $this->job->file_checked_by;
+
+        $this->job_checked = $this->job->job_checked;
+        $this->checker = $this->job->checker;
+        $this->report_checked_date = $this->job->report_checked_date;
+
+        $this->approve_checked = $this->job->approve_checked;
+        $this->approve_checked_date= $this->job->approve_checked_date;
+
+        
+
+        // binding files list
+        //$this->subfolder = str_replace('/', '_', $this->jobcode);
+        //$this->job_imgs = DB::select('select * from jobs_img where job_id = ' . $this->myid . ' order by file_name');
+        //$this->subfolder = str_replace('/', '_', $this->job->jobcode);
+        //$this->job_imgs = DB::select('select * from jobs_img where job_id = ' . $jobid . ' order by file_name');
+
+    }
+
+
+
+
+    public function callUpdate() {
+        $this->updateData();
+    }
+
+    public function updateData()
+    {
+        dd('Under Modify code.');
+
+        $this->validate([
+            'projectname' => 'required|string',
+            
+        ]);
+
+        // if ($this->lat == null){
+        //     $this->lat = 0;
+        // }
+        // if ($this->lng == null){
+        //     $this->lng = 0;
+        // }
+        $sql_startdate = (new MainController)->ConvertThaiDate2SqlDate($this->startdate);
+        //dd($sql_startdate);
+        $sql_inspectiondate = (new MainController)->ConvertThaiDate2SqlDate($this->inspectiondate);
+        $sql_lcduedate = (new MainController)->ConvertThaiDate2SqlDate($this->lcduedate);
+        $sql_clientduedate = (new MainController)->ConvertThaiDate2SqlDate($this->clientduedate);
+        $sql_report_checked_date = (new MainController)->ConvertThaiDate2SqlDate($this->report_checked_date);
+        $sql_approve_checked_date = (new MainController)->ConvertThaiDate2SqlDate($this->approve_checked_date);
+        
+        if($this->myid){
+            $my_job = Job::find($this->myid);
+            // for check add new value in client combobox
+            // if ($this->client != 'อื่นๆ'){
+            //     $this->client_note = "";
+            // }else{
+            //     if ( $this->client_note != '') {
+            //         // นำ client_note ไปเช็คในตาราง clients ถ้าไม่มีให้ Add new
+            //         $result = (new MainController)->MyFind("clients","clientname","where clientname = '" . $this->client_note . "'","" ); 
+            //         if ($result == '') {
+            //             $new_itemno = $this->gen_new_itemno();
+            //             Client::create([
+            //                 'itemno' => $new_itemno,
+            //                 'clientname' => $this->client_note,
+            //             ]);
+            //             $this->list_clients = Client::orderBy('itemno', 'asc')->get();
+            //         }
+            //     }
+            // }
+            // for check add new value in proptype combobox
+            // if ($this->selectedProptype == 'อื่นๆ'){
+            //     if ( $this->prop_type_note != '') {
+            //         // นำ prop_type_not ไปเช็คในตาราง proptypes ถ้าไม่มีให้ Add new
+            //         $result = (new MainController)->MyFind("proptypes","show_prop_type","where show_prop_type = '" . $this->prop_type_note . "'","" ); 
+            //         if ($result == '') {
+            //             $new_itemno = $this->gen_new_itemno_proptype();
+            //             Proptype::create([
+            //                 'itemno' => $new_itemno,
+            //                 'show_prop_type' => $this->prop_type_note,
+            //             ]);
+            //             $this->proptypes = Proptype::orderBy('itemno', 'asc')->get();
+            //         }
+            //     }
+            // }
+            // for check add new value in proptype2 combobox
+            //  if ($this->selectedProptype2 == 'อื่นๆ'){
+            //      if ( $this->prop_type2_note != '') {
+            //         // นำ $prop_type2_note ไปเช็คในตาราง proptype2s ถ้าไม่มีให้ Add new
+            //         //dd($this->selectedProptype . "   " . $this->prop_type2_note);
+            //         $result = (new MainController)->MyFind("proptype2s","show_prop_type2","where show_prop_type = '" . $this->selectedProptype . "' and show_prop_type2 = '" . $this->prop_type2_note . "'","" ); 
+            //         // dd($result);
+            //         if ($result == '') {
+            //             $new_itemno = $this->gen_new_itemno_proptype2($this->selectedProptype);
+            //             if ($new_itemno == "1") {
+            //                 Proptype2::create([
+            //                     'show_prop_type' => $this->selectedProptype,
+            //                     'itemno' => 1,
+            //                     'show_prop_type2' => "",
+            //                 ]);
+            //                 Proptype2::create([
+            //                     'show_prop_type' => $this->selectedProptype,
+            //                     'itemno' => 99,
+            //                     'show_prop_type2' => "อื่นๆ",
+            //                 ]);
+            //             }
+            //             $new_itemno = $this->gen_new_itemno_proptype2($this->selectedProptype);
+            //             if ((int)$new_itemno > 1) {
+            //                 Proptype2::create([
+            //                     'show_prop_type' => $this->selectedProptype,
+            //                     'itemno' => $new_itemno,
+            //                     'show_prop_type2' => $this->prop_type2_note,
+            //                 ]);
+            //             }
+            //             $this->proptypes2 = Proptype2::where('show_prop_type',$this->selectedProptype)->orderBy('itemno', 'asc')->get();
+                        
+            //         }
+            //     }
+            //  }else{
+            //     $this->proptypes2 = Proptype2::where('show_prop_type',$this->selectedProptype)->orderBy('itemno', 'asc')->get();
+            //  }
+
+            $my_job->update([
+                'reportcode' => $this->reportcode,
+                'client' => $this->client,
+                // 'client_note' => $this->client_note,
+                // 'prop_type' => $this->selectedProptype,
+                // 'prop_type2' => $this->selectedProptype2,
+                // 'prop_type2_note' => $this->prop_type2_note,
+                // 'prop_size' => $this->prop_size,
+                // 'projectname' => $this->projectname,
+                // 'proplocation' => $this->proplocation,
+                // 'province_code' => $this->selectedProvince,
+                // 'amphure_code' => $this->amphure_code,
+                // 'district' => $this->district,
+                // 'customer' => $this->customer,
+                // 'jobtype' => $this->jobtype,
+                // 'jobsize' => $this->jobsize,
+                // 'easydiff' => $this->easydiff,
+                // 'obj_id' => $this->obj_id,
+                // 'valuationfee' => (float) str_replace(',', '', $this->valuationfee),
+                // 'valuationfee_case' => $this->valuationfee_case,
+                // 'job_gps' => $this->job_gps,
+                // 'lat' => $this->lat,
+                // 'lng' => $this->lng,
+                // 'valuer' => $this->valuer,
+                // 'headvaluer' => $this->headvaluer,
+                // 'checker' => $this->checker,
+                // 'startdate' => $sql_startdate,
+                // 'inspectiondate' => $sql_inspectiondate,
+                // 'lcduedate' => $sql_lcduedate,
+                // 'clientduedate' => $sql_clientduedate,
+                // 'report_checked_date' => $sql_report_checked_date,
+                // 'approve_checked_date' => $sql_approve_checked_date,
+                // 'job_status' => $this->job_status,
+                // 'obj_method' => $this->obj_method,
+                // 'marketvalue' => (float) str_replace(',', '', $this->marketvalue),
+                // 'job_checked' => (bool) $this->job_checked,
+                // 'print_checked' => (bool) $this->print_checked,
+                // 'link_checked' => (bool) $this->link_checked,
+                // 'file_checked' => (bool) $this->file_checked,
+            ]);
+            // for set change new value in client combobox
+            // if ($this->client == 'อื่นๆ'){
+            //     if ( $this->client_note != '') {
+            //         $my_job->update([
+            //             'client' => $this->client_note,
+            //             'client_note' => '',
+            //         ]);
+            //         $this->client = $this->client_note;
+            //         $this->client_note = "";
+            //     }
+            // }
+            // for set change new value in proptype combobox
+            // if ($this->selectedProptype == 'อื่นๆ'){
+            //     if ( $this->prop_type_note != '') {
+            //         $my_job->update([
+            //             'prop_type' => $this->prop_type_note,
+            //         ]);
+            //         $this->selectedProptype = $this->prop_type_note;
+            //         $this->prop_type_note = "";
+            //     }
+            // }
+            // for set change new value in proptype2 combobox (selectedProptype2)
+            // if ($this->selectedProptype2 == 'อื่นๆ'){
+            //     //dd($this->prop_type2_note);
+            //     if ( $this->prop_type2_note != '') {
+            //         $my_job->update([
+            //             'prop_type2' => $this->prop_type2_note,
+            //             'prop_type2_note' => "",
+            //         ]);
+            //         $this->selectedProptype2 = $this->prop_type2_note;
+            //         $this->prop_type2_note = "";
+            //     }
+            // }
+            // $this->proptype2 = Job::find($this->myid)->prop_type2;
+        }
+
+        
+        session()->flash('message', 'Updated successfully.');
+        //$this->emit('jobUpdated');
+        //return redirect('/dashboard')->with('message', 'บันทึกข้อมูลเสร็จแล้ว');
+    }
+
 
     public function openreport($jobid){
        
@@ -367,47 +626,7 @@ class Index extends Component
         $this->TotalSaleByMonth = 0;
     }
 
-    public function BindingData($jobid)
-    {
-        //dd($jobid);
-        $this->job = Job::find($jobid);
-        $this->selectedProptype = $this->job->prop_type;
-        $this->proptype2s = Proptype2::where('show_prop_type', $this->job->prop_type)->orderBy('itemno', 'asc')->get();
-        if ($this->proptype2s->isEmpty()) {
-            $this->proptype2s = Proptype2::whereIn('itemno', [1, 99])->take(2)->get();
-            $this->selectedProptype2 = "";
-            $this->prop_type2_note = "";
-        }else{
-            $this->proptype2 = $this->job->prop_type2;
-            $this->selectedProptype2 = $this->job->prop_type2;
-            $this->prop_type2_note = $this->job->prop_type2_note;
-        }
-        $this->jobsize = $this->job->jobsize;
-        $this->prop_size = $this->job->prop_size;
-        $this->client_note = $this->job->client_note;
-        $this->valuationfee = $this->job->valuationfee;
-        $this->valuer = $this->job->valuer;
-        $this->headvaluer = $this->job->headvaluer;
-        $this->checker = $this->job->checker;
-        //$this->startdate = Carbon::parse($this->job->startdate)->isoFormat('Do MMM Y');
-        $this->startdate = $this->job->startdate;
-        $this->inspectiondate = $this->job->inspectiondate;
-        $this->lcduedate = $this->job->lcduedate;
-        
-        $this->print_checked = $this->job->print_checked;
-        $this->print_checked_by = $this->job->print_checked_by;
-        $this->link_checked = $this->job->link_checked;
-        $this->link_checked_by = $this->job->link_checked_by;
-        $this->file_checked = $this->job->file_checked;
-        $this->file_checked_by = $this->job->file_checked_by;
-
-        $this->job_checked = $this->job->job_checked;
-        $this->report_checked_by = $this->job->report_checked_by;
-        $this->report_checked_date = $this->job->report_checked_date;
-        $this->approve_checked_date= $this->job->approve_checked_date;
-
-    }
-
+   
     public function updatedSelectedProptype($value)
     {
        

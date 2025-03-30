@@ -15,6 +15,7 @@ use App\Models\Proptype;
 use App\Models\Proptype2;
 use App\Models\Client;
 
+
 class JobOrderEdit extends Component
 {
     public $sum;
@@ -152,7 +153,6 @@ class JobOrderEdit extends Component
             $this->prop_type2_note = $this->job->prop_type2_note;
         }
        
-
         
     }
 

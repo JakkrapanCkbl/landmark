@@ -10601,12 +10601,12 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .main-toggle-group .toggle span::before {
-  content: "on";
+  content: "Yes";
   left: -25px;
 }
 
 .main-toggle-group .toggle span::after {
-  content: "off";
+  content: "No";
   right: -29px;
 }
 

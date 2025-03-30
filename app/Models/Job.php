@@ -14,7 +14,7 @@ class Job extends Model
         'id', 'jobcode', 'clientcode', 'reportcode','projectname', 
         'jobsize', 'jobtype', 'client', 'client_note', 'customer_company', 'customer_address', 
         'customer', 'prop_type', 'prop_size', 'proplocation', 'lcduedate',
-        'headvaluer', 'headvaluer_n', 'valuer', 'valuer_n', 'percentfinish',
+        'headvaluer_n', 'valuer', 'valuer_n', 'percentfinish',
         'startdate', 'inspectiondate', 'lcduedate', 'clientduedate', 'created_at', 'updated_at',
         'propd_id', 'province_code', 'amphure_code', 'district', 'obj_id', 'marketvalue', 'marketvalue_unit',
         'lat', 'lng', 'valuationfee', 'remark', 'easydiff',
@@ -24,7 +24,8 @@ class Job extends Model
         'link_checked', 'link_checked_by', 'link_checked_date',
         'print_checked', 'print_checked_by', 'print_checked_date', 
         'file_checked', 'file_checked_by', 'file_checked_date',
-        'job_checked', 'report_checked_by', 'report_checked_date', 'approve_checked_date', 
+        'job_checked', 'checker', 'report_checked_date', 
+        'approve_checked', 'headvaluer', 'approve_checked_date', 
         'land_size'
     ];
 
