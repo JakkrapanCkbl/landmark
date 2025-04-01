@@ -39,8 +39,12 @@ class Index extends Component
     public $reportcode;
     public $projectname;
     public $proplocation;
+    public $obj_id;
+    public $jobtype;
+    public $customer;
     public $jobsize;
     public $prop_size;
+    public $easydiff;
     public $client;
     public $client_note;
     public $valuationfee;
@@ -111,7 +115,8 @@ class Index extends Component
         $this->users = Auth::user();
         $this->CountTotalTask(Carbon::now()->year);
         $this->CountCompletedTaskByMonth(Carbon::now()->year,Carbon::now()->month);
-        $this->proptypes = Proptype::orderBy('itemno')->get();
+        //$this->proptypes = Proptype::orderBy('itemno')->get();
+        $this->proptypes = Proptype::whereNot('id', 1)->orderBy('itemno')->get();
         $this->list_clients = Client::orderBy('itemno', 'asc')->get();
         $this->list_valuers = $this->get_valuers();
         $this->list_headvaluers = $this->get_headvaluers();
@@ -205,7 +210,11 @@ class Index extends Component
             $this->selectedProptype2 = $this->job->prop_type2;
             $this->prop_type2_note = $this->job->prop_type2_note;
         }
+        $this->customer = $this->job->customer;
+        $this->obj_id = $this->job->obj_id;
+        $this->jobtype = $this->job->jobtype;
         $this->jobsize = $this->job->jobsize;
+        $this->easydiff = $this->job->easydiff;
         $this->prop_size = $this->job->prop_size;
         $this->client_note = $this->job->client_note;
         $this->valuationfee = number_format($this->job->valuationfee);

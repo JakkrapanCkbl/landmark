@@ -321,12 +321,12 @@
                                                             <input class="form-control" wire:model="clientduedate" name="clientduedate" id="clientduedate" type="text">
                                                         </div>
                                                     </div>
-                                                     {{-- <div class="col-2">
+                                                     <div class="col-2">
                                                         <div class="form-group">
                                                             <label for="clientduedate" class="form-label"><span style="color:blue;font-weight: bold;">ส่งตรวจรายงาน</label>
                                                             <input class="form-control" wire:model="clientduedate" name="clientduedate" id="clientduedate" type="text">
                                                         </div>
-                                                    </div> --}}
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
@@ -351,7 +351,7 @@
                                                     
                                                     <div class="col-3">
                                                         <div class="form-group">
-                                                            <label for="report_checked_date" class="form-label">สถานะตรวจรายงาน</label>
+                                                            <label for="report_checked_date" class="form-label">สถานะตรวจรายงานเบื้องต้น</label>
                                                             {{-- <input class="form-control" wire:model="report_checked_date" name="report_checked_date" id="report_checked_date" type="text"> --}}
                                                              <div class="toggle toggle-dark on"><span></span></div>
                                                                 @if($job_checked == '0')
@@ -368,8 +368,12 @@
                                                                     </div>
                                                                 @endif
                                                         </div>
-                                                        <input type="text" class="form-control" name="checker" id="checker" wire:model="checker">
-                                                        
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="form-group">
+                                                            <label for="checker" class="form-label">จัดทำโดย</label>
+                                                            <input type="text" disabled class="form-control" name="checker" id="checker" wire:model="checker">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -410,7 +414,12 @@
                                                                     </div>
                                                                 @endif
                                                         </div>
-                                                        <input type="text" class="form-control" name="headvaluer" id="headvaluer" wire:model="headvaluer">
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="form-group">
+                                                            <label for="headvaluer" class="form-label"><span style="color:green;font-weight: bold;">จัดทำโดย</label>
+                                                            <input type="text" disabled class="form-control" name="headvaluer" id="headvaluer" wire:model="headvaluer">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -420,9 +429,9 @@
                                             <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ตรวจสอบข้อมูล/จัดเก็บไฟล์</p></td>
                                             <td class="wp-70">
                                                 <div class="row">
-                                                    <div class="col-3">
+                                                    <div class="col-2">
                                                         <label class="form-check-label" for="link_checked">Collect soft File</label>
-                                                        <br>
+                                                        {{-- <br> --}}
                                                         <div class="toggle toggle-dark on"><span></span></div>
                                                         @if($link_checked == '0')
                                                             <div class="main-toggle-group d-flex flex-wrap mt-3">
@@ -437,9 +446,14 @@
                                                                 </div>
                                                             </div>
                                                         @endif
-                                                        <input type="text" class="form-control" name="link_checked_by" id="link_checked_by" wire:model="link_checked_by">
                                                     </div>
-                                                    <div class="col-3">
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label class="form-check-label" for="link_checked_by">จัดทำโดย</label>
+                                                            <input type="text" disabled class="form-control" name="link_checked_by" id="link_checked_by" wire:model="link_checked_by">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2">
                                                         <label class="form-check-label" for="print_checked">Print เล่มรายงาน</label>
                                                         <br>
                                                         @if($print_checked == '0')
@@ -455,13 +469,19 @@
                                                                 </div>
                                                             </div>
                                                         @endif
-                                                        <input type="text" class="form-control" name="print_checked_by" id="print_checked_by" wire:model="print_checked_by">
+                                                        
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label class="form-check-label" for="print_checked_by">จัดทำโดย</label>
+                                                            <input type="text" disabled class="form-control" name="print_checked_by" id="print_checked_by" wire:model="print_checked_by">
+                                                        </div>
                                                     </div>
 
-                                                    <div class="col-3">
+                                                    <div class="col-2">
                                                         <label class="form-check-label" for="file_checked">Collect Hard File</label>
                                                         <br>
-                                                         @if($print_checked == '0')
+                                                         @if($file_checked == '0')
                                                             <div class="main-toggle-group d-flex flex-wrap mt-3">
                                                                 <div class="toggle toggle-info off">
                                                                     <span></span>
@@ -474,9 +494,13 @@
                                                                 </div>
                                                             </div>
                                                         @endif
-                                                        <input type="text" class="form-control" name="file_checked_by" id="file_checked_by" wire:model="file_checked_by">
-
-                                                       
+                                                        
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label class="form-check-label" for="file_checked_by">จัดทำโดย</label>
+                                                            <input type="text" disabled class="form-control" name="file_checked_by" id="file_checked_by" wire:model="file_checked_by">
+                                                        </div>
                                                     </div>
                                                 </div>            
                                             </td>
@@ -500,7 +524,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-3">
+                                                    <div class="col-2">
                                                         <label class="form-check-label" for="job_checked">Project Completed</label>
                                                         <br>
                                                          @if($job_checked == '0')
@@ -517,6 +541,13 @@
                                                             </div>
                                                         @endif
                                                         {{-- <input type="text" class="form-control" name="report_checked_by" id="report_checked_by" wire:model="report_checked_by"> --}}
+                                                    </div>
+
+                                                    <div class="col-2">
+                                                        <div class="form-group">
+                                                            <label class="form-check-label" for="report_checked_by">จัดทำโดย</label>
+                                                            <input type="text" disabled class="form-control" name="report_checked_by" id="report_checked_by" wire:model="report_checked_by">
+                                                        </div>
                                                     </div>
 
                                                 </div>            
