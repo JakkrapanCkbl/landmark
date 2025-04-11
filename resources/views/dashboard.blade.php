@@ -181,9 +181,9 @@
                     { "data": "startdate" },
                     { "data": "inspectiondate" },
                     { "data": "lcduedate" },
-                    { "data": "report_checked" },
-                    { "data": "approve_checked" },
-                    { "data": "clientduedate" },
+                    { "data": "pre_report_checked_date" },
+                    { "data": "job_checked_date" },
+                    { "data": "send_check_report_date" },
                     { "data": "valuer" },
                     { "data": "headvaluer" },
                     { "data": "do_advance" },
@@ -367,14 +367,14 @@
                     },
                     
                     {
-                        targets: 13, // report_checked_date
+                        targets: 13, // pre_report_checked_date
                         render: function(data, type, row) {
-                            let dateObj = new Date(row.report_checked_date);
+                            let dateObj = new Date(row.pre_report_checked_date);
                             // Define the reference date
                             let referenceDate = new Date('1976-04-27');
                             if  (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
                                 // Check if dateObj is invalid
-                                if (row.report_checked_date === null) {
+                                if (row.pre_report_checked_date === null) {
                                     return `<td class="text-muted fs-13"></td>`;
                                 }else{
                                     // Define Thai weekday and month arrays
@@ -402,14 +402,14 @@
                         }
                     },
                     {
-                        targets: 14, // approve_checked_date
+                        targets: 14, // job_checked_date
                         render: function(data, type, row) {
-                            let dateObj = new Date(row.approve_checked_date);
+                            let dateObj = new Date(row.job_checked_date);
                             // Define the reference date
                             let referenceDate = new Date('1976-04-27');
                             if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
                                 // Check if dateObj is invalid
-                                if (row.approve_checked_date === null) {
+                                if (row.job_checked_date === null) {
                                     return `<td class="text-muted fs-13"></td>`;
                                 }else{
                                     // Define Thai weekday and month arrays
@@ -436,14 +436,14 @@
                         }
                     },
                     {
-                        targets: 15, // clientduedate column
+                        targets: 15, // send_check_report_date column
                         render: function(data, type, row) {
-                            let dateObj = new Date(row.clientduedate);
+                            let dateObj = new Date(row.send_check_report_date);
                             // Define the reference date
                             let referenceDate = new Date('1976-04-27');
                             if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
                                 // Check if dateObj is invalid
-                                if (row.clientduedate === null) {
+                                if (row.send_check_report_date === null) {
                                     return `<td class="text-muted fs-13"></td>`;
                                 }else{
                                     // Define Thai weekday and month arrays

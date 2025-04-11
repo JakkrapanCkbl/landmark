@@ -13,6 +13,7 @@ use App\Models\{Job,Amphure};
 use App\Models\Proptype;
 use App\Models\Proptype2;
 use App\Models\Client;
+use Illuminate\Support\Facades\Validator;
 
 class Index extends Component
 {
@@ -52,8 +53,8 @@ class Index extends Component
     public $inspectiondate;
     public $lcduedate;
     public $clientduedate;
+    public $send_check_report_date;
     
-    public $job_status;
     public $job_imgs;
     public $mainfolder = 'working_files';
     public $subfolder;
@@ -63,6 +64,7 @@ class Index extends Component
     public $list_checkers = null; //for checker
     
     public $job_gps;
+    
     public $proptypes = null;
     public $proptype;
     public $selectedProptype = null;
@@ -72,23 +74,33 @@ class Index extends Component
     public $prop_type_note = null;
     public $prop_type2_note;
     public $list_clients = null; //for dropdown client
+
+    public $pre_job_checked = 0;
+    public $pre_checker = 'dido';
+    public $pre_report_checked_date;
+    public $pre_show_modified;
+
     public $print_checked = 0;
     public $print_checked_by;
+    public $print_checked_date;
+
+
     public $link_checked = 0;
     public $link_checked_by;
+
     public $file_checked = 0;
     public $file_checked_by;
-
-    public $job_checked = 0;
-    public $checker = 'dido';
-    public $report_checked_date;
 
     public $approve_checked = 0;
     public $headvaluer = 'สาโรจน์';
     public $approve_checked_date;
+    public $show_Approved;
 
-
-
+    public $job_checked = 0;
+    public $checker = 'กนกวรรณ';
+    public $job_status;
+    public $job_checked_date;
+    public $show_finishjob;
 
 
     protected $listeners = [
@@ -133,13 +145,13 @@ class Index extends Component
         $sql = $sql . "jobs.obj_method, jobs.marketvalue, jobs.marketvalue_unit, ";
         $sql = $sql . "jobs.prop_type, jobs.prop_size, jobs.startdate, ";
         $sql = $sql . "jobs.inspectiondate, jobs.lcduedate, ";
-        $sql = $sql . "jobs.report_checked_date, jobs.approve_checked_date, jobs.clientduedate, ";
+        $sql = $sql . "jobs.pre_report_checked_date, jobs.job_checked_date, jobs.send_check_report_date, ";
         $sql = $sql . "jobs.valuer, jobs.headvaluer, '' as 'do_advance', jobs.job_status, jobs.customer, ";
         $sql = $sql . "jobs.jobsize, jobs.easydiff, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs.job_checked, ";
         $sql = $sql . "jobs.customer, jobs.proplocation, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs_img.file_name, jobs.projectname ";
         $sql = $sql . "From jobs Left Join ";
         $sql = $sql . "jobs_img On jobs_img.jobcode = jobs.jobcode ";
-        //$sql = $sql . "WHERE jobs.jobcode = 'LC/66BF-0002' Order By jobs.id Desc";
+        //$sql = $sql . "WHERE jobs.jobcode = 'LC/66BF-0006' Order By jobs.id Desc";
         $sql = $sql . "WHERE Year(jobs.startdate) >= Year(Now()) - 2 Order By jobs.id Desc";
         //dd($sql);
         $jobs = DB::select($sql);
@@ -221,7 +233,6 @@ class Index extends Component
         $this->valuer = $this->job->valuer;
         $this->headvaluer = $this->job->headvaluer;
         $this->job_gps = $this->job->job_gps;
-        
         if ($this->job->startdate === '1976-04-27') {
             $this->startdate = null;
         } else {
@@ -237,11 +248,23 @@ class Index extends Component
         } else {
             $this->lcduedate = Carbon::parse($this->job->lcduedate)->locale('th')->translatedFormat('j M Y');
         }
-        if ($this->job->clientduedate === '1976-04-27') {
+        if (($this->job->clientduedate === '1976-04-27') || ($this->job->clientduedate === null)) {
             $this->clientduedate = null;
         } else {
             $this->clientduedate = Carbon::parse($this->job->clientduedate)->locale('th')->translatedFormat('j M Y');
         }
+        if (($this->job->send_check_report_date === '1976-04-27')|| ($this->job->send_check_report_date === null)) {
+            $this->send_check_report_date = null;
+        } else {
+            $this->send_check_report_date = Carbon::parse($this->job->send_check_report_date)->locale('th')->translatedFormat('j M Y');
+        }
+        $this->pre_job_checked = $this->job->pre_job_checked;
+        $this->pre_checker = $this->job->pre_checker;
+        $this->pre_report_checked_date = $this->job->pre_report_checked_date;
+        $this->pre_show_modified = $this->pre_checker . ' ' . $this->pre_report_checked_date ;
+
+        $this->approve_checked_date = $this->job->approve_checked_date;
+        $this->show_Approved = $this->headvaluer . ' ' . $this->approve_checked_date ;
 
         
         $this->print_checked = $this->job->print_checked;
@@ -250,13 +273,16 @@ class Index extends Component
         $this->link_checked_by = $this->job->link_checked_by;
         $this->file_checked = $this->job->file_checked;
         $this->file_checked_by = $this->job->file_checked_by;
+       
+
+        $this->approve_checked = $this->job->approve_checked;
+        $this->checker= $this->job->checker;
+        $this->approve_checked_date= $this->job->approve_checked_date;
 
         $this->job_checked = $this->job->job_checked;
         $this->checker = $this->job->checker;
-        $this->report_checked_date = $this->job->report_checked_date;
-
-        $this->approve_checked = $this->job->approve_checked;
-        $this->approve_checked_date= $this->job->approve_checked_date;
+        $this->job_checked_date = $this->job->job_checked_date;
+        $this->show_finishjob = $this->checker . ' ' . $this->job_checked_date;
 
         
 
@@ -277,29 +303,61 @@ class Index extends Component
 
     public function updateData()
     {
-        dd('Under Modify code.');
-
+        //dd('Under Modify code.');
         $this->validate([
             'projectname' => 'required|string',
             
         ]);
+        // set ชื่อธนาคาร ให้เป็นฟอร์แมท Master
 
-        // if ($this->lat == null){
-        //     $this->lat = 0;
-        // }
-        // if ($this->lng == null){
-        //     $this->lng = 0;
-        // }
-        $sql_startdate = (new MainController)->ConvertThaiDate2SqlDate($this->startdate);
-        //dd($sql_startdate);
-        $sql_inspectiondate = (new MainController)->ConvertThaiDate2SqlDate($this->inspectiondate);
-        $sql_lcduedate = (new MainController)->ConvertThaiDate2SqlDate($this->lcduedate);
-        $sql_clientduedate = (new MainController)->ConvertThaiDate2SqlDate($this->clientduedate);
-        $sql_report_checked_date = (new MainController)->ConvertThaiDate2SqlDate($this->report_checked_date);
-        $sql_approve_checked_date = (new MainController)->ConvertThaiDate2SqlDate($this->approve_checked_date);
+        // set job_gps and sprit to lat and long
+        if($this->job_gps === "") {
+            $lat = 0;
+            $long = 0;
+        }else{
+            $result = $this->validateGPS($this->job_gps);
+            $lat = $result['latitude']; 
+            $long = $result['longitude']; 
+        }
+        //dd("lat = " . $lat . ", long = " . $long);
+        $clientName = $this->convert2ClientMaster($this->client);
+        //dd($clientName);
+        $valuationfee_number = (int) str_replace(',', '', $this->valuationfee);
+        //dd($valuationfee_number);
+        if($this->startdate == null){
+            $sql_startdate = null;
+        }else{
+            $sql_startdate = (new MainController)->ConvertThaiDate2SqlDate($this->startdate);
+        }
+        if($this->inspectiondate == null){
+            $sql_inspectiondate = null;
+        }else{
+            $sql_inspectiondate = (new MainController)->ConvertThaiDate2SqlDate($this->inspectiondate);
+        }
+        if($this->lcduedate == null){
+            $sql_lcduedate = null;
+        }else{
+            $sql_lcduedate = (new MainController)->ConvertThaiDate2SqlDate($this->lcduedate);
+        }
+        if($this->clientduedate == null){
+            $sql_clientduedate = null;
+        }else{
+            $sql_clientduedate = (new MainController)->ConvertThaiDate2SqlDate($this->clientduedate);
+        }
+        if($this->send_check_report_date == null){
+            $sql_send_check_report_date = null;
+        }else{
+            $sql_send_check_report_date = (new MainController)->ConvertThaiDate2SqlDate($this->send_check_report_date);
+        }
+        //dd($this->job_checked);
+        //dd($this->report_checked_date);
+        //$sql_report_checked_date = (new MainController)->ConvertThaiDate2SqlDate($this->report_checked_date);
+        //dd($this->approve_checked_date);
+        //$sql_approve_checked_date = (new MainController)->ConvertThaiDate2SqlDate($this->approve_checked_date);
         
         if($this->myid){
             $my_job = Job::find($this->myid);
+            //dd($my_job);
             // for check add new value in client combobox
             // if ($this->client != 'อื่นๆ'){
             //     $this->client_note = "";
@@ -730,7 +788,79 @@ class Index extends Component
         return DB::select($strsql);
     }
 
+    function validateGPS($gpsString)
+    {
+        $validator = Validator::make(['gps' => $gpsString], [
+            'gps' => [
+                'required',
+                'regex:/^-?\d{1,2}\.\d{6},\s?-?\d{1,3}\.\d{6}$/', // Format check: "lat, long"
+                function ($attribute, $value, $fail) {
+                    list($lat, $long) = explode(',', $value);
+                    $lat = trim($lat);
+                    $long = trim($long);
 
+                    if ($lat < -90 || $lat > 90) {
+                        $fail('Latitude must be between -90 and 90.');
+                    }
+                    if ($long < -180 || $long > 180) {
+                        $fail('Longitude must be between -180 and 180.');
+                    }
+                }
+            ]
+        ]);
+
+        // If validation fails, return null for latitude and longitude
+        if ($validator->fails()) {
+            return [
+                'latitude' => null,
+                'longitude' => null,
+                'errors' => $validator->errors()->all()
+            ];
+        }
+
+        // Extract latitude and longitude
+        list($lat, $long) = explode(',', $gpsString);
+        
+        return [
+            'latitude' => trim($lat),
+            'longitude' => trim($long)
+        ];
+    }
+
+    function convert2ClientMaster($input){
+        // client master is UOB, KK, CIMB, SCB, BOC, ICBC, LHB, TTB, KTB, MBKG
+        if (strpos($input, 'UOB') !== false) {
+            return "UOB";
+        }elseif (strpos($input, 'KK') !== false) {
+            return "KK";
+        }elseif (strpos($input, 'CIMB') !== false) {
+            return "CIMB";
+        }elseif (strpos($input, 'SCB') !== false) {
+            return "SCB";
+        }elseif (strpos($input, 'BOC') !== false) {
+            return "BOC";
+        }elseif (strpos($input, 'ICBC') !== false) {
+            return "ICBC";
+        }elseif (strpos($input, 'LHB') !== false) {
+            return "LHB";
+        }elseif (strpos($input, 'TTB') !== false) {
+            return "TTB";
+        }elseif (strpos($input, 'KTB') !== false) {
+            return "KTB";
+        }elseif (strpos($input, 'MBKG') !== false) {
+            return "MBKG";
+        }elseif (strpos($input, 'อื่นๆ') !== false) {
+            return "อื่นๆ";
+        }
+        else {
+            return "";
+        }
+    }
+
+    public function updatedJobChecked($value)
+    {
+        // Do something when job_checked changes
+    }
 
 }
 
