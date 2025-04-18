@@ -199,7 +199,7 @@
                                             <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">คุณสมบัติรายงาน</p></td>
                                             <td class="wp-70">
                                                 <div class="row">
-                                                 <div class="col-5">
+                                                 <div class="col-4">
                                                     <div class="form-group">
                                                         <label for="obj_id" class="form-label">วัตถุประสงค์การประเมิน</label>
                                                         <select name="obj_id" class="form-control form-select" wire:model="obj_id">
@@ -217,17 +217,33 @@
                                                         </select>
                                                     </div>
                                                     </div>
-                                                    <div class="col-3">
+                                                    {{-- <div class="col-3">
                                                         <div class="form-group">
                                                             <label for="jobtype" class="form-label">รายงานภาษา</label>
                                                             <select name="jobtype" id="jobtype" class="form-control form-select" wire:model="jobtype">
-                                                                    <option value="ไทย 1 (ส่ง Soft File Only)">ไทย 1 (ส่ง Soft File Only)</option>
-                                                                    <option value="ไทย 1 เล่ม">ไทย 1 เล่ม</option>
+                                                                    <option value="ไทย 1 เล่ม + (ส่ง Soft File ในระบบ)">ไทย 1 เล่ม + (ส่ง Soft File ในระบบ)</option>
+                                                                    <option value="ไทย (ส่ง Soft File Only)">ไทย (ส่ง Soft File Only)</option>
                                                                     <option value="ไทย 2 เล่ม">ไทย 2 เล่ม</option>
-                                                                    <option value="ไทย 2 เล่ม + CD">ไทย 2 เล่ม + CD</option>
-                                                                    <option value="อังกฤษ 2 เล่ม">อังกฤษ 2 เล่ม</option>
-                                                                    <option value="ไทย 2 เล่ม + อังกฤษ 2 เล่ม">ไทย 2 เล่ม + อังกฤษ 2 เล่ม</option>
-                                                                    <option value="-">-</option>
+                                                                    <option value="ไทย 2 เล่ม + CD + PDF">ไทย 2 เล่ม + CD + PDF</option>
+                                                                    <option value="ไทย 2 เล่ม + CD + (ส่ง Soft File ในระบบ)">ไทย 2 เล่ม + CD + (ส่ง Soft File ในระบบ)</option>
+                                                                    <option value="ไทย 2 เล่ม + (ส่ง PDF โดยตรง)">ไทย 2 เล่ม + (ส่ง PDF โดยตรง)</option>
+                                                                    <option value="ไทย 2 เล่ม + อังกฤษ 2 เล่ม + (ส่ง PDF)">ไทย 2 เล่ม + อังกฤษ 2 เล่ม + (ส่ง PDF)</option>
+                                                                    
+                                                                    
+                                                            </select>
+                                                        </div>
+                                                    </div> --}}
+                                                    <div class="col-4">
+                                                        <div class="form-group">
+                                                            <label for="jobtype" class="form-label">รายงานภาษา</label>
+                                                            <select name="jobtype" id="jobtype" class="form-control form-select" wire:model="jobtype">
+                                                                <option value="ไทย 1 เล่ม + (ส่ง Soft File ในระบบ)">ไทย 1 เล่ม + (ส่ง Soft File ในระบบ)</option>
+                                                                <option value="ไทย (ส่ง Soft File Only)">ไทย (ส่ง Soft File Only)</option>
+                                                                <option value="ไทย 2 เล่ม">ไทย 2 เล่ม</option>
+                                                                <option value="ไทย 2 เล่ม + CD + PDF">ไทย 2 เล่ม + CD + PDF</option>
+                                                                <option value="ไทย 2 เล่ม + CD + (ส่ง Soft File ในระบบ)">ไทย 2 เล่ม + CD + (ส่ง Soft File ในระบบ)</option>
+                                                                <option value="ไทย 2 เล่ม + (ส่ง PDF โดยตรง)">ไทย 2 เล่ม + (ส่ง PDF โดยตรง)</option>
+                                                                <option value="ไทย 2 เล่ม + อังกฤษ 2 เล่ม + (ส่ง PDF)">ไทย 2 เล่ม + อังกฤษ 2 เล่ม + (ส่ง PDF)</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -507,7 +523,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-2">
+                                                    {{-- <div class="col-2">
                                                         <label class="form-check-label" for="job_checked">Project Completed</label>
                                                         <br>
                                                          @if($job_checked == '0')
@@ -523,9 +539,22 @@
                                                                 </div>
                                                             </div>
                                                         @endif
+                                                    </div> --}}
+                                                    <div class="col-2">
+                                                        <label class="form-check-label" for="job_checked">Project Completed</label>
+                                                        <br>
+                                                        <div class="main-toggle-group d-flex flex-wrap mt-3">
+                                                            <div 
+                                                                class="toggle {{ $job_checked == '0' ? 'off' : 'on' }}" 
+                                                                wire:click="toggleJobChecked" 
+                                                                style="cursor: pointer;"
+                                                            >
+                                                                <span></span>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
-                                                    <div class="col-3">
+                                                    <div class="col-4">
                                                         <div class="form-group">
                                                             <label class="form-check-label" for="show_finishjob">จัดทำโดย</label>
                                                             <input type="text" disabled class="form-control" name="show_finishjob" id="show_finishjob" wire:model="show_finishjob">

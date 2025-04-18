@@ -76,7 +76,7 @@ class Index extends Component
     public $list_clients = null; //for dropdown client
 
     public $pre_job_checked = 0;
-    public $pre_checker = 'dido';
+    public $pre_checker = 'วลัยกร';
     public $pre_report_checked_date;
     public $pre_show_modified;
 
@@ -356,6 +356,7 @@ class Index extends Component
         //$sql_approve_checked_date = (new MainController)->ConvertThaiDate2SqlDate($this->approve_checked_date);
         
         if($this->myid){
+            //dd($this->job_checked);
             $my_job = Job::find($this->myid);
             //dd($my_job);
             // for check add new value in client combobox
@@ -430,6 +431,9 @@ class Index extends Component
             $my_job->update([
                 'reportcode' => $this->reportcode,
                 'client' => $this->client,
+                'job_checked' => (bool) $this->job_checked,
+                'checker' => $this->checker,
+                'job_checked_date' => $this->job_checked ? now() : null,
                 // 'client_note' => $this->client_note,
                 // 'prop_type' => $this->selectedProptype,
                 // 'prop_type2' => $this->selectedProptype2,
@@ -440,7 +444,7 @@ class Index extends Component
                 // 'province_code' => $this->selectedProvince,
                 // 'amphure_code' => $this->amphure_code,
                 // 'district' => $this->district,
-                // 'customer' => $this->customer,
+                 'customer' => $this->customer,
                 // 'jobtype' => $this->jobtype,
                 // 'jobsize' => $this->jobsize,
                 // 'easydiff' => $this->easydiff,
@@ -462,7 +466,7 @@ class Index extends Component
                 // 'job_status' => $this->job_status,
                 // 'obj_method' => $this->obj_method,
                 // 'marketvalue' => (float) str_replace(',', '', $this->marketvalue),
-                // 'job_checked' => (bool) $this->job_checked,
+                
                 // 'print_checked' => (bool) $this->print_checked,
                 // 'link_checked' => (bool) $this->link_checked,
                 // 'file_checked' => (bool) $this->file_checked,
@@ -715,15 +719,15 @@ class Index extends Component
         }
     }
 
-    public function updatedclient($value)
-    {
-        //dd('client updated');
-        if ($value == 'อื่นๆ') {
-            //dd('ok');
-            $this->client_note = '';
-        }
+    // public function updatedclient($value)
+    // {
+    //     //dd('client updated');
+    //     if ($value == 'อื่นๆ') {
+    //         //dd('ok');
+    //         $this->client_note = '';
+    //     }
         
-    }
+    // }
 
     public static function gen_new_itemno()
     {
@@ -860,6 +864,56 @@ class Index extends Component
     public function updatedJobChecked($value)
     {
         // Do something when job_checked changes
+    }
+
+    public function updatedClient($value)
+    {
+        if ($value == 'อื่นๆ') {
+            //dd('ok');
+            $this->client_note = '';
+        }
+        $this->jobtype = $this->GetReportLanguage($value);
+    }
+
+
+    public function GetReportLanguage($bankname)
+    {
+      $result = '';
+      if ($bankname == 'UOB') {
+        $result = 'ไทย 1 เล่ม + (ส่ง Soft File ในระบบ)';
+      }elseif ($bankname == 'KK') {
+        $result = 'ไทย (ส่ง Soft File Only)';
+      }elseif ($bankname == 'CIMB') {
+        $result = 'ไทย 2 เล่ม';
+      }elseif ($bankname == 'SCB') {
+        $result = 'ไทย 2 เล่ม + CD + PDF';
+      }elseif ($bankname == 'TTB') {
+        $result = 'ไทย 2 เล่ม + CD + (ส่ง Soft File ในระบบ)';
+      }elseif ($bankname == 'Thai Credit') {
+        $result = 'ไทย 2 เล่ม + (ส่ง PDF โดยตรง)';
+      }elseif ($bankname == 'GSB') {
+        $result = 'ไทย 2 เล่ม + อังกฤษ 2 เล่ม + (ส่ง PDF)';
+      }elseif ($bankname == 'KTB') {
+        $result = 'ไทย 2 เล่ม + CD + (ส่ง Soft File ในระบบ)';
+      }elseif ($bankname == 'MBKG') {
+        $result = 'ไทย 2 เล่ม ';
+      }elseif ($bankname == 'LHB') {
+        $result = 'ไทย 1 เล่ม + (ส่ง Soft File ในระบบ)';
+      }elseif ($bankname == 'BOC') {
+        $result = 'ไทย 2 เล่ม + CD + PDF';
+      }elseif ($bankname == 'ICBC') {
+        $result = 'ไทย 2 เล่ม + CD + PDF';
+      }elseif ($bankname == 'ICBC') {
+        $result = 'ไทย 2 เล่ม + CD + PDF';
+      }elseif ($bankname == 'อื่นๆ') {
+        $result = 'ไทย 2 เล่ม + (ส่ง PDF โดยตรง)';
+      }
+      return $result;
+    }
+
+    public function toggleJobChecked()
+    {
+        $this->job_checked = $this->job_checked == 0 ? 1 : 0;
     }
 
 }
