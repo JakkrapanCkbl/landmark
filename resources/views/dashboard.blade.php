@@ -631,9 +631,20 @@
                 // Convert and display the year in Thai Buddhist Era (พ.ศ.)
                 const thaiBuddhistYear = instance.currentYear + 543;
                 document.getElementById("clientduedate").value = dateStr.replace(instance.currentYear.toString(), thaiBuddhistYear.toString());
-               
                 },
             });
+
+            flatpickr("#send_check_report_date", {
+                dateFormat: "d M Y",
+                locale: "th",
+                onReady: function(selectedDates, dateStr, instance) {
+                // Convert and display the year in Thai Buddhist Era (พ.ศ.)
+                const thaiBuddhistYear = instance.currentYear + 543;
+                document.getElementById("send_check_report_date").value = dateStr.replace(instance.currentYear.toString(), thaiBuddhistYear.toString());
+                },
+            });
+
+            
 
             flatpickr("#report_checked_date", {
                 dateFormat: "d M Y",
@@ -657,6 +668,7 @@
                 },
             });
     </script>
+    
   
 
 @endsection <!-- script -->

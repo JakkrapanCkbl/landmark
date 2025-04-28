@@ -49,15 +49,11 @@ Route::post('post-registration', [AuthController::class, 'postRegistration'])->n
 
 Route::get('dashboard', [AuthController::class, 'dashboard']);
 
-
-
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/forget-password', [ForgetPasswordManager::class, 'forgetPassword'])->name('forget.password');
 Route::post('/forget-password', [ForgetPasswordManager::class, 'forgetPasswordPost'])->name('forget.password.post');
 Route::get('/reset-password/{token}', [ForgetPasswordManager::class, "resetPassword"])->name("reset.password");
 Route::post('/reset-password', [ForgetPasswordManager::class, 'resetPasswordPost'])->name('reset.password.post');
-
-
 
 
 use App\Http\Livewire\Login2;

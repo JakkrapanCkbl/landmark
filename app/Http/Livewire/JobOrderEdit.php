@@ -16,6 +16,7 @@ use App\Models\Proptype2;
 use App\Models\Client;
 
 
+
 class JobOrderEdit extends Component
 {
     public $sum;

@@ -19,6 +19,8 @@ class Index extends Component
 {
     public $sum = '5';
     public $message = '';
+
+    
     public $jobs = null;
     public $users;
 
@@ -49,6 +51,7 @@ class Index extends Component
     public $client;
     public $client_note;
     public $valuationfee;
+    public $valuationfee_case;
     public $startdate;
     public $inspectiondate;
     public $lcduedate;
@@ -64,40 +67,47 @@ class Index extends Component
     public $list_checkers = null; //for checker
     
     public $job_gps;
+    public $lat;
+    public $lng;
     
     public $proptypes = null;
     public $proptype;
-    public $selectedProptype = null;
-    public $proptype2s = null;
-    public $proptype2;
-    public $selectedProptype2 = null;
-    public $prop_type_note = null;
-    public $prop_type2_note;
-    public $list_clients = null; //for dropdown client
+    public $selectedProptype;
+    public $prop_type_note;
 
+    // public $proptype2s = null;
+    // public $proptype2;
+    // public $selectedProptype2 = null;
+    // public $prop_type2_note;
+
+    public $list_clients = null; //for dropdown client
     public $pre_job_checked = 0;
-    public $pre_checker = 'วลัยกร';
+    public $pre_checker;
     public $pre_report_checked_date;
     public $pre_show_modified;
+
+    public $link_checked = 0;
+    public $link_checked_by;
+    public $link_checked_date;
+    public $show_link_checked;
 
     public $print_checked = 0;
     public $print_checked_by;
     public $print_checked_date;
-
-
-    public $link_checked = 0;
-    public $link_checked_by;
+    public $show_print_checked;
 
     public $file_checked = 0;
     public $file_checked_by;
+    public $file_checked_date;
+    public $show_file_checked;
 
     public $approve_checked = 0;
-    public $headvaluer = 'สาโรจน์';
+    public $headvaluer;
     public $approve_checked_date;
     public $show_Approved;
 
     public $job_checked = 0;
-    public $checker = 'กนกวรรณ';
+    public $checker;
     public $job_status;
     public $job_checked_date;
     public $show_finishjob;
@@ -118,6 +128,9 @@ class Index extends Component
     {
         // $this->subfolder = str_replace('/', '_', $this->jobcode);
         // $this->job_imgs = DB::select('select * from jobs_img where job_id = ' . $this->myid . ' order by file_name');
+        if ($this->myid != '0') {
+            
+        }
        
     }
 
@@ -127,7 +140,6 @@ class Index extends Component
         $this->users = Auth::user();
         $this->CountTotalTask(Carbon::now()->year);
         $this->CountCompletedTaskByMonth(Carbon::now()->year,Carbon::now()->month);
-        //$this->proptypes = Proptype::orderBy('itemno')->get();
         $this->proptypes = Proptype::whereNot('id', 1)->orderBy('itemno')->get();
         $this->list_clients = Client::orderBy('itemno', 'asc')->get();
         $this->list_valuers = $this->get_valuers();
@@ -151,8 +163,8 @@ class Index extends Component
         $sql = $sql . "jobs.customer, jobs.proplocation, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs_img.file_name, jobs.projectname ";
         $sql = $sql . "From jobs Left Join ";
         $sql = $sql . "jobs_img On jobs_img.jobcode = jobs.jobcode ";
-        //$sql = $sql . "WHERE jobs.jobcode = 'LC/66BF-0006' Order By jobs.id Desc";
-        $sql = $sql . "WHERE Year(jobs.startdate) >= Year(Now()) - 2 Order By jobs.id Desc";
+        $sql = $sql . "WHERE jobs.jobcode = 'LC/66BF-0006' Order By jobs.id Desc";
+        //$sql = $sql . "WHERE Year(jobs.startdate) >= Year(Now()) - 2 Order By jobs.id Desc";
         //dd($sql);
         $jobs = DB::select($sql);
         // Return as JSON
@@ -197,11 +209,11 @@ class Index extends Component
         $this->proplocation = $value4;
         // $this->startdate = $value5;
         //$this->clientduedate = $value6;
-        $this->job_status = $value7;
+        //$this->job_status = $value7;
         //$this->print_checked = $value8;
-        $this->link_checked = $value9;
-        $this->file_checked = $value10;
-        $this->client = $value11;
+        //$this->link_checked = $value9;
+        //$this->file_checked = $value10;
+        //$this->client = $value11;
         
         
     }
@@ -211,80 +223,120 @@ class Index extends Component
         //dd($jobid);
         Carbon::setLocale('th');
         $this->job = Job::find($jobid);
-        $this->selectedProptype = $this->job->prop_type;
-        $this->proptype2s = Proptype2::where('show_prop_type', $this->job->prop_type)->orderBy('itemno', 'asc')->get();
-        if ($this->proptype2s->isEmpty()) {
-            $this->proptype2s = Proptype2::whereIn('itemno', [1, 99])->take(2)->get();
-            $this->selectedProptype2 = "";
-            $this->prop_type2_note = "";
-        }else{
-            $this->proptype2 = $this->job->prop_type2;
-            $this->selectedProptype2 = $this->job->prop_type2;
-            $this->prop_type2_note = $this->job->prop_type2_note;
-        }
+        $this->client = $this->job->client;
+        $this->client_note = $this->job->client_note;
         $this->customer = $this->job->customer;
+
+        $this->proptype = $this->job->prop_type;
+        $this->selectedProptype = $this->job->prop_type;
+        $this->prop_type_note = $this->job->prop_type_note;
+        $this->prop_size = $this->job->prop_size;
+        $this->job_gps = $this->job->job_gps;
+        $this->lat = $this->job->lat;
+        $this->lng = $this->job->lng;
         $this->obj_id = $this->job->obj_id;
         $this->jobtype = $this->job->jobtype;
         $this->jobsize = $this->job->jobsize;
         $this->easydiff = $this->job->easydiff;
-        $this->prop_size = $this->job->prop_size;
-        $this->client_note = $this->job->client_note;
         $this->valuationfee = number_format($this->job->valuationfee);
+        $this->valuationfee_case = $this->job->valuationfee_case;
+        
+        
         $this->valuer = $this->job->valuer;
         $this->headvaluer = $this->job->headvaluer;
-        $this->job_gps = $this->job->job_gps;
+        
         if ($this->job->startdate === '1976-04-27') {
             $this->startdate = null;
         } else {
-            $this->startdate = Carbon::parse($this->job->startdate)->locale('th')->translatedFormat('j M Y');
+            //$this->startdate = Carbon::parse($this->job->startdate)->locale('th')->translatedFormat('j M Y');
+            $carbonDate = Carbon::parse($this->job->startdate)->locale('th');
+            $dayMonth = $carbonDate->translatedFormat('j M');
+            $buddhistYear = $carbonDate->year + 543;
+            $this->startdate = $dayMonth . ' ' . $buddhistYear;
         }
         if ($this->job->inspectiondate === '1976-04-27') {
             $this->inspectiondate = null;
         } else {
-            $this->inspectiondate = Carbon::parse($this->job->inspectiondate)->locale('th')->translatedFormat('j M Y');
+            //$this->inspectiondate = Carbon::parse($this->job->inspectiondate)->locale('th')->translatedFormat('j M Y');
+            $carbonDate = Carbon::parse($this->job->inspectiondate)->locale('th');
+            $dayMonth = $carbonDate->translatedFormat('j M');
+            $buddhistYear = $carbonDate->year + 543;
+            $this->inspectiondate = $dayMonth . ' ' . $buddhistYear;
         }
         if ($this->job->lcduedate === '1976-04-27') {
             $this->lcduedate = null;
         } else {
-            $this->lcduedate = Carbon::parse($this->job->lcduedate)->locale('th')->translatedFormat('j M Y');
+            //$this->lcduedate = Carbon::parse($this->job->lcduedate)->locale('th')->translatedFormat('j M Y');
+            $carbonDate = Carbon::parse($this->job->lcduedate)->locale('th');
+            $dayMonth = $carbonDate->translatedFormat('j M');
+            $buddhistYear = $carbonDate->year + 543;
+            $this->lcduedate = $dayMonth . ' ' . $buddhistYear;
         }
         if (($this->job->clientduedate === '1976-04-27') || ($this->job->clientduedate === null)) {
             $this->clientduedate = null;
         } else {
-            $this->clientduedate = Carbon::parse($this->job->clientduedate)->locale('th')->translatedFormat('j M Y');
+            //$this->clientduedate = Carbon::parse($this->job->clientduedate)->locale('th')->translatedFormat('j M Y');
+            $carbonDate = Carbon::parse($this->job->clientduedate)->locale('th');
+            $dayMonth = $carbonDate->translatedFormat('j M');
+            $buddhistYear = $carbonDate->year + 543;
+            $this->clientduedate = $dayMonth . ' ' . $buddhistYear;
         }
         if (($this->job->send_check_report_date === '1976-04-27')|| ($this->job->send_check_report_date === null)) {
             $this->send_check_report_date = null;
         } else {
-            $this->send_check_report_date = Carbon::parse($this->job->send_check_report_date)->locale('th')->translatedFormat('j M Y');
+            //$this->send_check_report_date = Carbon::parse($this->job->send_check_report_date)->locale('th')->translatedFormat('j M Y');
+            $carbonDate = Carbon::parse($this->job->send_check_report_date)->locale('th');
+            $dayMonth = $carbonDate->translatedFormat('j M');
+            $buddhistYear = $carbonDate->year + 543;
+            $this->send_check_report_date = $dayMonth . ' ' . $buddhistYear;
         }
         $this->pre_job_checked = $this->job->pre_job_checked;
         $this->pre_checker = $this->job->pre_checker;
         $this->pre_report_checked_date = $this->job->pre_report_checked_date;
-        $this->pre_show_modified = $this->pre_checker . ' ' . $this->pre_report_checked_date ;
+        $this->pre_show_modified = $this->pre_checker . ' ' . $this->formatBuddhistDateTime($this->pre_report_checked_date) ;
 
-        $this->approve_checked_date = $this->job->approve_checked_date;
-        $this->show_Approved = $this->headvaluer . ' ' . $this->approve_checked_date ;
+       
 
+        $this->link_checked = $this->job->link_checked;
+        $this->link_checked_by = $this->job->link_checked_by;
+        $this->link_checked_date = $this->job->link_checked_date;
+        $this->show_link_checked = $this->link_checked_by . ' ' . $this->formatBuddhistDateTime($this->link_checked_date) ;
         
         $this->print_checked = $this->job->print_checked;
         $this->print_checked_by = $this->job->print_checked_by;
-        $this->link_checked = $this->job->link_checked;
-        $this->link_checked_by = $this->job->link_checked_by;
+        $this->print_checked_date = $this->job->print_checked_date;
+        $this->show_print_checked = $this->job->print_checked_by . ' ' . $this->formatBuddhistDateTime($this->print_checked_date) ;
+       
         $this->file_checked = $this->job->file_checked;
         $this->file_checked_by = $this->job->file_checked_by;
+        $this->file_checked_date = $this->job->file_checked_date;
+        $this->show_file_checked = $this->job->file_checked_by . ' ' . $this->formatBuddhistDateTime($this->file_checked_date) ;
        
 
         $this->approve_checked = $this->job->approve_checked;
-        $this->checker= $this->job->checker;
+        $this->headvaluer= $this->job->headvaluer;
         $this->approve_checked_date= $this->job->approve_checked_date;
+        $this->show_Approved = $this->headvaluer . ' ' . $this->formatBuddhistDateTime($this->approve_checked_date) ;
+        
 
         $this->job_checked = $this->job->job_checked;
         $this->checker = $this->job->checker;
         $this->job_checked_date = $this->job->job_checked_date;
-        $this->show_finishjob = $this->checker . ' ' . $this->job_checked_date;
+        $this->show_finishjob = $this->checker . ' ' . $this->formatBuddhistDateTime($this->job_checked_date);
 
-        
+        $this->job_status = $this->job->job_status;
+
+        // $this->proptype2s = Proptype2::where('show_prop_type', $this->job->prop_type)->orderBy('itemno', 'asc')->get();
+        // if ($this->proptype2s->isEmpty()) {
+        //     $this->proptype2s = Proptype2::whereIn('itemno', [1, 99])->take(2)->get();
+        //     $this->selectedProptype2 = "";
+        //     $this->prop_type2_note = "";
+        // }else{
+        //     $this->proptype2 = $this->job->prop_type2;
+        //     $this->selectedProptype2 = $this->job->prop_type2;
+        //     $this->prop_type2_note = $this->job->prop_type2_note;
+        // }
+
 
         // binding files list
         //$this->subfolder = str_replace('/', '_', $this->jobcode);
@@ -303,7 +355,9 @@ class Index extends Component
 
     public function updateData()
     {
-        //dd('Under Modify code.');
+        //dd($this->pre_checker);
+        $user = Auth::user();
+        //dd($user->name);
         $this->validate([
             'projectname' => 'required|string',
             
@@ -312,17 +366,17 @@ class Index extends Component
 
         // set job_gps and sprit to lat and long
         if($this->job_gps === "") {
-            $lat = 0;
-            $long = 0;
+            $this->lat = 0;
+            $this->lng = 0;
         }else{
             $result = $this->validateGPS($this->job_gps);
-            $lat = $result['latitude']; 
-            $long = $result['longitude']; 
+            $this->lat = $result['latitude']; 
+            $this->lng = $result['longitude']; 
         }
         //dd("lat = " . $lat . ", long = " . $long);
         $clientName = $this->convert2ClientMaster($this->client);
         //dd($clientName);
-        $valuationfee_number = (int) str_replace(',', '', $this->valuationfee);
+        //$valuationfee_number = (int) str_replace(',', '', $this->valuationfee);
         //dd($valuationfee_number);
         if($this->startdate == null){
             $sql_startdate = null;
@@ -344,17 +398,117 @@ class Index extends Component
         }else{
             $sql_clientduedate = (new MainController)->ConvertThaiDate2SqlDate($this->clientduedate);
         }
+       //dd($this->send_check_report_date);
         if($this->send_check_report_date == null){
             $sql_send_check_report_date = null;
         }else{
             $sql_send_check_report_date = (new MainController)->ConvertThaiDate2SqlDate($this->send_check_report_date);
         }
-        //dd($this->job_checked);
-        //dd($this->report_checked_date);
-        //$sql_report_checked_date = (new MainController)->ConvertThaiDate2SqlDate($this->report_checked_date);
-        //dd($this->approve_checked_date);
-        //$sql_approve_checked_date = (new MainController)->ConvertThaiDate2SqlDate($this->approve_checked_date);
+        //dd($sql_send_check_report_date);
+        if ($this->pre_job_checked == '1'){
+            if ($this->pre_checker == '') {
+                if (($user->name == 'ศิรินานา') || ($user->name == 'วลัยกร') || ($user->name == 'สมสมัย') || 
+                ($user->name == 'นิรันดร') || ($user->name == 'มนต์ชัย') || ($user->name == 'ปริวรรต')) {
+                    $this->pre_job_checked = '1';
+                    $this->pre_checker = $user->name;
+                    $this->pre_report_checked_date = now();
+                }else{
+                    $this->pre_job_checked = '0';
+                    $this->pre_checker = '';
+                    $this->pre_report_checked_date = null;
+                }
+            }
+        }else{
+            $this->pre_checker = '';
+            $this->pre_report_checked_date = null;
+        }
         
+        if ($this->approve_checked == '1'){
+            if ($this->headvaluer == '') {
+                if (($user->name == 'dido') || ($user->name == 'สาโรจน์') || ($user->name == 'มงคล') || ($user->name == 'นิรันดร')) {
+                    $this->approve_checked = '1';
+                    $this->headvaluer = $user->name;
+                    $this->approve_checked_date = now();
+                }else{
+                    $this->approve_checked = '0';
+                    $this->headvaluer = '';
+                    $this->approve_checked_date = null;
+                }
+            }
+        }else{
+            $this->headvaluer = '';
+            $this->approve_checked_date = null;
+        }
+
+        if ($this->job_checked == '1'){
+            if ($this->checker == '') {
+                if (($user->name == 'dido') || ($user->name == 'กนกวรรณ') || ($user->name == 'มงคล') || ($user->name == 'วลัยกร')) {
+                    $this->job_checked = '1';
+                    $this->checker = $user->name;
+                    $this->job_checked_date = now();
+                }else{
+                    $this->job_checked = '0';
+                    $this->checker = '';
+                    $this->job_checked_date = null;
+                }
+            }
+        }else{
+            $this->checker = '';
+            $this->job_checked_date = null;
+        }
+        
+        if ($this->link_checked == '1'){
+            if ($this->link_checked_by == '') {
+                if (($user->name == 'ศิรินานา') || ($user->name == 'วลัยกร') || ($user->name == 'กนกวรรณ') || ($user->name == 'สมสมัย')) {
+                    $this->link_checked = '1';
+                    $this->link_checked_by = $user->name;
+                    $this->link_checked_date = now();
+                }else{
+                    $this->link_checked = '0';
+                    $this->link_checked_by = '';
+                    $this->link_checked_date = null;
+                }
+            }
+        }else{
+            $this->link_checked_by = '';
+            $this->link_checked_date = null;
+        }
+        
+        if ($this->print_checked == '1'){
+            if ($this->print_checked_by == '') {
+                if (($user->name == 'ศิรินานา') || ($user->name == 'วลัยกร') || ($user->name == 'กนกวรรณ') || ($user->name == 'สมสมัย')) {
+                    $this->print_checked = '1';
+                    $this->print_checked_by = $user->name;
+                    $this->print_checked_date = now();
+                }else{
+                    $this->print_checked = '0';
+                    $this->print_checked_by = '';
+                    $this->print_checked_date = null;
+                }
+            }
+        }else{
+            $this->print_checked_by = '';
+            $this->print_checked_date = null;
+        }
+        //--
+        if ($this->file_checked == '1'){
+            if ($this->file_checked_by == '') {
+                if (($user->name == 'ศิรินานา') || ($user->name == 'วลัยกร') || ($user->name == 'กนกวรรณ') || ($user->name == 'สมสมัย')) {
+                    $this->file_checked = '1';
+                    $this->file_checked_by = $user->name;
+                    $this->file_checked_date = now();
+                }else{
+                    $this->file_checked = '0';
+                    $this->file_checked_by = '';
+                    $this->file_checked_date = null;
+                }
+            }
+        }else{
+            $this->file_checked_by = '';
+            $this->file_checked_date = null;
+        }
+
+
         if($this->myid){
             //dd($this->job_checked);
             $my_job = Job::find($this->myid);
@@ -429,38 +583,69 @@ class Index extends Component
             //  }
 
             $my_job->update([
+                //jobcode
                 'reportcode' => $this->reportcode,
                 'client' => $this->client,
-                'job_checked' => (bool) $this->job_checked,
-                'checker' => $this->checker,
-                'job_checked_date' => $this->job_checked ? now() : null,
-                // 'client_note' => $this->client_note,
-                // 'prop_type' => $this->selectedProptype,
+                'client_note' => $this->client_note,
+                'customer' => $this->customer,
+                'prop_type' => $this->selectedProptype,
+                'prop_type_note' => $this->prop_type_note,
                 // 'prop_type2' => $this->selectedProptype2,
                 // 'prop_type2_note' => $this->prop_type2_note,
+                'projectname' => $this->projectname,
+                'job_gps' => $this->job_gps,
+                'lat' => $this->lat,
+                'lng' => $this->lng,
+                'proplocation' => $this->proplocation,
+                'obj_id' => $this->obj_id,
+                'jobtype' => $this->jobtype,
+                'jobsize' => $this->jobsize,
+                'easydiff' => $this->easydiff,
+                'valuationfee' => (float) str_replace(',', '', $this->valuationfee),
+                'valuationfee_case' => $this->valuationfee_case,
+                'valuer' => $this->valuer,
+                'startdate' => $sql_startdate,
+                'inspectiondate' => $sql_inspectiondate,
+                'lcduedate' => $sql_lcduedate,
+                'clientduedate' => $sql_clientduedate,
+                'send_check_report_date' => $sql_send_check_report_date,
+                
+                'pre_job_checked' => (bool) $this->pre_job_checked,
+                'pre_checker' => $this->pre_checker,
+                //'pre_report_checked_date' => $this->pre_job_checked ? now() : null,
+                'pre_report_checked_date' => $this->pre_report_checked_date,
+
+                'approve_checked' => (bool) $this->approve_checked,
+                'headvaluer' => $this->headvaluer,
+                'approve_checked_date' => $this->approve_checked_date,
+
+                'link_checked' => (bool) $this->link_checked,
+                'link_checked_by' => $this->link_checked_by,
+                'link_checked_date' => $this->link_checked_date,
+
+                'print_checked' => (bool) $this->print_checked,
+                'print_checked_by' => $this->print_checked_by,
+                'print_checked_date' => $this->print_checked_date,
+
+                'file_checked' => (bool) $this->file_checked,
+                'file_checked_by' => $this->file_checked_by,
+                'file_checked_date' => $this->file_checked_date,
+
+                'job_checked' => (bool) $this->job_checked,
+                'checker' => $this->checker,
+                'job_checked_date' => $this->job_checked_date,
+
+                
                 // 'prop_size' => $this->prop_size,
-                // 'projectname' => $this->projectname,
-                // 'proplocation' => $this->proplocation,
+                
                 // 'province_code' => $this->selectedProvince,
                 // 'amphure_code' => $this->amphure_code,
                 // 'district' => $this->district,
-                 'customer' => $this->customer,
-                // 'jobtype' => $this->jobtype,
-                // 'jobsize' => $this->jobsize,
-                // 'easydiff' => $this->easydiff,
-                // 'obj_id' => $this->obj_id,
-                // 'valuationfee' => (float) str_replace(',', '', $this->valuationfee),
-                // 'valuationfee_case' => $this->valuationfee_case,
-                // 'job_gps' => $this->job_gps,
-                // 'lat' => $this->lat,
-                // 'lng' => $this->lng,
-                // 'valuer' => $this->valuer,
+
                 // 'headvaluer' => $this->headvaluer,
                 // 'checker' => $this->checker,
-                // 'startdate' => $sql_startdate,
-                // 'inspectiondate' => $sql_inspectiondate,
-                // 'lcduedate' => $sql_lcduedate,
-                // 'clientduedate' => $sql_clientduedate,
+               
+                
                 // 'report_checked_date' => $sql_report_checked_date,
                 // 'approve_checked_date' => $sql_approve_checked_date,
                 // 'job_status' => $this->job_status,
@@ -482,6 +667,7 @@ class Index extends Component
             //         $this->client_note = "";
             //     }
             // }
+
             // for set change new value in proptype combobox
             // if ($this->selectedProptype == 'อื่นๆ'){
             //     if ( $this->prop_type_note != '') {
@@ -493,6 +679,7 @@ class Index extends Component
             //     }
             // }
             // for set change new value in proptype2 combobox (selectedProptype2)
+            
             // if ($this->selectedProptype2 == 'อื่นๆ'){
             //     //dd($this->prop_type2_note);
             //     if ( $this->prop_type2_note != '') {
@@ -504,7 +691,7 @@ class Index extends Component
             //         $this->prop_type2_note = "";
             //     }
             // }
-            // $this->proptype2 = Job::find($this->myid)->prop_type2;
+            // $this->proptype2 = Job::find($this->edit_id)->prop_type2;
         }
 
         
@@ -700,34 +887,30 @@ class Index extends Component
    
     public function updatedSelectedProptype($value)
     {
-       
-        $this->proptype2s = Proptype2::where('show_prop_type', $value)->orderBy('itemno', 'asc')->get();
-        if ($this->proptype2s->isEmpty()) {
-            $this->proptype2s = Proptype2::whereIn('itemno', [1, 99])->take(2)->get();
-            $this->selectedProptype2 = "";
-        }
+        // $this->proptype2s = Proptype2::where('show_prop_type', $value)->orderBy('itemno', 'asc')->get();
+        // if ($this->proptype2s->isEmpty()) {
+        //     $this->proptype2s = Proptype2::whereIn('itemno', [1, 99])->take(2)->get();
+        //     $this->selectedProptype2 = "";
+        // }
         if ($value !== 'อื่นๆ') {
             $this->prop_type_note = "";
-            
         }
     }
 
-    public function updatedSelectedProptype2($value)
+    // public function updatedSelectedProptype2($value)
+    // {
+    //     if ($value !== 'อื่นๆ') {
+    //         $this->prop_type2_note = "";
+    //     }
+    // }
+
+    public function updatedclient($value)
     {
         if ($value !== 'อื่นๆ') {
-            $this->prop_type2_note = "";
+            $this->client_note = '';
         }
+        $this->jobtype = $this->GetReportLanguage($value);
     }
-
-    // public function updatedclient($value)
-    // {
-    //     //dd('client updated');
-    //     if ($value == 'อื่นๆ') {
-    //         //dd('ok');
-    //         $this->client_note = '';
-    //     }
-        
-    // }
 
     public static function gen_new_itemno()
     {
@@ -866,15 +1049,7 @@ class Index extends Component
         // Do something when job_checked changes
     }
 
-    public function updatedClient($value)
-    {
-        if ($value == 'อื่นๆ') {
-            //dd('ok');
-            $this->client_note = '';
-        }
-        $this->jobtype = $this->GetReportLanguage($value);
-    }
-
+   
 
     public function GetReportLanguage($bankname)
     {
@@ -914,6 +1089,22 @@ class Index extends Component
     public function toggleJobChecked()
     {
         $this->job_checked = $this->job_checked == 0 ? 1 : 0;
+    }
+
+    public function formatBuddhistDateTime($datetime)
+    {
+        //$carbon = \Carbon\Carbon::parse($datetime);
+        //$buddhistYear = $carbon->year + 543;
+        //return $carbon->format('d-m-') . $buddhistYear . $carbon->format(' H:i:s');
+
+        \Carbon\Carbon::setLocale('th'); // Set Thai locale
+        $carbon = \Carbon\Carbon::parse($datetime);
+        $buddhistYear = $carbon->year + 543;
+        $day = $carbon->format('d');
+        $month = $carbon->translatedFormat('M'); // e.g., เม.ย.
+        $time = $carbon->format('H:i:s');
+
+        return "{$day} {$month} {$buddhistYear} {$time}";
     }
 
 }

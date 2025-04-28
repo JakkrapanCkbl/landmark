@@ -147,6 +147,7 @@
                                                             </div>
                                                         </div>
                                                     @endif
+
                                                     <div class="col-2">
                                                         <div class="form-group">
                                                             <label for="prop_size" class="form-label">เนื้อที่</label>
@@ -158,6 +159,8 @@
                                                 </div>
                                             </td>
                                         </tr>
+
+
                                          <tr>
                                             <td class="wp-30 text-muted fs-14"><span style="color:green;font-weight: bold;">ชื่อโครงการ/GPS</p></td>
                                             <td class="wp-70">
@@ -280,7 +283,7 @@
                                                             @error('valuationfee') <span class="error" style="color: red;">{{ $message }}</span> @enderror
                                                         </div>
                                                     </div>
-                                                    <div class="col-5">
+                                                    <div class="col-6">
                                                         <div class="form-group">
                                                             <label for="valuationfee_case" class="form-label">เงื่อนไขการเก็บเงินลูกค้า</label>
                                                             <select name="valuationfee_case" class="form-control form-select" wire:model="valuationfee_case">
@@ -355,18 +358,30 @@
                                                         <div class="form-group">
                                                             <label class="form-label">สถานะตรวจรายงานเบื้องต้น</label>
                                                             <div class="toggle toggle-dark on"><span></span></div>
-                                                            
                                                             <div class="main-toggle-group d-flex flex-wrap mt-3">
                                                                 <div 
-                                                                    class="toggle toggle-secondary {{ $pre_job_checked ? 'on' : 'off' }}"
-                                                                    wire:model="pre_job_checked"
-                                                                    wire:click="$toggle('pre_job_checked')"
+                                                                    class="toggle toggle-info {{ $pre_job_checked ? 'on' : 'off' }}"
+                                                                    {{-- wire:model="pre_job_checked" --}}
+                                                                    {{-- wire:click="$toggle('pre_job_checked')" --}}
+                                                                    @if ((Auth::user()->name === 'ศิรินานา') || (Auth::user()->name === 'วลัยกร') || (Auth::user()->name === 'สมสมัย') || (Auth::user()->name === 'นิรันดร') || (Auth::user()->name === 'มนต์ชัย') || (Auth::user()->name === 'ปริวรรต'))
+                                                                        @if (($pre_job_checked == '0') || (Auth::user()->name == $pre_checker))
+                                                                            wire:model="pre_job_checked"
+                                                                            wire:click="$toggle('pre_job_checked')"
+                                                                        @else
+                                                                            style="pointer-events: none; opacity: 0.5;"
+                                                                            title="Only Mr.A can toggle this"
+                                                                        @endif
+                                                                    @else
+                                                                        style="pointer-events: none; opacity: 0.5;"
+                                                                        title="Only Mr.A can toggle this"
+                                                                    @endif
                                                                 >
                                                                     <span></span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                    
                                                     <div class="col-3">
                                                         <div class="form-group">
@@ -397,21 +412,27 @@
                                                     <div class="col-3">
                                                         <div class="form-group">
                                                             <label for="clientduedate" class="form-label"><span style="color:green;font-weight: bold;">สถานะอนุมัติเล่มรายงาน</label>
-                                                            {{-- <input class="form-control" wire:model="clientduedate" name="clientduedate" id="clientduedate" type="text"> --}}
                                                             <div class="toggle toggle-dark on"><span></span></div>
-                                                                @if($approve_checked == '0')
-                                                                    <div class="main-toggle-group d-flex flex-wrap mt-3">
-                                                                        <div class="toggle toggle-secondary off">
-                                                                            <span></span>
-                                                                        </div>
+                                                                <div class="main-toggle-group d-flex flex-wrap mt-3">
+                                                                    <div 
+                                                                        class="toggle toggle-info {{ $approve_checked ? 'on' : 'off' }}"
+                                                                        @if ((Auth::user()->name === 'dido') || (Auth::user()->name === 'สาโรจน์') || (Auth::user()->name === 'มงคล') || (Auth::user()->name === 'นิรันดร'))
+                                                                            @if (($approve_checked == '0') || (Auth::user()->name == $headvaluer))
+                                                                                wire:model="approve_checked"
+                                                                                wire:click="$toggle('approve_checked')"
+                                                                            @else
+                                                                                style="pointer-events: none; opacity: 0.5;"
+                                                                                title="Only Mr.A can toggle this"
+                                                                            @endif
+                                                                        @else
+                                                                            style="pointer-events: none; opacity: 0.5;"
+                                                                            title="Only Mr.A can toggle this"
+                                                                        @endif
+                                                                    >
+                                                                        <span></span>
                                                                     </div>
-                                                                @else
-                                                                    <div class="main-toggle-group d-flex flex-wrap mt-3">
-                                                                        <div class="toggle toggle-secondary on">
-                                                                            <span></span>
-                                                                        </div>
-                                                                    </div>
-                                                                @endif
+                                                                </div>
+
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
@@ -432,73 +453,90 @@
                                                         <label class="form-check-label" for="link_checked">Collect soft File</label>
                                                         {{-- <br> --}}
                                                         <div class="toggle toggle-dark on"><span></span></div>
-                                                        @if($link_checked == '0')
-                                                            <div class="main-toggle-group d-flex flex-wrap mt-3">
-                                                                <div class="toggle toggle-secondary off">
-                                                                    <span></span>
-                                                                </div>
+                                                        <div class="main-toggle-group d-flex flex-wrap mt-3">
+                                                            <div 
+                                                                class="toggle toggle-info {{ $link_checked ? 'on' : 'off' }}"
+                                                                @if ((Auth::user()->name === 'ศิรินานา') || (Auth::user()->name === 'วลัยกร') || (Auth::user()->name === 'กนกวรรณ') || (Auth::user()->name === 'สมสมัย'))
+                                                                    @if (($link_checked == '0') || (Auth::user()->name == $link_checked_by))
+                                                                        wire:model="link_checked"
+                                                                        wire:click="$toggle('link_checked')"
+                                                                    @else
+                                                                        style="pointer-events: none; opacity: 0.5;"
+                                                                        title="Only Mr.A can toggle this"
+                                                                    @endif
+                                                                @else
+                                                                    style="pointer-events: none; opacity: 0.5;"
+                                                                    title="Only Mr.A can toggle this"
+                                                                @endif
+                                                            >
+                                                                <span></span>
                                                             </div>
-                                                        @else
-                                                            <div class="main-toggle-group d-flex flex-wrap mt-3">
-                                                                <div class="toggle toggle-secondary on">
-                                                                    <span></span>
-                                                                </div>
-                                                            </div>
-                                                        @endif
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
                                                         <div class="form-group">
-                                                            <label class="form-check-label" for="link_checked_by">จัดทำโดย</label>
-                                                            <input type="text" disabled class="form-control" name="link_checked_by" id="link_checked_by" wire:model="link_checked_by">
+                                                            <label class="form-check-label" for="show_link_checked">จัดทำโดย</label>
+                                                            <input type="text" disabled class="form-control" name="show_link_checked" id="show_link_checked" wire:model="show_link_checked">
                                                         </div>
                                                     </div>
                                                     <div class="col-2">
                                                         <label class="form-check-label" for="print_checked">Print เล่มรายงาน</label>
-                                                        <br>
-                                                        @if($print_checked == '0')
-                                                            <div class="main-toggle-group d-flex flex-wrap mt-3">
-                                                                <div class="toggle toggle-success off">
-                                                                    <span></span>
-                                                                </div>
+                                                        {{-- <br> --}}
+                                                        <div class="toggle toggle-dark on"><span></span></div>
+                                                        <div class="main-toggle-group d-flex flex-wrap mt-3">
+                                                            <div 
+                                                                class="toggle toggle-info {{ $print_checked ? 'on' : 'off' }}"
+                                                                @if ((Auth::user()->name === 'ศิรินานา') || (Auth::user()->name === 'วลัยกร') || (Auth::user()->name === 'กนกวรรณ') || (Auth::user()->name === 'สมสมัย'))
+                                                                    @if (($print_checked == '0') || (Auth::user()->name == $print_checked_by))
+                                                                        wire:model="print_checked"
+                                                                        wire:click="$toggle('print_checked')"
+                                                                    @else
+                                                                        style="pointer-events: none; opacity: 0.5;"
+                                                                        title="Only Mr.A can toggle this"
+                                                                    @endif
+                                                                @else
+                                                                    style="pointer-events: none; opacity: 0.5;"
+                                                                    title="Only Mr.A can toggle this"
+                                                                @endif
+                                                            >
+                                                                <span></span>
                                                             </div>
-                                                        @else
-                                                            <div class="main-toggle-group d-flex flex-wrap mt-3">
-                                                                <div class="toggle toggle-success on">
-                                                                    <span></span>
-                                                                </div>
-                                                            </div>
-                                                        @endif
-                                                        
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
                                                         <div class="form-group">
-                                                            <label class="form-check-label" for="print_checked_by">จัดทำโดย</label>
-                                                            <input type="text" disabled class="form-control" name="print_checked_by" id="print_checked_by" wire:model="print_checked_by">
+                                                            <label class="form-check-label" for="show_print_checked">จัดทำโดย</label>
+                                                            <input type="text" disabled class="form-control" name="show_print_checked" id="show_print_checked" wire:model="show_print_checked">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-2">
                                                         <label class="form-check-label" for="file_checked">Collect Hard File</label>
-                                                        <br>
-                                                         @if($file_checked == '0')
-                                                            <div class="main-toggle-group d-flex flex-wrap mt-3">
-                                                                <div class="toggle toggle-info off">
-                                                                    <span></span>
-                                                                </div>
+                                                        <div class="toggle toggle-dark on"><span></span></div>
+                                                        <div class="main-toggle-group d-flex flex-wrap mt-3">
+                                                            <div 
+                                                                class="toggle toggle-info {{ $file_checked ? 'on' : 'off' }}"
+                                                                @if ((Auth::user()->name === 'ศิรินานา') || (Auth::user()->name === 'วลัยกร') || (Auth::user()->name === 'กนกวรรณ') || (Auth::user()->name === 'สมสมัย'))
+                                                                    @if (($file_checked == '0') || (Auth::user()->name == $file_checked_by))
+                                                                        wire:model="file_checked"
+                                                                        wire:click="$toggle('file_checked')"
+                                                                    @else
+                                                                        style="pointer-events: none; opacity: 0.5;"
+                                                                        title="Only Mr.A can toggle this"
+                                                                    @endif
+                                                                @else
+                                                                    style="pointer-events: none; opacity: 0.5;"
+                                                                    title="Only Mr.A can toggle this"
+                                                                @endif
+                                                            >
+                                                                <span></span>
                                                             </div>
-                                                        @else
-                                                            <div class="main-toggle-group d-flex flex-wrap mt-3">
-                                                                <div class="toggle toggle-info on">
-                                                                    <span></span>
-                                                                </div>
-                                                            </div>
-                                                        @endif
-                                                        
+                                                        </div>
                                                     </div>
                                                     <div class="col-2">
                                                         <div class="form-group">
-                                                            <label class="form-check-label" for="file_checked_by">จัดทำโดย</label>
-                                                            <input type="text" disabled class="form-control" name="file_checked_by" id="file_checked_by" wire:model="file_checked_by">
+                                                            <label class="form-check-label" for="show_file_checked">จัดทำโดย</label>
+                                                            <input type="text" disabled class="form-control" name="show_file_checked" id="show_file_checked" wire:model="show_file_checked">
                                                         </div>
                                                     </div>
                                                 </div>            
@@ -523,31 +561,25 @@
                                                         </div>
                                                     </div>
 
-                                                    {{-- <div class="col-2">
-                                                        <label class="form-check-label" for="job_checked">Project Completed</label>
-                                                        <br>
-                                                         @if($job_checked == '0')
-                                                            <div class="main-toggle-group d-flex flex-wrap mt-3">
-                                                                <div class="toggle off">
-                                                                    <span></span>
-                                                                </div>
-                                                            </div>
-                                                        @else
-                                                            <div class="main-toggle-group d-flex flex-wrap mt-3">
-                                                                <div class="toggle on">
-                                                                    <span></span>
-                                                                </div>
-                                                            </div>
-                                                        @endif
-                                                    </div> --}}
+                                                    
                                                     <div class="col-2">
                                                         <label class="form-check-label" for="job_checked">Project Completed</label>
                                                         <br>
                                                         <div class="main-toggle-group d-flex flex-wrap mt-3">
                                                             <div 
-                                                                class="toggle {{ $job_checked == '0' ? 'off' : 'on' }}" 
-                                                                wire:click="toggleJobChecked" 
-                                                                style="cursor: pointer;"
+                                                                class="toggle toggle {{ $job_checked ? 'on' : 'off' }}"
+                                                                @if ((Auth::user()->name === 'dido') || (Auth::user()->name === 'กนกวรรณ') || (Auth::user()->name === 'มงคล') || (Auth::user()->name === 'วลัยกร'))
+                                                                    @if (($job_checked == '0') || (Auth::user()->name == $checker))
+                                                                        wire:model="job_checked"
+                                                                        wire:click="$toggle('job_checked')"
+                                                                    @else
+                                                                        style="pointer-events: none; opacity: 0.5;"
+                                                                        title="Only Mr.A can toggle this"
+                                                                    @endif
+                                                                @else
+                                                                    style="pointer-events: none; opacity: 0.5;"
+                                                                    title="Only Mr.A can toggle this"
+                                                                @endif
                                                             >
                                                                 <span></span>
                                                             </div>

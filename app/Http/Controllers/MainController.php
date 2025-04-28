@@ -45,9 +45,16 @@ class MainController extends Controller
     }
 
     public function ConvertThaiDate2SqlDate($DoMMY){
-        //$DoMMY = '01 ม.ค. 2024'
+        
+        //$DoMMY = '01 ม.ค. 2024' OR //$DoMMY = '01 ม.ค. 2567'
         $d = substr($DoMMY, 0, 2);
         $y = substr($DoMMY, -4);
+         // Now you want to check if $y is 2024 (Gregorian) or 2567 (Buddhist calendar)
+        if ($y >= 2500) {
+            // It's Buddhist year
+            $y = $y - 543;
+        }
+
         $segments = explode(" ", $DoMMY);
         $value = $segments[1];  //month name
         switch ($value) {
@@ -125,5 +132,7 @@ class MainController extends Controller
         $year = $date->year + 543;
         return $date->format("j $month $year H:i:s");
     }
+
+    
 
 }

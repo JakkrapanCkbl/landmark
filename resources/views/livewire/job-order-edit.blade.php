@@ -188,7 +188,6 @@
                                                 </div>
                                             @endif
                                             
-
                                             <div class="col-2">
                                                 <div class="form-group">
                                                     <label for="prop_size" class="form-label">เนื้อที่</label>

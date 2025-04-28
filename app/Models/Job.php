@@ -13,7 +13,7 @@ class Job extends Model
     protected $fillable = [
         'id', 'jobcode', 'clientcode', 'reportcode','projectname', 
         'jobsize', 'jobtype', 'client', 'client_note', 'customer_company', 'customer_address', 
-        'customer', 'prop_type', 'prop_size', 'proplocation', 'lcduedate',
+        'customer', 'prop_type', 'prop_type_note', 'prop_size', 'proplocation', 'lcduedate',
         'headvaluer_n', 'valuer', 'valuer_n', 'percentfinish',
         'startdate', 'inspectiondate', 'lcduedate', 'clientduedate', 'send_check_report_date', 'created_at', 'updated_at',
         'propd_id', 'province_code', 'amphure_code', 'district', 'obj_id', 'marketvalue', 'marketvalue_unit',
@@ -29,7 +29,7 @@ class Job extends Model
         'approve_checked', 'headvaluer', 'approve_checked_date', 
         'job_checked', 'checker', 'job_status', 'job_checked_date', 
 
-        
+
     ];
 
 }
