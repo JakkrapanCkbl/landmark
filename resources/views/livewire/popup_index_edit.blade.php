@@ -7,6 +7,7 @@
 
                 <div class="modal-header p-5">
                     <h1 class="page-title"><p style="font-weight: bold; color: Red;"> Report : {{$jobcode}} </h4>
+                    {{-- <h1 class="page-title"><p style="font-weight: bold; color: Red;"> ID : {{$myid}} </h4> --}}
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
                     {{-- <h4 class="modal-title text-dark"> รหัสรายงาน : <u><a href= "{{ route('joborder.joborder-edit', ['id' => $myid]) }}" target='_blank'>{{$jobcode}}</a></u></h4><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button> --}}
                      {{-- <button class="btn btn-primary" onclick="updateValue()">บันทึกข้อมูล</button> --}}
@@ -552,7 +553,20 @@
                                                         <div class="form-group">
                                                             <label class="form-check-label">สถานะ</label>
                                                             <br>
-                                                            <select name="job_status" class="form-control form-select" wire:model="job_status">
+                                                            {{-- <select name="job_status" class="form-control form-select" wire:model="job_status">
+                                                                <option value="In Progress">In Progress</option>
+                                                                <option value="Completed">Completed</option>
+                                                                <option value="On Hold">On Hold</option>
+                                                                <option value="Cancel">Cancel</option>
+                                                            </select> --}}
+                                                            <select name="job_status" class="form-control form-select" wire:model="job_status"
+                                                                @if (
+                                                                    !(in_array(Auth::user()->name, ['dido', 'กนกวรรณ', 'มงคล', 'วลัยกร']) && 
+                                                                    ($job_checked == '0' || Auth::user()->name == $checker))
+                                                                )
+                                                                    disabled
+                                                                @endif
+                                                            >
                                                                 <option value="In Progress">In Progress</option>
                                                                 <option value="Completed">Completed</option>
                                                                 <option value="On Hold">On Hold</option>

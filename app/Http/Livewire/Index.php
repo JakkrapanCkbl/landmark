@@ -163,8 +163,9 @@ class Index extends Component
         $sql = $sql . "jobs.customer, jobs.proplocation, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs_img.file_name, jobs.projectname ";
         $sql = $sql . "From jobs Left Join ";
         $sql = $sql . "jobs_img On jobs_img.jobcode = jobs.jobcode ";
-        $sql = $sql . "WHERE jobs.jobcode = 'LC/66BF-0006' Order By jobs.id Desc";
-        //$sql = $sql . "WHERE Year(jobs.startdate) >= Year(Now()) - 2 Order By jobs.id Desc";
+        //$sql = $sql . "WHERE jobs.jobcode = 'LC/67BF-2246' Order By jobs.id Desc";
+        //$sql = $sql . "WHERE jobs.jobcode like 'LC/66BF-00%' Order By jobs.id Desc";
+        $sql = $sql . "WHERE Year(jobs.startdate) >= Year(Now()) - 2 Order By jobs.id Desc";
         //dd($sql);
         $jobs = DB::select($sql);
         // Return as JSON
@@ -294,7 +295,7 @@ class Index extends Component
         $this->pre_checker = $this->job->pre_checker;
         $this->pre_report_checked_date = $this->job->pre_report_checked_date;
         $this->pre_show_modified = $this->pre_checker . ' ' . $this->formatBuddhistDateTime($this->pre_report_checked_date) ;
-
+        //dd($this->pre_show_modified);
        
 
         $this->link_checked = $this->job->link_checked;
@@ -590,6 +591,7 @@ class Index extends Component
                 'customer' => $this->customer,
                 'prop_type' => $this->selectedProptype,
                 'prop_type_note' => $this->prop_type_note,
+                'prop_size' => $this->prop_size,
                 // 'prop_type2' => $this->selectedProptype2,
                 // 'prop_type2_note' => $this->prop_type2_note,
                 'projectname' => $this->projectname,
@@ -630,31 +632,18 @@ class Index extends Component
                 'file_checked' => (bool) $this->file_checked,
                 'file_checked_by' => $this->file_checked_by,
                 'file_checked_date' => $this->file_checked_date,
-
+                
                 'job_checked' => (bool) $this->job_checked,
                 'checker' => $this->checker,
                 'job_checked_date' => $this->job_checked_date,
+                'job_status' => $this->job_status,
 
-                
-                // 'prop_size' => $this->prop_size,
-                
                 // 'province_code' => $this->selectedProvince,
                 // 'amphure_code' => $this->amphure_code,
                 // 'district' => $this->district,
-
-                // 'headvaluer' => $this->headvaluer,
-                // 'checker' => $this->checker,
-               
-                
-                // 'report_checked_date' => $sql_report_checked_date,
-                // 'approve_checked_date' => $sql_approve_checked_date,
-                // 'job_status' => $this->job_status,
                 // 'obj_method' => $this->obj_method,
                 // 'marketvalue' => (float) str_replace(',', '', $this->marketvalue),
-                
-                // 'print_checked' => (bool) $this->print_checked,
-                // 'link_checked' => (bool) $this->link_checked,
-                // 'file_checked' => (bool) $this->file_checked,
+             
             ]);
             // for set change new value in client combobox
             // if ($this->client == 'อื่นๆ'){
@@ -1096,6 +1085,9 @@ class Index extends Component
         //$carbon = \Carbon\Carbon::parse($datetime);
         //$buddhistYear = $carbon->year + 543;
         //return $carbon->format('d-m-') . $buddhistYear . $carbon->format(' H:i:s');
+        if ($datetime == null) {
+            return null;
+        }
 
         \Carbon\Carbon::setLocale('th'); // Set Thai locale
         $carbon = \Carbon\Carbon::parse($datetime);
