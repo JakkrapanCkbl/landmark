@@ -164,8 +164,8 @@ class Index extends Component
         $sql = $sql . "From jobs Left Join ";
         $sql = $sql . "jobs_img On jobs_img.jobcode = jobs.jobcode ";
         //$sql = $sql . "WHERE jobs.jobcode = 'LC/67BF-2246' Order By jobs.id Desc";
-        //$sql = $sql . "WHERE jobs.jobcode like 'LC/66BF-00%' Order By jobs.id Desc";
-        $sql = $sql . "WHERE Year(jobs.startdate) >= Year(Now()) - 2 Order By jobs.id Desc";
+        $sql = $sql . "WHERE jobs.jobcode like 'LC/66BF-00%' Order By jobs.id Desc";
+        //$sql = $sql . "WHERE Year(jobs.startdate) >= Year(Now()) - 2 Order By jobs.id Desc";
         //dd($sql);
         $jobs = DB::select($sql);
         // Return as JSON
@@ -1029,7 +1029,7 @@ class Index extends Component
             return "อื่นๆ";
         }
         else {
-            return "";
+            return $input;
         }
     }
 
@@ -1060,7 +1060,7 @@ class Index extends Component
       }elseif ($bankname == 'KTB') {
         $result = 'ไทย 2 เล่ม + CD + (ส่ง Soft File ในระบบ)';
       }elseif ($bankname == 'MBKG') {
-        $result = 'ไทย 2 เล่ม ';
+        $result = 'ไทย 2 เล่ม';
       }elseif ($bankname == 'LHB') {
         $result = 'ไทย 1 เล่ม + (ส่ง Soft File ในระบบ)';
       }elseif ($bankname == 'BOC') {
@@ -1071,6 +1071,8 @@ class Index extends Component
         $result = 'ไทย 2 เล่ม + CD + PDF';
       }elseif ($bankname == 'อื่นๆ') {
         $result = 'ไทย 2 เล่ม + (ส่ง PDF โดยตรง)';
+      }else{
+        $result = 'ไทย (ส่ง Soft File Only)';
       }
       return $result;
     }
