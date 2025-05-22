@@ -64,6 +64,7 @@ use App\Http\Livewire\Landing;
 use App\Http\Livewire\Index;
 use App\Http\Livewire\HomeFoundation;
 use App\Http\Livewire\CityPlan;
+use App\Http\Livewire\BuildingLaw;
 use App\Http\Livewire\Buttons;
 use App\Http\Livewire\FormAdvanced;
 use App\Http\Livewire\JobAdd;
@@ -90,6 +91,12 @@ Route::get('homefoundation', [AuthController::class, 'homefoundation'])->name('h
 Route::get('foundpropmap', [AuthController::class, 'foundpropmap'])->name('foundpropmap');
 
 Route::get('cityplan', [AuthController::class, 'cityplan'])->name('cityplan');
+Route::get('building_law', [AuthController::class, 'building_law'])->name('building_law');
+Route::get('forest_law', [AuthController::class, 'building_law'])->name('forest_law');
+Route::get('gov_project', [AuthController::class, 'building_law'])->name('gov_project');
+Route::get('expropriate', [AuthController::class, 'building_law'])->name('expropriate');
+Route::get('parcel', [AuthController::class, 'building_law'])->name('parcel');
+
 
 
 //Route::view('/homefoundation', 'homefoundation');

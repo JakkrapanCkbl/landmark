@@ -31,7 +31,7 @@
             <div class="card product-sales-main">
                 <div class="card-header border-bottom">
                     {{-- <button type="button" class="btn btn-primary" onclick="location.href='{{ url('/job/create') }}';">ลงทะเบียน</button> --}}
-                    {{-- <button type="button" class="btn btn-primary" data-bs-target="#PopupCityplanAddData" data-bs-toggle="modal" onclick="@this.resetInput()">ลงทะเบียน</button> --}}
+                    <button type="button" class="btn btn-primary" data-bs-target="#PopupCityplanAddData" data-bs-toggle="modal" onclick="@this.resetInput()">ลงทะเบียน</button>
                     
                 </div>
                 <div wire:ignore>

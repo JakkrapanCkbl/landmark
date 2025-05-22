@@ -153,19 +153,19 @@ class Index extends Component
     {
         // Perform the SQL query
         //$jobs = Job::whereYear('startdate', Carbon::now()->year)->get();
-        $sql = "Select jobs.id, jobs.client, jobs.jobcode, jobs.reportcode, CONCAT(jobs.projectname, '<BR> ', jobs.proplocation) AS showprojectname, ";
+        $sql = "Select jobs.id, jobs.client, jobs.customer, ";
+        $sql = $sql . "jobs.jobcode, jobs.reportcode, CONCAT(jobs.projectname, '<BR> ', jobs.proplocation) AS showprojectname, ";
         $sql = $sql . "jobs.obj_method, jobs.marketvalue, jobs.marketvalue_unit, ";
         $sql = $sql . "jobs.prop_type, jobs.prop_size, jobs.startdate, ";
-        $sql = $sql . "jobs.inspectiondate, jobs.lcduedate, ";
-        $sql = $sql . "jobs.pre_report_checked_date, jobs.job_checked_date, jobs.send_check_report_date, ";
-        $sql = $sql . "jobs.valuer, jobs.headvaluer, '' as 'do_advance', jobs.job_status, jobs.customer, ";
+        $sql = $sql . "jobs.inspectiondate, jobs.lcduedate, jobs.send_check_report_date, ";
+        $sql = $sql . "jobs.pre_report_checked_date, jobs.approve_checked_date,  jobs.clientduedate, ";
+        $sql = $sql . "jobs.valuer, jobs.headvaluer, jobs.advance_by, jobs.job_status, ";
         $sql = $sql . "jobs.jobsize, jobs.easydiff, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs.job_checked, ";
         $sql = $sql . "jobs.customer, jobs.proplocation, jobs.print_checked, jobs.link_checked, jobs.file_checked, jobs_img.file_name, jobs.projectname ";
         $sql = $sql . "From jobs Left Join ";
         $sql = $sql . "jobs_img On jobs_img.jobcode = jobs.jobcode ";
-        //$sql = $sql . "WHERE jobs.jobcode = 'LC/67BF-2246' Order By jobs.id Desc";
-        $sql = $sql . "WHERE jobs.jobcode like 'LC/66BF-00%' Order By jobs.id Desc";
-        //$sql = $sql . "WHERE Year(jobs.startdate) >= Year(Now()) - 2 Order By jobs.id Desc";
+        //$sql = $sql . "WHERE jobs.jobcode like 'LC/66BF-000%' Order By jobs.id Desc";
+        $sql = $sql . "WHERE Year(jobs.startdate) >= Year(Now()) - 2 Order By jobs.id Desc";
         //dd($sql);
         $jobs = DB::select($sql);
         // Return as JSON
@@ -199,24 +199,15 @@ class Index extends Component
         dd('test');
     }
 
-    public function bindingPopup($value0,$value1,$value2,$value3,$value4,$value5,$value6,$value7,$value8,$value9,$value10,$value11){
+    public function bindingPopup($value1,$value2,$value3,$value4,$value5){
        
         //dd($value0);
-        $this->myid = $value0;
-        $this->BindingData($value0);
-        $this->jobcode = $value1;
-        $this->reportcode = $value2;
-        $this->projectname = $value3;
-        $this->proplocation = $value4;
-        // $this->startdate = $value5;
-        //$this->clientduedate = $value6;
-        //$this->job_status = $value7;
-        //$this->print_checked = $value8;
-        //$this->link_checked = $value9;
-        //$this->file_checked = $value10;
-        //$this->client = $value11;
-        
-        
+        $this->myid = $value1;
+        $this->BindingData($value1);
+        $this->jobcode = $value2;
+        $this->reportcode = $value3;
+        $this->projectname = $value4;
+        $this->proplocation = $value5;
     }
 
     public function BindingData($jobid)

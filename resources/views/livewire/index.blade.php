@@ -715,6 +715,7 @@
                                     <tr>
                                         <th>id</th>
                                         <th class="bg-transparent border-bottom-0">ลูกค้า</th>
+                                        <th class="bg-transparent border-bottom-0">ลูกค้าราย</th>
                                         <th class="bg-transparent border-bottom-0">รายงานเลขที่</th>
                                         <th class="bg-transparent border-bottom-0">Bank's ID</th>
                                         <th class="bg-transparent border-bottom-0">โครงการ / ที่ตั้ง</th>
@@ -727,13 +728,13 @@
                                         <th class="bg-transparent border-bottom-0">สำรวจ</th>
                                         <th class="bg-transparent border-bottom-0">ส่งงาน LC</th>
                                         <th class="bg-transparent border-bottom-0">ส่งตรวจรายงาน</th>
+                                        <th class="bg-transparent border-bottom-0">ตรวจเบื้องต้น</th>
                                         <th class="bg-transparent border-bottom-0">อนุมัติรายงาน</th>
                                         <th class="bg-transparent border-bottom-0">ส่งงานลูกค้า</th>
                                         <th class="bg-transparent border-bottom-0">ผู้ประเมิน</th>
                                         <th class="bg-transparent border-bottom-0">ผู้ตรวจ</th>
                                         <th class="bg-transparent border-bottom-0">ทำล่วงหน้า</th>
                                         <th class="bg-transparent border-bottom-0">สถานะ</th>
-                                        <th class="bg-transparent border-bottom-0">customer</th>
                                         <th class="bg-transparent border-bottom-0">proplocation</th>
                                         <th class="bg-transparent border-bottom-0">print_checked</th>
                                         <th class="bg-transparent border-bottom-0">link_checked</th>

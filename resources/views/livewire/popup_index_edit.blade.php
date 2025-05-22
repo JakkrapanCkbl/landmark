@@ -207,17 +207,17 @@
                                                     <div class="form-group">
                                                         <label for="obj_id" class="form-label">วัตถุประสงค์การประเมิน</label>
                                                         <select name="obj_id" class="form-control form-select" wire:model="obj_id">
-                                                            <option value="1">เพื่อประกอบการพิจารณาสินเชื่อ</option>
-                                                            <option value="2">เพื่อทบทวนราคาประเมิน</option>
-                                                            <option value="3">ทราบมูลค่าตลาด</option>
-                                                            <option value="4">สาธารณะ</option>
-                                                            <option value="5">บันทึกมูลค่าทางบัญชี</option>
-                                                            <option value="6">พิจารณาภายในบริษัท, ใช้เป็นข้อมูลภายในบริษัท</option>
-                                                            <option value="7">เพื่ออ้างอิงในการเจรจาต่อรองราคา</option>
-                                                            <option value="8">เพื่อกำหนดราคาซื้อขายทอดตลาด</option>
-                                                            <option value="9">เพื่อประกอบการตั้งราคาขายทรัพย์สิน</option>
-                                                            <option value="10">ปรับปรุงโครงสร้างหนี้</option>
-                                                            <option value="11">อื่นๆ</option>
+                                                            <option value="เพื่อประกอบการพิจารณาสินเชื่อ">เพื่อประกอบการพิจารณาสินเชื่อ</option>
+                                                            <option value="เพื่อทบทวนราคาประเมิน">เพื่อทบทวนราคาประเมิน</option>
+                                                            <option value="ทราบมูลค่าตลาด">ทราบมูลค่าตลาด</option>
+                                                            <option value="สาธารณะ<">สาธารณะ</option>
+                                                            <option value="บันทึกมูลค่าทางบัญชี">บันทึกมูลค่าทางบัญชี</option>
+                                                            <option value="พิจารณาภายในบริษัท, ใช้เป็นข้อมูลภายในบริษัท">พิจารณาภายในบริษัท, ใช้เป็นข้อมูลภายในบริษัท</option>
+                                                            <option value="เพื่ออ้างอิงในการเจรจาต่อรองราคา">เพื่ออ้างอิงในการเจรจาต่อรองราคา</option>
+                                                            <option value="เพื่อกำหนดราคาซื้อขายทอดตลาด">เพื่อกำหนดราคาซื้อขายทอดตลาด</option>
+                                                            <option value="เพื่อประกอบการตั้งราคาขายทรัพย์สิน">เพื่อประกอบการตั้งราคาขายทรัพย์สิน</option>
+                                                            <option value="ปรับปรุงโครงสร้างหนี้">ปรับปรุงโครงสร้างหนี้</option>
+                                                            <option value="อื่นๆ">อื่นๆ</option>
                                                         </select>
                                                     </div>
                                                     </div>

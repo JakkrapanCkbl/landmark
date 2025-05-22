@@ -8,7 +8,7 @@
 @endsection  
 
 @section('content')
-    @livewire('city-plan')
+    @livewire('building-law')
 @endsection
 
 
@@ -167,9 +167,9 @@
                     {
                         targets: 4, //  description
                         render: function(data, type, row) {
-                            //return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.doc_group + `','` + row.asa_no + `','` + row.publish_date + `','` + row.law_type + `','`  + row.province + `','` + row.description + `','` + row.expire_date + `','` + row.organization + `','` + row.remark + `')" class="text-dark" data-bs-target="#PopupCityplanEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.description + `</p></a></td>`;
+                            return `<td class="text-center"><a href="javascript:void(0)" onclick="bindingPopupEditData('` + row.id + `','` + row.doc_group + `','` + row.asa_no + `','` + row.publish_date + `','` + row.law_type + `','`  + row.province + `','` + row.description + `','` + row.expire_date + `','` + row.organization + `','` + row.remark + `')" class="text-dark" data-bs-target="#PopupCityplanEditData" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.description + `</p></a></td>`;
 
-                            return `<td class="text-center">` + row.description + `</td>`;
+                            //return `<td class="text-center">` + row.description + `</td>`;
                         }
                     },
                     {

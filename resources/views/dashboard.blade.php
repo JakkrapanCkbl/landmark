@@ -63,8 +63,8 @@
             }
         }
 
-        function bindingPopup(value0,value1,value2,value3,value4,value5,value6,value7,value8,value9,value10,value11) {
-            Livewire.emit('bindingPopup',value0,value1,value2,value3,value4,value5,value6,value7,value8,value9,value10,value11);
+        function bindingPopup(value1,value2,value3,value4,value5) {
+            Livewire.emit('bindingPopup',value1,value2,value3,value4,value5);
         }
 
         
@@ -139,6 +139,7 @@
     <script>
             var table = $('#home-data-table1').DataTable({
                 dom: 'Bfrtip', // Define where the buttons appear
+                searching: true,
                 buttons: [
                     {
                         extend: 'excelHtml5',
@@ -170,6 +171,7 @@
                 "columns": [
                     { "data": "id" },
                     { "data": "client" },
+                    { "data": "customer" },
                     { "data": "jobcode" },
                     { "data": "reportcode" },
                     { "data": "showprojectname" },
@@ -181,14 +183,14 @@
                     { "data": "startdate" },
                     { "data": "inspectiondate" },
                     { "data": "lcduedate" },
-                    { "data": "pre_report_checked_date" },
-                    { "data": "job_checked_date" },
                     { "data": "send_check_report_date" },
+                    { "data": "pre_report_checked_date" },
+                    { "data": "approve_checked_date" },
+                    { "data": "clientduedate" },
                     { "data": "valuer" },
                     { "data": "headvaluer" },
                     { "data": "do_advance" },
                     { "data": "job_status" },
-                    { "data": "customer" },
                     { "data": "proplocation" },
                     { "data": "print_checked" },
                     { "data": "link_checked" },
@@ -200,15 +202,7 @@
                      {
                         targets: 0, // jobcode column
                         render: function(data, type, row) {
-                            //return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="bindingPopup('` + row.id + `','` + row.jobcode + `','` + row.reportcode + `','` + row.projectname + `','` + row.proplocation + `','` + row.startdate + `','` + row.clientduedate + `','` + row.job_status + `','` + row.print_checked + `','` + row.link_checked + `','` + row.file_checked + `')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
-                            //return `<td class="text-muted fs-13"><a data-bs-toggle="tooltip" data-bs-original-title="Open PDF" href="` + {{ Storage::disk("s3")->url("/working_files/LC_66BF_0824/LC-66BF-0824-T.pdf") }} + `" target="_blank"><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
-                            
-                            if (row.file_name === null) {
-                                return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="openreport('` + row.id + `')""><span style="color:black;" >` + row.id + `</p></a></td>`;
-                            }else{
-                                return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="openreport('` + row.id + `')""><span style="color:green;text-decoration: underline;" >` + row.id + `</p></a></td>`;
-                            }
-                            
+                            return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="bindingPopup('` + row.id + `','` + row.jobcode + `','` + row.reportcode + `','` + row.projectname + `','` + row.proplocation + `')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.id + `</p></a></td>`;
                         }
                     },
                     {
@@ -230,15 +224,30 @@
                         }
                         }
                     },
-
                     {
-                        targets: 2, // jobcode column
+                        targets: 2, // customer column
                         render: function(data, type, row) {
-                            return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="bindingPopup('` + row.id + `','` + row.jobcode + `','` + row.reportcode + `','` + row.projectname + `','` + row.proplocation + `','` + row.startdate + `','` + row.clientduedate + `','` + row.job_status + `','` + row.print_checked + `','` + row.link_checked + `','` + row.file_checked + `','` + row.client + `')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
+                            return `<td class="text-muted fs-13">` + row.customer + `</td>`;
                         }
                     },
+
                     {
-                        targets: 6, // market value
+                        targets: 3, // jobcode column
+                        render: function(data, type, row) {
+                            //return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="bindingPopup('` + row.id + `','` + row.jobcode + `','` + row.reportcode + `','` + row.projectname + `','` + row.proplocation + `','` + row.startdate + `','` + row.clientduedate + `','` + row.job_status + `','` + row.print_checked + `','` + row.link_checked + `','` + row.file_checked + `')" class="text-dark" data-bs-target="#Vertically" data-bs-toggle="modal" ><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
+                            //return `<td class="text-muted fs-13"><a data-bs-toggle="tooltip" data-bs-original-title="Open PDF" href="` + {{ Storage::disk("s3")->url("/working_files/LC_66BF_0824/LC-66BF-0824-T.pdf") }} + `" target="_blank"><span style="color:green;font-weight: bold;text-decoration: underline;" >` + row.jobcode + `</p></a></td>`;
+                            
+                            if (row.file_name === null) {
+                                return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="openreport('` + row.id + `')""><span style="color:black;" >` + row.jobcode +  `</p></a></td>`;
+                            }else{
+                                return `<td class="text-muted fs-13"><a href="javascript:void(0)" onclick="openreport('` + row.id + `')""><span style="color:green;text-decoration: underline;" >` + row.jobcode +  `</p></a></td>`;
+                            }
+                            
+                        }
+                    },
+
+                    {
+                        targets: 7, // market value
                         className: 'text-end',
                         render: function(data, type, row) {
                             //return `<td class="text-muted fs-13">` + row.marketvalue + `</td>`;
@@ -252,7 +261,7 @@
                         }
                     },
                     {
-                        targets: 7, // market value unit
+                        targets: 8, // market value unit
                         className: 'text-end',
                         render: function(data, type, row) {
                             //return `<td class="text-muted fs-13">` + row.marketvalue_unit + `</td>`;
@@ -267,7 +276,7 @@
                         }
                     },
                     {
-                        targets: 10, // startdate column
+                        targets: 11, // startdate column
                         render: function(data, type, row) {
                             let dateObj = new Date(row.startdate);
                             let referenceDate = new Date('1976-04-27');
@@ -300,7 +309,7 @@
                         }
                     },
                     {
-                        targets: 11, // inspectiondate column
+                        targets: 12, // inspectiondate column
                         render: function(data, type, row) {
                             let dateObj = new Date(row.inspectiondate);
                             let referenceDate = new Date('1976-04-27');
@@ -333,7 +342,7 @@
                         }
                     },
                     {
-                        targets: 12, // lcduedate column
+                        targets: 13, // lcduedate column
                         render: function(data, type, row) {
                             let dateObj = new Date(row.lcduedate);
                             let referenceDate = new Date('1976-04-27');
@@ -365,9 +374,42 @@
                             }
                         }
                     },
-                    
                     {
-                        targets: 13, // pre_report_checked_date
+                        targets: 14, // send_check_report_date column
+                        render: function(data, type, row) {
+                            let dateObj = new Date(row.send_check_report_date);
+                            // Define the reference date
+                            let referenceDate = new Date('1976-04-27');
+                            if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
+                                // Check if dateObj is invalid
+                                if (row.send_check_report_date === null) {
+                                    return `<td class="text-muted fs-13"></td>`;
+                                }else{
+                                    // Define Thai weekday and month arrays
+                                    const thaiWeekdays = ['อา. ', 'จ. ', 'อ. ', 'พ. ', 'พฤ. ', 'ศ. ', 'ส. '];
+                                    const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 
+                                                        'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                                    // Get the day, month, and year
+                                    let day = dateObj.getDate(); // Get the day of the month
+                                    let month = thaiMonths[dateObj.getMonth()]; // Get the abbreviated month name
+                                    //let year = dateObj.getFullYear() % 100 + 543; // Get the last two digits of the year in BE
+                                    let year = (dateObj.getFullYear() + 543) % 100; // Get last two digits of Buddhist year
+                                    // Get the day of the week (0-6) and convert to Thai weekday name
+                                    let weekday = thaiWeekdays[dateObj.getDay()];
+
+                                    // Format the date as 'Weekday Day Month Year'
+                                    let formattedDate = `${weekday} ${day} ${month} ${year}`;
+
+                                    // Return the HTML with the formatted date
+                                    return `<td class="text-muted fs-13">` + formattedDate + `</td>`;
+                                }
+                            }else{
+                                return `<td class="text-muted fs-13"></td>`;
+                            }
+                        }
+                    },
+                    {
+                        targets: 15, // pre_report_checked_date
                         render: function(data, type, row) {
                             let dateObj = new Date(row.pre_report_checked_date);
                             // Define the reference date
@@ -402,14 +444,14 @@
                         }
                     },
                     {
-                        targets: 14, // job_checked_date
+                        targets: 16, // approve_checked_date
                         render: function(data, type, row) {
-                            let dateObj = new Date(row.job_checked_date);
+                            let dateObj = new Date(row.approve_checked_date);
                             // Define the reference date
                             let referenceDate = new Date('1976-04-27');
                             if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
                                 // Check if dateObj is invalid
-                                if (row.job_checked_date === null) {
+                                if (row.approve_checked_date === null) {
                                     return `<td class="text-muted fs-13"></td>`;
                                 }else{
                                     // Define Thai weekday and month arrays
@@ -436,14 +478,14 @@
                         }
                     },
                     {
-                        targets: 15, // send_check_report_date column
+                        targets: 17, // clientduedate
                         render: function(data, type, row) {
-                            let dateObj = new Date(row.send_check_report_date);
+                            let dateObj = new Date(row.clientduedate);
                             // Define the reference date
                             let referenceDate = new Date('1976-04-27');
                             if (!isNaN(dateObj) && dateObj.getTime() !== referenceDate.getTime()) {
                                 // Check if dateObj is invalid
-                                if (row.send_check_report_date === null) {
+                                if (row.clientduedate === null) {
                                     return `<td class="text-muted fs-13"></td>`;
                                 }else{
                                     // Define Thai weekday and month arrays
@@ -469,8 +511,10 @@
                             }
                         }
                     },
+
+                    
                     {
-                        targets: 16, // valuer column
+                        targets: 18, // valuer column
                         className: 'text-center',
                         render: function(data, type, row) {
                             if (row.valuer == 'มงคล') {
@@ -501,7 +545,7 @@
                         }
                     },
                     {
-                        targets: 17, // headvaluer column
+                        targets: 19, // headvaluer column
                         className: 'text-center',
                         render: function(data, type, row) {
                             if (row.headvaluer == 'มงคล') {
@@ -532,14 +576,14 @@
                         }
                     },
                     {
-                        targets: 18, // do_advance
+                        targets: 20, // do_advance
                         className: 'text-center',
                         render: function(data, type, row) {
                             return `<td class="text-center"><span class="data-image avatar avatar-md rounded-circle" style="background-image: url({{asset('storage/avatars/avatar.jpg')}})"></span></td>`;
                         }
                     },
                     {
-                        targets: 19, // job_status column
+                        targets: 21, // job_status column
                         render: function(data, type, row) {
                             if (row.job_status == 'In Progress') {
                                 return `<td class="text-center">In Progress</td>`;
@@ -554,16 +598,9 @@
                             }
                         }
                     },
+                    
                     {
-                        targets: 20,  // Adjust based on the index of another column to hide
-                        visible: false // Hide the third column
-                    },
-                    {
-                        targets: 21,  // Adjust based on the index of another column to hide
-                        visible: false // Hide the third column
-                    },
-                    {
-                        targets: 22,  // Adjust based on the index of another column to hide
+                        targets: 22,  // proplocation Adjust based on the index of another column to hide
                         visible: false // Hide the third column
                     },
                     {
@@ -575,12 +612,16 @@
                         visible: false // Hide the third column
                     },
                     {
-                        targets: 25,  // file_name
+                        targets: 25,  // Adjust based on the index of another column to hide
                         visible: false // Hide the third column
                     },
                     {
-                        targets: 26,  // projectname
-                        visible: true // Hide the third column
+                        targets: 26,  // file_name
+                        visible: false // Hide the third column
+                    },
+                    {
+                        targets: 27,  // projectname
+                        visible: false // Hide the third column
                     },
                     
                 ],
