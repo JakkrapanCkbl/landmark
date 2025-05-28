@@ -32,6 +32,7 @@ class Job extends Model
         'deedtumbon', 'deedamphur', 'deedprovince', 'deedno',
         'land_size','ownership_building', 'marketvalue_ac', 'assessmentvalue', 
         'marketvalue_unit','marketvalue', 
+        'advance_checked', 'advance_by', 'advance_date',
 
     ];
 

@@ -179,56 +179,66 @@ class ApiJobController extends Controller
     public function update_job_from_report(Request $request, $fieldValue)
     {
         $validatedData = $request->validate([
-            'reportcode' => 'nullable|string',
             'client' => 'nullable|string',
-            'customer'=> 'nullable|string',
-            'prop_type' => 'nullable|string',
+            'customer'=> 'nullable|string', //3 jobcode is $fieldValue
+            'reportcode' => 'nullable|string',
+            'projectname' => 'nullable|string', //5
+            
+            'proplocation' => 'nullable|string',
+            'obj_method' => 'nullable|string',
+            'marketvalue' => 'nullable|string',
+            'marketvalue_unit' => 'nullable|string',
+            'prop_type' => 'nullable|string', //10
+
             'prop_size' => 'nullable|string',
-            'projectname' => 'nullable|string',
+            'startdate' => 'nullable|date_format:Y-m-d',
+            'inspectiondate' => 'nullable|date_format:Y-m-d',
+            'lcduedate' => 'nullable|date_format:Y-m-d',
+            'send_check_report_date' => 'nullable|date_format:Y-m-d', //15
+
+            'pre_report_checked_date' => 'nullable|date_format:Y-m-d H:i:s',
+            'approve_checked_date' => 'nullable|date_format:Y-m-d H:i:s',
+            'clientduedate' => 'nullable|date_format:Y-m-d',
+            'valuer' => 'nullable|string',
+            'headvaluer' => 'nullable|string', //20
+
+            'advance_by' => 'nullable|string',
+            'job_status' => 'nullable|string',
             'job_gps' => 'nullable|string',
             'lat' => 'nullable|string',
-            'lng' => 'nullable|string',
-            'proplocation' => 'nullable|string',
+            'lng' => 'nullable|string', //25
+
             'obj_id' => 'nullable|string',
             'jobtype' => 'nullable|string',
-            'valuer' => 'nullable|string',
-            'inspectiondate' => 'nullable|date_format:Y-m-d',
-            'startdate' => 'nullable|date_format:Y-m-d', 
-            'lcduedate' => 'nullable|date_format:Y-m-d',
-            'clientduedate' => 'nullable|date_format:Y-m-d',
-            'send_check_report_date' => 'nullable|date_format:Y-m-d',
+            'jobsize' => 'nullable|string',
+            'easydiff' => 'nullable|string',
+            'valuationfee' => 'nullable|string', //30
+
+            'valuationfee_case' => 'nullable|string',
             'pre_job_checked' => 'nullable|string',
             'pre_checker' => 'nullable|string',
-            'pre_report_checked_date' => 'nullable|date_format:Y-m-d H:i:s',
             'approve_checked' => 'nullable|string',
-            'headvaluer' => 'nullable|string',
-            'approve_checked_date' => 'nullable|date_format:Y-m-d H:i:s',
-            'link_checked' => 'nullable|string',
+            'link_checked' => 'nullable|string', //35
+            
             'link_checked_by' => 'nullable|string',
             'link_checked_date' => 'nullable|date_format:Y-m-d H:i:s',
             'print_checked' => 'nullable|string',
             'print_checked_by' => 'nullable|string',
-            'print_checked_date' => 'nullable|date_format:Y-m-d H:i:s',
+            'print_checked_date' => 'nullable|date_format:Y-m-d H:i:s', //40
+
             'file_checked' => 'nullable|string',
             'file_checked_by' => 'nullable|string',
             'file_checked_date' => 'nullable|date_format:Y-m-d H:i:s',
-
             'job_checked' => 'nullable|string',
-            'checker' => 'nullable|string',
+            'checker' => 'nullable|string', //45
+
             'job_checked_date' => 'nullable|date_format:Y-m-d H:i:s',
-            'job_status' => 'nullable|string',
-            'obj_method' => 'nullable|string',
-            'remark'=> 'nullable|string',
-            'deedtumbon'=> 'nullable|string',
-            'deedamphur'=> 'nullable|string',
-            'deedprovince'=> 'nullable|string',
-            'deedno'=> 'nullable|string',
-            'land_size'=> 'nullable|string',
-            'ownership_building'=> 'nullable|string',
-            'marketvalue_ac'=> 'nullable|string',
-            'assessmentvalue'=> 'nullable|string',
-            'marketvalue_unit' => 'nullable|string',
-            'marketvalue' => 'nullable|string'
+            'advance_checked' => 'nullable|string',
+            'advance_date' => 'nullable|date_format:Y-m-d H:i:s',
+            'remark'=> 'nullable|string' //49 end then 50 is active field
+
+            // 'reportcode' => 'nullable|string',
+            // 'projectname' => 'nullable|string'
         ]);
 
         // Find the model using the alternative field (e.g., 'slug' or 'email')
